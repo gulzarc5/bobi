@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Bplus</title>
+    <title>BibiBobi</title>
     <link rel="icon" href="{{ asset('admin/src_files/logo/icon.png')}}" type="image/icon type">
 
     <!-- Bootstrap -->
@@ -71,7 +71,9 @@
                 <br />
 
                 <div>
-                  <h1><img src="{{ asset('admin/src_files/logo/logo.png')}}" height="150"></h1>
+                  <h1>BIBI BOBI
+                    {{-- <img src="{{ asset('admin/src_files/logo/logo.png')}}" height="150"> --}}
+                  </h1>
                   <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
                 </div>
               </div>

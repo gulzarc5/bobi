@@ -18,10 +18,8 @@
                             <tr>
                               <th>Sl</th>
                               <th>Name</th>
-                              <th>Value</th>
                               <th>Category</th>
                               <th>FirstCategory</th>
-                              <th>SecondCategory</th>
                               <th>Status</th>
                               <th>action</th>
                             </tr>
@@ -50,11 +48,9 @@
                 ajax: "{{ route('admin.size_lists') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 's_name', name: 's_name',searchable: true},
-                    {data: 's_value', name: 's_value' ,searchable: true},
+                    {data: 'name', name: 'name',searchable: true},
                     {data: 'category_name', name: 'category_name' ,searchable: true},
-                    {data: 'first_category_name', name: 'first_category_name' ,searchable: true},       
-                    {data: 'second_category_name', name: 'second_category_name' ,searchable: true},             
+                    {data: 'first_category_name', name: 'first_category_name' ,searchable: true},               
                     {data: 'status_tab', name: 'status_tab',orderable: false, searchable: false},                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]

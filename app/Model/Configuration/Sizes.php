@@ -5,10 +5,10 @@ namespace App\Model\Configuration;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class SizeName extends Model
+class Sizes extends Model
 {
     use SoftDeletes;
-    protected $table = 'size_name';
+    protected $table = 'sizes';
 
     protected $fillable = [
     	'name','status','category','first_category',

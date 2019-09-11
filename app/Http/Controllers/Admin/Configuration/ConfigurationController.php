@@ -7,23 +7,24 @@ use App\Http\Controllers\Controller;
 use App\Category;
 use App\FirstCategory;
 use App\SecondCategory;
-use App\Model\Configuration\SizeName;
+use App\Model\Configuration\Sizes;
 use Validator;
 use DataTables;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ConfigurationController extends Controller
 {
 
     //*********************** Size Section*************************
-    public function viewSizeNameForm(){
-        $size_name = SizeName::whereNull('deleted_at')
-        ->get();
+    // public function viewSizeNameForm(){
+    //     $size_name = Sizes::whereNull('deleted_at')
+    //     ->get();
 
-        $main_category = Category::where('status','1')->get()->pluck('name','id');
+    //     $main_category = Category::where('status','1')->get()->pluck('name','id');
 
-        return View('admin.configuration.add_size_name',compact('size_name','main_category'));
-    }
+    //     return View('admin.configuration.add_size_name',compact('size_name','main_category'));
+    // }
 
     public function AjaxSizeWithCategory($first_category){
         $size = DB::table('size_name')
@@ -34,218 +35,218 @@ class ConfigurationController extends Controller
         echo $size;
     }
 
-    public function AddSizeName(Request $request){
-        $validatedData = $request->validate([
-        'name' => 'required',
-        'category' => 'required',
-        'first_category' => 'required',
-        ]);
+    // public function AddSizeName(Request $request){
+    //     $validatedData = $request->validate([
+    //     'name' => 'required',
+    //     'category' => 'required',
+    //     'first_category' => 'required',
+    //     ]);
 
-        $size_name =SizeName::create([
-            'name' => $request->input('name'),
-            'category' => $request->input('category'),
-            'first_category' => $request->input('first_category'),
-        ]);
+    //     $size_name =SizeName::create([
+    //         'name' => $request->input('name'),
+    //         'category' => $request->input('category'),
+    //         'first_category' => $request->input('first_category'),
+    //     ]);
 
-        if ($size_name) {
-            return redirect()->back()->with('message','Size Name Added Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        } 
-    }
+    //     if ($size_name) {
+    //         return redirect()->back()->with('message','Size Name Added Successfully');
+    //     }else{
+    //         return redirect()->back()->with('error','Something Went Wrong Please try Again');
+    //     } 
+    // }
 
-    public function UpdateSizeName(Request $request){
+    // public function UpdateSizeName(Request $request){
         
-        $validatedData = $request->validate([
-        'id' => 'required',
-        'name' => 'required',
-        'category' => 'required',
-        'first_category' => 'required',
-        ]);
+    //     $validatedData = $request->validate([
+    //     'id' => 'required',
+    //     'name' => 'required',
+    //     'category' => 'required',
+    //     'first_category' => 'required',
+    //     ]);
 
-        $size_name = SizeName::where('id',$request->input('id'))->update([
-        'name' => $request->input('name'),
-        'category' => $request->input('category'),
-        'first_category' => $request->input('first_category'),
-        ]);
-        if ($size_name) {
-            return redirect()->back()->with('message','Size Updated Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        }
-    }
+    //     $size_name = SizeName::where('id',$request->input('id'))->update([
+    //     'name' => $request->input('name'),
+    //     'category' => $request->input('category'),
+    //     'first_category' => $request->input('first_category'),
+    //     ]);
+    //     if ($size_name) {
+    //         return redirect()->back()->with('message','Size Updated Successfully');
+    //     }else{
+    //         return redirect()->back()->with('error','Something Went Wrong Please try Again');
+    //     }
+    // }
 
-    public function UpdateSizeNameStatus($size_name_id,$status)
-    {
-        $size_name = SizeName::where('id',$size_name_id)
-        ->update([
-            'status' => $status,
-        ]);
-        if ($size_name) {
-            return redirect()->back()->with('message','Size Name Status Updated Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        }
-    }
+    // public function UpdateSizeNameStatus($size_name_id,$status)
+    // {
+    //     $size_name = SizeName::where('id',$size_name_id)
+    //     ->update([
+    //         'status' => $status,
+    //     ]);
+    //     if ($size_name) {
+    //         return redirect()->back()->with('message','Size Name Status Updated Successfully');
+    //     }else{
+    //         return redirect()->back()->with('error','Something Went Wrong Please try Again');
+    //     }
+    // }
 
-    public function EditSizeName($id){
-        try {
-            $id = decrypt($id);
-        }catch(DecryptException $e) {
-            return redirect()->back();
-        }
-        $size_name = SizeName::whereNull('deleted_at')->get();
-        $size_name_edit = SizeName::where('id',$id)->first();
+    // public function EditSizeName($id){
+    //     try {
+    //         $id = decrypt($id);
+    //     }catch(DecryptException $e) {
+    //         return redirect()->back();
+    //     }
+    //     $size_name = SizeName::whereNull('deleted_at')->get();
+    //     $size_name_edit = SizeName::where('id',$id)->first();
 
-        $main_category = Category::where('status','1')->get()->pluck('name','id');
-        $first_category = FirstCategory::where('status',1)
-        ->where('category_id',$size_name_edit->category)
-        ->get()->pluck('name','id');
+    //     $main_category = Category::where('status','1')->get()->pluck('name','id');
+    //     $first_category = FirstCategory::where('status',1)
+    //     ->where('category_id',$size_name_edit->category)
+    //     ->get()->pluck('name','id');
 
-        return View('admin.configuration.add_size_name',compact('size_name_edit','size_name','main_category','first_category'));
-
-
-    }
-
-    public function deleteSizeName($id)
-    {
-        $size_name = SizeName::where('id',$id)
-        ->delete();
-        if ($size_name) {
-            return redirect()->back()->with('message','Size Name Deleted Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        }
-    }
-
-    public function AddSizeValueForm($sizeId){
-        try {
-            $sizeId = decrypt($sizeId);
-        }catch(DecryptException $e) {
-            return redirect()->back();
-        }
-        $size_value = DB::table('size_value')
-        ->select('size_value.*', 'size_name.name AS s_name')
-        ->join('size_name','size_value.size','=','size_name.id')
-        ->whereNull('size_value.deleted_at')
-        ->where('size_value.size',$sizeId)        
-        ->get();
-
-        $sizes = DB::table('size_name')
-        ->where('status','=', 1)
-        ->where('id',$sizeId)
-        ->first();
-        return View('admin.configuration.add_size_value',compact('size_value','sizes'));
+    //     return View('admin.configuration.add_size_name',compact('size_name_edit','size_name','main_category','first_category'));
 
 
-    }
+    // }
 
-    public function AddSizeValue(Request $request){
+    // public function deleteSizeName($id)
+    // {
+    //     $size_name = SizeName::where('id',$id)
+    //     ->delete();
+    //     if ($size_name) {
+    //         return redirect()->back()->with('message','Size Name Deleted Successfully');
+    //     }else{
+    //         return redirect()->back()->with('error','Something Went Wrong Please try Again');
+    //     }
+    // }
+
+//     public function AddSizeValueForm($sizeId){
+//         try {
+//             $sizeId = decrypt($sizeId);
+//         }catch(DecryptException $e) {
+//             return redirect()->back();
+//         }
+//         $size_value = DB::table('size_value')
+//         ->select('size_value.*', 'size_name.name AS s_name')
+//         ->join('size_name','size_value.size','=','size_name.id')
+//         ->whereNull('size_value.deleted_at')
+//         ->where('size_value.size',$sizeId)        
+//         ->get();
+
+//         $sizes = DB::table('size_name')
+//         ->where('status','=', 1)
+//         ->where('id',$sizeId)
+//         ->first();
+//         return View('admin.configuration.add_size_value',compact('size_value','sizes'));
+
+
+//     }
+
+//     public function AddSizeValue(Request $request){
       
 
-        $validatedData = $request->validate([
-            'size' => 'required',
-            'value' => 'required',
-        ]);
+//         $validatedData = $request->validate([
+//             'size' => 'required',
+//             'value' => 'required',
+//         ]);
 
-        $size_value_check = DB::table('size_value')
-        ->where('size',$request->input('size'))
-        ->where('value',$request->input('value'))
-        ->whereNull('deleted_at')
-        ->count();
+//         $size_value_check = DB::table('size_value')
+//         ->where('size',$request->input('size'))
+//         ->where('value',$request->input('value'))
+//         ->whereNull('deleted_at')
+//         ->count();
 
-        if ($size_value_check > 0) {
-            return redirect()->back()->with('error','Sorry Size '.$request->input('value').' Already Exist');
-        }
+//         if ($size_value_check > 0) {
+//             return redirect()->back()->with('error','Sorry Size '.$request->input('value').' Already Exist');
+//         }
 
-        $size_value = DB::table('size_value')
-        ->insert([
-            'size' => $request->input('size'),
-            'value' => $request->input('value'),
-        ]);
+//         $size_value = DB::table('size_value')
+//         ->insert([
+//             'size' => $request->input('size'),
+//             'value' => $request->input('value'),
+//         ]);
         
-        if ($size_value) {
-            return redirect()->back()->with('message','Size Value Added Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        } 
+//         if ($size_value) {
+//             return redirect()->back()->with('message','Size Value Added Successfully');
+//         }else{
+//             return redirect()->back()->with('error','Something Went Wrong Please try Again');
+//         } 
 
 
-   }
+//    }
 
-   public function sizeValueStatusUpdate($value_id,$size_id,$status)
-   {
-        $size_value = DB::table('size_value')
-        ->where('id' , $value_id)
-        ->update([
-            'status' => $status,
-        ]);
+//    public function sizeValueStatusUpdate($value_id,$size_id,$status)
+//    {
+//         $size_value = DB::table('size_value')
+//         ->where('id' , $value_id)
+//         ->update([
+//             'status' => $status,
+//         ]);
         
-        if ($size_value) {
-            return redirect()->back()->with('message','Size Value Status Updated Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        } 
-   }
+//         if ($size_value) {
+//             return redirect()->back()->with('message','Size Value Status Updated Successfully');
+//         }else{
+//             return redirect()->back()->with('error','Something Went Wrong Please try Again');
+//         } 
+//    }
 
 
-   public function sizeValueEdit($value_id,$size_id)
-   {
-       $size_value = DB::table('size_value')
-        ->select('size_value.*', 'size_name.name AS s_name')
-        ->join('size_name','size_value.size','=','size_name.id')
-        ->whereNull('size_value.deleted_at')
-        ->where('size_value.size',$size_id)        
-        ->get();
+//    public function sizeValueEdit($value_id,$size_id)
+//    {
+//        $size_value = DB::table('size_value')
+//         ->select('size_value.*', 'size_name.name AS s_name')
+//         ->join('size_name','size_value.size','=','size_name.id')
+//         ->whereNull('size_value.deleted_at')
+//         ->where('size_value.size',$size_id)        
+//         ->get();
 
-        $sizes = DB::table('size_name')
-        ->where('status','=', 1)
-        ->where('id',$size_id)
-        ->first();
+//         $sizes = DB::table('size_name')
+//         ->where('status','=', 1)
+//         ->where('id',$size_id)
+//         ->first();
 
-        $size_edit_value = DB::table('size_value')
-        ->where('id',$value_id)
-        ->first();
+//         $size_edit_value = DB::table('size_value')
+//         ->where('id',$value_id)
+//         ->first();
 
-        return View('admin.configuration.add_size_value',compact('size_value','sizes','size_edit_value'));
-   }
+//         return View('admin.configuration.add_size_value',compact('size_value','sizes','size_edit_value'));
+//    }
 
-   public function sizeValueUpdate(Request $request)
-   {
-       $validatedData = $request->validate([
-            'id' => 'required',
-            'value' => 'required',
-        ]);
+//    public function sizeValueUpdate(Request $request)
+//    {
+//        $validatedData = $request->validate([
+//             'id' => 'required',
+//             'value' => 'required',
+//         ]);
 
-        $size_value = DB::table('size_value')
-        ->where('id' , $request->input('id'))
-        ->update([
-            'value' => $request->input('value'),
-        ]);
+//         $size_value = DB::table('size_value')
+//         ->where('id' , $request->input('id'))
+//         ->update([
+//             'value' => $request->input('value'),
+//         ]);
         
-        if ($size_value) {
-            return redirect()->back()->with('message','Size Value Updated Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        } 
+//         if ($size_value) {
+//             return redirect()->back()->with('message','Size Value Updated Successfully');
+//         }else{
+//             return redirect()->back()->with('error','Something Went Wrong Please try Again');
+//         } 
 
-   }
+//    }
 
-    public function sizeValueDelete($value_id,$size_id)
-    {
-        $timestamp = now()->toDateTimeString();
-        $size_value = DB::table('size_value')
-        ->where('id' , $value_id)
-        ->update([
-            'deleted_at' =>$timestamp,
-        ]);
+//     public function sizeValueDelete($value_id,$size_id)
+//     {
+//         $timestamp = now()->toDateTimeString();
+//         $size_value = DB::table('size_value')
+//         ->where('id' , $value_id)
+//         ->update([
+//             'deleted_at' =>$timestamp,
+//         ]);
         
-        if ($size_value) {
-            return redirect()->back()->with('message','Size Value Deleted Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        } 
-    }
+//         if ($size_value) {
+//             return redirect()->back()->with('message','Size Value Deleted Successfully');
+//         }else{
+//             return redirect()->back()->with('error','Something Went Wrong Please try Again');
+//         } 
+//     }
 
     
 
@@ -267,33 +268,31 @@ class ConfigurationController extends Controller
         $validatedData = $request->validate([
         'category' => 'required',
         'first_category' => 'required',
-        'second_category' => 'required',
-        'size_value_id' => 'required',
-        'size_id' => 'required',
+        'size' => 'required',
         ]);
+        $size = $request->input('size'); //array of Size Value
 
-        $size_value_id = $request->input('size_value_id'); //array of Size Value
-
-        for ($i=0; $i < count($size_value_id) ; $i++) { 
+        for ($i=0; $i < count((array)$size) ; $i++) { 
             /// Validation For check Size Is already exist or Not
-            $check_size = DB::table('add_size')
-            ->where('category','=',$request->input('category'))
-            ->where('first_category','=',$request->input('first_category'))
-            ->where('second_category','=',$request->input('second_category'))
-            ->where('size_value_id','=',$size_value_id[$i])
-            ->where('size_id','=',$request->input('size_id'))
-            ->count();
+            if (!empty($size[$i])) {
+                $check_size = DB::table('sizes')
+                    ->where('category','=',$request->input('category'))
+                    ->where('first_category','=',$request->input('first_category'))
+                    ->where('name','=',$size[$i])
+                    ->count();
+                if ($check_size <= 0) {
+                    $size = DB::table('sizes')
+                        ->insert([
+                            'category' => $request->input('category'),
+                            'first_category' => $request->input('first_category'),
+                            'name' => $size[$i],
+                            'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                        ]);
+                }
+            }
             
-            if ($check_size <= 0) {
-               $size = DB::table('add_size')
-                ->insert([
-                    'category' => $request->input('category'),
-                    'first_category' => $request->input('first_category'),
-                    'second_category' => $request->input('second_category'),
-                    'size_value_id' => $size_value_id[$i],
-                    'size_id' => $request->input('size_id'),
-                ]);
-            }            
+            
+                        
         }
         
         return redirect()->back()->with('message','Size Added Successfully');
@@ -307,20 +306,15 @@ class ConfigurationController extends Controller
     }
 
     public function sizeLists(Request $request){
-        $query = DB::table('add_size')
-        ->select('size_name.name as s_name','size_value.value as s_value','category.name as category_name','first_category.name as first_category_name','second_category.name as second_category_name','add_size.status as status')
-        ->join('size_name','add_size.size_id','=','size_name.id')
-        ->join('size_value','add_size.size_value_id','=','size_value.id')
-        ->join('category','add_size.category','=','category.id')
-        ->join('first_category','add_size.first_category','=','first_category.id')
-        ->join('second_category','add_size.second_category','=','second_category.id');
+        $query = DB::table('sizes')
+        ->select('sizes.*','category.name as category_name','first_category.name as first_category_name')
+        ->join('category','sizes.category','=','category.id')
+        ->join('first_category','sizes.first_category','=','first_category.id');
        
             return datatables()->of($query->get())
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                   $btn = '<a href="#" class="btn btn-primary btn-sm">View</a>
-                   <a href="#" class="btn btn-warning btn-sm">Edit</a>                   
-                   ';
+                   $btn = '<a href="#" class="btn btn-warning btn-sm">Edit</a>';
                    if ($row->status == '1') {
                        $btn .= '<a href="#" class="btn btn-danger btn-sm">Disable</a>';
                         return $btn;
@@ -351,7 +345,8 @@ class ConfigurationController extends Controller
     
     public function viewColorNameForm(){
         $colors = DB::table('color')->get();
-        return view('admin.configuration.add_color_name_form',compact('colors'));
+        $main_category = Category::where('status','1')->get()->pluck('name','id');
+        return view('admin.configuration.add_color_name_form',compact('colors','main_category'));
     }
 
     public function AddColorName(Request $request){
@@ -481,256 +476,256 @@ class ConfigurationController extends Controller
     }
 
         //************************ Varient Section*****************************
-    public function viewVarientNameForm(){
-        $main_category = Category::where('status','1')->get()->pluck('name','id');
+//     public function viewVarientNameForm(){
+//         $main_category = Category::where('status','1')->get()->pluck('name','id');
 
-        return view('admin.configuration.add_varient_name_form',compact('main_category'));
-    }
+//         return view('admin.configuration.add_varient_name_form',compact('main_category'));
+//     }
 
-    public function addVarientName(Request $request){
-        $validatedData = $request->validate([
-        'name' => 'required',
-        'category' => 'required',
-        'first_category' => 'required',
-        ]);
+//     public function addVarientName(Request $request){
+//         $validatedData = $request->validate([
+//         'name' => 'required',
+//         'category' => 'required',
+//         'first_category' => 'required',
+//         ]);
 
-        $varient_check = DB::table('varient_name')
-        ->where('name','=',$request->input('name'))
-        ->whereNull('deleted_at')
-        ->where('category',$request->input('category'))
-        ->where('first_category',$request->input('first_category'))
-        ->count();
+//         $varient_check = DB::table('varient_name')
+//         ->where('name','=',$request->input('name'))
+//         ->whereNull('deleted_at')
+//         ->where('category',$request->input('category'))
+//         ->where('first_category',$request->input('first_category'))
+//         ->count();
 
-        if ($varient_check > 0 ) {
-            return redirect()->back()->with('error','Varient Name '.$request->input('name').' Already Exist');
-        }
+//         if ($varient_check > 0 ) {
+//             return redirect()->back()->with('error','Varient Name '.$request->input('name').' Already Exist');
+//         }
 
-        $varient = DB::table('varient_name')
-        ->insert([
-            'name' => $request->input('name'),
-            'category' => $request->input('category'),
-            'first_category' => $request->input('first_category'),
-        ]);
+//         $varient = DB::table('varient_name')
+//         ->insert([
+//             'name' => $request->input('name'),
+//             'category' => $request->input('category'),
+//             'first_category' => $request->input('first_category'),
+//         ]);
 
-        if ($varient) {
-            return redirect()->back()->with('message','Varient Name Added Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        }
-    }
+//         if ($varient) {
+//             return redirect()->back()->with('message','Varient Name Added Successfully');
+//         }else{
+//             return redirect()->back()->with('error','Something Went Wrong Please try Again');
+//         }
+//     }
 
     
 
-    public function varientNameList(){
-        return view('admin.configuration.varient_name_list');
-    }
+//     public function varientNameList(){
+//         return view('admin.configuration.varient_name_list');
+//     }
 
-    public function ajaxVarientNameList(){
-        $query = DB::table('varient_name')
-        ->select('varient_name.*','category.name as c_name','first_category.name as first_c_name')
-        ->join('category','varient_name.category','=','category.id')
-        ->join('first_category','varient_name.first_category','=','first_category.id')
-        ->whereNull('varient_name.deleted_at');
+//     public function ajaxVarientNameList(){
+//         $query = DB::table('varient_name')
+//         ->select('varient_name.*','category.name as c_name','first_category.name as first_c_name')
+//         ->join('category','varient_name.category','=','category.id')
+//         ->join('first_category','varient_name.first_category','=','first_category.id')
+//         ->whereNull('varient_name.deleted_at');
        
-            return datatables()->of($query->get())
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                   $btn = '<a href="'.route('admin.varient_value_form',['varient_id' => encrypt($row->id)]).'" class="btn btn-primary btn-sm">Add Varient Value</a>
-                   <a href="#" class="btn btn-warning btn-sm">Edit</a>                   
-                   ';
-                   if ($row->status == '1') {
-                       $btn .= '<a href="#" class="btn btn-danger btn-sm">Disable</a>';
-                        return $btn;
-                    }else{
-                       $btn .= '<a href="#" class="btn btn-success btn-sm">Enable</a>';
-                        return $btn;
-                    }
-                    return $btn;
-            })
-            ->addColumn('status_tab', function($row){
-                if ($row->status == '1') {
+//             return datatables()->of($query->get())
+//             ->addIndexColumn()
+//             ->addColumn('action', function($row){
+//                    $btn = '<a href="'.route('admin.varient_value_form',['varient_id' => encrypt($row->id)]).'" class="btn btn-primary btn-sm">Add Varient Value</a>
+//                    <a href="#" class="btn btn-warning btn-sm">Edit</a>                   
+//                    ';
+//                    if ($row->status == '1') {
+//                        $btn .= '<a href="#" class="btn btn-danger btn-sm">Disable</a>';
+//                         return $btn;
+//                     }else{
+//                        $btn .= '<a href="#" class="btn btn-success btn-sm">Enable</a>';
+//                         return $btn;
+//                     }
+//                     return $btn;
+//             })
+//             ->addColumn('status_tab', function($row){
+//                 if ($row->status == '1') {
 
-                   $btn = '<a href="#" class="btn btn-success btn-sm">Enabled</a>';
-                    return $btn;
-                }else{
+//                    $btn = '<a href="#" class="btn btn-success btn-sm">Enabled</a>';
+//                     return $btn;
+//                 }else{
 
-                   $btn = '<a href="#" class="btn btn-danger btn-sm">Disabled</a>';
-                    return $btn;
-                }
-            })
-            ->rawColumns(['action','status_tab'])
-            ->toJson();
-    }
+//                    $btn = '<a href="#" class="btn btn-danger btn-sm">Disabled</a>';
+//                     return $btn;
+//                 }
+//             })
+//             ->rawColumns(['action','status_tab'])
+//             ->toJson();
+//     }
 
-    public function AjaxVarientNames($first_category){
-       $varient = DB::table('varient_name')
-       ->where('first_category',$first_category)
-       ->whereNull('deleted_at')
-       ->where('status','1')
-       ->get()
-       ->pluck('name','id');
-       return $varient;
-    }
+//     public function AjaxVarientNames($first_category){
+//        $varient = DB::table('varient_name')
+//        ->where('first_category',$first_category)
+//        ->whereNull('deleted_at')
+//        ->where('status','1')
+//        ->get()
+//        ->pluck('name','id');
+//        return $varient;
+//     }
 
-    public function viewVarientValueForm($varientId){
-        try {
-            $varientId = decrypt($varientId);
-        }catch(DecryptException $e) {
-            return redirect()->back();
-        }
-        $varient_value = DB::table('varient_value')
-        ->select('varient_value.*', 'varient_name.name AS v_name')
-        ->join('varient_name','varient_value.varient_id','=','varient_name.id')
-        ->where('varient_value.status','=', '1')   
-        ->where('varient_value.varient_id',$varientId) 
-        ->whereNull('varient_value.deleted_at')    
-        ->get();
+//     public function viewVarientValueForm($varientId){
+//         try {
+//             $varientId = decrypt($varientId);
+//         }catch(DecryptException $e) {
+//             return redirect()->back();
+//         }
+//         $varient_value = DB::table('varient_value')
+//         ->select('varient_value.*', 'varient_name.name AS v_name')
+//         ->join('varient_name','varient_value.varient_id','=','varient_name.id')
+//         ->where('varient_value.status','=', '1')   
+//         ->where('varient_value.varient_id',$varientId) 
+//         ->whereNull('varient_value.deleted_at')    
+//         ->get();
 
-        $varient_name = DB::table('varient_name')
-        ->where('status','=', 1)
-        ->whereNull('deleted_at')
-        ->where('id',$varientId)
-        ->first();
+//         $varient_name = DB::table('varient_name')
+//         ->where('status','=', 1)
+//         ->whereNull('deleted_at')
+//         ->where('id',$varientId)
+//         ->first();
 
-        return View('admin.configuration.varient_value_form',compact('varient_value','varient_name'));
+//         return View('admin.configuration.varient_value_form',compact('varient_value','varient_name'));
 
 
-    }
+//     }
 
-    public function addVarientValue(Request $request){
+//     public function addVarientValue(Request $request){
       
 
-        $validatedData = $request->validate([
-            'varient_id' => 'required',
-            'value' => 'required',
-        ]);
+//         $validatedData = $request->validate([
+//             'varient_id' => 'required',
+//             'value' => 'required',
+//         ]);
 
-        $varient_value_check =  DB::table('varient_value')
-        ->where('varient_id',$request->input('varient_id'))
-        ->where('value',$request->input('value'))
-        ->count();
-        if ($varient_value_check > 0) {
-            return redirect()->back()->with('error',$request->input('value').' Already Exist');
-        }
+//         $varient_value_check =  DB::table('varient_value')
+//         ->where('varient_id',$request->input('varient_id'))
+//         ->where('value',$request->input('value'))
+//         ->count();
+//         if ($varient_value_check > 0) {
+//             return redirect()->back()->with('error',$request->input('value').' Already Exist');
+//         }
 
 
-        $varient_value = DB::table('varient_value')
-        ->insert([
-            'varient_id' => $request->input('varient_id'),
-            'value' => $request->input('value'),
-        ]);
+//         $varient_value = DB::table('varient_value')
+//         ->insert([
+//             'varient_id' => $request->input('varient_id'),
+//             'value' => $request->input('value'),
+//         ]);
         
-        if ($varient_value) {
-            return redirect()->back()->with('message','Varient Value Added Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        } 
+//         if ($varient_value) {
+//             return redirect()->back()->with('message','Varient Value Added Successfully');
+//         }else{
+//             return redirect()->back()->with('error','Something Went Wrong Please try Again');
+//         } 
 
 
-   }
+//    }
 
 
-    public function viewMapVarientForm(){
-        $main_category = Category::where('status','1')->get()->pluck('name','id');
+//     public function viewMapVarientForm(){
+//         $main_category = Category::where('status','1')->get()->pluck('name','id');
 
      
-        return view('admin.configuration.map_varient_form',compact('main_category'));
-    }
+//         return view('admin.configuration.map_varient_form',compact('main_category'));
+//     }
 
-    public function AjaxVarientValueWithVarientId($varient_id){
-        $varient = DB::table('varient_value')
-        ->whereNull('deleted_at')
-        ->where('varient_id',$varient_id)
-        ->where('status','1')
-        ->get()
-        ->pluck('value','id');
-        return $varient;
-    }
+//     public function AjaxVarientValueWithVarientId($varient_id){
+//         $varient = DB::table('varient_value')
+//         ->whereNull('deleted_at')
+//         ->where('varient_id',$varient_id)
+//         ->where('status','1')
+//         ->get()
+//         ->pluck('value','id');
+//         return $varient;
+//     }
 
-    public function addMapVarient(Request $request){
+//     public function addMapVarient(Request $request){
        
-       $validatedData = $request->validate([
-            'category' => 'required',
-            'first_category' => 'required',
-            'second_category' => 'required',
-            'varient_id' => 'required',
-            'varient_value_id' => 'required',
-        ]);
+//        $validatedData = $request->validate([
+//             'category' => 'required',
+//             'first_category' => 'required',
+//             'second_category' => 'required',
+//             'varient_id' => 'required',
+//             'varient_value_id' => 'required',
+//         ]);
 
-       $varient_value_id = $request->input('varient_value_id'); // Array Of Varient Value Id
+//        $varient_value_id = $request->input('varient_value_id'); // Array Of Varient Value Id
 
-       for ($i=0; $i < count($varient_value_id) ; $i++) { 
+//        for ($i=0; $i < count($varient_value_id) ; $i++) { 
            
-           $map_varient_check = DB::table('varient_map')
-           ->where('category',$request->input('category'))
-           ->where('first_category',$request->input('first_category'))
-           ->where('second_category',$request->input('second_category'))
-           ->where('varient_id',$request->input('varient_id'))
-           ->where('varient_value_id',$varient_value_id[$i])
-           ->whereNull('deleted_at')
-           ->count();
+//            $map_varient_check = DB::table('varient_map')
+//            ->where('category',$request->input('category'))
+//            ->where('first_category',$request->input('first_category'))
+//            ->where('second_category',$request->input('second_category'))
+//            ->where('varient_id',$request->input('varient_id'))
+//            ->where('varient_value_id',$varient_value_id[$i])
+//            ->whereNull('deleted_at')
+//            ->count();
 
-           if ($map_varient_check <= 0) {
-               $map_varient_insert = DB::table('varient_map')
-               ->insert([
-                   'category' => $request->input('category'),
-                   'first_category' => $request->input('first_category'),
-                   'second_category' => $request->input('second_category'),
-                   'varient_id' => $request->input('varient_id'),
-                   'varient_value_id' => $varient_value_id[$i],
-               ]);
+//            if ($map_varient_check <= 0) {
+//                $map_varient_insert = DB::table('varient_map')
+//                ->insert([
+//                    'category' => $request->input('category'),
+//                    'first_category' => $request->input('first_category'),
+//                    'second_category' => $request->input('second_category'),
+//                    'varient_id' => $request->input('varient_id'),
+//                    'varient_value_id' => $varient_value_id[$i],
+//                ]);
 
-           }
+//            }
 
-       }
+//        }
     
-    return redirect()->back()->with('message','Varient Value Mapped Successfully');
+//     return redirect()->back()->with('message','Varient Value Mapped Successfully');
       
-    }
+//     }
 
-    public function ViewMappedVarientList(){
-        return view('admin.configuration.varient_map_list');
-    }
+//     public function ViewMappedVarientList(){
+//         return view('admin.configuration.varient_map_list');
+//     }
 
-    public function ajaxMappedVarientList(){
-        $query = DB::table('varient_map')
-        ->select('varient_map.*','category.name as c_name','first_category.name as first_c_name','second_category.name as second_c_name','varient_value.value as varient_value','varient_name.name as varient_name')
-        ->join('category','varient_map.category','=','category.id')
-        ->join('first_category','varient_map.first_category','=','first_category.id')
-        ->join('second_category','varient_map.second_category','=','second_category.id')
-        ->join('varient_value','varient_map.varient_value_id','=','varient_value.id')
-        ->join('varient_name','varient_map.varient_id','=','varient_name.id')
-        ->whereNull('varient_map.deleted_at');
+//     public function ajaxMappedVarientList(){
+//         $query = DB::table('varient_map')
+//         ->select('varient_map.*','category.name as c_name','first_category.name as first_c_name','second_category.name as second_c_name','varient_value.value as varient_value','varient_name.name as varient_name')
+//         ->join('category','varient_map.category','=','category.id')
+//         ->join('first_category','varient_map.first_category','=','first_category.id')
+//         ->join('second_category','varient_map.second_category','=','second_category.id')
+//         ->join('varient_value','varient_map.varient_value_id','=','varient_value.id')
+//         ->join('varient_name','varient_map.varient_id','=','varient_name.id')
+//         ->whereNull('varient_map.deleted_at');
        
-            return datatables()->of($query->get())
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                   $btn = '
-                   <a href="#" class="btn btn-warning btn-sm">Edit</a>                   
-                   ';
-                   if ($row->status == '1') {
-                       $btn .= '<a href="#" class="btn btn-danger btn-sm">Disable</a>';
-                        return $btn;
-                    }else{
-                       $btn .= '<a href="#" class="btn btn-success btn-sm">Enable</a>';
-                        return $btn;
-                    }
-                    return $btn;
-            })
-            ->addColumn('status_tab', function($row){
-                if ($row->status == '1') {
+//             return datatables()->of($query->get())
+//             ->addIndexColumn()
+//             ->addColumn('action', function($row){
+//                    $btn = '
+//                    <a href="#" class="btn btn-warning btn-sm">Edit</a>                   
+//                    ';
+//                    if ($row->status == '1') {
+//                        $btn .= '<a href="#" class="btn btn-danger btn-sm">Disable</a>';
+//                         return $btn;
+//                     }else{
+//                        $btn .= '<a href="#" class="btn btn-success btn-sm">Enable</a>';
+//                         return $btn;
+//                     }
+//                     return $btn;
+//             })
+//             ->addColumn('status_tab', function($row){
+//                 if ($row->status == '1') {
 
-                   $btn = '<a href="#" class="btn btn-success btn-sm">Enabled</a>';
-                    return $btn;
-                }else{
+//                    $btn = '<a href="#" class="btn btn-success btn-sm">Enabled</a>';
+//                     return $btn;
+//                 }else{
 
-                   $btn = '<a href="#" class="btn btn-danger btn-sm">Disabled</a>';
-                    return $btn;
-                }
-            })
-            ->rawColumns(['action','status_tab'])
-            ->toJson();
-    }
+//                    $btn = '<a href="#" class="btn btn-danger btn-sm">Disabled</a>';
+//                     return $btn;
+//                 }
+//             })
+//             ->rawColumns(['action','status_tab'])
+//             ->toJson();
+//     }
 
     //*****************Brand Configuration*************************
 

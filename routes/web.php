@@ -70,16 +70,16 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 	Route::group(['namespace'=> 'Configuration'], function(){
 
 		//********************************Size Configuration Route***************************************
-		Route::get('/Add/Size/Name', 'ConfigurationController@viewSizeNameForm')->name('admin.add_size_name_form');
-		Route::post('/Add/Size/Name', 'ConfigurationController@AddSizeName')->name('admin.add_size_name');
-		Route::get('/Edit/Size/Name/{id}', 'ConfigurationController@EditSizeName')->name('admin.edit_size_name');
-		Route::post('/Update/Size/Name/', 'ConfigurationController@UpdateSizeName')->name('admin.update_size_name');
-		Route::get('/Update/Size/Name/Status/{name_id}/{status}', 'ConfigurationController@UpdateSizeNameStatus')->name('admin.update_size_name_status');
-		Route::get('/Delete/Size/Name/{id}', 'ConfigurationController@deleteSizeName')->name('admin.delete_size_name');
+		// Route::get('/Add/Size/Name', 'ConfigurationController@viewSizeNameForm')->name('admin.add_size_name_form');
+		// Route::post('/Add/Size/Name', 'ConfigurationController@AddSizeName')->name('admin.add_size_name');
+		// Route::get('/Edit/Size/Name/{id}', 'ConfigurationController@EditSizeName')->name('admin.edit_size_name');
+		// Route::post('/Update/Size/Name/', 'ConfigurationController@UpdateSizeName')->name('admin.update_size_name');
+		// Route::get('/Update/Size/Name/Status/{name_id}/{status}', 'ConfigurationController@UpdateSizeNameStatus')->name('admin.update_size_name_status');
+		// Route::get('/Delete/Size/Name/{id}', 'ConfigurationController@deleteSizeName')->name('admin.delete_size_name');
 
 
-		Route::get('/Add/Size/Value/{size_id}', 'ConfigurationController@AddSizeValueForm')->name('admin.add_size_value_form');
-		Route::post('/Add/Size/Value/', 'ConfigurationController@AddSizeValue')->name('admin.add_size_value');
+		// Route::get('/Add/Size/Value/{size_id}', 'ConfigurationController@AddSizeValueForm')->name('admin.add_size_value_form');
+		// Route::post('/Add/Size/Value/', 'ConfigurationController@AddSizeValue')->name('admin.add_size_value');
 		Route::get('/Add/Size', 'ConfigurationController@viewSizeForm')->name('admin.add_size_form');
 		Route::post('/Add/Size', 'ConfigurationController@addSize')->name('admin.add_size');
 		Route::get('/size/values/{size_id}', 'ConfigurationController@AjaxSizeValues');
