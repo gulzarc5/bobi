@@ -24,7 +24,7 @@
                             {{Form::model($color, ['method' => 'post','route'=>'admin.updateCategory'])}}
                             {{ Form::hidden('id',null,array('class' => 'form-control','placeholder'=>'Enter Category name')) }}
                         @else
-                            {{ Form::open(['method' => 'post','route'=>'admin.add_color_name']) }}
+                            {{ Form::open(['method' => 'post','route'=>'admin.add_color']) }}
                         @endif
                         <div class="form-group">
                             {{ Form::label('category', 'Select Category')}}
@@ -55,30 +55,24 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            {{ Form::label('name', 'Color Name')}} 
-                            {{ Form::text('name',null,array('class' => 'form-control','placeholder'=>'Enter Category name')) }}
-                            @if($errors->has('name'))
-                                <span class="invalid-feedback" role="alert" style="color:red">
-			                        <strong>{{ $errors->first('name') }}</strong>
-			                    </span> 
-                            @enderror
+                        <div id="colors">
+                            <div class="form-group col-md-5">
+                                {{ Form::label('name', 'Color Name')}} 
+                                {{ Form::text('color_name[]',null,array('class' => 'form-control','placeholder'=>'Enter Category name')) }}
+                            </div>
+                            <div class="form-group col-md-5">
+                                
+                                {{ Form::label('value', 'Select Color')}} 
+                                <div class="input-group demo2">
+                                    {{ Form::text('color_value[]','#39c914',array('class' => 'form-control','placeholder'=>'Select Color Value')) }}
+                                    <span class="input-group-addon"><i></i></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button class="btn btn-sm btn-info" onclick="addColor()" type="button" style="margin-top: 25px;">Add More</button>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            
-                            {{ Form::label('value', 'Select Color')}} 
-                            <div class="input-group demo2">
-                            {{ Form::text('value','#39c914',array('class' => 'form-control','placeholder'=>'Select Color Value')) }}
-                            <span class="input-group-addon"><i></i></span>
-                        </div>
-                            @if($errors->has('value'))
-                                <span class="invalid-feedback" role="alert" style="color:red">
-                                    <strong>{{ $errors->first('value') }}</strong>
-                                </span> 
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             @if(isset($color) && !empty($color))
                                 {{ Form::submit('Save', array('class'=>'btn btn-success')) }}
                             @else
@@ -138,5 +132,30 @@
             });
 
         })
+        var coloradd = 1;
+        function addColor() {
+            var html = '<div id="color_div'+coloradd+'">'+
+                            '<div class="form-group col-md-5">'+
+                                '<label for="name">Color Name</label>'+
+                                '<input class="form-control" placeholder="Enter Category name" name="color_name[]" type="text" id="name">'+
+                            '</div>'+
+                            '<div class="form-group col-md-5">'+
+                                '<label for="value">Select Color</label>'+
+                                '<div class="input-group demo2 colorpicker-element">'+
+                                    '<input class="form-control" placeholder="Select Color Value" name="color_value[]" type="text" value="#39c914" id="value">'+
+                                    '<span class="input-group-addon"><i style="background-color: rgb(57, 201, 20);"></i></span>'+
+                                '</div>'+
+                            '</div>'+
+                            '<div class="col-md-2">'+
+                                '<button class="btn btn-sm btn-danger" onclick="removeColor('+coloradd+')" type="button" style="margin-top: 25px;">Remove</button>'+
+                            '</div>'+
+                        '</div>';
+            $("#colors").append(html);
+            coloradd++;
+        }
+
+        function removeColor(colorid) {
+            $("#color_div"+colorid).remove();
+        }
     </script>
  @endsection

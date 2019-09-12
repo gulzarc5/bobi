@@ -349,32 +349,31 @@ class ConfigurationController extends Controller
         return view('admin.configuration.add_color_name_form',compact('colors','main_category'));
     }
 
-    public function AddColorName(Request $request){
+    public function AddColor(Request $request){
         $validatedData = $request->validate([
-        'name' => 'required',
-        'value' => 'required',
-        ]);
-
-        $color_check = DB::table('color')
-        ->where('name','=',$request->input('name'))
-        ->count();
-
-        if ($color_check > 0 ) {
-            return redirect()->back()->with('error','Color Already Exist');
+            'category' => 'required',
+            'first_category' => 'required',
+            ]);
+        $category_id = $request->input('category');
+        $first_category = $request->input('first_category');
+        $color_name = $request->input('color_name'); // array of color name
+        $color_value = $request->input('color_value'); // array of color name
+        
+        for ($i=0; $i < count((array)$color_name); $i++) { 
+            if (!empty($color_name[$i]) && !empty($color_value[$i])) {
+                $check_color = DB::table('color')->where('name',$color_name[$i])->count();
+                if ( $check_color <= 0 ) {
+                    DB::table('color')
+                    ->insert([
+                        'name' => $color_name[$i],
+                        'value' => $color_value[$i],
+                        'category_id' => $category_id,
+                        'first_category_id' => $first_category,
+                    ]);
+                }
+            }
         }
-
-        $color = DB::table('color')
-        ->insert([
-            'name' => $request->input('name'),
-            'value' => $request->input('value')
-        ]);
-
-        if ($color) {
-            return redirect()->back()->with('message','Color Added Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        }
-
+        return redirect()->back()->with('message','Color Added Successfully');
     }
 
     public function viewMapColorForm(){

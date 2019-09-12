@@ -95,7 +95,7 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 
 		//********************Color Configuration Route*************************
 		Route::get('/Add/Color/Name', 'ConfigurationController@viewColorNameForm')->name('admin.add_color_name_form');
-		Route::post('/Add/Color/Name', 'ConfigurationController@AddColorName')->name('admin.add_color_name');
+		Route::post('/Add/Color', 'ConfigurationController@AddColor')->name('admin.add_color');
 
 		Route::get('/Add/Color/Map', 'ConfigurationController@viewMapColorForm')->name('admin.map_color_form');
 		Route::post('/Add/Color/Map', 'ConfigurationController@addColorMap')->name('admin.add_color_map');
