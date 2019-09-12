@@ -728,14 +728,14 @@ class ConfigurationController extends Controller
 
     //*****************Brand Configuration*************************
 
-    public function viewBrandNameForm(){
+    public function viewBrandForm(){
         $main_category = Category::where('status','1')
         ->whereNull('deleted_at')
         ->get()->pluck('name','id');
        return view('admin.configuration.add_brand_name_form',compact('main_category'));
     }
 
-    public function addBrandName(Request $request){
+    public function addBrand(Request $request){
         
         $validatedData = $request->validate([
         'name' => 'required',
@@ -809,12 +809,12 @@ class ConfigurationController extends Controller
             ->toJson();
     }
 
-    public function viewMapBrandForm(){
-        $main_category = Category::where('status','1')->get()->pluck('name','id');
+    // public function viewMapBrandForm(){
+    //     $main_category = Category::where('status','1')->get()->pluck('name','id');
 
      
-        return view('admin.configuration.map_brand_form',compact('main_category'));
-    }
+    //     return view('admin.configuration.map_brand_form',compact('main_category'));
+    // }
 
     public function AjaxBrandNames($first_category){
         $brands = DB::table('brand_name')
@@ -826,84 +826,84 @@ class ConfigurationController extends Controller
        return $brands;
     }
 
-    public function addMapBrand(Request $request){
+    // public function addMapBrand(Request $request){
        
-       $validatedData = $request->validate([
-            'category' => 'required',
-            'first_category' => 'required',
-            'second_category' => 'required',
-            'brand_id' => 'required',
-        ]);
+    //    $validatedData = $request->validate([
+    //         'category' => 'required',
+    //         'first_category' => 'required',
+    //         'second_category' => 'required',
+    //         'brand_id' => 'required',
+    //     ]);
 
-       $map_varient_check = DB::table('map_brand')
-       ->where('category',$request->input('category'))
-       ->where('first_category',$request->input('first_category'))
-       ->where('second_category',$request->input('second_category'))
-       ->where('brand_id',$request->input('brand_id'))
-       ->whereNull('deleted_at')
-       ->count();
+    //    $map_varient_check = DB::table('map_brand')
+    //    ->where('category',$request->input('category'))
+    //    ->where('first_category',$request->input('first_category'))
+    //    ->where('second_category',$request->input('second_category'))
+    //    ->where('brand_id',$request->input('brand_id'))
+    //    ->whereNull('deleted_at')
+    //    ->count();
 
-       if ($map_varient_check > 0) {
-           return redirect()->back()->with('error','Brand Already Exist Under This Category');
-       }
+    //    if ($map_varient_check > 0) {
+    //        return redirect()->back()->with('error','Brand Already Exist Under This Category');
+    //    }
 
-       $map_varient_insert = DB::table('map_brand')
-       ->insert([
-           'category' => $request->input('category'),
-           'first_category' => $request->input('first_category'),
-           'second_category' => $request->input('second_category'),
-           'brand_id' => $request->input('brand_id'),
-       ]);
+    //    $map_varient_insert = DB::table('map_brand')
+    //    ->insert([
+    //        'category' => $request->input('category'),
+    //        'first_category' => $request->input('first_category'),
+    //        'second_category' => $request->input('second_category'),
+    //        'brand_id' => $request->input('brand_id'),
+    //    ]);
 
-       if ($map_varient_insert) {
-            return redirect()->back()->with('message','Brand Mapped Successfully');
-        }else{
-            return redirect()->back()->with('error','Something Went Wrong Please try Again');
-        } 
-    }
+    //    if ($map_varient_insert) {
+    //         return redirect()->back()->with('message','Brand Mapped Successfully');
+    //     }else{
+    //         return redirect()->back()->with('error','Something Went Wrong Please try Again');
+    //     } 
+    // }
 
-    public function ViewMappedBrandList(){
-        return view('admin.configuration.map_brand_list');
-    }
+    // public function ViewMappedBrandList(){
+    //     return view('admin.configuration.map_brand_list');
+    // }
 
-    public function ajaxMappedBrandList(){
-        $query = DB::table('map_brand')
-        ->select('map_brand.*','category.name as c_name','first_category.name as first_c_name','second_category.name as second_c_name','brand_name.name as brand_name')
-        ->join('category','map_brand.category','=','category.id')
-        ->join('first_category','map_brand.first_category','=','first_category.id')
-        ->join('second_category','map_brand.second_category','=','second_category.id')
-        ->join('brand_name','map_brand.brand_id','=','brand_name.id')
-        ->whereNull('map_brand.deleted_at');
+    // public function ajaxMappedBrandList(){
+    //     $query = DB::table('map_brand')
+    //     ->select('map_brand.*','category.name as c_name','first_category.name as first_c_name','second_category.name as second_c_name','brand_name.name as brand_name')
+    //     ->join('category','map_brand.category','=','category.id')
+    //     ->join('first_category','map_brand.first_category','=','first_category.id')
+    //     ->join('second_category','map_brand.second_category','=','second_category.id')
+    //     ->join('brand_name','map_brand.brand_id','=','brand_name.id')
+    //     ->whereNull('map_brand.deleted_at');
        
-            return datatables()->of($query->get())
-            ->addIndexColumn()
-            ->addColumn('action', function($row){
-                   $btn = '
-                   <a href="#" class="btn btn-warning btn-sm">Edit</a>                   
-                   ';
-                   if ($row->status == '1') {
-                       $btn .= '<a href="#" class="btn btn-danger btn-sm">Disable</a>';
-                        return $btn;
-                    }else{
-                       $btn .= '<a href="#" class="btn btn-success btn-sm">Enable</a>';
-                        return $btn;
-                    }
-                    return $btn;
-            })
-            ->addColumn('status_tab', function($row){
-                if ($row->status == '1') {
+    //         return datatables()->of($query->get())
+    //         ->addIndexColumn()
+    //         ->addColumn('action', function($row){
+    //                $btn = '
+    //                <a href="#" class="btn btn-warning btn-sm">Edit</a>                   
+    //                ';
+    //                if ($row->status == '1') {
+    //                    $btn .= '<a href="#" class="btn btn-danger btn-sm">Disable</a>';
+    //                     return $btn;
+    //                 }else{
+    //                    $btn .= '<a href="#" class="btn btn-success btn-sm">Enable</a>';
+    //                     return $btn;
+    //                 }
+    //                 return $btn;
+    //         })
+    //         ->addColumn('status_tab', function($row){
+    //             if ($row->status == '1') {
 
-                   $btn = '<a href="#" class="btn btn-success btn-sm">Enabled</a>';
-                    return $btn;
-                }else{
+    //                $btn = '<a href="#" class="btn btn-success btn-sm">Enabled</a>';
+    //                 return $btn;
+    //             }else{
 
-                   $btn = '<a href="#" class="btn btn-danger btn-sm">Disabled</a>';
-                    return $btn;
-                }
-            })
-            ->rawColumns(['action','status_tab'])
-            ->toJson();
-    }
+    //                $btn = '<a href="#" class="btn btn-danger btn-sm">Disabled</a>';
+    //                 return $btn;
+    //             }
+    //         })
+    //         ->rawColumns(['action','status_tab'])
+    //         ->toJson();
+    // }
 
 
     //******************State Section******************

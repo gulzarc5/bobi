@@ -105,31 +105,31 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 
 		//********************Varient Configuration Route*************************
 		
-		Route::get('/Add/Varient/Name', 'ConfigurationController@viewVarientNameForm')->name('admin.add_varient_name_form');
-		Route::post('/Add/Varient/Name', 'ConfigurationController@addVarientName')->name('admin.add_varient_name');
-		Route::get('/Varient/Name/list', 'ConfigurationController@varientNameList')->name('admin.varient_name_list');
-		Route::get('/Add/Varient/Value/{varient_id}', 'ConfigurationController@viewVarientValueForm')->name('admin.varient_value_form');
-		Route::post('/Add/Varient/Value/', 'ConfigurationController@addVarientValue')->name('admin.add_varient_value');
+		// Route::get('/Add/Varient/Name', 'ConfigurationController@viewVarientNameForm')->name('admin.add_varient_name_form');
+		// Route::post('/Add/Varient/Name', 'ConfigurationController@addVarientName')->name('admin.add_varient_name');
+		// Route::get('/Varient/Name/list', 'ConfigurationController@varientNameList')->name('admin.varient_name_list');
+		// Route::get('/Add/Varient/Value/{varient_id}', 'ConfigurationController@viewVarientValueForm')->name('admin.varient_value_form');
+		// Route::post('/Add/Varient/Value/', 'ConfigurationController@addVarientValue')->name('admin.add_varient_value');
 
-		Route::get('Ajax/Varient/Name/List', 'ConfigurationController@ajaxVarientNameList')->name('admin.ajax_varient_name_list');
-		Route::get('/Add/varient/Map', 'ConfigurationController@viewMapVarientForm')->name('admin.map_varient_form');
-		Route::post('/Add/varient/Map', 'ConfigurationController@addMapVarient')->name('admin.map_varient_add');
+		// Route::get('Ajax/Varient/Name/List', 'ConfigurationController@ajaxVarientNameList')->name('admin.ajax_varient_name_list');
+		// Route::get('/Add/varient/Map', 'ConfigurationController@viewMapVarientForm')->name('admin.map_varient_form');
+		// Route::post('/Add/varient/Map', 'ConfigurationController@addMapVarient')->name('admin.map_varient_add');
 
-		Route::get('/Ajax/varient/{first_category}', 'ConfigurationController@AjaxVarientNames');
-		Route::get('/Ajax/varient/value/{varient_id}', 'ConfigurationController@AjaxVarientValueWithVarientId');
-		Route::get('View/Varient/Mapped/List', 'ConfigurationController@ViewMappedVarientList')->name('admin.view_mapped_varient_list');
-		Route::get('Ajax/Varient/Mapped/List', 'ConfigurationController@ajaxMappedVarientList')->name('admin.ajax_mapped_varient_list');
+		// Route::get('/Ajax/varient/{first_category}', 'ConfigurationController@AjaxVarientNames');
+		// Route::get('/Ajax/varient/value/{varient_id}', 'ConfigurationController@AjaxVarientValueWithVarientId');
+		// Route::get('View/Varient/Mapped/List', 'ConfigurationController@ViewMappedVarientList')->name('admin.view_mapped_varient_list');
+		// Route::get('Ajax/Varient/Mapped/List', 'ConfigurationController@ajaxMappedVarientList')->name('admin.ajax_mapped_varient_list');
 
 		//********************Brand Configuration Route*************************
-		Route::get('/Add/Brand/Name', 'ConfigurationController@viewBrandNameForm')->name('admin.add_brand_name_form');
-		Route::post('/Add/Brand/Name', 'ConfigurationController@addBrandName')->name('admin.add_brand_name');
+		Route::get('/Add/Brand/', 'ConfigurationController@viewBrandForm')->name('admin.add_brand_form');
+		Route::post('/Add/Brand', 'ConfigurationController@addBrand')->name('admin.add_brand');
 		Route::get('/Brand/Name/list', 'ConfigurationController@brandNameList')->name('admin.brand_name_list');
 		Route::get('Ajax/Brand/Name/List', 'ConfigurationController@ajaxBrandNameList')->name('admin.ajax_brand_name_list');
-		Route::get('/Add/Brand/Map', 'ConfigurationController@viewMapBrandForm')->name('admin.map_brand_form');
+		// Route::get('/Add/Brand/Map', 'ConfigurationController@viewMapBrandForm')->name('admin.map_brand_form');
 		Route::get('/Ajax/brand/{first_category}', 'ConfigurationController@AjaxBrandNames');
-		Route::post('/Add/Brand/Map', 'ConfigurationController@addMapBrand')->name('admin.add_map_brand');
-		Route::get('View/Brand/Mapped/List', 'ConfigurationController@ViewMappedBrandList')->name('admin.view_mapped_brand_list');
-		Route::get('Ajax/Brand/Mapped/List', 'ConfigurationController@ajaxMappedBrandList')->name('admin.ajax_mapped_brand_list');
+		// Route::post('/Add/Brand/Map', 'ConfigurationController@addMapBrand')->name('admin.add_map_brand');
+		// Route::get('View/Brand/Mapped/List', 'ConfigurationController@ViewMappedBrandList')->name('admin.view_mapped_brand_list');
+		// Route::get('Ajax/Brand/Mapped/List', 'ConfigurationController@ajaxMappedBrandList')->name('admin.ajax_mapped_brand_list');
 		
 
 		//*******************State Routes*********************
