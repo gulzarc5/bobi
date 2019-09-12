@@ -16,6 +16,6 @@
 
 
 
-Route::get('seller_register', function () {
-    return view('web.seller.seller_register');
+Route::get('/', function () {
+    return view('web.index');
 });
