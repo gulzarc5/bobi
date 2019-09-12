@@ -16,7 +16,7 @@
                     <!-- SLIDE  -->
                     <li data-index="rs-14" data-transition="3dcurtain-horizontal,3dcurtain-vertical,cube,cube-horizontal" data-slotamount="7,7,7,7"  data-easein="default,default,default,default" data-easeout="default,default,default,default" data-masterspeed="600,600,600,600"  data-rotate="0,0,0,0"  data-saveperformance="off"  data-title="Slide-7" data-description=""> 
                       <!-- MAIN IMAGE --> 
-                      <img src="images/slider/slider-bg2.jpg"  alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina> 
+                      <img src="{{asset('web/images/slider/slider-bg2.jpg')}}"  alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina> 
                       <!-- LAYER NR. 1 -->
                       <div class="tp-caption black lft tp-resizeme" data-x="center" data-hoffset="-200" data-y="center" data-voffset="-130" data-speed="300" data-start="1000" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 5; max-width: auto; max-height: auto; white-space: nowrap;">
                         <p class="text-center" style="font-size: 15px; color: #fff; font-weight: bold; letter-spacing: 1px; text-transform: uppercase;">Meet New Theme </p>
@@ -43,7 +43,7 @@
                     <!-- SLIDE  -->
                     <li data-index="rs-15" data-transition="3dcurtain-horizontal,3dcurtain-vertical,cube,cube-horizontal" data-slotamount="7,7,7,7"  data-easein="default,default,default,default" data-easeout="default,default,default,default" data-masterspeed="600,600,600,600"  data-rotate="0,0,0,0"  data-saveperformance="off"  data-title="Slide-8" data-description=""> 
                       <!-- MAIN IMAGE --> 
-                      <img src="images/slider/slider-bg3.jpg"  alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina> 
+                      <img src="{{asset('web/images/slider/slider-bg3.jpg')}}"  alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina> 
                       <!-- LAYERS --> 
                       
                       <!-- LAYERS --> 
@@ -73,7 +73,7 @@
                     <!-- SLIDE  -->
                     <li data-index="rs-17" data-transition="3dcurtain-horizontal,3dcurtain-vertical,cube,cube-horizontal" data-slotamount="7,7,7,7"  data-easein="default,default,default,default" data-easeout="default,default,default,default" data-masterspeed="600,600,600,600" data-rotate="0,0,0,0"  data-saveperformance="off"  data-title="Slide-8" data-description=""> 
                       <!-- MAIN IMAGE --> 
-                      <img src="images/slider/slider-bg1.jpg"  alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina> 
+                      <img src="{{asset('web/images/slider/slider-bg1.jpg')}}"  alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina> 
                       <!-- LAYERS --> 
                       <!-- LAYER NR. 1 -->
                       <div class="tp-caption black lft tp-resizeme" data-x="center" data-hoffset="200" data-y="center" data-voffset="-90" data-speed="300" data-start="1000" data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" style="z-index: 5; max-width: auto; max-height: auto; white-space: nowrap;">
@@ -107,7 +107,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-4 col-sms-12">
-            <div class="banner-box banner-box1"> <a href="#"><img src="images/banner_staic1.png" alt=""></a>
+            <div class="banner-box banner-box1"> <a href="#"><img src="{{asset('web/images/banner_staic1.png')}}" alt=""></a>
               <div class="box-hover">
                 <div class="banner-title">Women Style</div>
                 <div class="line"></div>
@@ -115,7 +115,7 @@
             </div>
           </div>
           <div class="col-sm-4 col-sms-12">
-            <div class="banner-box banner-box2"> <a href="#"><img src="images/banner_staic2.png" alt=""></a>
+            <div class="banner-box banner-box2"> <a href="#"><img src="{{asset('web/images/banner_staic2.png')}}" alt=""></a>
               <div class="box-hover">
                 <div class="banner-title">New Fashion</div>
                 <div class="line"></div>
@@ -123,7 +123,7 @@
             </div>
           </div>
           <div class="col-sm-4 col-sms-12">
-            <div class="banner-box banner-box3"> <a href="#"><img src="images/banner_staic3.png" alt=""></a>
+            <div class="banner-box banner-box3"> <a href="#"><img src="{{asset('web/images/banner_staic3.png')}}" alt=""></a>
               <div class="box-hover">
                 <div class="banner-title">Men Clothing</div>
                 <div class="line"></div>
@@ -154,7 +154,7 @@
                         <div class="product-thumbnail">
                           <div class="icon-new-label new-left">New</div>
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img01.jpg" alt=""> <img class="hover-img" src="images/products/img01.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img01.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img01.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -184,7 +184,7 @@
                       <div class="item-inner">
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img02.jpg" alt=""> <img class="hover-img" src="images/products/img02.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img02.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img02.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -217,7 +217,7 @@
                       <div class="item-inner">
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img03.jpg" alt=""> <img class="hover-img" src="images/products/img03.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img03.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img03.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -252,7 +252,7 @@
                         <div class="icon-new-label new-right">New</div>
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img04.jpg" alt=""> <img class="hover-img" src="images/products/img04.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img04.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img04.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -283,7 +283,7 @@
                         <div class="product-thumbnail">
                           <div class="icon-new-label new-left">New</div>
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img05.jpg" alt=""> <img class="hover-img" src="images/products/img05.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -316,7 +316,7 @@
                       <div class="item-inner">
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img06.jpg" alt=""> <img class="hover-img" src="images/products/img06.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img06.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img06.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -358,7 +358,7 @@
                           <div class="icon-sale-label sale-left">Sale</div>
                           <div class="icon-new-label new-right">New</div>
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img03.jpg" alt=""> <img class="hover-img" src="images/products/img03.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img03.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img03.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -389,7 +389,7 @@
                         <div class="product-thumbnail">
                           <div class="icon-sale-label sale-left">Sale</div>
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img08.jpg" alt=""> <img class="hover-img" src="images/products/img08.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img08.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img08.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -422,7 +422,7 @@
                       <div class="item-inner">
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img01.jpg" alt=""> <img class="hover-img" src="images/products/img01.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img01.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img01.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -455,7 +455,7 @@
                       <div class="item-inner">
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img04.jpg" alt=""> <img class="hover-img" src="images/products/img04.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img04.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img04.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -485,7 +485,7 @@
                       <div class="item-inner">
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img05.jpg" alt=""> <img class="hover-img" src="images/products/img05.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -518,7 +518,7 @@
                       <div class="item-inner">
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img06.jpg" alt=""> <img class="hover-img" src="images/products/img06.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img06.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img06.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -560,7 +560,7 @@
                           <div class="icon-sale-label sale-left">Sale</div>
                           <div class="icon-new-label new-right">New</div>
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img03.jpg" alt=""> <img class="hover-img" src="images/products/img03.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img03.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img03.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -590,7 +590,7 @@
                       <div class="item-inner">
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img04.jpg" alt=""> <img class="hover-img" src="images/products/img04.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img04.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img04.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -620,7 +620,7 @@
                       <div class="item-inner">
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img05.jpg" alt=""> <img class="hover-img" src="images/products/img05.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -653,7 +653,7 @@
                       <div class="item-inner">
                         <div class="product-thumbnail">
                           <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure> <img class="first-img" src="images/products/img06.jpg" alt=""> <img class="hover-img" src="images/products/img06.jpg" alt=""></figure>
+                            <figure> <img class="first-img" src="{{asset('web/images/products/img06.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img06.jpg')}}" alt=""></figure>
                             </a> </div>
                           <div class="pr-info-area">
                             <div class="pr-button">
@@ -693,7 +693,7 @@
           <!-- Banner -->
           <div class="col-md-4 top-banner hidden-sm">
             <div class="jtv-banner3">
-              <div class="jtv-banner3-inner"><a href="#"><img src="images/sub1.jpg" alt=""></a>
+              <div class="jtv-banner3-inner"><a href="#"><img src="{{asset('web/images/sub1.jpg')}}" alt=""></a>
                 <div class="hover_content">
                   <div class="hover_data">
                     <div class="title"> sunglasse </div>
@@ -712,7 +712,7 @@
                     <ul class="products-grid">
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img02.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img02.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -733,7 +733,7 @@
                       </li>
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img03.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img03.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -757,7 +757,7 @@
                       </li>
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img03.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img03.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -778,7 +778,7 @@
                       </li>
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img04.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img04.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -804,7 +804,7 @@
                     <ul class="products-grid">
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img05.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img05.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -825,7 +825,7 @@
                       </li>
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img06.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img06.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -849,7 +849,7 @@
                       </li>
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img07.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img07.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -870,7 +870,7 @@
                       </li>
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img08.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img08.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -896,7 +896,7 @@
                     <ul class="products-grid">
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img09.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img09.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -917,7 +917,7 @@
                       </li>
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img10.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img10.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -941,7 +941,7 @@
                       </li>
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img11.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img11.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -962,7 +962,7 @@
                       </li>
                       <li class="item col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div class="item-inner">
-                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="images/products/img12.jpg"> </a> </div>
+                          <div class="item-img"> <a class="product-image" title="Retis lapen casen" href="product_detail.html"> <img alt="Retis lapen casen" src="{{asset('web/images/products/img12.jpg')}}"> </a> </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
@@ -1014,7 +1014,7 @@
                             <div class="icon-sale-label sale-left">Sale</div>
                             <div class="icon-new-label new-right">New</div>
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img08.jpg" alt=""> <img class="hover-img" src="images/products/img08.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img08.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img08.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1044,7 +1044,7 @@
                         <div class="item-inner">
                           <div class="product-thumbnail">
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img13.jpg" alt=""> <img class="hover-img" src="images/products/img13.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img13.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img13.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1077,7 +1077,7 @@
                         <div class="item-inner">
                           <div class="product-thumbnail">
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img09.jpg" alt=""> <img class="hover-img" src="images/products/img09.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img09.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img09.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1112,7 +1112,7 @@
                           <div class="icon-new-label new-right">New</div>
                           <div class="product-thumbnail">
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img12.jpg" alt=""> <img class="hover-img" src="images/products/img12.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img12.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img12.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1143,7 +1143,7 @@
                           <div class="product-thumbnail">
                             <div class="icon-new-label new-left">New</div>
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img05.jpg" alt=""> <img class="hover-img" src="images/products/img05.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1176,7 +1176,7 @@
                         <div class="item-inner">
                           <div class="product-thumbnail">
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img06.jpg" alt=""> <img class="hover-img" src="images/products/img06.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img06.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img06.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1222,7 +1222,7 @@
                       <div class="product-thumbnail">
                         <div class="icon-hot-label hot-right">Hot</div>
                         <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                          <figure> <img class="first-img" src="images/products/img15.jpg" alt=""> <img class="hover-img" src="images/products/img15.jpg" alt=""></figure>
+                          <figure> <img class="first-img" src="{{asset('web/images/products/img15.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img15.jpg')}}" alt=""></figure>
                           </a> </div>
                         <div class="pr-info-area">
                           <div class="pr-button">
@@ -1273,7 +1273,7 @@
                           <div class="product-thumbnail">
                             <div class="icon-sale-label sale-left">Sale</div>
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img06.jpg" alt=""> <img class="hover-img" src="images/products/img06.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img06.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img06.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1305,7 +1305,7 @@
                             <div class="product-thumbnail">
                               <div class="icon-sale-label sale-right">Sale</div>
                               <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                                <figure> <img class="first-img" src="images/products/img07.jpg" alt=""> <img class="hover-img" src="images/products/img07.jpg" alt=""></figure>
+                                <figure> <img class="first-img" src="{{asset('web/images/products/img07.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img07.jpg')}}" alt=""></figure>
                                 </a> </div>
                               <div class="pr-info-area">
                                 <div class="pr-button">
@@ -1343,7 +1343,7 @@
                             <div class="product-thumbnail">
                               <div class="icon-new-label new-left">45% off</div>
                               <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                                <figure> <img class="first-img" src="images/products/img08.jpg" alt=""> <img class="hover-img" src="images/products/img08.jpg" alt=""></figure>
+                                <figure> <img class="first-img" src="{{asset('web/images/products/img08.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img08.jpg')}}" alt=""></figure>
                                 </a> </div>
                               <div class="pr-info-area">
                                 <div class="pr-button">
@@ -1380,7 +1380,7 @@
                           <div class="product-thumbnail">
                             <div class="icon-new-label new-left">New</div>
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img09.jpg" alt=""> <img class="hover-img" src="images/products/img09.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img09.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img09.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1412,7 +1412,7 @@
                             <div class="product-thumbnail">
                               <div class="icon-sale-label sale-right">Sale</div>
                               <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                                <figure> <img class="first-img" src="images/products/img10.jpg" alt=""> <img class="hover-img" src="images/products/img10.jpg" alt=""></figure>
+                                <figure> <img class="first-img" src="{{asset('web/images/products/img10.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img10.jpg')}}" alt=""></figure>
                                 </a> </div>
                               <div class="pr-info-area">
                                 <div class="pr-button">
@@ -1450,7 +1450,7 @@
                         <div class="item-inner">
                           <div class="product-thumbnail">
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img11.jpg" alt=""> <img class="hover-img" src="images/products/img11.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img11.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img11.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1481,7 +1481,7 @@
                           <div class="item-img">
                             <div class="product-thumbnail">
                               <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                                <figure> <img class="first-img" src="images/products/img12.jpg" alt=""> <img class="hover-img" src="images/products/img12.jpg" alt=""></figure>
+                                <figure> <img class="first-img" src="{{asset('web/images/products/img12.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img12.jpg')}}" alt=""></figure>
                                 </a> </div>
                               <div class="pr-info-area">
                                 <div class="pr-button">
@@ -1518,7 +1518,7 @@
                           <div class="item-img">
                             <div class="product-thumbnail">
                               <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                                <figure> <img class="first-img" src="images/products/img13.jpg" alt=""> <img class="hover-img" src="images/products/img13.jpg" alt=""></figure>
+                                <figure> <img class="first-img" src="{{asset('web/images/products/img13.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img13.jpg')}}" alt=""></figure>
                                 </a> </div>
                               <div class="pr-info-area">
                                 <div class="pr-button">
@@ -1554,7 +1554,7 @@
                         <div class="item-inner">
                           <div class="product-thumbnail">
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img14.jpg" alt=""> <img class="hover-img" src="images/products/img14.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img14.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img14.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1585,7 +1585,7 @@
                           <div class="item-img">
                             <div class="product-thumbnail">
                               <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                                <figure> <img class="first-img" src="images/products/img15.jpg" alt=""> <img class="hover-img" src="images/products/img14.jpg" alt=""></figure>
+                                <figure> <img class="first-img" src="{{asset('web/images/products/img15.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img14.jpg')}}" alt=""></figure>
                                 </a> </div>
                               <div class="pr-info-area">
                                 <div class="pr-button">
@@ -1623,7 +1623,7 @@
                         <div class="item-inner">
                           <div class="product-thumbnail">
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img01.jpg" alt=""> <img class="hover-img" src="images/products/img01.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img01.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img01.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1654,7 +1654,7 @@
                           <div class="item-img">
                             <div class="product-thumbnail">
                               <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                                <figure> <img class="first-img" src="images/products/img02.jpg" alt=""> <img class="hover-img" src="images/products/img02.jpg" alt=""></figure>
+                                <figure> <img class="first-img" src="{{asset('web/images/products/img02.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img02.jpg')}}" alt=""></figure>
                                 </a> </div>
                               <div class="pr-info-area">
                                 <div class="pr-button">
@@ -1691,7 +1691,7 @@
                           <div class="item-img">
                             <div class="product-thumbnail">
                               <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                                <figure> <img class="first-img" src="images/products/img03.jpg" alt=""> <img class="hover-img" src="images/products/img03.jpg" alt=""></figure>
+                                <figure> <img class="first-img" src="{{asset('web/images/products/img03.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img03.jpg')}}" alt=""></figure>
                                 </a> </div>
                               <div class="pr-info-area">
                                 <div class="pr-button">
@@ -1727,7 +1727,7 @@
                         <div class="item-inner">
                           <div class="product-thumbnail">
                             <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                              <figure> <img class="first-img" src="images/products/img04.jpg" alt=""> <img class="hover-img" src="images/products/img04.jpg" alt=""></figure>
+                              <figure> <img class="first-img" src="{{asset('web/images/products/img04.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img04.jpg')}}" alt=""></figure>
                               </a> </div>
                             <div class="pr-info-area">
                               <div class="pr-button">
@@ -1758,7 +1758,7 @@
                           <div class="item-img">
                             <div class="product-thumbnail">
                               <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                                <figure> <img class="first-img" src="images/products/img05.jpg" alt=""> <img class="hover-img" src="images/products/img05.jpg" alt=""></figure>
+                                <figure> <img class="first-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""> <img class="hover-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""></figure>
                                 </a> </div>
                               <div class="pr-info-area">
                                 <div class="pr-button">
@@ -1814,7 +1814,7 @@
                     <!-- Item -->
                     <div class="item">
                       <div class="jtv-blog">
-                        <div class="blog-img"> <a href="blog_single_post.html"> <img class="primary-img" src="images/blog-img1.jpg" alt=""></a> <span class="moretag"></span> </div>
+                        <div class="blog-img"> <a href="blog_single_post.html"> <img class="primary-img" src="{{asset('web/images/blog-img1.jpg')}}" alt=""></a> <span class="moretag"></span> </div>
                         <div class="blog-content-jtv">
                           <h2><a href="blog_single_post.html">Sed do eiusmod sit amet</a></h2>
                           <span class="jtv-entry-meta"><span class="date">28 January, 2017</span> <i class="pe-7s-like"></i> 149 likes <span class="blog-comments"><i class="pe-7s-comment"></i> 80 comments</span></span>
@@ -1826,7 +1826,7 @@
                     <!-- End Item -->
                     <div class="item">
                       <div class="jtv-blog">
-                        <div class="blog-img"> <a href="blog_single_post.html"><img class="primary-img" src="images/blog-img2.jpg" alt=""></a> </div>
+                        <div class="blog-img"> <a href="blog_single_post.html"><img class="primary-img" src="{{asset('web/images/blog-img2.jpg')}}" alt=""></a> </div>
                         <div class="blog-content-jtv">
                           <h2><a href="blog_single_post.html">Lorem ipsum dolor sit amet</a></h2>
                           <span class="jtv-entry-meta"><span class="date">14 February, 2017</span> <i class="pe-7s-like"></i> 50 likes <span class="blog-comments"><i class="pe-7s-comment"></i> 99 comments</span></span>
@@ -1838,7 +1838,7 @@
                     <!-- Item -->
                     <div class="item">
                       <div class="jtv-blog">
-                        <div class="blog-img"> <a href="blog_single_post.html"><img class="primary-img" src="images/blog-img3.jpg" alt=""></a> </div>
+                        <div class="blog-img"> <a href="blog_single_post.html"><img class="primary-img" src="{{asset('web/images/blog-img3.jpg')}}" alt=""></a> </div>
                         <div class="blog-content-jtv">
                           <h2><a href="blog_single_post.html">Integer scelerisque diam vitae</a></h2>
                           <span class="jtv-entry-meta"><span class="date">5 March, 2017</span> <i class="pe-7s-like"></i> 29 likes <span class="blog-comments"><i class="pe-7s-comment"></i> 44 comments</span></span>
@@ -1852,7 +1852,7 @@
                     <!-- Item -->
                     <div class="item">
                       <div class="jtv-blog">
-                        <div class="blog-img"> <a href="blog_single_post.html"> <img class="primary-img" src="images/blog-img1.jpg" alt=""></a> <span class="moretag"></span> </div>
+                        <div class="blog-img"> <a href="blog_single_post.html"> <img class="primary-img" src="{{asset('web/images/blog-img1.jpg')}}" alt=""></a> <span class="moretag"></span> </div>
                         <div class="blog-content-jtv">
                           <h2><a href="blog_single_post.html">Sed do eiusmod sit amet</a></h2>
                           <span class="jtv-entry-meta"><span class="date">15 April, 2017</span> <i class="pe-7s-like"></i> 5 likes <span class="blog-comments"><i class="pe-7s-comment"></i> 20 comments</span></span>
@@ -1882,13 +1882,13 @@
                         minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip volutpat.
                         Integer rutrum ante eu lacus.Vestibulum libero nisl, porta vel, scelerisque eget, malesuada at, 
                         neque. Voluptate, consetur adipisicing elit. Morbi dignissim, leo non mollis ultricies.</blockquote>
-                      <div class="thumb"> <img src="images/testimonials-img3.jpg" alt="testimonials img"> </div>
+                      <div class="thumb"> <img src="{{asset('web/images/testimonials-img3.jpg')}}" alt="testimonials img"> </div>
                       <div class="holder-info"> <strong class="name">John Doe</strong> <strong class="designation">CEO, Company</strong></div>
                     </div>
                     <div class="holder">
                       <blockquote> Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing elit.Lorem ipsum dolor sit ame consetur adipisicing elit.Lorem ipsum dolor sit ame consetur adipisicing elit. Voluptate, consetur adipisicing elit. 
                         Lorem ipsum dolor sit ame consetur adipisicing elit.  Suspendisse diam ipsum, ultricies vel posuere at, sodales et lorem.</blockquote>
-                      <div class="thumb"> <img src="images/testimonials-img1.jpg" alt="testimonials img"> </div>
+                      <div class="thumb"> <img src="{{asset('web/images/testimonials-img1.jpg')}}" alt="testimonials img"> </div>
                       <div class="holder-info"> <strong class="name">Vince Roy</strong> <strong class="designation">CEO, Newspaper</strong> </div>
                     </div>
                     <div class="holder">
@@ -1896,13 +1896,13 @@
                         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad 
                         minim. Donec sit amet eros.
                         Cras feugiat luctus nulla vitae posuere. Suspendisse potenti. quis rhoncus libero orci quis ex. Donec molestie convallis dictum. Praesent at dapibus massa. Ut placerat enim vitae porta rutrum. Nullam faucibus volutpat nunc vitae cursus. </blockquote>
-                      <div class="thumb"> <img src="images/testimonials-img2.jpg" alt="testimonials img"> </div>
+                      <div class="thumb"> <img src="{{asset('web/images/testimonials-img2.jpg')}}" alt="testimonials img"> </div>
                       <div class="holder-info"><strong class="name">John Doe</strong> <strong class="designation">CEO, ABC Softwear</strong></div>
                     </div>
                     <div class="holder">
                       <blockquote>Aliquam erat volutpat. Sed do eiusmod tempor incididunt Integer rutrum ante eu lacus. Vestibulum libero nisl, porta vel, scelerisque eget. Donec sit amet eros.
                         Nulla non ornare nisi, sed condimentum lorem. Morbi sed vehicula magna. Donec vitae ultricies velit, sit amet sollicitudin ligula.</blockquote>
-                      <div class="thumb"> <img src="images/testimonials-img4.jpg" alt="testimonials img"> </div>
+                      <div class="thumb"> <img src="{{asset('web/images/testimonials-img4.jpg')}}" alt="testimonials img"> </div>
                       <div class="holder-info"> <strong class="name">Vince Roy</strong> <strong class="designation">CEO, XYZ Softwear</strong></div>
                     </div>
                   </div>

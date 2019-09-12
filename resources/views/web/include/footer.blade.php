@@ -144,29 +144,29 @@
   <!-- JS --> 
 
   <!-- jquery js --> 
-  <script type="text/javascript" src="js/jquery.min.js"></script> 
+  <script type="text/javascript" src="{{asset('web/js/jquery.min.js')}}"></script> 
 
   <!-- bootstrap js --> 
-  <script type="text/javascript" src="js/bootstrap.min.js"></script> 
+  <script type="text/javascript" src="{{asset('web/js/bootstrap.min.js')}}"></script> 
 
   <!-- owl.carousel.min js --> 
-  <script type="text/javascript" src="js/owl.carousel.min.js"></script> 
+  <script type="text/javascript" src="{{asset('web/js/owl.carousel.min.js')}}"></script> 
 
   <!-- jquery.mobile-menu js --> 
-  <script type="text/javascript" src="js/mobile-menu.js"></script> 
+  <script type="text/javascript" src="{{asset('web/js/mobile-menu.js')}}"></script> 
 
   <!--jquery-ui.min js --> 
-  <script type="text/javascript" src="js/jquery-ui.js"></script> 
+  <script type="text/javascript" src="{{asset('web/js/jquery-ui.js')}}"></script> 
 
   <!-- main js --> 
-  <script type="text/javascript" src="js/main.js"></script> 
+  <script type="text/javascript" src="{{asset('web/js/main.js')}}"></script> 
   <!-- <script type="text/javascript" src="html/js/main.js"></script>  -->
 
   <!-- countdown js --> 
-  <script type="text/javascript" src="js/countdown.js"></script> 
+  <script type="text/javascript" src="{{asset('web/js/countdown.js')}}"></script> 
 
   <!-- Slider Js --> 
-  <script type="text/javascript" src="js/revolution-slider.js"></script> 
+  <script type="text/javascript" src="{{asset('web/js/revolution-slider.js')}}"></script> 
 
   <!-- Revolution slider --> 
   <script type="text/javascript">

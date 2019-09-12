@@ -17,6 +17,5 @@
 
 
 Route::get('/', function () {
-	echo "hi";
-    // return view('web.index');
+    return view('web.index');
 });

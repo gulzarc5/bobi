@@ -8,7 +8,7 @@
   <!-- Mobile specific metas  -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Favicons Icon -->
-  <link rel="shortcut icon" type="image/x-icon" href="images/fab.png">
+  <link rel="shortcut icon" type="image/x-icon" href="{{asset('web/images/fab.png')}}">
   <!-- CSS Style -->
   <link rel="stylesheet" href="{{asset('web/css/url.css')}}">
 </head>
@@ -17,7 +17,7 @@
   <!-- mobile menu -->
   <div id="mobile-menu">
     <div class="mobile-menu-top" style="height: 100px;background: #323d61">
-        <img src="images/testimonials-img2.jpg" style="width: 23%;border-radius: 50%;margin: 12px 0 5px 12px;border: 5px solid #c3c30d;">
+        <img src="{{asset('web/images/testimonials-img2.jpg')}}')}}" style="width: 23%;border-radius: 50%;margin: 12px 0 5px 12px;border: 5px solid #c3c30d;">
         <h6 style="color: #fff;margin-left: 10px">Wellcome User</h6>
     </div>
     <ul>
@@ -218,7 +218,7 @@
                       <span class="mm-label hidden">Categories</span> 
                     </div>
                     <!-- Header Logo -->
-                    <div class="logo"><a title="e-commerce" href="index.html"><img alt="e-commerce" src="images/logo.png"></a> </div>
+                    <div class="logo"><a title="e-commerce" href="index.html"><img alt="e-commerce" src="{{asset('web/images/logo.png')}}"></a> </div>
                     <!-- Shop by category -->
                   </div>
                 </div>
@@ -242,7 +242,17 @@
                 
               </div>
               <div class="col-sm-5 col-md-4 col-xs-12 header-right"> 
-                <!-- top cart -->
+                <!-- Seller Login -->
+                <div class="top-cart-contain">
+                  <div class="mini-cart">
+                    <div class="basket dropdown-toggle"><a href="Cart" target="_blank">
+                      <div class="cart-icon"><i class="pe-7s-home"></i></div>
+                      <div class="shoppingcart-inner" style="margin-top: 9px;"><span class="cart-title hidden-xs">Seller Login</span></div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <!-- Whishlist-->
                 <div class="top-cart-contain">
                   <div class="mini-cart">
                     <div class="basket dropdown-toggle"><a href="Cart">
@@ -252,6 +262,7 @@
                     </div>
                   </div>
                 </div>
+                <!-- My Cart -->
                 <div class="top-cart-contain">
                   <div class="mini-cart">
                     <div class="basket dropdown-toggle"><a href="Cart">
@@ -259,20 +270,6 @@
                       <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Basket</span> <span class="cart-total">2 items</span></div>
                       </a>
                     </div>
-                  </div>
-                </div>
-                <!-- My Account -->
-                <div class="jtv-user-info">
-                  <div class="dropdown"><a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i class="pe-7s-config"></i><span>My Account</span> <i class="fa fa-angle-down"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="account_page.html">Account</a></li>
-                      <li><a href="wishlist.html">Wishlist</a></li>
-                      <li><a href="checkout.html">Checkout</a></li>
-                      <li><a href="about_us.html">About us</a></li>
-                      <li class="divider"></li>
-                      <li><a href="account_page.html">Log In</a></li>
-                      <li><a href="register_page.html">Register</a></li>
-                    </ul>
                   </div>
                 </div>
               </div>
@@ -367,7 +364,7 @@
                             </ul>
                           </div>
                           <div class="col-2">
-                            <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="images/menu-img1.jpg"> </a> </div>
+                            <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="{{asset('web/images/menu-img1.jpg')}}"> </a> </div>
                           </div>
                         </div>
                       </div>
@@ -430,13 +427,13 @@
                         </div>
                         <div class="jtv-nav-banner">
                           <div class="jtv-banner-box">
-                            <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img2.jpg" alt="Handbag"> </a> </div>
+                            <div class="jtv-nav-banner-img"> <a href="#"><img src="{{asset('web/images/menu-img2.jpg')}}" alt="Handbag"> </a> </div>
                           </div>
                           <div class="jtv-banner-box">
-                            <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img3.jpg" alt="Handbag"> </a> </div>
+                            <div class="jtv-nav-banner-img"> <a href="#"><img src="{{asset('web/images/menu-img3.jpg')}}" alt="Handbag"> </a> </div>
                           </div>
                           <div class="jtv-banner-box jtv-banner-box_last">
-                            <div class="jtv-nav-banner-img"> <a href="#"><img src="images/menu-img4.jpg" alt="Handbag"> </a> </div>
+                            <div class="jtv-nav-banner-img"> <a href="#"><img src="{{asset('web/images/menu-img4.jpg')}}" alt="Handbag"> </a> </div>
                           </div>
                         </div>
                       </div>
@@ -539,7 +536,7 @@
                             </li>
                           </ul>
                         </div>
-                        <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="images/menu-img5.jpg" alt="menu img"> </div>
+                        <div class="nav-block nav-block-right std jtv-menu-box-right"><img src="{{asset('web/images/menu-img5.jpg')}}" alt="menu img"> </div>
                       </div>
                     </div>
                   </li>
