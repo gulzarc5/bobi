@@ -25,34 +25,27 @@
                   <div class="x_content">
                         @php
                           $id_count = 1;
-                          $product_id = null;
                         @endphp
-                        @if(isset($sizes) && !empty($sizes))
-                          @foreach($sizes as $key => $value)
+                        @if(isset($product_sizes) && !empty($product_sizes))
+                          @foreach($product_sizes as $key => $size)
                             <div class="well" style="overflow: auto">
-
-                              @foreach($value as $size)
                                 <div class="form-row mb-10" id="inner_size_add_div'+key+'">
                                   <div class="col-md-12 col-sm-12 col-xs-12 mb-3" id="error{{ $id_count }}">
 
                                   </div>
                                   <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                                     
-                                    <input type="hidden" name="size_id[]" id="size_id{{$id_count}}" value="{{ $size->id}}">
+                                    <input type="hidden" name="size_id" id="size_id{{$id_count}}" value="{{ $size->id}}">
                                     <input type="hidden"  id="product{{$id_count}}" value="{{ $size->product_id}}">
-                                    @php
-                                      $product_id = $size->product_id;
-                                    @endphp
-
-                                    <input type="hidden"  id="size_name{{$id_count}}" value="{{ $size->size_name_id}}">
-                                    <label for="size">{{ $key }}</label>
-                                    <select class="form-control" name="size[]" id="size{{$id_count}}" disabled>
+              
+                                    <label for="size">Size</label>
+                                    <select class="form-control" name="size" id="size{{$id_count}}" disabled>
                                       <option value="">Please Select Size</option>
-                                        @foreach($sizes_options[$key] as $size_option)
-                                          @if( $size_option->size_value_id == $size->size_value_id )
-                                            <option value="{{ $size_option->size_value_id }}" selected>{{ $size_option->size_value }}</option>
+                                        @foreach($sizes as $size_option)
+                                          @if( $size_option->id == $size->size_id )
+                                            <option value="{{ $size_option->id }}" selected>{{ $size_option->name }}</option>
                                           @else
-                                            <option value="{{ $size_option->size_value_id }}">{{ $size_option->size_value }}</option>
+                                            <option value="{{ $size_option->id }}">{{ $size_option->name }}</option>
                                           @endif
                                         @endforeach
 
@@ -61,16 +54,16 @@
                                   
                                   <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                                     <label for="mrp">Enter M.R.P.</label>
-                                      <input type="text" class="form-control" name="mrp[]" value="{{ $size->mrp }}" placeholder="Enter MRP" id="mrp{{$id_count}}" disabled>
+                                      <input type="text" class="form-control" name="mrp" value="{{ $size->mrp }}" placeholder="Enter MRP" id="mrp{{$id_count}}" disabled>
                                   </div>
                                   <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                                     <label for="price">Enter Price</label>
-                                      <input type="text" class="form-control" name="price[]"  placeholder="Enter Price" value="{{ $size->price }}" id="price{{$id_count}}" disabled>
+                                      <input type="text" class="form-control" name="price"  placeholder="Enter Price" value="{{ $size->price }}" id="price{{$id_count}}" disabled>
                                   </div>
 
                                   <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                                     <label for="stock">Enter Stock</label>
-                                    <input type="text" class="form-control" name="stock[]"  placeholder="Enter Stock" value="{{ $size->stock }}" id="stock{{$id_count}}" disabled>
+                                    <input type="text" class="form-control" name="stock"  placeholder="Enter Stock" value="{{ $size->stock }}" id="stock{{$id_count}}" disabled>
                                   </div>
 
                                   <div class="col-md-8 col-sm-12 col-xs-12 mb-3">
@@ -89,7 +82,6 @@
                                 @php
                                   $id_count++;
                                 @endphp
-                              @endforeach
                             </div>
                           @endforeach
                         @endif
@@ -123,51 +115,51 @@
                  
                     {{ Form::open(['method' => 'post','route'=>'admin.product_new_size_add']) }}
                     
-                       
-                      <div  id="size_div">
+                  <input type="hidden" name="product_id" value="{{ $product_id }}">
+                      
                         @if($errors->any())
                             @foreach ($errors->all() as $error)
                                 <div>{{ $error }}</div>
                             @endforeach
                         @endif
-                        @if(isset($sizes_add) && !empty($sizes_add))
-                          @foreach($sizes_add as $key => $value)
-                            <div class="well" style="overflow: auto">                              
-                                <div class="form-row mb-10">
-                                  <div class="col-md-4 col-sm-12 col-xs-12 mb-3">                    
-                                    <input type="hidden"  name="product_id[]" value="{{ $product_id }}">
-                                    <input type="hidden" name="size_name_id[]" value="{{ current(current($value))->size_id }}">
-                                    <label for="size">{{ $key }}</label>
-                                    <select class="form-control" name="size[]">
-                                      <option value="">Please Select Size</option>
-                                        @foreach($value as $key1 => $value1)
-                                            <option value="{{ $value1->size_value_id }}">{{ $value1->size_value }}</option>
+                        <div  id="size_div">
+                          <div class="well" style="overflow: auto">
+                              <div class="form-row mb-10" >
+                                  <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
+                                      <label for="size">Size</label>
+                                      <select class="form-control size" name="size[]" id="size_option">
+                                          <option value="">Please Select Size</option>
+                                          @foreach($sizes as $size_option)
+                                            <option value="{{ $size_option->id }}">{{ $size_option->name }}</option>
                                         @endforeach
+                                      </select>
+                                  </div>
+                              </div>
 
-                                    </select>
-                                  </div>
-                                  
-                                  <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
-                                    <label for="mrp[]">Enter M.R.P.</label>
-                                      <input type="text" class="form-control" name="mrp[]"  placeholder="Enter MRP">
-                                  </div>
-                                  <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
-                                    <label for="price[]">Enter Price</label>
-                                      <input type="text" class="form-control" name="price[]"  placeholder="Enter Price">
-                                  </div>
+                              <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
+                                  <label for="mrp">Enter M.R.P.</label>
+                                  <input type="text" class="form-control" name="mrp[]"  placeholder="Enter MRP">
+                              </div>
 
-                                  <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
-                                    <label for="stock">Enter Stock</label>
-                                    <input type="text" class="form-control" name="stock[]"  placeholder="Enter Stock" >
-                                  </div>
-                                </div>
-                            </div>
-                          @endforeach
-                        @endif
+                              <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
+                                  <label for="price">Enter Price</label>
+                                  <input type="text" class="form-control" name="price[]"  placeholder="Enter Price" >
+                              </div>
+
+                              <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
+                                  <label for="stock">Enter Stock</label>
+                                  <input type="text" class="form-control" name="stock[]"  placeholder="Enter Stock" >
+                              </div>
+
+                              <div class="col-md-8 col-sm-12 col-xs-12 mb-3">
+                                  <a class="btn btn-sm btn-primary" style="margin-top: 25px;" onclick="add_more_inner_size_div()">Add More</a>
+                              </div>
+                          </div>
+                        </div>
                           <div>
                             <button type="submit" class="btn btn-success"> Submit </button>
                           </div>
-                      </div>
+                      
                     {{ Form::close() }}
 
                   </div>
@@ -195,7 +187,6 @@
       function size_save(id) {
 
         var product_id =  $('#product'+id).val();
-        var size_name_id = $('#size_name'+id).val();
         var size_id = $('#size_id'+id).val();
         var size = $("#size"+id).find(":selected").val();
         var mrp = $("#mrp"+id).val();
@@ -211,7 +202,14 @@
         $.ajax({
             type:"POST",
             url:"{{ route('admin.product_size_update')}}",
-            data:{ size_id:size_id, size:size, mrp:mrp, price:price, stock:stock, product_id:product_id, size_name_id:size_name_id },
+            data:{ 
+              size_id:size_id, 
+              size:size, 
+              mrp:mrp, 
+              price:price, 
+              stock:stock, 
+              product_id:product_id, 
+              },
             success:function(data){
               console.log(data);
               if (data == 1) {
@@ -234,72 +232,6 @@
       }
 
 
-        var color_html = null;
-         var size={};
-        $(document).ready(function(){
-            $("#second_category").change(function(){
-                        
-                var category = $('#category').val();
-                var first_category = $('#first_category').val();
-                var second_category = $(this).val();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    type:"GET",
-                    url:"{{ url('/admin/Products/ajax/form/load/data')}}"+"/"+category+"/"+first_category+"/"+second_category+"",
-                    success:function(data){
- 
-                        if (data.sizes != null) {
-                            $.each( data.sizes, function( key, value ) {
-                              
-                                var size_div_html = '<div class="well" style="overflow: auto"><div class="form-row mb-10" id="inner_size_add_div'+key+'">'+
-                                    '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">';
-                                    if(value.length > 0 ) {
-                                       size_div_html +='<input type="hidden" name="size_id[]" value="'+value[0]['size_id']+'">';
-                                   }
-                                    size_div_html +='<label for="size">'+key+'</label>'+
-                                        '<select class="form-control" name="size[]">'+
-                                        '<option value="">Please Select Size</option>';
-                                         size[key] = '<option value="">Please Select Size</option>';
-                                    if (value.length > 0 ) {
-                                         $.each( value, function( key1, value ) {
-                                           size_div_html += "<option value='"+value.size_value_id+"'>"+value.size_value+"</option>";
-                                           size[key] += "<option value='"+value.size_value_id+"'>"+value.size_value+"</option>";
-                                        });
-                                    }
-                                size_div_html +='</select>'+
-                                    '</div>'+
-                                    '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
-                                      '<label for="mrp">Enter M.R.P.</label>'+
-                                      '<input type="text" class="form-control" name="mrp[]"  placeholder="Enter MRP" >'+
-
-                                    '</div>'+
-                                    '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
-                                      '<label for="price">Enter Price</label>'+
-                                      '<input type="text" class="form-control" name="price[]"  placeholder="Enter Price" >'+
-                                    '</div>'+
-
-                                    '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
-                                      '<label for="stock">Enter Stock</label>'+
-                                      '<input type="text" class="form-control" name="stock[]"  placeholder="Enter Stock" >'+
-                                    '</div>'+
-
-                                    '<div class="col-md-8 col-sm-12 col-xs-12 mb-3">'+
-                                       '<a class="btn btn-sm btn-primary" style="margin-top: 25px;" onclick="add_more_inner_size_div(\''+key+'\',\''+value[0]['size_id']+'\')">Add More</a>'+
-                                    '</div>'+
-                                '</div></div>';
-                                $("#size_div").show();
-                                $("#size_div").append(size_div_html);
-                            });
-                        }
-
-                    }
-                });
-            });
-        });
 
     </script>
     <script src="{{ asset('admin/javascript/product.js') }}"></script>

@@ -139,7 +139,7 @@
                       <li><a><i class="fa fa-bar-chart-o"></i>Colors <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="{{route('admin.add_color_name_form')}}">Add New Color</a></li>
-                          <li><a href="{{route('admin.map_color_form')}}">Map Color</a></li>
+                          {{-- <li><a href="{{route('admin.map_color_form')}}">Map Color</a></li> --}}
                           <li><a href="{{route('admin.view_color_list')}}">Colors List</a></li>
                         </ul>
                       </li>

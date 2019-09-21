@@ -16,7 +16,7 @@ Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 
 	Route::get('/Edit/{product_id}', 'ProductController@productEdit')->name('admin.product_edit');
 
-	Route::post('/Update/', 'ProductController@productUpdate')->name('admin.update_product');
+	Route::post('/updates/id/', 'ProductController@productUpdate')->name('admin.update_product');
 
 	Route::get('ajax/Get/Brands/{category}/{first_category}/{second_category}','ProductController@ajaxGetLoadFormData');
 
@@ -34,8 +34,7 @@ Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 	Route::get('/Size/Status/{size_id}/{status}/{product_id}', 'ProductController@productSizeStatusUpdate')->name('admin.product_size_status_update');
 	Route::post('/New/Size/Add/', 'ProductController@productNewSizeAdd')->name('admin.product_new_size_add');
 
-	Route::get('/Varients/Edit/{product_id}', 'ProductController@productVarientEdit')->name('admin.product_varient_edit');
-	Route::post('/Varients/Update/', 'ProductController@productVarientUpdate')->name('admin.product_varient_update');
+	
 
 	Route::get('/Colors/Edit/{product_id}', 'ProductController@productColorEdit')->name('admin.product_Color_edit');
 	Route::post('/Color/Update/', 'ProductController@productColorUpdate')->name('admin.product_color_update');

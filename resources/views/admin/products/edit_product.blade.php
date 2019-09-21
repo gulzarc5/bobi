@@ -126,10 +126,10 @@
                                             <option value="">Select Brand</option>
                                              @if(isset($brands) && !empty($brands))
                                                 @foreach($brands as $brand)
-                                                    @if($product->brand_id  == $brand->brand_id)
-                                                        <option value="{{ $brand->brand_id }}" selected>{{ $brand->brand_name }}</option>
+                                                    @if($product->brand_id  == $brand->id)
+                                                        <option value="{{ $brand->id }}" selected>{{ $brand->name }}</option>
                                                     @else
-                                                        <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
+                                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                                     @endif
                                                 @endforeach
                                             @endif

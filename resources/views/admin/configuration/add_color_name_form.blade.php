@@ -2,8 +2,8 @@
 @extends('admin.template.admin_master')
 
 @section('style')
-<link href="{{asset('admin/src_files/vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}" rel="stylesheet">
-<script src="{{asset('admin/javascript/jscolor.js')}}"></script>
+{{-- <link href="{{asset('admin/src_files/vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}" rel="stylesheet"> --}}
+<link href="{{asset('admin/css/spectrum.css')}}" rel="stylesheet">
 @endsection
 
 @section('content')
@@ -56,17 +56,22 @@
                             @enderror
                         </div>
                         <div id="colors">
-                            <div class="form-group col-md-5">
-                                {{ Form::label('name', 'Color Name')}} 
-                                {{ Form::text('color_name[]',null,array('class' => 'form-control','placeholder'=>'Enter Category name')) }}
-                            </div>
-                            <div class="form-group col-md-5 color_picker_input">
-                                
-                                {{ Form::label('value', 'Select Color')}} 
-                                    {{ Form::text('color_value[]','#39c914',array('class' => 'form-control jscolor','placeholder'=>'Select Color Value')) }}
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn btn-sm btn-info" onclick="addColor()" type="button" style="margin-top: 25px;">Add More</button>
+                            <div id="color_div">
+                                <div class="form-group col-md-5">
+                                    {{ Form::label('name', 'Color Name')}} 
+                                    {{ Form::text('color_name[]',null,array('class' => 'form-control','placeholder'=>'Enter Category name')) }}
+                                </div>
+                                <div class="form-group col-md-5 color_picker_input">
+                                    
+                                    {{ Form::label('value', 'Select Color')}} 
+                                    <div class="input-group demo2" style="display: flex;">
+                                        {{ Form::text('color_value[]','#39c914',array('class' => 'form-control','id'=>'color1','placeholder'=>'Select Color Value', 'style'=>'width: 80%;')) }}
+                                        <input type='text' class="basic"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-sm btn-info" onclick="addColor()" type="button" style="margin-top: 25px;">Add More</button>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
@@ -101,8 +106,16 @@
  @endsection
 
  @section('script')
-  <script src="{{asset('admin/src_files/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>
+  {{-- <script src="{{asset('admin/src_files/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script> --}}
+  <script src="{{asset('admin/javascript/spectrum.js')}}"></script>
      <script type="text/javascript">
+        $(".basic").spectrum({
+            color: "#f00",
+            showButtons: false,
+            move: function(color) {
+                $("#color1").val(color.toHexString());
+            }
+        });
         $(document).ready(function(){
 
             $("#category").change(function(){
@@ -137,18 +150,34 @@
                                 '<label for="name">Color Name</label>'+
                                 '<input class="form-control" placeholder="Enter Category name" name="color_name[]" type="text" id="name">'+
                             '</div>'+
-                            '<div class="form-group col-md-5">'+color_picker_input+
-                            '</div>'+
+                            '<div class="form-group col-md-5 color_picker_input">'+
+                                    '<label for="value">Select Color</label>'+
+                                    '<div class="input-group demo2" style="display: flex;">'+
+                                        '<input class="form-control" style="width: 80%;" id="color1'+coloradd+'" placeholder="Select Color Value" name="color_value[]" type="text" value="#39c914">'+
+                                        '<input type="text" onclick="col_pic('+coloradd+')" class="basic'+coloradd+'"/>'+
+                                    '</div>'+
+                                '</div>'+
                             '<div class="col-md-2">'+
                                 '<button class="btn btn-sm btn-danger" onclick="removeColor('+coloradd+')" type="button" style="margin-top: 25px;">Remove</button>'+
                             '</div>'+
                         '</div>';
             $("#colors").append(html);
+            col_pic(coloradd);
             coloradd++;
         }
 
         function removeColor(colorid) {
             $("#color_div"+colorid).remove();
+        }
+
+        function col_pic(col_id){
+            $(".basic"+col_id).spectrum({
+            color: "#f00",
+            showButtons: false,
+            move: function(color) {
+                $("#color1"+col_id).val(color.toHexString());
+            }
+        });
         }
     </script>
  @endsection
