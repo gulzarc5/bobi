@@ -1,3 +1,8 @@
+/* All these css are added later
+1. For desktop
+2. For responsive (max-width:425px)
+*/
+
 /*========== Navigation ==========*/
 nav {
 	position: relative;
@@ -529,6 +534,26 @@ ul.level1 {
 	display: none!important;
 	transition: .5s
 }
+.tab-head{
+	margin: 0;
+    margin-top: 23px;
+    margin-left: 11px;
+    background: #dffffc;
+    padding: 4px 10px;
+    border-radius: 3px;
+    height: 34px;
+    width: 115px;
+    border: 1px solid #ddd;
+}
+.tab-head ul li span{
+	color: #736e6e;
+}
+.tab-head ul li strong{
+	text-decoration:underline;
+}
+.login{
+	padding: 5px 10px;
+}
 /*========== Flex ==========*/
 .flex{
 	display: flex;
@@ -543,31 +568,169 @@ ul.level1 {
 }
 /*========== logo ==========*/
 .logo img{
-	width: 64%;
+	width: 94%;
+}
+.jtv-sticky-menu .logo img{
+	width:  86%;
+}
+.jtv-sticky-menu .logo {
+    margin-top: -4px;
+}
+/*========== Seller Login ==========*/
+
+.seller .box-authentication,.seller .box-authentication input{
+    display: inline-block;
+    width: 100%!important;
+}
+.seller .page-content{
+	z-index: 9;
+}
+.seller{
+	height: 657px;
+	background: url(../images/slider/sell.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+/*========== Overley ==========*/
+.overley{
+	position: absolute;
+	top: 0%;
+	width:100%;
+	height: 100%;
+	background: #0000006b;
+}
+.footer-fixd{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background: #323d61;
+	z-index: 9;
+	color: #fff;
+}
+.footer-fixd a{
+	color: yellow!important;
+}
+/*========== box-shadow ==========*/
+.box-shadow {
+	-webkit-box-shadow: 0px 0px 26px -2px rgba(87,87,87,1);
+    -moz-box-shadow: 0px 0px 26px -2px rgba(87,87,87,1);
+    box-shadow: 0px 0px 26px -2px rgb(204, 204, 204);
+}
+/*========== wishlist ==========*/
+.slider-product .add_to_wishlist{
+	border: 1px #cac8c8ad solid;
+    color: #fff;
+    background-color: #fff;
+    width: 38px;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+.slider-product .add_to_wishlist i{
+	font-size: 18px;
+    padding: 8px;
+    color: #000;
+}
+.slider-product .add_to_wishlist:hover{
+	border: 1px #00b9f5 solid;
+    color: #fff;
+    background-color: #00b9f5;
+    width: 38px;
+}
+.slider-product .add_to_wishlist:hover i{
+    color: #fff;
+}
+
+/*========== Footer ==========*/
+.payment ul li {
+	background: #fff;
+}
+.footer-links {
+	color: #fff;
+	font-weight: 100;
+}
+/*========== slider ==========*/
+.slider-content{
+	position: absolute;
+	top: 0;
+	left: 60px;
 }
 /*==========  ==========*/
 
 /*==========  ==========*/
 
 /*==========  ==========*/
-
-/*==========  ==========*/
-
-/*==========  ==========*/
-
-/*==========  ==========*/
-
-/*==========  ==========*/
-
-/*==========  ==========*/
-
-/*==========  ==========*/
-
-/*==========  ==========*/
-
+.clearfix {padding: 90px 0}
+.inst img{border: 3px solid #fff;padding: 10px;background-color: #555555a1;	-webkit-box-shadow: 0px 0px 26px -2px #ffffff;
+    -moz-box-shadow: 0px 0px 26px -2px #ffffff;
+    box-shadow: 0px 0px 26px -2px #ffffff;}
+.inst .arrow1{
+	border: none;
+	padding: 0px;
+	background-color: transparent;
+	position: absolute;
+	z-index: 10;
+	transform: rotate(-90deg);
+	top: 29%;
+    left: 91%;
+    width: 18%;
+    box-shadow: none;
+}
+.inst .arrow2{
+	border: none;
+	padding: 0px;
+	background-color: transparent;
+	position: absolute;
+	z-index: 10;
+    top: 103%;
+    left: 46%;
+    width: 18%;
+    box-shadow: none;
+}
+.inst .arrow3{
+	border: none;
+	padding: 0px;
+	background-color: transparent;
+	position: absolute;
+	z-index: 10;
+	transform: rotate(90deg);
+	top: 29%;
+    left: 91%;
+    width: 18%;
+    box-shadow: none;
+}
+.spl-sell .inst{padding: 3px 73px;}
+/*========== button ==========*/
+.btn-home {
+	border-radius: 3px;
+    background: #fff;
+    color: #3e3737;
+    background: #dffffc;
+    padding: 5px 8px;
+    border: 1px solid#ddd;
+}
+.home-tab hr{margin: 12px 0}
 /*========== Responsive ==========*/
 @media (max-width: 425px){
-	.logo img{
+	.jtv-sticky-menu .logo img{
 		width: 28%;
+	}.logo img{
+		width: 34%;
+	}
+	.seller .page-content{
+		width:85%;
+		padding: 8px 20px;
+	}
+	.seller img{
+		width: 50%;
+	}
+	.seller{
+		height: 500px;
+	}
+	.footer-fixd{
+		text-align: center;
+	}
+	.slider-content{
+		left: 30px;
 	}
 }

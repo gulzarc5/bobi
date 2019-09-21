@@ -1,25 +1,9 @@
   <!-- Footer -->
     <footer>
-      <div class="footer-newsletter">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 col-sm-12">
-              <form id="newsletter-validate-detail" method="post" action="#">
-                <h3>Subscribe to our news</h3>
-                <div class="newsletter-inner">
-                  <input class="newsletter-email" name='Email' placeholder='Enter Your Email'/>
-                  <button class="button subscribe" type="submit" title="Subscribe">Subscribe</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
       <div class="container">
         <div class="row">
           <div class="col-sm-6 col-md-3 col-xs-12">
-            <div class="footer-logo"><a href="index.html"><img src="images/logo.png" alt="fotter logo"></a> </div>
-            <p>Lorem Ipsum is simply dummy text of the print and typesetting industry. Ut pharetra augue nec augue. Nam elit agna, endrerit sit amet, tincidunt ac, viverra sed, nulla.</p>
+            <div class="footer-logo"><a href="index.html"><img src="{{asset('web/images/logo.png')}}" alt="fotter logo"></a> </div>
             <div class="social">
               <ul class="inline-mode">
                 <li class="social-network fb"><a title="Connect us on Facebook" target="_blank" href="https://www.facebook.com/"><i class="icon-social-facebook icons"></i></a></li>
@@ -78,18 +62,24 @@
           </div>
           <div class="col-sm-6 col-md-3 col-xs-12 collapsed-block">
             <div class="footer-links">
-              <h3 class="links-title">Working hours<a class="expander visible-xs" href="#TabBlock-5">+</a></h3>
+              <h3 class="links-title">Contact Us<a class="expander visible-xs" href="#TabBlock-5">+</a></h3>
               <div class="tabBlock" id="TabBlock-5">
-                <div class="footer-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</div>
-                <div class="footer-description"> <b>Monday-Friday:</b> 8.30 a.m. - 5.30 p.m.<br>
-                  <b>Saturday:</b> 9.00 a.m. - 2.00 p.m.<br>
-                  <b>Sunday:</b> Closed </div>
+                <div class="footer-description"> 
+                  Address: 8.30 a.m. - 5.30 p.m.<br>
+                  E-mail: Demo@mail.com.<br>
+                  Phone: +91-9451****28 
+                </div>
+                <div class="footer-description"> 
+                  Monday-Friday: 8.30 a.m. - 5.30 p.m.<br>
+                  Saturday: 9.00 a.m. - 2.00 p.m.<br>
+                  Sunday: Closed 
+                </div>
                 <div class="payment">
                   <ul>
-                    <li><a href="#"><img title="Visa" alt="Visa" src="images/visa.png"></a></li>
-                    <li><a href="#"><img title="Paypal" alt="Paypal" src="images/paypal.png"></a></li>
-                    <li><a href="#"><img title="Discover" alt="Discover" src="images/discover.png"></a></li>
-                    <li><a href="#"><img title="Master Card" alt="Master Card" src="images/master-card.png"></a></li>
+                    <li><a href="#"><img title="Visa" alt="Visa" src="{{asset('web/images/visa.png')}}"></a></li>
+                    <li><a href="#"><img title="Paypal" alt="Paypal" src="{{asset('web/images/paypal.png')}}"></a></li>
+                    <li><a href="#"><img title="Discover" alt="Discover" src="{{asset('web/images/discover.png')}}"></a></li>
+                    <li><a href="#"><img title="Master Card" alt="Master Card" src="{{asset('web/images/master-card.png')}}"></a></li>
                   </ul>
                 </div>
               </div>
@@ -97,39 +87,16 @@
           </div>
         </div>
       </div>
-      <div class="footer-contact">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="footer-contact-item">
-                <div class="footer-contact-icon"> <i class="pe-7s-map-marker"></i> </div>
-                <div class="footer-contact-text"> Company, 12/34 - West 21st Street, New York, USA </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="footer-contact-item">
-                <div class="footer-contact-icon"> <i class="pe-7s-call"></i> </div>
-                <div class="footer-contact-text"> + (800) 0123 456 789 </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="footer-contact-item">
-                <div class="footer-contact-icon"> <i class="pe-7s-mail"></i> </div>
-                <div class="footer-contact-text"> <a href="mailto:email@domain.com">support@themes.com</a> </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="footer-contact"></div>
       <div class="footer-coppyright">
         <div class="container">
           <div class="row">
-            <div class="col-sm-6 col-xs-12 coppyright"> Copyright © 2017 <a href="#"> Bigstart </a>. All Rights Reserved. </div>
+            <div class="col-sm-6 col-xs-12 coppyright"> Copyright © 2019 <a href="#"> Bibibobi </a>. All Rights Reserved. || Developed By <a href="https://www.webinfotech.net.in/">Webinfotech</a></div>
             <div class="col-sm-6 col-xs-12">
               <ul class="footer-company-links">
-                <li> <a href="about_us.html">About Bigstart</a> </li>
-                <li> <a href="#">Careers</a> </li>
                 <li> <a href="#">Privacy Policy</a> </li>
+                <li>|</li>
+                <li> <a href="#">Terms &amp; Condition</a> </li>
               </ul>
             </div>
           </div>
@@ -167,7 +134,11 @@
 
   <!-- Slider Js --> 
   <script type="text/javascript" src="{{asset('web/js/revolution-slider.js')}}"></script> 
-
+  <script type="text/javascript" src="{{asset('web/js/jquery.bxslider.js')}}"></script>
+  <script type="text/javascript" src="{{asset('web/js/jquery.flexslider.js')}}"></script>
+  <script type="text/javascript" src="{{asset('web/js/cloud-zoom.js')}}"></script> 
+  <script type="text/javascript" src="{{asset('web/js/jquery.magnifying-zoom.js')}}"></script>
+</body>
   <!-- Revolution slider --> 
   <script type="text/javascript">
       var setREVStartSize = function() {};
@@ -280,62 +251,62 @@
       CountBack_slider(gsecs1, "countbox_1", 1);
   </script>
   <script type='text/javascript'>
-  jQuery(document).ready(function() {
-  jQuery('#jtv-rev_slider').show().revolution({
-  dottedOverlay: 'none',
-  delay: 5000,
-  startwidth: 1140,
-  startheight: 500,
-  hideThumbs: 200,
-  thumbWidth: 200,
-  thumbHeight: 50,
-  thumbAmount: 2,
-  navigationType: 'thumb',
-  navigationArrows: 'solo',
-  navigationStyle: 'round',
-  touchenabled: 'on',
-  onHoverStop: 'on',
-  swipe_velocity: 0.7,
-  swipe_min_touches: 1,
-  swipe_max_touches: 1,
-  drag_block_vertical: false,
-  spinner: 'spinner0',
-  keyboardNavigation: 'off',
-  navigationHAlign: 'center',
-  navigationVAlign: 'bottom',
-  navigationHOffset: 0,
-  navigationVOffset: 20,
-  soloArrowLeftHalign: 'left',
-  soloArrowLeftValign: 'center',
-  soloArrowLeftHOffset: 20,
-  soloArrowLeftVOffset: 0,
-  soloArrowRightHalign: 'right',
-  soloArrowRightValign: 'center',
-  soloArrowRightHOffset: 20,
-  soloArrowRightVOffset: 0,
-  shadow: 0,
-  fullWidth: 'on',
-  fullScreen: 'off',
-  stopLoop: 'off',
-  stopAfterLoops: -1,
-  stopAtSlide: -1,
-  shuffle: 'off',
-  autoHeight: 'off',
-  forceFullWidth: 'on',
-  fullScreenAlignForce: 'off',
-  minFullScreenHeight: 0,
-  hideNavDelayOnMobile: 1500,
-  hideThumbsOnMobile: 'off',
-  hideBulletsOnMobile: 'off',
-  hideArrowsOnMobile: 'off',
-  hideThumbsUnderResolution: 0,
-  hideSliderAtLimit: 0,
-  hideCaptionAtLimit: 0,
-  hideAllCaptionAtLilmit: 0,
-  startWithSlide: 0,
-  fullScreenOffsetContainer: ''
-  });
-  });
+    jQuery(document).ready(function() {
+    jQuery('#jtv-rev_slider').show().revolution({
+    dottedOverlay: 'none',
+    delay: 5000,
+    startwidth: 1140,
+    startheight: 500,
+    hideThumbs: 200,
+    thumbWidth: 200,
+    thumbHeight: 50,
+    thumbAmount: 2,
+    navigationType: 'thumb',
+    navigationArrows: 'solo',
+    navigationStyle: 'round',
+    touchenabled: 'on',
+    onHoverStop: 'on',
+    swipe_velocity: 0.7,
+    swipe_min_touches: 1,
+    swipe_max_touches: 1,
+    drag_block_vertical: false,
+    spinner: 'spinner0',
+    keyboardNavigation: 'off',
+    navigationHAlign: 'center',
+    navigationVAlign: 'bottom',
+    navigationHOffset: 0,
+    navigationVOffset: 20,
+    soloArrowLeftHalign: 'left',
+    soloArrowLeftValign: 'center',
+    soloArrowLeftHOffset: 20,
+    soloArrowLeftVOffset: 0,
+    soloArrowRightHalign: 'right',
+    soloArrowRightValign: 'center',
+    soloArrowRightHOffset: 20,
+    soloArrowRightVOffset: 0,
+    shadow: 0,
+    fullWidth: 'on',
+    fullScreen: 'off',
+    stopLoop: 'off',
+    stopAfterLoops: -1,
+    stopAtSlide: -1,
+    shuffle: 'off',
+    autoHeight: 'off',
+    forceFullWidth: 'on',
+    fullScreenAlignForce: 'off',
+    minFullScreenHeight: 0,
+    hideNavDelayOnMobile: 1500,
+    hideThumbsOnMobile: 'off',
+    hideBulletsOnMobile: 'off',
+    hideArrowsOnMobile: 'off',
+    hideThumbsUnderResolution: 0,
+    hideSliderAtLimit: 0,
+    hideCaptionAtLimit: 0,
+    hideAllCaptionAtLilmit: 0,
+    startWithSlide: 0,
+    fullScreenOffsetContainer: ''
+    });
+    });
   </script> 
 </body>
 

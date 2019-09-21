@@ -442,3 +442,14 @@ jQuery(document).ready(function() {
 jQuery(window).scroll(function() {
     jQuery(this).scrollTop() > 1 ? jQuery(".header-inner").addClass("jtv-sticky-menu") : jQuery(".header-inner").removeClass("jtv-sticky-menu")
 });
+   /******************************************
+        hover div
+    ******************************************/
+    $('#account-head').mouseover(
+         function(){ $(".dropdown").addClass('open') },
+      )
+      $('#account-head').mouseout(
+         function(){ $(".dropdown").removeClass('open') },
+      );
+
+

@@ -19,3 +19,12 @@
 Route::get('/', function () {
     return view('web.index');
 });
+Route::get('/Seller-Login', function () {
+    return view('web.seller-login');
+});
+Route::get('/Seller-Register', function () {
+    return view('web.seller-register');
+});
+Route::get('/Product_Detail', function () {
+    return view('web.product_detail');
+});
