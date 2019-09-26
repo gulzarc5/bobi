@@ -28,3 +28,6 @@ Route::get('/Seller-Register', function () {
 Route::get('/Product_Detail', function () {
     return view('web.product_detail');
 });
+Route::get('/Product_List', function () {
+    return view('web.product_list');
+});

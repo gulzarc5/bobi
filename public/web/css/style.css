@@ -4133,8 +4133,7 @@ a.ads1 img {
 }
 .pagination-area {
 	background: rgba(0,0,0,0) none repeat scroll 0 0;
-	border-top: 1px solid #eee;
-	margin: 22px 0 0;
+	margin: 22px 0;
 	padding-top: 20px;
 	text-align: center;
 	display: inline-block;
@@ -4793,35 +4792,19 @@ h2.saider-bar-title {
 }
 .color ul li {
 	border: 0 none;
-	float: left;
 	margin-right: 5px
 }
-.color ul li a {
-	clear: both;
-	background: #333333;
-	float: left;
-	font-size: 11px;
-	font-weight: 700;
-	text-transform: uppercase;
-	height: 20px;
-	width: 20px;
-	border: 1px solid #eeeeee;
-	border-radius: 3px;
-}
-.color ul li:nth-child(2) a {
-	background: #e32b00
-}
-.color ul li:nth-child(3) a {
-	background: #ff9000
-}
-.color ul li:nth-child(4) a {
-	background: #8BC44A
-}
-.color ul li:nth-child(5) a {
-	background: #10b9b9
-}
-.color ul li:nth-child(6) a {
-	background: #FFFFFF
+.color ul li label a {
+    clear: both;
+    float:right;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    height: 15px;
+    width: 15px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    margin-left: 10px;
 }
 .size-area {
 	margin-bottom: 8px;
@@ -4833,15 +4816,16 @@ h2.saider-bar-title {
 	margin-right: 5px
 }
 .size li a {
-	border: 1px solid #e8e6e2;
-	padding: 3px 10px;
-	color: #666;
-	float: left;
-	font-size: 11px;
-	font-weight: 700;
-	text-transform: uppercase;
-	text-decoration: none;
-	border-radius: 3px;
+	border: 1px dashed #afaa9f;
+    padding: 3px 10px;
+    color: #666;
+    float: right;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 3px;
+    margin-top: -3px;
 }
 .size li a:hover {
 	border-color: #00b9f5
