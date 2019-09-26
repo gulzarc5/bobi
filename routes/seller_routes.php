@@ -1,15 +1,12 @@
 <?php
 
 Route::get('seller_login', function () {
-    return view('web.seller.seller_login');
+	return view('web.seller-login');
 })->name('seller_login');
 
 Route::group(['prefix'=>'Seller','namespace'=>'Seller'],function(){
 
-
-
-	Route::post('/seller/Registration', 'SellerController@sellerRegistration')->name('seller.registration');
-	Route::post('/Login', 'SellerLoginController@sellerLogin');
+	Route::post('/Login', 'SellerLoginController@sellerLogin')->name('seller.login');
 	Route::post('/logout', 'SellerLoginController@logout')->name('seller.logout');
 
 	Route::group(['middleware'=>'auth:seller'],function(){

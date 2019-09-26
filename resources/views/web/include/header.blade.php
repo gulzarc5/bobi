@@ -279,7 +279,7 @@
                       <span class="mm-label hidden">Categories</span> 
                     </div>
                     <!-- Header Logo -->
-                    <div class="logo"><a title="e-commerce" href="index.html"><img alt="e-commerce" src="{{asset('web/images/logo.png')}}"></a> </div>
+                    <div class="logo"><a title="e-commerce" href="{{ route('web.index')}}"><img alt="e-commerce" src="{{asset('web/images/logo.png')}}"></a> </div>
                     <!-- Shop by category -->
                   </div>
                 </div>
@@ -306,7 +306,7 @@
                 <div class="top-cart-contain tab-head">
                   <div style="width: 100%">
                     <div class="basket dropdown-toggle" style="width: 100%">
-                      <a href="Seller-Login" target="_blank" class="flex-center">
+                      <a href="{{ route('seller_login') }}" target="_blank" class="flex-center">
                         <div class="cart-icon"><i class="pe-7s-home" style="font-size: 26px"></i></div>
                         <div class="shoppingcart-inner" style="margin-top: 9px;"><span class="cart-title hidden-xs">&nbsp;Sell</span></div>
                       </a>
@@ -358,8 +358,8 @@
               <div class="nav-inner"> 
                 <!-- BEGIN NAV -->
                 <ul id="nav" class="hidden-xs">
-                  <li class="drop-menu"><a href="index.html" class="level-top active"><span>Home</span></a></li>
-                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Men</span></a>
+                  <li class="drop-menu"><a href="{{ route('web.index') }}" class="level-top active"><span>Home</span></a></li>
+                  <li class="mega-menu"> <a class="level-top" href="#"><span>Men</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">

@@ -24,7 +24,6 @@ class CategoryController extends Controller
         'name' => 'required',
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
         $image = $request->file('image');
         $image_name = null;
         if($request->hasfile('image')){
@@ -157,7 +156,7 @@ class CategoryController extends Controller
         $validatedData = $request->validate([
         'category_id' => 'required',
         'name' => 'required',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $image = $request->file('image');
@@ -304,8 +303,9 @@ class CategoryController extends Controller
         'category_id' => 'required',
         'name' => 'required',
         'first_category_id' => 'required',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+        $type = $request->input('type_id');
 
         $image = $request->file('image');
         $image_name = null;
@@ -321,12 +321,23 @@ class CategoryController extends Controller
             ->save($thumb_path);
         }
 
-        $second_category = SecondCategory::create([
-            'category_id' => $request->input('category_id'),
-            'name' => $request->input('name'),
-            'first_category_id' => $request->input('first_category_id'),
-            'image' => $image_name,
-        ]);
+        if(isset($type) && !empty($type)){
+            $second_category = SecondCategory::create([
+                'category_id' => $request->input('category_id'),
+                'name' => $request->input('name'),
+                'first_category_id' => $request->input('first_category_id'),
+                'image' => $image_name,
+                'tribe_category' => $type,
+            ]);
+        }else{
+            $second_category = SecondCategory::create([
+                'category_id' => $request->input('category_id'),
+                'name' => $request->input('name'),
+                'first_category_id' => $request->input('first_category_id'),
+                'image' => $image_name,
+            ]);
+        }
+        
 
         if ($second_category) {
             return redirect()->back()->with('message','Second Category Added Successfully');

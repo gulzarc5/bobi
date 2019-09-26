@@ -226,31 +226,6 @@
             });
         });
 
-
-         $("#second_category").change(function(){
-                        
-                var category = $('#category').val();
-                var first_category = $('#first_category').val();
-                var second_category = $(this).val();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    type:"GET",
-                    url:"{{ url('/admin/Products/ajax/Get/Brands')}}"+"/"+category+"/"+first_category+"/"+second_category+"",
-                    success:function(data){
-                        if (data.brands.length > 0) {                           
-                            $("#brand").html("<option value=''>Please Select Second Category</option>");
-                            $.each( data.brands, function( key, value ) {
-                                $("#brand").append("<option value='"+value.brand_id+"'>"+value.brand_name+"</option>");
-                            });
-                        }
-
-                    }
-                });
-            });
     </script>
  @endsection
 

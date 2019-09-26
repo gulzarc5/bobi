@@ -11,10 +11,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="{{asset('admin/src_files/logo/icon.png')}}" type="image/ico" />
+  <link rel="icon" href="{{asset('web/images/fab.png')}}" type="image/ico" />
 
-    <title>Bplus</title>
-    <link rel="icon" href="{{asset('admin/src_files/logo/icon.png')}}" type="image/icon type">
+    <title>Bibi Bobi</title>
+    <link rel="icon" href="{{asset('web/images/fab.png')}}" type="image/icon type">
 
 
     <!-- Bootstrap -->
@@ -56,8 +56,9 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{route('seller.deshboard')}}" class="site_title">
-                <img src="{{asset('admin/src_files/logo/logo.png')}}" height="70">
+              <a href="{{route('seller.deshboard')}}" class="site_title" style="height: auto;
+              background-color: #fff;display: flex;justify-content: center;">
+                <img src="{{asset('web/images/logo.png')}}" height="70">
               </a>
             </div>
 

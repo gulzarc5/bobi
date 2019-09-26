@@ -247,9 +247,8 @@ class ProductController extends Controller
         ->first();
 
         $sizes = DB::table('product_sizes')
-        ->select('product_sizes.*','size_name.name as s_name','size_value.value as s_value')
-        ->join('size_name','product_sizes.size_name_id','=','size_name.id')
-        ->join('size_value','product_sizes.size_value_id','=','size_value.id')
+        ->select('product_sizes.*','sizes.name as s_name')
+        ->join('sizes','product_sizes.size_id','=','sizes.id')
         ->where('product_sizes.product_id',$product_id)
         ->whereNull('product_sizes.deleted_at')
         ->get();
@@ -261,15 +260,7 @@ class ProductController extends Controller
         ->whereNull('product_colors.deleted_at')
         ->get();
 
-        $varients = DB::table('product_varients')
-        ->select('product_varients.*','varient_name.name as v_name','varient_value.value as v_value')
-        ->join('varient_name','product_varients.varient_name_id','=','varient_name.id')
-        ->join('varient_value','product_varients.varient_value_id','=','varient_value.id')
-        ->where('product_varients.product_id',$product_id)
-        ->whereNull('product_varients.deleted_at')
-        ->get();
-
-        return view('admin.products.product_details',compact('product','sizes','colors','varients'));
+        return view('admin.products.product_details',compact('product','sizes','colors'));
     }
 
     public function productEdit($product_id)
