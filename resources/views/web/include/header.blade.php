@@ -320,8 +320,8 @@
                       <li><a href="account_page.html">My Account</a></li>
                       <li><a href="wishlist.html">My Orders</a></li>
                       <li class="divider"></li>
-                      <li style="text-align: center;"><a href="register_page.html"> <span>If you are a new user</span><br><strong>Register</strong></a></li>
-                      <li class="login"><a href="#" class="btn outline btn-color" target="_blank">Login</a></li>
+                      <li style="text-align: center;"><a href="{{ route('web.register')}}"> <span>If you are a new user</span><br><strong>Register</strong></a></li>
+                      <li class="login"><a href="{{ route('web.login')}}" class="btn outline btn-color" target="_blank">Login</a></li>
                       <li class="login"><a href="#" class="btn outline btn-color" target="_blank">Logout</a></li>
                     </ul>
                   </div>
@@ -329,7 +329,7 @@
                 <!-- Whishlist-->
                 <div class="top-cart-contain">
                   <div class="mini-cart">
-                    <div class="basket dropdown-toggle"><a href="Cart">
+                    <div class="basket dropdown-toggle"><a href="{{ route('web.cart')}}">
                       <div class="cart-icon"><i class="pe-7s-like"></i></div>
                       <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Wishlist</span> <span class="cart-total">2 items</span></div>
                       </a>
@@ -339,7 +339,7 @@
                 <!-- My Cart -->
                 <div class="top-cart-contain">
                   <div class="mini-cart">
-                    <div class="basket dropdown-toggle"><a href="Cart">
+                    <div class="basket dropdown-toggle"><a href="{{ route('web.cart')}}">
                       <div class="cart-icon"><i class="pe-7s-shopbag"></i></div>
                       <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Basket</span> <span class="cart-total">2 items</span></div>
                       </a>

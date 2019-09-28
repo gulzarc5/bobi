@@ -808,6 +808,56 @@ ul.level1 {
     border: 1px solid#ddd;
 }
 .home-tab hr{margin: 12px 0}
+.Login-section .page-content{
+    width: 30%;
+}
+.Login-section .box-authentication,.Login-section .box-authentication input{
+    width: 100%;
+}
+.Login-section{
+	display: flex;
+    justify-content: center;
+}
+.nav-drict{
+    position: relative;
+    top: 0;
+    left:0;
+    padding: 20px 0;
+    width: 100%;
+}
+.nav-drict ul{
+    display: flex;
+    justify-content: center;
+}
+.nav-drict ul li{
+    padding: 0 10px;
+    text-transform: uppercase;
+    list-style: none;
+}
+.nav-drict ul li h6 {
+    letter-spacing: 3px;
+    font-size: 14px;
+}
+.nav-drict ul .active h6{
+    margin-top: -3px;
+    border: 1px solid #52d3fa;
+    color: #ffffff;
+    padding: 1px 3px;
+    background: #323d61;
+}
+.divider{
+    border-bottom: 1px dashed #696b79;
+    height: 10px;
+    width: 5%;
+}
+.act{
+	border-bottom: 1px solid ;
+    height: 10px!important;
+    width: 5%!important;
+}
+.done, .act{
+	opacity: .5;
+}
 /*========== Responsive ==========*/
 @media (max-width: 425px){
 	.jtv-sticky-menu .logo img{
