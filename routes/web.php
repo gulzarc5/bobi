@@ -34,6 +34,18 @@ Route::get('City/list/{state_id}', 'Admin\Configuration\ConfigurationController@
 Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin'],function(){
 
 	require __DIR__.'/product_routes.php';
+
+	Route::group(['namespace'=> 'Users'], function(){
+		Route::get('/sellers/','UsersController@allSellers')->name('admin.allSellers');
+		Route::get('Ajax/sellers/','UsersController@ajaxAllSellers')->name('admin.ajaxAllSellers');
+
+		Route::get('/Buyers/','UsersController@allBuyers')->name('admin.allBuyers');
+		Route::get('Ajax/Buyers/','UsersController@ajaxAllBuyers')->name('admin.ajaxAllBuyers');
+
+		Route::get('/Seller/Details/{seller_id}','UsersController@sellerView')->name('admin.seller_view');
+		Route::get('/Seller/verification/{seller_id}','UsersController@sellerUpdateVerification')->name('admin.sellerUpdateVerification');
+		Route::get('/Seller/Status/{seller_id}/{status}','UsersController@sellerUpdateStatus')->name('admin.sellerUpdateStatus');
+	});
 	 
 	Route::get('/deshboard', 'AdminDeshboardController@index')->name('admin.deshboard');
 	///////////////////////////////All Category////////////////////////////////

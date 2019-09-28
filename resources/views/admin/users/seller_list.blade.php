@@ -1,4 +1,4 @@
-@extends('seller.template.seller_master')
+@extends('admin.template.admin_master')
 
 @section('content')
 
@@ -8,7 +8,7 @@
     	    <div class="x_panel">
 
     	        <div class="x_title">
-    	            <h2>Product List</h2>
+    	            <h2>Sellers List</h2>
     	            <div class="clearfix"></div>
     	        </div>
     	        <div>
@@ -17,13 +17,11 @@
                           <thead>
                             <tr>
                               <th>Sl</th>
-                              <th>Product Id</th>
-                              <th>Product Name</th>
-                              <th>Category</th>
-                              <th>FirstCategory</th>
-                              <th>SecondCategory</th>
-                              <th>Designer</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Mobile</th>
                               <th>Status</th>
+                              <th>Verification Status</th>
                               <th>action</th>
                             </tr>
                           </thead>
@@ -48,22 +46,14 @@
             var table = $('#size_list').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('seller.ajax.get_product_list') }}",
+                ajax: "{{ route('admin.ajaxAllSellers') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'id', name: 'id',searchable: true},
                     {data: 'name', name: 'name',searchable: true},
-                    {data: 'c_name', name: 'c_name' ,searchable: true},
-                    {data: 'first_c_name', name: 'first_c_name' ,searchable: true},       
-                    {data: 'second_c_name', name: 'second_c_name' ,searchable: true},
-                    {data: 'brand_name', name: 'brand_name' ,searchable: true}, 
-                    {data: 'status', name: 'status', render:function(data, type, row){
-                      if (row.status == '1') {
-                        return "<button class='btn btn-info'>Enable</a>"
-                      }else{
-                        return "<button class='btn btn-danger'>Disabled</a>"
-                      }                        
-                    }},                  
+                    {data: 'email', name: 'email' ,searchable: true},
+                    {data: 'mobile', name: 'mobile' ,searchable: true},                 
+                    {data: 'status_tab', name: 'status_tab',orderable: false, searchable: false},
+                    {data: 'verification_status', name: 'verification_status',orderable: false, searchable: false},               
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

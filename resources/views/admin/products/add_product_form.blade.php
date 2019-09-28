@@ -99,9 +99,9 @@
 
                             <div class="form-row mb-3">
                                 <div class="col-md-4 col-sm-12 col-xs-12 mb-3" >
-                                    <label for="brand">Select Brand</label>
+                                    <label for="brand">Select Designer</label>
                                     <select class="form-control" name="brand" id="brand">
-                                        <option value="">Select Brand</option>
+                                        <option value="">Please Select Designer</option>
                                     </select>
                                 </div>                        
                             </div>
@@ -113,7 +113,7 @@
                                     <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                                         <label for="color">Select Color</label>
                                         <select class="form-control color" name="color[]" id="color_list">
-                                          <option value="">Select Color</option>
+                                          <option value="">Please Select Color</option>
                                         </select>
                                     </div>    
                                     <div class="col-md-2 col-sm-12 col-xs-12 mb-3">
@@ -250,9 +250,9 @@
                     success:function(data){
                         console.log(data);
                         $("#second_category").html("<option value=''>Please Select Second Category</option>");
-                        $("#brand").html("<option value=''>Please Select Brand</option>");
-                        $(".color").html("<option value=''>Please Select Brand</option>");
-                        $(".size").html("<option value=''>Please Select Brand</option>");
+                        $("#brand").html("<option value=''>Please Select Designer</option>");
+                        $(".color").html("<option value=''>Please Select Color</option>");
+                        $(".size").html("<option value=''>Please Select Size</option>");
                         
                         if (data.second_category.length > 0) {  
                             $.each( data.second_category, function( key, value ) {

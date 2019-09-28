@@ -328,7 +328,7 @@ class CategoryController extends Controller
                 'first_category_id' => $request->input('first_category_id'),
                 'image' => $image_name,
                 'tribe_category' => $type,
-            ]);
+            ])->tosql();
         }else{
             $second_category = SecondCategory::create([
                 'category_id' => $request->input('category_id'),

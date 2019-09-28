@@ -92,6 +92,7 @@
                     </a>
                     <ul class="nav child_menu">
                       <li><a href="{{route('seller.MyprofileForm')}}">My Profile</a></li>
+                      <li><a href="{{route('seller.MyCategoryForm')}}">My Category</a></li>
                       <li><a href="{{route('seller.change_password_form')}}">Change Password</a></li>
                     </ul>
                   </li>
@@ -146,7 +147,7 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out pull-right" style="margin-top: 8px;margin-left: 7px;"></i> Log Out</a></li>
              <form id="logout-form" action="{{ route('seller.logout') }}" method="POST" style="display: none;">
                   @csrf
               </form>

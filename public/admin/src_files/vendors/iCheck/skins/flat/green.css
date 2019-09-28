@@ -13,10 +13,18 @@
     border: none;
     cursor: pointer;
 }
-
+.well .clear-fix-cat{
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #b9b1b1;
+    padding-top: 10px;
+    margin-bottom: 13px;
+}
 .icheckbox_flat-green {
     background-position: 0 0;
-}
+    margin-bottom: 7px;
+} 
+   
     .icheckbox_flat-green.checked {
         background-position: -22px 0;
     }

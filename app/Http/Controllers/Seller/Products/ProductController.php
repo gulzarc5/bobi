@@ -31,7 +31,6 @@ class ProductController extends Controller
             'category' => 'required',
             'first_category' => 'required',
             'second_category' => 'required',
-            'brand' => 'required',
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -56,13 +55,19 @@ class ProductController extends Controller
         $short_description = $request->input('short_description');
         $long_description = $request->input('long_description');
 
+        $brand_fetch = DB::table('seller_deals')
+            ->select('id')
+            ->where('seller_id',$seller_id)
+            ->where('first_category_id',$first_category)
+            ->first();
+
         $product_insert = DB::table('products')
         ->insertGetId([
             'name' => $name,
             'tag_name' => $tag_name,
             'size_wearing' => $size_wearing,
             'fit_wearing' => $fit_wearing,
-            'brand_id' => $brand,
+            'brand_id' => $brand_fetch->id,
             'seller_id' => $seller_id,
             'category' => $category,
             'first_category' => $first_category,
@@ -261,14 +266,14 @@ class ProductController extends Controller
         ->whereNull('deleted_at')
         ->get();
 
-        $brands = DB::table('brand_name')
-        ->where('brand_name.category',$product->category)
-        ->where('brand_name.first_category',$product->first_category)
-        ->where('brand_name.status','1')
-        ->whereNull('brand_name.deleted_at')
-        ->get();
+        // $brands = DB::table('brand_name')
+        // ->where('brand_name.category',$product->category)
+        // ->where('brand_name.first_category',$product->first_category)
+        // ->where('brand_name.status','1')
+        // ->whereNull('brand_name.deleted_at')
+        // ->get();
 
-        return view('seller.products.edit_product',compact('category','product','first_category','second_category','brands'));
+        return view('seller.products.edit_product',compact('category','product','first_category','second_category'));
     }
 
     public function AjaxGetBrandFirstCategory($first_category)
@@ -285,7 +290,7 @@ class ProductController extends Controller
             'category' => 'required',
             'first_category' => 'required',
             'second_category' => 'required',
-            'brand' => 'required',
+            // 'brand' => 'required',
         ]);
 
         try {
@@ -305,7 +310,7 @@ class ProductController extends Controller
             'category' => $request->input('category'),
             'first_category' => $request->input('first_category'),
             'second_category' => $request->input('second_category'),
-            'brand_id' => $request->input('brand'),
+            // 'brand_id' => $request->input('brand'),
             'short_description' => $request->input('short_description'),
             'long_description' => $request->input('long_description'),
         ]);

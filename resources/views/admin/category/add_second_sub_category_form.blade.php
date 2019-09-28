@@ -178,7 +178,7 @@
 	            var category = $(this).val();
 				if(category == '3'){
 					var cat_type = '<label for="category_type">Select Type</label>'+
-	            		'<select class="form-control" id="category_type" name="type_id">'+
+	            		'<select class="form-control" id="category_type" name="type_id" required>'+
 							'<option selected="selected" value="">Please Select Type</option>'+
 							'<option value="2">Male</option>'+
 							'<option value="3">Female</option>'+

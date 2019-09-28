@@ -86,23 +86,10 @@
                   </li>
                   <li><a><i class="fa fa-edit"></i> Users <span class="fa fa-chevron-down"></span></a>
                      <ul class="nav child_menu">
-                        <li><a>Sellers<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Active Sellers</a>
-                            </li>
-                            <li><a href="#level2_1">InActive Sellers</a>
-                            </li>
-                          </ul>
-                        </li>
-
-                        <li><a>Buyers<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Active Buyers</a>
-                            </li>
-                            <li><a href="#level2_1">InActive Buyers</a>
-                            </li>
-                          </ul>
-                        </li>
+                      <li class="sub_menu"><a href="{{ route('admin.allSellers') }}">Seller List</a>
+                      </li>
+                      <li class="sub_menu"><a href="level2.html">Buyers List</a>
+                      </li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i>Products<span class="fa fa-chevron-down"></span></a>

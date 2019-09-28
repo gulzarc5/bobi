@@ -119,7 +119,7 @@
                                     </div>                            
                                 </div>
 
-                                <div class="form-row mb-3">
+                                {{-- <div class="form-row mb-3">
                                     <div class="col-md-4 col-sm-12 col-xs-12 mb-3" >
                                         <label for="brand">Select Brand</label>
                                         <select class="form-control" name="brand" id="brand">
@@ -135,7 +135,7 @@
                                             @endif
                                         </select>
                                     </div>                        
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="well" style="overflow: auto">

@@ -132,10 +132,10 @@ class ConfigurationController extends Controller
         $first_category = $request->input('first_category');
         $color_name = $request->input('color_name'); // array of color name
         $color_value = $request->input('color_value'); // array of color name
-        
+        // dd($color_name);
         for ($i=0; $i < count((array)$color_name); $i++) { 
             if (!empty($color_name[$i]) && !empty($color_value[$i])) {
-                $check_color = DB::table('color')->where('name',$color_name[$i])->count();
+                $check_color = DB::table('color')->where('name',$color_name[$i])->where('first_category_id',$first_category)->count();
                 if ( $check_color <= 0 ) {
                     DB::table('color')
                     ->insert([

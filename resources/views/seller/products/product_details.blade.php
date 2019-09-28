@@ -36,7 +36,7 @@
                       </tr>
                     @endif
                     <tr>
-                      <th>Brand : </th>
+                      <th>Designer : </th>
                       <td>{{ $product->brand_name }}</td>
                     </tr>
                     <tr>

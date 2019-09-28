@@ -14,13 +14,13 @@ Route::group(['prefix'=>'Seller','namespace'=>'Seller'],function(){
 		require __DIR__.'/seller_product_routes.php';
 	 
 		Route::get('/Deshboard', 'SellerController@index')->name('seller.deshboard');
-
 		Route::get('/MyProfile', 'SellerController@myProfileForm')->name('seller.MyprofileForm');
+		Route::get('/Category/{status?}', 'SellerController@myCategoryForm')->name('seller.MyCategoryForm');
+		Route::post('/Category/Update', 'SellerController@myCategoryUpdate')->name('seller.MyCategoryUpdate');
+		Route::get('/Category/delete/{id}', 'SellerController@myCategoryDelete')->name('seller.MyCategoryDelete');
 		Route::post('/MyProfile', 'SellerController@sellerUpdate')->name('seller.MyprofileUpdate');
 		Route::get('/change/Password', 'SellerController@viewChangePasswordForm')->name('seller.change_password_form');
 		Route::post('/change/Password', 'SellerController@ChangePassword')->name('seller.change_password');
-
-
 	});
 });
 
