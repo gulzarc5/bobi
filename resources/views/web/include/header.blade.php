@@ -279,7 +279,7 @@
                       <span class="mm-label hidden">Categories</span> 
                     </div>
                     <!-- Header Logo -->
-                    <div class="logo"><a title="e-commerce" href="index.html"><img alt="e-commerce" src="{{asset('web/images/logo.png')}}"></a> </div>
+                    <div class="logo"><a title="e-commerce" href="{{ route('web.index')}}"><img alt="e-commerce" src="{{asset('web/images/logo.png')}}"></a> </div>
                     <!-- Shop by category -->
                   </div>
                 </div>
@@ -306,7 +306,7 @@
                 <div class="top-cart-contain tab-head">
                   <div style="width: 100%">
                     <div class="basket dropdown-toggle" style="width: 100%">
-                      <a href="Seller-Login" target="_blank" class="flex-center">
+                      <a href="{{ route('seller_login') }}" target="_blank" class="flex-center">
                         <div class="cart-icon"><i class="pe-7s-home" style="font-size: 26px"></i></div>
                         <div class="shoppingcart-inner" style="margin-top: 9px;"><span class="cart-title hidden-xs">&nbsp;Sell</span></div>
                       </a>
@@ -358,61 +358,35 @@
               <div class="nav-inner"> 
                 <!-- BEGIN NAV -->
                 <ul id="nav" class="hidden-xs">
-                  <li class="drop-menu"><a href="index.html" class="level-top active"><span>Home</span></a></li>
-                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Men</span></a>
+                  <li class="drop-menu"><a href="{{ route('web.index') }}" class="level-top active"><span>Home</span></a></li>
+                  <li class="mega-menu"> <a class="level-top" href="#"><span>Men</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">
                           <div class="col-1">
                             <ul class="level0">
-                              <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
+                              @if (isset($category_list['category_list_men']) && !empty($category_list['category_list_men']))
+                             
+                                
+                                  @foreach ($category_list['category_list_men'] as $f_category)
+                                    @if (count($f_category['second_category']) > 0)
+                                      <li class="parent item"> <a><span>{{ $f_category['name'] }}</span></a>
+                                      <ul class="level1">
+                                        @foreach ($f_category['second_category'] as $s_category)
+                                          <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
+                                        @endforeach
+                                      </ul>
+                                      @endif
+                                  @endforeach                                  
+                              @endif
+                              {{-- <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
                                 <ul class="level1">
                                   <li> <a href="Product_List"><span>Toaster Crossbody</span></a> </li>
                                   <li> <a href="Product_List"><span>Piper Bag</span></a> </li>
                                   <li> <a href="Product_List"><span>Leather Bag</span></a> </li>
                                   <li> <a href="Product_List"><span>Canvas Bag</span></a> </li>
                                 </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>bucket bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Accessories</span></a> </li>
-                                  <li> <a href="Product_List"><span>Gym Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Fashion Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Messenger Bags</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Duffels</span></a> </li>
-                                  <li> <a href="Product_List"><span>Umbrellas</span></a> </li>
-                                  <li> <a href="Product_List"><span>Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Travel Gear</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>curved boxy sling</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Luggage</span></a> </li>
-                                  <li> <a href="Product_List"><span>Briefcases</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bowling</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bucket Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>floral lattice bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Crossbody Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Clutch Handbag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Hobo Shoulder</span></a> </li>
-                                  <li> <a href="Product_List"><span>Saddle Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>Bag Accessories</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Wallet Wristlet</span></a> </li>
-                                  <li> <a href="Product_List"><span>Solo Premium </span></a> </li>
-                                  <li> <a href="Product_List"><span>Laptop Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Belts</span></a> </li>
-                                </ul>
-                              </li>
+                              </li> --}}
                             </ul>
                           </div>
                           <div class="col-2">
@@ -428,54 +402,26 @@
                         <div class="nav-block jtv-nav-block-center">
                           <div class="col-1">
                             <ul class="level0">
-                              <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
+                                @if (isset($category_list['category_list_women']) && !empty($category_list['category_list_women']))
+                                  @foreach ($category_list['category_list_women'] as $f_category)
+                                    @if (count($f_category['second_category']) > 0)
+                                      <li class="parent item"> <a href="Product_List"><span>{{ $f_category['name'] }}</span></a>
+                                      <ul class="level1">
+                                        @foreach ($f_category['second_category'] as $s_category)
+                                          <li> <a href="Product_List"><span>{{ $s_category->name }}</span></a> </li>
+                                        @endforeach
+                                      </ul>
+                                    @endif
+                                  @endforeach
+                                @endif
+                              {{-- <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
                                 <ul class="level1">
                                   <li> <a href="Product_List"><span>Toaster Crossbody</span></a> </li>
                                   <li> <a href="Product_List"><span>Piper Bag</span></a> </li>
                                   <li> <a href="Product_List"><span>Leather Bag</span></a> </li>
                                   <li> <a href="Product_List"><span>Canvas Bag</span></a> </li>
                                 </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>bucket bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Accessories</span></a> </li>
-                                  <li> <a href="Product_List"><span>Gym Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Fashion Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Messenger Bags</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Duffels</span></a> </li>
-                                  <li> <a href="Product_List"><span>Umbrellas</span></a> </li>
-                                  <li> <a href="Product_List"><span>Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Travel Gear</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>curved boxy sling</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Luggage</span></a> </li>
-                                  <li> <a href="Product_List"><span>Briefcases</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bowling</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bucket Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>floral lattice bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Crossbody Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Clutch Handbag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Hobo Shoulder</span></a> </li>
-                                  <li> <a href="Product_List"><span>Saddle Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>Bag Accessories</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Wallet Wristlet</span></a> </li>
-                                  <li> <a href="Product_List"><span>Solo Premium </span></a> </li>
-                                  <li> <a href="Product_List"><span>Laptop Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Belts</span></a> </li>
-                                </ul>
-                              </li>
+                              </li> --}}
                             </ul>
                           </div>
                           <div class="col-2">
@@ -485,7 +431,7 @@
                       </div>
                     </div>
                   </li>
-                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Kids</span></a>
+                  {{-- <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Kids</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">
@@ -547,217 +493,65 @@
                         </div>
                       </div>
                     </div>
-                  </li>
-                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Women Tribe</span></a>
+                  </li> --}}
+                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Women TRADITIONAL</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">
                           <div class="col-12">
                             <ul class="level0">
-                              <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
+                              @if (isset($category_list['category_list_womenTraditional']) && !empty($category_list['category_list_womenTraditional']))
+                                @foreach ($category_list['category_list_womenTraditional'] as $f_category)
+                                  @if (count($f_category['second_category']) > 0)
+                                    <li class="parent item"> <a href="Product_List"><span>{{ $f_category['name'] }}</span></a>
+                                    <ul class="level1">
+                                      @foreach ($f_category['second_category'] as $s_category)
+                                        <li> <a href="Product_List"><span>{{ $s_category->name }}</span></a> </li>
+                                      @endforeach
+                                    </ul>
+                                  @endif
+                                @endforeach
+                              @endif
+                              {{-- <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
                                 <ul class="level1">
                                   <li> <a href="Product_List"><span>Toaster Crossbody</span></a> </li>
                                   <li> <a href="Product_List"><span>Piper Bag</span></a> </li>
                                   <li> <a href="Product_List"><span>Leather Bag</span></a> </li>
                                   <li> <a href="Product_List"><span>Canvas Bag</span></a> </li>
                                 </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>bucket bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Accessories</span></a> </li>
-                                  <li> <a href="Product_List"><span>Gym Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Fashion Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Messenger Bags</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Duffels</span></a> </li>
-                                  <li> <a href="Product_List"><span>Umbrellas</span></a> </li>
-                                  <li> <a href="Product_List"><span>Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Travel Gear</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>curved boxy sling</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Luggage</span></a> </li>
-                                  <li> <a href="Product_List"><span>Briefcases</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bowling</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bucket Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>floral lattice bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Crossbody Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Clutch Handbag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Hobo Shoulder</span></a> </li>
-                                  <li> <a href="Product_List"><span>Saddle Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>Bag Accessories</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Wallet Wristlet</span></a> </li>
-                                  <li> <a href="Product_List"><span>Solo Premium </span></a> </li>
-                                  <li> <a href="Product_List"><span>Laptop Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Belts</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Toaster Crossbody</span></a> </li>
-                                  <li> <a href="Product_List"><span>Piper Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Leather Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Canvas Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>bucket bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Accessories</span></a> </li>
-                                  <li> <a href="Product_List"><span>Gym Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Fashion Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Messenger Bags</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Duffels</span></a> </li>
-                                  <li> <a href="Product_List"><span>Umbrellas</span></a> </li>
-                                  <li> <a href="Product_List"><span>Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Travel Gear</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>curved boxy sling</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Luggage</span></a> </li>
-                                  <li> <a href="Product_List"><span>Briefcases</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bowling</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bucket Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>floral lattice bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Crossbody Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Clutch Handbag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Hobo Shoulder</span></a> </li>
-                                  <li> <a href="Product_List"><span>Saddle Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>Bag Accessories</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Wallet Wristlet</span></a> </li>
-                                  <li> <a href="Product_List"><span>Solo Premium </span></a> </li>
-                                  <li> <a href="Product_List"><span>Laptop Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Belts</span></a> </li>
-                                </ul>
-                              </li>
+                              </li> --}}
                             </ul>
                           </div>
                         </div>
                       </div>
                     </div>
                   </li>
-                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Men Tribe</span></a>
+                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Men TRADITIONAL</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">
                           <div class="col-12">
                             <ul class="level0">
-                              <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
+                              {{-- <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
                                 <ul class="level1">
                                   <li> <a href="Product_List"><span>Toaster Crossbody</span></a> </li>
                                   <li> <a href="Product_List"><span>Piper Bag</span></a> </li>
                                   <li> <a href="Product_List"><span>Leather Bag</span></a> </li>
                                   <li> <a href="Product_List"><span>Canvas Bag</span></a> </li>
                                 </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>bucket bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Accessories</span></a> </li>
-                                  <li> <a href="Product_List"><span>Gym Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Fashion Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Messenger Bags</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Duffels</span></a> </li>
-                                  <li> <a href="Product_List"><span>Umbrellas</span></a> </li>
-                                  <li> <a href="Product_List"><span>Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Travel Gear</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>curved boxy sling</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Luggage</span></a> </li>
-                                  <li> <a href="Product_List"><span>Briefcases</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bowling</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bucket Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>floral lattice bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Crossbody Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Clutch Handbag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Hobo Shoulder</span></a> </li>
-                                  <li> <a href="Product_List"><span>Saddle Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>Bag Accessories</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Wallet Wristlet</span></a> </li>
-                                  <li> <a href="Product_List"><span>Solo Premium </span></a> </li>
-                                  <li> <a href="Product_List"><span>Laptop Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Belts</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Toaster Crossbody</span></a> </li>
-                                  <li> <a href="Product_List"><span>Piper Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Leather Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Canvas Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>bucket bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Accessories</span></a> </li>
-                                  <li> <a href="Product_List"><span>Gym Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Fashion Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Messenger Bags</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Duffels</span></a> </li>
-                                  <li> <a href="Product_List"><span>Umbrellas</span></a> </li>
-                                  <li> <a href="Product_List"><span>Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Travel Gear</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>curved boxy sling</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Luggage</span></a> </li>
-                                  <li> <a href="Product_List"><span>Briefcases</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bowling</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bucket Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>floral lattice bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Crossbody Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Clutch Handbag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Hobo Shoulder</span></a> </li>
-                                  <li> <a href="Product_List"><span>Saddle Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>Bag Accessories</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Wallet Wristlet</span></a> </li>
-                                  <li> <a href="Product_List"><span>Solo Premium </span></a> </li>
-                                  <li> <a href="Product_List"><span>Laptop Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Belts</span></a> </li>
-                                </ul>
-                              </li>
+                              </li> --}}
+                              @if (isset($category_list['category_list_menTraditional']) && !empty($category_list['category_list_menTraditional']))
+                                @foreach ($category_list['category_list_menTraditional'] as $f_category)
+                                  @if (count($f_category['second_category']) > 0)
+                                    <li class="parent item"> <a href="Product_List"><span>{{ $f_category['name'] }}</span></a>
+                                    <ul class="level1">
+                                      @foreach ($f_category['second_category'] as $s_category)
+                                        <li> <a href="Product_List"><span>{{ $s_category->name }}</span></a> </li>
+                                      @endforeach
+                                    </ul>
+                                  @endif
+                                @endforeach
+                              @endif
                             </ul>
                           </div>
                         </div>

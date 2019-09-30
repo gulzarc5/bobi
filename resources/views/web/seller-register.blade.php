@@ -28,22 +28,58 @@
               <div class="col-sm-6 inst" style="float: right;"><img src="{{asset('web/images/seller/delivery-product.jpg')}}"></div>
             </div>
           </div>
-          <div class="col-md-3 page-content">            
+          <div class="col-md-3 page-content" style="margin-top: -26px;">            
             <div class="flex-center"><img src="{{asset('web/images/logo.png')}}"></div>          
             <div class="account-login">
-              <div class="box-authentication" style="padding-top: 10px">
-                <h4>Register</h4>
-                <p class="before-login-text">Welcome! Sign in for being seller</p>
-                <label for="emmail_login">Email address<span class="required">*</span></label>
-                <input id="emmail_login" type="text" class="form-control">
-                <label for="password_login">Password<span class="required">*</span></label>
-                <input id="password_login" type="password" class="form-control">              
-                <label for="password_login">Confirm Password<span class="required">*</span></label>
-                <input id="password_login" type="password" class="form-control">
-                <button class="button"><i class="icon-lock icons"></i>&nbsp; <span>Signup</span></button>              
-                <hr>
-                <p class="forgot-pass"><span class="required">*</span>If you are already registered <a href="Seller-Login"><span style="text-decoration: underline;">Login</span></a></p>
-              </div>
+              {{ Form::open(['method' => 'post','route'=>'web.seller_registration']) }}
+                <div class="box-authentication" style="padding-top: 10px">
+                  <h4>Register</h4>
+                    @if (Session::has('message'))
+                      <div class="alert alert-success">{{ Session::get('message') }}</div>
+                    @endif @if (Session::has('error'))
+                      <div class="alert alert-danger">{{ Session::get('error') }}</div>
+                    @endif
+                  <label for="emmail_login">Name<span class="required">*</span></label>
+                  <input id="emmail_login" name="name" type="text" class="form-control">
+                    @if($errors->has('name'))
+                      <span class="invalid-feedback" role="alert" style="color:red">
+                        <strong>{{ $errors->first('name') }}</strong>
+                      </span> <br>
+                    @enderror
+                  <label for="emmail_login">Email address<span class="required">*</span></label>
+                  <input id="emmail_login" name="email" type="text" class="form-control">
+                    @if($errors->has('email'))
+                      <span class="invalid-feedback" role="alert" style="color:red">
+                        <strong>{{ $errors->first('email') }}</strong>
+                      </span> <br>
+                    @enderror
+                  <label for="emmail_login">Mobile<span class="required">*</span></label>
+                  <input id="emmail_login" name="mobile" type="number" class="form-control">
+                      @if($errors->has('mobile'))
+                        <span class="invalid-feedback" role="alert" style="color:red">
+                          <strong>{{ $errors->first('mobile') }}</strong>
+                        </span> <br>
+                      @enderror
+                  <label for="password_login">Password<span class="required">*</span></label>
+                  <input id="password_login" name="password" type="password" class="form-control">  
+                    @if($errors->has('password'))
+                      <span class="invalid-feedback" role="alert" style="color:red">
+                        <strong>{{ $errors->first('password') }}</strong>
+                      </span> <br>
+                    @enderror            
+                  <label for="password_login">Confirm Password<span class="required">*</span></label>
+                  <input id="password_login" name="confirmed" type="password" class="form-control">
+                    @if($errors->has('confirmed'))
+                      <span class="invalid-feedback" role="alert" style="color:red">
+                        <strong>{{ $errors->first('confirmed') }}</strong>
+                      </span> <br>
+                    @enderror  
+
+                  <button class="button"><i class="icon-lock icons"></i>&nbsp; <span>Signup</span></button>              
+                  <hr>
+                  <p class="forgot-pass"><span class="required">*</span>If you are already registered <a href="{{ route('seller_login')}}"><span style="text-decoration: underline;">Login</span></a></p>
+                </div>
+              {{ Form::close() }}
             </div>
           </div>
         </div> 

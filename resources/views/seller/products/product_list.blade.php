@@ -22,9 +22,9 @@
                               <th>Category</th>
                               <th>FirstCategory</th>
                               <th>SecondCategory</th>
-                              <th>Brand</th>
+                              <th>Designer</th>
                               <th>Status</th>
-                              <th>Action</th>
+                              <th>action</th>
                             </tr>
                           </thead>
                           <tbody>                       
@@ -56,8 +56,14 @@
                     {data: 'c_name', name: 'c_name' ,searchable: true},
                     {data: 'first_c_name', name: 'first_c_name' ,searchable: true},       
                     {data: 'second_c_name', name: 'second_c_name' ,searchable: true},
-                    {data: 'brand_name', name: 'brand_name' ,searchable: true},             
-                    {data: 'status_tab', name: 'status_tab',orderable: false, searchable: false},                    
+                    {data: 'brand_name', name: 'brand_name' ,searchable: true}, 
+                    {data: 'status', name: 'status', render:function(data, type, row){
+                      if (row.status == '1') {
+                        return "<button class='btn btn-info'>Enable</a>"
+                      }else{
+                        return "<button class='btn btn-danger'>Disabled</a>"
+                      }                        
+                    }},                  
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

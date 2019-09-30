@@ -25,9 +25,6 @@ Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 	Route::post('/New/Size/Add/', 'ProductController@productNewSizeAdd')->name('seller.product_new_size_add');
 
 
-	Route::get('/Varients/Edit/{product_id}', 'ProductController@productVarientEdit')->name('seller.product_varient_edit');
-	Route::post('/Varients/Update/', 'ProductController@productVarientUpdate')->name('seller.product_varient_update');
-
 
 	Route::get('/Colors/Edit/{product_id}', 'ProductController@productColorEdit')->name('seller.product_Color_edit');
 	Route::post('/Color/Update/', 'ProductController@productColorUpdate')->name('seller.product_color_update');
@@ -35,4 +32,5 @@ Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 
 	Route::get('/Status/Update/{product_id}/{status}', 'ProductController@productStatusUpdate')->name('seller.product_status_update');
 
+	Route::get('/Ajax/brand/{first_category}', 'ProductController@AjaxGetBrandFirstCategory');
 });

@@ -11,10 +11,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="{{asset('admin/src_files/logo/icon.png')}}" type="image/ico" />
+  <link rel="icon" href="{{asset('web/images/fab.png')}}" type="image/ico" />
 
-    <title>Bplus</title>
-    <link rel="icon" href="{{asset('admin/src_files/logo/icon.png')}}" type="image/icon type">
+    <title>Bibi Bobi</title>
+    <link rel="icon" href="{{asset('web/images/fab.png')}}" type="image/icon type">
 
 
     <!-- Bootstrap -->
@@ -56,8 +56,9 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="{{route('seller.deshboard')}}" class="site_title">
-                <img src="{{asset('admin/src_files/logo/logo.png')}}" height="70">
+              <a href="{{route('seller.deshboard')}}" class="site_title" style="height: auto;
+              background-color: #fff;display: flex;justify-content: center;">
+                <img src="{{asset('web/images/logo.png')}}" height="70">
               </a>
             </div>
 
@@ -91,6 +92,7 @@
                     </a>
                     <ul class="nav child_menu">
                       <li><a href="{{route('seller.MyprofileForm')}}">My Profile</a></li>
+                      <li><a href="{{route('seller.MyCategoryForm')}}">My Category</a></li>
                       <li><a href="{{route('seller.change_password_form')}}">Change Password</a></li>
                     </ul>
                   </li>
@@ -145,7 +147,7 @@
               </div>
 
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                <li><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="fa fa-sign-out pull-right" style="margin-top: 8px;margin-left: 7px;"></i> Log Out</a></li>
              <form id="logout-form" action="{{ route('seller.logout') }}" method="POST" style="display: none;">
                   @csrf
               </form>

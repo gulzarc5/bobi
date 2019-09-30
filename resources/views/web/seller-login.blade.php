@@ -30,19 +30,44 @@
           </div>
           <div class="col-md-3 page-content">
             <div class="flex-center"><img src="{{asset('web/images/logo.png')}}"></div> 
+            
+            {{ Form::open(array('url' => 'Seller/Login', 'method' => 'post')) }}
             <div class="account-login">
               <div class="box-authentication" style="padding-top: 10px">
                 <h4>Login</h4>
+                @if (Session::has('message'))
+                  <div class="alert alert-success">{{ Session::get('message') }}</div>
+                @endif @if (Session::has('error'))
+                  <div class="alert alert-danger">{{ Session::get('error') }}</div>
+                @endif
                 <p class="before-login-text">Welcome back! Sign in to your account</p>
                 <label for="emmail_login">Email address<span class="required">*</span></label>
-                <input id="emmail_login" type="text" class="form-control">
+                <input id="emmail_login" name="email" type="email" type="text" class="form-control">
+                  @if ($message = Session::get('login_error'))
+                    <span class="invalid-feedback" role="alert" style="color:red">
+                          <strong>{{ $message }}</strong>
+                      </span><br>
+                  @endif
+                  @error('email')
+                      <span class="invalid-feedback" role="alert" style="color:red">
+                          <strong>{{ $message }}</strong>
+                      </span><br>
+                  @enderror
+
                 <label for="password_login">Password<span class="required">*</span></label>
-                <input id="password_login" type="password" class="form-control">
+                <input id="password_login" name="password" type="password" class="form-control">
+                  @error('password')
+                      <span class="invalid-feedback" role="alert" style="color:red">
+                          <strong>{{ $message }}</strong>
+                      </span><br>
+                  @enderror
+
                 <button class="button"><i class="icon-lock icons"></i>&nbsp; <span>Login</span></button>              
                 <p class="forgot-pass"><a href="#">Lost your password?</a></p><hr>
                 <p class="forgot-pass"><span class="required">*</span>If you are a new seller <a href="Seller-Register"><span style="text-decoration: underline;">Register</span></a></p>
               </div>
             </div>
+            {{ Form::close() }}
           </div>
         </div>  
       </div>      

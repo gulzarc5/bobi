@@ -86,23 +86,10 @@
                   </li>
                   <li><a><i class="fa fa-edit"></i> Users <span class="fa fa-chevron-down"></span></a>
                      <ul class="nav child_menu">
-                        <li><a>Sellers<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Active Sellers</a>
-                            </li>
-                            <li><a href="#level2_1">InActive Sellers</a>
-                            </li>
-                          </ul>
-                        </li>
-
-                        <li><a>Buyers<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Active Buyers</a>
-                            </li>
-                            <li><a href="#level2_1">InActive Buyers</a>
-                            </li>
-                          </ul>
-                        </li>
+                      <li class="sub_menu"><a href="{{ route('admin.allSellers') }}">Seller List</a>
+                      </li>
+                      <li class="sub_menu"><a href="level2.html">Buyers List</a>
+                      </li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i>Products<span class="fa fa-chevron-down"></span></a>
@@ -139,26 +126,17 @@
                       <li><a><i class="fa fa-bar-chart-o"></i>Colors <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                           <li><a href="{{route('admin.add_color_name_form')}}">Add New Color</a></li>
-                          <li><a href="{{route('admin.map_color_form')}}">Map Color</a></li>
+                          {{-- <li><a href="{{route('admin.map_color_form')}}">Map Color</a></li> --}}
                           <li><a href="{{route('admin.view_color_list')}}">Colors List</a></li>
                         </ul>
                       </li>
 
-                      {{-- <li><a><i class="fa fa-bar-chart-o"></i>Varients <span class="fa fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                          <li><a href="{{route('admin.add_varient_name_form')}}">Add Varient Name</a></li>
-                           <li><a href="{{route('admin.varient_name_list')}}">Varient Name List</a></li>
-                           <li><a href="{{route('admin.map_varient_form')}}">Map Varient</a></li>
-                          <li><a href="{{route('admin.view_mapped_varient_list')}}">Mapped Varient List</a></li>
-                        </ul>
-                      </li> --}}
-
                       <li><a><i class="fa fa-bar-chart-o"></i>Brand <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <li><a href="{{route('admin.add_brand_name_form')}}">Add Brand Name</a></li>
-                           <li><a href="{{route('admin.brand_name_list')}}">Brand Name List</a></li>
-                           <li><a href="{{route('admin.map_brand_form')}}">Map Brand</a></li>
-                          <li><a href="{{route('admin.view_mapped_brand_list')}}">Mapped Brand List</a></li>
+                          <li><a href="{{route('admin.add_brand_form')}}">Add Brand</a></li>
+                           <li><a href="{{route('admin.brand_name_list')}}">Brand List</a></li>
+                           {{-- <li><a href="{{route('admin.map_brand_form')}}">Map Brand</a></li>
+                          <li><a href="{{route('admin.view_mapped_brand_list')}}">Mapped Brand List</a></li> --}}
                         </ul>
                       </li>
 
