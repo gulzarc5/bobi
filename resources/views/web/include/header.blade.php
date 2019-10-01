@@ -405,10 +405,10 @@
                                 @if (isset($category_list['category_list_women']) && !empty($category_list['category_list_women']))
                                   @foreach ($category_list['category_list_women'] as $f_category)
                                     @if (count($f_category['second_category']) > 0)
-                                      <li class="parent item"> <a href="Product_List"><span>{{ $f_category['name'] }}</span></a>
+                                      <li class="parent item"> <a><span>{{ $f_category['name'] }}</span></a>
                                       <ul class="level1">
                                         @foreach ($f_category['second_category'] as $s_category)
-                                          <li> <a href="Product_List"><span>{{ $s_category->name }}</span></a> </li>
+                                          <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
                                         @endforeach
                                       </ul>
                                     @endif
@@ -503,10 +503,10 @@
                               @if (isset($category_list['category_list_womenTraditional']) && !empty($category_list['category_list_womenTraditional']))
                                 @foreach ($category_list['category_list_womenTraditional'] as $f_category)
                                   @if (count($f_category['second_category']) > 0)
-                                    <li class="parent item"> <a href="Product_List"><span>{{ $f_category['name'] }}</span></a>
+                                    <li class="parent item"> <a><span>{{ $f_category['name'] }}</span></a>
                                     <ul class="level1">
                                       @foreach ($f_category['second_category'] as $s_category)
-                                        <li> <a href="Product_List"><span>{{ $s_category->name }}</span></a> </li>
+                                        <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
                                       @endforeach
                                     </ul>
                                   @endif
@@ -543,10 +543,10 @@
                               @if (isset($category_list['category_list_menTraditional']) && !empty($category_list['category_list_menTraditional']))
                                 @foreach ($category_list['category_list_menTraditional'] as $f_category)
                                   @if (count($f_category['second_category']) > 0)
-                                    <li class="parent item"> <a href="Product_List"><span>{{ $f_category['name'] }}</span></a>
+                                    <li class="parent item"> <a><span>{{ $f_category['name'] }}</span></a>
                                     <ul class="level1">
                                       @foreach ($f_category['second_category'] as $s_category)
-                                        <li> <a href="Product_List"><span>{{ $s_category->name }}</span></a> </li>
+                                        <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
                                       @endforeach
                                     </ul>
                                   @endif

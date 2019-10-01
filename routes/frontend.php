@@ -7,6 +7,7 @@ Route::group(['namespace'=> 'Web'], function(){
 
     Route::group(['namespace'=> 'Product','prefix'=>'Product'], function(){
         Route::get('/List/{second_category_id}','ProductController@productList')->name('web.product_list');
+        Route::get('/Detail/{product_id}','ProductController@productDetail')->name('web.product_detail');
     });
 
 });

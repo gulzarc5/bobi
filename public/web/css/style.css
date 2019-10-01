@@ -5086,12 +5086,13 @@ button.button.button-clear:hover {
 24. products grid
 ******************************************/
 .shop-inner {
-	padding: 15px 20px 20px 20px;
+	/* padding: 15px 20px 20px 20px;
 	background-color: #fff;
 	border: 1px solid #eee;
 	box-shadow: 0 0 8px 0 rgba(0,0,0,.05);
 	border-radius: 3px;
-	margin-bottom: 30px;
+	margin-bottom: 30px; */
+	background-color: #fff;
 }
 .products-grid {
 	margin: 0;

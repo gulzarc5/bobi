@@ -6,7 +6,7 @@
   <div class="main-container col2-left-layout">
     <div class="container">
       <div class="row">
-        <div class="col-main col-sm-9 col-xs-12 col-sm-push-3">
+        <div class="col-main col-sm-9 col-xs-12 col-sm-push-3 shop-inner">
           {{-- <div class="category-description std">
             <div class="slider-items-products">
               <div id="category-desc-slider" class="product-flexslider hidden-buttons">
@@ -32,258 +32,57 @@
               </div>
             </div>
           </div> --}}
-          <div class="shop-inner slider-product">
-            <div class="page-title">
-              <h2>Men > T-Shirt</h2>
+          <div class=" slider-product">
+            <div class="page-title" style="padding-top: 13px;">
+              <h2>
+                @if (isset($data['category_name'] ) && !empty($data['category_name'] ))
+                    {{$data['category_name'] ->category_name}} > {{ $data['category_name'] ->second_cat_name }}
+                @endif
+                
+              </h2>
             </div><hr>
             <div class="product-grid-area">
               <ul class="products-grid">
-                <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> 
-                          <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure><img class="first-img" src="{{asset('web/images/products/img02.jpg')}}" alt=""></figure>
-                          </a> 
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
+                @if (isset($data['product_list']) && !empty($data['product_list']))
+                  @foreach ($data['product_list'] as $product)
+                    <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
+                      <div class="product-item">
+                        <div class="item-inner">
+                          <div class="product-thumbnail">
+                            <div class="pr-img-area"> 
+                              <a  href="{{ route('web.product_detail',['product_id' => encrypt($product['id'])])}}">
+                                <figure><img class="first-img" src="{{asset('images/product/thumb/'.$product['image'].'')}}" alt=""></figure>
+                              </a> 
                             </div>
-                            <div class="pro-action flex-center">
-                              <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                              <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
+                          </div>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> 
+                                <a href="{{ route('web.product_detail',['product_id' => encrypt($product['id'])])}}">
+                                  {{ $product['name'] }}
+                                 </a> </div>
+                              <div class="item-content">
+                                <div class="item-price">
+                                  <div class="price-box"> <span class="regular-price"> <span class="price">
+                                      {{ number_format($product['price'],2,".",'') }}
+                                    </span> </span> </div>
+                                </div>
+                                <div class="pro-action flex-center">
+                                  <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
+                                  <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> 
-                          <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure><img class="first-img" src="{{asset('web/images/products/img03.jpg')}}" alt=""></figure>
-                          </a> 
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action flex-center">
-                              <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                              <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> 
-                          <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure><img class="first-img" src="{{asset('web/images/products/img04.jpg')}}" alt=""></figure>
-                          </a> 
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action flex-center">
-                              <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                              <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> 
-                          <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure><img class="first-img" src="{{asset('web/images/products/img07.jpg')}}" alt=""></figure>
-                          </a> 
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action flex-center">
-                              <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                              <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> 
-                          <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure><img class="first-img" src="{{asset('web/images/products/img14.jpg')}}" alt=""></figure>
-                          </a> 
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action flex-center">
-                              <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                              <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> 
-                          <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure><img class="first-img" src="{{asset('web/images/products/img08.jpg')}}" alt=""></figure>
-                          </a> 
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action flex-center">
-                              <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                              <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> 
-                          <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure><img class="first-img" src="{{asset('web/images/products/img05.jpg')}}" alt=""></figure>
-                          </a> 
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action flex-center">
-                              <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                              <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> 
-                          <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure><img class="first-img" src="{{asset('web/images/products/img03.jpg')}}" alt=""></figure>
-                          </a> 
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action flex-center">
-                              <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                              <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="pr-img-area"> 
-                          <a title="Ipsums Dolors Untra" href="single_product.html">
-                            <figure><img class="first-img" src="{{asset('web/images/products/img02.jpg')}}" alt=""></figure>
-                          </a> 
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
-                            </div>
-                            <div class="pro-action flex-center">
-                              <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                              <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                    </li>
+                  @endforeach
+                @endif
+                
               </ul>
             </div>
-            <div class="pagination-area">
+            {{-- <div class="pagination-area">
               <div class="loader loader--style6" title="Loading">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                    width="24px" height="30px" viewBox="0 0 24 30" xml:space="preserve">
@@ -313,25 +112,29 @@
                   </rect>
                 </svg>
               </div>
-            </div>
+            </div> --}}
           </div>
         </div>
         <aside class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">
           <div class="block shop-by-side">
             <div class="sidebar-bar-title">
-              <h3>Men</h3>
+              <h3>
+                @if (isset($data['category_name']) && !empty($data['category_name']))
+                {{$data['category_name']->category_name}}
+                @endif
+              </h3>
             </div>
             <div class="block-content">
               <p class="block-subtitle">Shopping Options</p>
               <div class="manufacturer-area">
-                <h2 class="saider-bar-title">Manufacturer</h2>
+                <h2 class="saider-bar-title">Category</h2>
                 <div class="saide-bar-menu">
                   <ul>
-                    <li><a href="#"><i class="fa fa-angle-right"></i> Aliquam</a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i> Duis tempus id </a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i> Leo quis molestie. </a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i> Suspendisse </a></li>
-                    <li><a href="#"><i class="fa fa-angle-right"></i> Nunc gravida </a></li>
+                      @if (isset($data['sub_category']) && !empty($data['sub_category']))
+                        @foreach ($data['sub_category'] as $subcategory)
+                          <li><a href="{{ route('web.product_list',['second_category_id'=>encrypt($subcategory->id)]) }}"><i class="fa fa-angle-right"></i>{{ $subcategory->name }}</a></li>
+                        @endforeach
+                      @endif
                   </ul>
                 </div>
               </div>
@@ -339,34 +142,20 @@
                 <h2 class="saider-bar-title">Color</h2>
                 <div class="layered-content color">
                   <ul class="check-box-list ">
-                    <li>
-                      <input type="checkbox" id="jtv1" name="jtvc">
-                      <label for="jtv1"> <span class="button"></span><a style="background:#333333"></a> Black</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv2" name="jtvc">
-                      <label for="jtv2"> <span class="button"></span><a style="background:#e32b00"></a> Red</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv3" name="jtvc">
-                      <label for="jtv3"> <span class="button"></span><a style="background:#ff9000"></a> Orange</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv4" name="jtvc">
-                      <label for="jtv4"> <span class="button"></span><a style="background:#8BC44A"></a> Green</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv5" name="jtvc">
-                      <label for="jtv5"> <span class="button"></span><a style="background:#10b9b9"></a> Blue</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv7" name="jtvc">
-                      <label for="jtv7"> <span class="button"></span><a style="background:#FFFFFF"></a> White</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv8" name="jtvc">
-                      <label for="jtv8"> <span class="button"></span><a style="background:#333333"></a> Black</label>
-                    </li>
+                    @if (isset($data['colors'] ) && !empty($data['colors'] ))
+                    @php
+                        $count = 1;
+                    @endphp
+                        @foreach ($data['colors'] as $colors)
+                          <li>
+                            <input type="checkbox" id="jtv{{$count}}" name="color[]">
+                            <label for="jtv{{$count}}"> <span class="button"></span><a style="background:{{$colors->value}}"></a> {{$colors->name}}</label>
+                          </li>
+                          @php
+                              $count++;
+                          @endphp
+                        @endforeach
+                    @endif
                   </ul>
                 </div>
               </div>              
@@ -374,30 +163,20 @@
                 <h2 class="saider-bar-title">Size</h2>
                 <div class="layered-content size">
                   <ul class="check-box-list ">
-                    <li>
-                      <input type="checkbox" id="jtv12" name="jtvc">
-                      <label for="jtv12"> <span class="button"></span><a>XS</a> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv13" name="jtvc">
-                      <label for="jtv13"> <span class="button"></span><a>S</a> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv14" name="jtvc">
-                      <label for="jtv14"> <span class="button"></span><a>M</a> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv15" name="jtvc">
-                      <label for="jtv15"> <span class="button"></span><a>L</a> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv17" name="jtvc">
-                      <label for="jtv17"> <span class="button"></span><a>XL</a> </label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="jtv18" name="jtvc">
-                      <label for="jtv18"> <span class="button"></span><a>XXL</a> </label>
-                    </li>
+                      @if (isset($data['sizes'] ) && !empty($data['sizes'] ))
+                      @php
+                          $count = 1;
+                      @endphp
+                        @foreach ($data['sizes'] as $size)
+                          <li>
+                          <input type="checkbox" id="size{{$count}}" name="size" value="{{$size->id}}">
+                            <label for="size{{$count}}"> <span class="button"></span><a>{{$size->name}}</a> </label>
+                          </li>
+                          @php
+                          $count++;
+                          @endphp
+                        @endforeach
+                      @endif
                   </ul>
                 </div>
               </div>
@@ -408,10 +187,10 @@
               <h3>Price</h3>
             </div>
             <div class="block-content">
-              <div class="slider-range">
-                <div data-label-reasult="Range:" data-min="0" data-max="500" data-unit="$" class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" data-value-min="50" data-value-max="350"><div class="ui-slider-range ui-widget-header ui-corner-all" style="left: 10%; width: 60%;"></div><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 10%;"></span><span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 70%;"></span></div>
-                <div class="amount-range-price">Range: $10 - $550</div>
-                <ul class="check-box-list">
+              <div>
+                <input type="hidden" id="price-slider" />
+
+                {{-- <ul class="check-box-list">
                   <li>
                     <input type="checkbox" id="p1" name="cc">
                     <label for="p1"> <span class="button"></span> $20 - $50<span class="count">(0)</span> </label>
@@ -424,7 +203,7 @@
                     <input type="checkbox" id="p3" name="cc">
                     <label for="p3"> <span class="button"></span> $100 - $250<span class="count">(0)</span> </label>
                   </li>
-                </ul>
+                </ul> --}}
               </div>
             </div>
           </div>
@@ -433,4 +212,44 @@
     </div>
   </div>
   <!-- Main Container End --> 
+@endsection
+@section('script')
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+
+@if(isset($data['price_range']) && !empty($data['price_range']) && !empty($data['price_range']->min_price) && !empty($data['price_range']->max_price))
+<script type="text/javascript">
+  $("#price-slider").ionRangeSlider({
+    min: {{ $data['price_range']->min_price }},
+    max: {{ $data['price_range']->max_price }},
+    type: 'double',
+    prefix: "Rs ",
+    prettify: false,
+    hasGrid: false,
+     onFinish: function (data) {
+      var prices = data.from+";"+data.to;
+      // filterProduct(prices);
+    },
+});
+</script>
+@else
+<script type="text/javascript">
+  $("#price-slider").ionRangeSlider({
+    min: 0,
+    max: 1000,
+    type: 'double',
+    prefix: "Rs ",
+    prettify: false,
+    hasGrid: false,
+    onFinish: function (data) {
+      var prices = data.from+";"+data.to;
+      // filterProduct(prices);
+    },
+});
+@endif
+</script>
 @endsection
