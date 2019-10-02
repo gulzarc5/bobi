@@ -69,7 +69,7 @@
                   <p>{{$data['product']->short_description}}</a></p>
                 </div>
 
-                {{ Form::open(['method' => 'post','url'=>'']) }}
+                {{ Form::open(['method' => 'post','route'=>'web.add_cart']) }}
               <input type="hidden" name="product_id" value="{{ $data['product']->id }}">
                   <div class="product-color-size-area">
                     <div class="color-area">
@@ -126,7 +126,7 @@
                         <label for="qty">Quantity:</label>
                         <div class="numbers-row">
                           <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
-                          <input type="text" class="qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                          <input type="text" class="qty" title="Qty" value="1" maxlength="12" id="qty" name="quantity">
                           <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
                         </div>
                       </div>

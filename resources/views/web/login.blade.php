@@ -17,7 +17,7 @@
             <p class="forgot-pass"><a href="{{ route('web.forgot-password')}}">Lost your password?</a></p>
             <button class="button"><i class="icon-lock icons"></i>&nbsp; <span>Login</span></button>
             <div class="register-benefits" style="display: flex;">
-              <h5>Haven't Registred Yet?</h5>&nbsp; <a href="{{ route('web.register')}}">Register</a>
+              <h5>Haven't Registred Yet?</h5>&nbsp; <a href="{{ route('web.user_registration_form')}}">Register</a>
             </div>
           </div>
         </div>

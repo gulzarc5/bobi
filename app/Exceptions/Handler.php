@@ -65,9 +65,9 @@ class Handler extends ExceptionHandler
                 break;
             case 'seller':
                 $login = 'seller_login';
-                break;
+                break;                
             default:
-                $login = 'login';
+                $login = 'web.userLoginForm';
                 break;
         }
         return redirect()->guest(route($login));

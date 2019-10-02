@@ -309,8 +309,8 @@
                       <li><a href="{{ route('web.my_account')}}">My Account</a></li>
                       <li><a href="{{ route('web.order')}}">My Orders</a></li>
                       <li class="divider"></li>
-                      <li style="text-align: center;"><a href="{{ route('web.register')}}"> <span>If you are a new user</span><br><strong>Register</strong></a></li>
-                      <li class="login"><a href="{{ route('web.login')}}" class="btn outline btn-color" target="_blank">Login</a></li>
+                      <li style="text-align: center;"><a href="{{ route('web.user_registration_form')}}"> <span>If you are a new user</span><br><strong>Register</strong></a></li>
+                      <li class="login"><a href="{{ route('web.userLoginForm')}}" class="btn outline btn-color" target="_blank">Login</a></li>
                       <li class="login"><a href="#" class="btn outline btn-color" target="_blank">Logout</a></li>
                     </ul>
                   </div>

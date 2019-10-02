@@ -5,6 +5,19 @@ Route::group(['namespace'=> 'Web'], function(){
     Route::get('/Seller-Register','RegisterController@sellerRegistrationForm')->name('web.seller_registration_form');
     Route::post('/Seller-Registeration','RegisterController@Registration')->name('web.seller_registration');
 
+    Route::get('/User/Registration','RegisterController@userRegistrationForm')->name('web.user_registration_form');
+    Route::post('/User/Registration','RegisterController@userRegistration')->name('web.user_registration');
+
+    Route::get('/user_login', 'UserController@userLoginForm')->name('web.userLoginForm');
+    Route::post('/user_login', 'LoginController@buyerLogin')->name('web.buyerLogin');
+    Route::post('/Logout', 'LoginController@logout')->name('web.buyerLogout');
+
+    Route::get('/shopping_cart', 'CartController@viewCart')->name('web.viewCart');
+    Route::post('/Product/Add', 'CartController@AddCart')->name('web.add_cart');
+    Route::post('/cartUpdate', 'CartController@updateCart')->name('web.updateCart');
+    Route::get('/cart/item/remove/{p_id}','CartController@cartItemRemove')->name('cartItemRemove');
+
+
     Route::group(['namespace'=> 'Product','prefix'=>'Product'], function(){
         Route::get('/List/{second_category_id}','ProductController@productList')->name('web.product_list');
         Route::get('/Detail/{product_id}/{size_id?}','ProductController@productDetail')->name('web.product_detail');
@@ -27,12 +40,12 @@ Route::get('/', function () {
 // Route::get('/Product_List', function () {
 //     return view('web.product_list');
 // });
-Route::get('/Login', function () {
-    return view('web.login');
-})->name('web.login');
-Route::get('/Register', function () {
-    return view('web.register');
-})->name('web.register');
+// Route::get('/Login', function () {
+//     return view('web.login');
+// })->name('web.login');
+// Route::get('/Register', function () {
+//     return view('web.register');
+// })->name('web.register');
 Route::get('/Forgot-Password', function () {
     return view('web.forgot-password');
 })->name('web.forgot-password');
