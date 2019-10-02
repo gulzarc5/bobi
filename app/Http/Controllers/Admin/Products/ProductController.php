@@ -152,6 +152,11 @@ class ProductController extends Controller
                 }                
             }
 
+            $product_price_update = DB::table('products')
+                ->where('id',$product_id)
+                ->update([
+                    'min_price' => DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'),
+                ]);
             //*****************insert Product Images******************
             if($request->hasfile('image'))
             {
@@ -553,6 +558,13 @@ class ProductController extends Controller
                 'price' => $price,
                 'stock' => $stock,
             ]);
+            
+
+            $product_price_update = DB::table('products')
+                ->where('id',$product_id)
+                ->update([
+                    'min_price' => DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'),
+                ]);
 
             if ($size_update) {
                return 2;
@@ -580,7 +592,12 @@ class ProductController extends Controller
         ->update([
             'status'=>$status,
         ]);
-
+        
+        $product_price_update = DB::table('products')
+            ->where('id',$product_id)
+            ->update([
+                'min_price' => DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'),
+            ]);
        return redirect()->route('admin.product_sizes', ['product_id' => encrypt($product_id)]);
     }
 
@@ -613,6 +630,11 @@ class ProductController extends Controller
             }                
         }
 
+        $product_price_update = DB::table('products')
+            ->where('id',$product_id)
+            ->update([
+                'min_price' => DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'),
+            ]);
         return redirect()->back();
     }
 

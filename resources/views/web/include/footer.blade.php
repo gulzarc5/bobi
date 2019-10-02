@@ -112,7 +112,7 @@
 
   <!-- jquery js --> 
   <script type="text/javascript" src="{{asset('web/js/jquery.min.js')}}"></script> 
-
+  
   <!-- bootstrap js --> 
   <script type="text/javascript" src="{{asset('web/js/bootstrap.min.js')}}"></script> 
 
@@ -148,7 +148,7 @@
 
       function revslider_showDoubleJqueryError(sliderID) {}
       var tpj = jQuery;
-      tpj.noConflict();
+      // tpj.noConflict();
       var revapi6;
       tpj(document).ready(function() {
           if (tpj("#rev_slider_6_1").revolution == undefined) {

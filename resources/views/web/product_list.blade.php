@@ -5,6 +5,7 @@
   <!-- Main Container -->
   <div class="main-container col2-left-layout">
     <div class="container">
+      
       <div class="row">
         <div class="col-main col-sm-9 col-xs-12 col-sm-push-3 shop-inner">
           {{-- <div class="category-description std">
@@ -34,15 +35,29 @@
           </div> --}}
           <div class=" slider-product">
             <div class="page-title" style="padding-top: 13px;">
-              <h2>
+              <h2 class="col-md-6">
                 @if (isset($data['category_name'] ) && !empty($data['category_name'] ))
-                    {{$data['category_name'] ->category_name}} > {{ $data['category_name'] ->second_cat_name }}
+                    {{$data['category_name']->category_name}} > {{ $data['category_name']->second_cat_name }}
+                    <input type="hidden" id="category_id_filter" value="{{$data['category_name']->second_cat_id}}">
                 @endif
-                
               </h2>
+              <div class="col-md-6">
+                  <select style="float:right;width: 200px;" id="product_sort" class="form-control" onchange="filterProduct();">
+                      <option value="low">Price Low To High</option>
+                      <option value="high">Price High To Low</option>
+                      <option value="newest">Newest First</option>
+                      <option value="title_asc">Title A-Z</option>
+                      <option value="title_dsc">Title Z-A</option>
+                      
+                  </select>
+                  <span style="float:right;float: right;padding-top: 6px;padding-right: 12px;font-variant: small-caps;font-weight: bold;">Sort By</span>
+              </div>
+              
             </div><hr>
+
+            {{--//////////////////////////////////// Products //////////////////////////////////--}}
             <div class="product-grid-area">
-              <ul class="products-grid">
+              <ul class="products-grid" id="product_list">
                 @if (isset($data['product_list']) && !empty($data['product_list']))
                   @foreach ($data['product_list'] as $product)
                     <li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
@@ -126,6 +141,7 @@
             </div>
             <div class="block-content">
               <p class="block-subtitle">Shopping Options</p>
+              {{--//////////////////////////////////// Categories //////////////////////////////////--}}
               <div class="manufacturer-area">
                 <h2 class="saider-bar-title">Category</h2>
                 <div class="saide-bar-menu">
@@ -138,6 +154,29 @@
                   </ul>
                 </div>
               </div>
+              {{--//////////////////////////////////// Designers //////////////////////////////////--}}
+              <div class="layered-Category">
+                <h2 class="saider-bar-title">Designers</h2>
+                <div class="layered-content color">
+                  <ul class="check-box-list ">
+                    @if (isset($data['designers'] ) && !empty($data['designers'] ))
+                    @php
+                        $count = 1;
+                    @endphp
+                        @foreach ($data['designers'] as $designer)
+                          <li>
+                          <input type="checkbox" id="design{{$count}}" value="{{ $designer->id }}" name="designer" onclick="designersCheckbox();">
+                            <label for="design{{$count}}"> <span class="button"></span> {{ $designer->name }}</label>
+                          </li>
+                          @php
+                              $count++;
+                          @endphp
+                        @endforeach
+                    @endif
+                  </ul>
+                </div>
+              </div> 
+              {{--//////////////////////////////////// Colors //////////////////////////////////--}}
               <div class="layered-Category">
                 <h2 class="saider-bar-title">Color</h2>
                 <div class="layered-content color">
@@ -148,8 +187,8 @@
                     @endphp
                         @foreach ($data['colors'] as $colors)
                           <li>
-                            <input type="checkbox" id="jtv{{$count}}" name="color[]">
-                            <label for="jtv{{$count}}"> <span class="button"></span><a style="background:{{$colors->value}}"></a> {{$colors->name}}</label>
+                          <input type="checkbox" id="color{{$count}}" name="color" value="{{ $colors->id }}" onclick="colorsCheckbox();">
+                            <label for="color{{$count}}"> <span class="button"></span><a style="background:{{$colors->value}}"></a> {{$colors->name}}</label>
                           </li>
                           @php
                               $count++;
@@ -158,7 +197,8 @@
                     @endif
                   </ul>
                 </div>
-              </div>              
+              </div>    
+              {{--//////////////////////////////////// Sizes //////////////////////////////////--}}          
               <div class="layered-Category">
                 <h2 class="saider-bar-title">Size</h2>
                 <div class="layered-content size">
@@ -169,7 +209,7 @@
                       @endphp
                         @foreach ($data['sizes'] as $size)
                           <li>
-                          <input type="checkbox" id="size{{$count}}" name="size" value="{{$size->id}}">
+                          <input type="checkbox" id="size{{$count}}" name="size" value="{{$size->id}}" onclick="sizesCheckbox();">
                             <label for="size{{$count}}"> <span class="button"></span><a>{{$size->name}}</a> </label>
                           </li>
                           @php
@@ -182,29 +222,16 @@
               </div>
             </div>
           </div>
+          {{--//////////////////////////////////// Price Range //////////////////////////////////--}}
           <div class="block product-price-range ">
             <div class="sidebar-bar-title">
               <h3>Price</h3>
             </div>
-            <div class="block-content">
+            {{-- <div class="block-content"> --}}
               <div>
                 <input type="hidden" id="price-slider" />
 
-                {{-- <ul class="check-box-list">
-                  <li>
-                    <input type="checkbox" id="p1" name="cc">
-                    <label for="p1"> <span class="button"></span> $20 - $50<span class="count">(0)</span> </label>
-                  </li>
-                  <li>
-                    <input type="checkbox" id="p2" name="cc">
-                    <label for="p2"> <span class="button"></span> $50 - $100<span class="count">(0)</span> </label>
-                  </li>
-                  <li>
-                    <input type="checkbox" id="p3" name="cc">
-                    <label for="p3"> <span class="button"></span> $100 - $250<span class="count">(0)</span> </label>
-                  </li>
-                </ul> --}}
-              </div>
+              {{-- </div> --}}
             </div>
           </div>
         </aside>
@@ -214,42 +241,166 @@
   <!-- Main Container End --> 
 @endsection
 @section('script')
-<script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
 
 @if(isset($data['price_range']) && !empty($data['price_range']) && !empty($data['price_range']->min_price) && !empty($data['price_range']->max_price))
-<script type="text/javascript">
-  $("#price-slider").ionRangeSlider({
-    min: {{ $data['price_range']->min_price }},
-    max: {{ $data['price_range']->max_price }},
-    type: 'double',
-    prefix: "Rs ",
-    prettify: false,
-    hasGrid: false,
-     onFinish: function (data) {
-      var prices = data.from+";"+data.to;
-      // filterProduct(prices);
-    },
-});
-</script>
+  <script>
+    $("#price-slider").ionRangeSlider({
+      min: '{{ $data['price_range']->min_price }}',
+      max: '{{ $data['price_range']->max_price }}',
+      type: 'double',
+      prefix: "Rs ",
+      prettify: false,
+      hasGrid: false,
+      onFinish: function (data) {
+        var prices = data.from+";"+data.to;
+        filterProduct(prices);
+      },
+    });
+    </script>
 @else
-<script type="text/javascript">
-  $("#price-slider").ionRangeSlider({
-    min: 0,
-    max: 1000,
-    type: 'double',
-    prefix: "Rs ",
-    prettify: false,
-    hasGrid: false,
-    onFinish: function (data) {
-      var prices = data.from+";"+data.to;
-      // filterProduct(prices);
-    },
-});
+  <script type="text/javascript">
+    $("#price-slider").ionRangeSlider({
+      min: 0,
+      max: 1000,
+      type: 'double',
+      prefix: "Rs ",
+      prettify: false,
+      hasGrid: false,
+      onFinish: function (data) {
+        var prices = data.from+";"+data.to;
+        filterProduct(prices);
+      },
+  });
+  </script>
 @endif
+
+<script>
+  $(".iCheck-helper").click(function () { 
+    filterProduct();
+  })
+
+  function designersCheckbox() {
+    filterProduct();
+  }
+
+  function sizesCheckbox() {
+    filterProduct();
+  }
+
+  function colorsCheckbox() {
+    filterProduct();
+  }
+
+  function filterProduct(prices) {
+      var category_id_filter = $("#category_id_filter").val();
+
+      var sort = $("#product_sort").val();    
+
+      var filter_color = $("input[name='color']:checked").map(function(){return $(this).val();}).get();
+
+      var filter_designers = new Array();
+      $("input:checkbox[name=designer]:checked").each(function(){
+          filter_designers.push($(this).val());
+      });
+     
+      var filter_sizes = new Array();
+      $("input:checkbox[name=size]:checked").each(function(){
+          filter_sizes.push($(this).val());
+      });
+
+      // console.log("Designers "+filter_designers);
+      // console.log("colors "+filter_color);
+      // console.log("category "+category_id_filter);
+      // console.log("Price "+prices);
+      // console.log("sizes "+filter_sizes);
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        }
+    });
+
+    $.ajax({
+        type:"POST",
+        url:"{{ route('web.product_filter')}}",
+        data:{
+          "_token": "{{ csrf_token() }}",
+          category:category_id_filter,
+          prices:prices,
+          colors:filter_color,
+          designers:filter_designers,
+          sizes:filter_sizes,
+          sort:sort,
+        },
+        beforeSend:function() { 
+             $('#myModal').modal('show');
+             $("#myModal").removeClass("mfp-hide");
+        },
+        complete:function() {
+          $('#myModal').modal('hide');
+          $("#myModal").addClass("mfp-hide");
+        },
+        success:function(data){
+           
+            
+            var response = data;
+            // console.log(data);
+            if (response.products) {
+              product_Html(response.products);
+            }
+        }
+    });
+  }
+
+  function product_Html(products){
+    var products_html = '';
+    
+    if (products.length > 0) {
+      $.each(products, function(key,products){
+        var product_route = '{{route('web.product_detail',['product_id' => encrypt(':id')])}}';
+        product_route = product_route.replace(':id', products.id);
+        products_html += '<li class="item col-lg-4 col-md-4 col-sm-6 col-xs-6 ">'+
+                      '<div class="product-item">'+
+                        '<div class="item-inner">'+
+                          '<div class="product-thumbnail">'+
+                            '<div class="pr-img-area">'+
+                              '<a  href="'+product_route+'">'+
+                                '<figure><img class="first-img" src="{{asset('images/product/thumb/')}}'+'/'+products.main_image+'" alt=""></figure>'+
+                              '</a>'+
+                            '</div>'+
+                          '</div>'+
+                          '<div class="item-info">'+
+                            '<div class="info-inner">'+
+                              '<div class="item-title">'+
+                                '<a href="'+product_route+'">'+products.name+'</a> </div>'+
+                              '<div class="item-content">'+
+                                '<div class="item-price">'+
+                                  '<div class="price-box"> <span class="regular-price"> <span class="price">'+
+                                      products.min_price+'.00</span> </span> </div>'+
+                                '</div>'+
+                                '<div class="pro-action flex-center">'+
+                                  '<div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>'+
+                                  '<button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>'+
+                                '</div>'+
+                              '</div>'+
+                            '</div>'+
+                          '</div>'+
+                        '</div>'+
+                      '</div>'+
+                    '</li>';
+      })
+
+    }
+    $("#product_list").html(products_html);
+  }
 </script>
+
+
+
+
+
+
 @endsection

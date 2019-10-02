@@ -2,10 +2,20 @@
 
 
 @section('content')
+<style>
+  .dot {
+    height: 21px;
+    width: 35px;
+    border-radius: 20%;
+    display: inline-block;
+    border: 1px solid;
+  }
+</style>
   <!-- Page Container -->
   <div class="main-container col1-layout">
     <div class="container">
       @if (isset($data))
+      <input type="hidden" name="product_id" id="product_id" value="{{encrypt($data['product']->id)}}">
         <div class="row">
           <div class="col-main">
             <div class="product-view-area">
@@ -36,63 +46,101 @@
                   <h1>{{$data['product']->name}}</h1>
                 </div>
                 <div class="price-box">
-                  <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> ₹329.99 </span> </p>
-                  <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $359.99 </span> </p>
+                  @if (isset($data['min_price']) && !empty($data['min_price']))
+                    <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> ₹{{ number_format($data['min_price']->price,2,".",'') }} </span> </p>
+                    <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> ₹{{ number_format($data['min_price']->mrp,2,".",'') }} </span> </p>
+                  @endif
+                  
                 </div>
                 <div class="ratings">
-                  <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div>
-                  <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p>
-                  <p class="availability in-stock pull-right">Availability: <span>In Stock</span></p>
+                  {{-- <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div> --}}
+                  {{-- <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p> --}}
+                  @if (isset($data['min_price']) && !empty($data['min_price']))
+                    @if ($data['min_price']->stock > 0)
+                      <p class="availability in-stock ">Availability: <span>In Stock</span></p>
+                    @else
+                      <p class="availability out-of-stock ">Availability: <span>Out Of Stock</span></p>
+                    @endif
+                  @endif
+                  
                 </div>
                 <div class="short-description">
                   <h2>Quick Overview</h2>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum.<a class="desp" style="cursor: pointer;">More Description</a></p>
+                  <p>{{$data['product']->short_description}}</a></p>
                 </div>
-                <div class="product-color-size-area">
-                  <div class="color-area">
-                    <h2 class="saider-bar-title">Color</h2>
-                    <div class="color">
-                      <ul>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                        <li><a></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="size-area">
-                    <h2 class="saider-bar-title">Size</h2>
-                    <div class="size">
-                      <ul>
-                        <li><a><input type="radio" name="size" value="1"  hidden> S</a></li>
-                        <li><a><input type="radio" name="size" value="2" checked hidden> L</a></li>
-                        <li><a><input type="radio" name="size" value="3" hidden> M</a></li>
-                        <li><a><input type="radio" name="size" value="4" hidden> XL</a></li>
-                        <li><a><input type="radio" name="size" value="5" hidden> XXL</a></li> 
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-variation">
-                  <form action="#" method="post">
-                    <div class="cart-plus-minus">
-                      <label for="qty">Quantity:</label>
-                      <div class="numbers-row">
-                        <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
-                        <input type="text" class="qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
-                        <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
+
+                {{ Form::open(['method' => 'post','url'=>'']) }}
+              <input type="hidden" name="product_id" value="{{ $data['product']->id }}">
+                  <div class="product-color-size-area">
+                    <div class="color-area">
+                      <h2 class="saider-bar-title">Color</h2>
+                      <div class="color">
+                        <ul>
+                          @if (isset($data['colors']) && !empty($data['colors']) )
+                            @php
+                                $count_color = 1;
+                            @endphp
+                              @foreach ($data['colors'] as $color)
+                                @if ($count_color == 1)
+                                  <li><input type="radio" name="color" value="{{ $color->color_id}}" checked><span class="dot" style="background-color: {{ $color->color_value}};"></span></li>
+                                @else
+                                  <li><input type="radio" name="color" value="{{ $color->color_id}}"><span class="dot" style="background-color: {{ $color->color_value}};"></span></li>
+                                @endif
+                                @php
+                                    $count_color++;
+                                @endphp
+                              @endforeach
+                          @endif
+                          
+                        </ul>
                       </div>
                     </div>
-                    <button class="button pro-add-to-cart" title="Add to Cart" type="button"><span><i class="pe-7s-cart"></i> Add to Cart</span></button>
-                  </form>
-                </div>
-                <div class="product-cart-option">
-                  <ul>
-                    <li><a href="#"><i class="pe-7s-like"></i><span>Add to Wishlist</span></a></li>
-                  </ul>
-                </div>
+                    <div class="size-area">
+                      <h2 class="saider-bar-title">Size</h2>
+                      <div class="size">
+                        <select name="size" id="size_div">
+                        @if (isset($data['sizes']) && !empty($data['sizes']))
+                            @foreach ($data['sizes'] as $size)
+                              @if ($data['min_price']->price ==  $size->price)
+                                <option value="{{$size->size_id}}" selected>{{$size->size_name}}</option>
+                              @else
+                                <option value="{{$size->size_id}}">{{$size->size_name}}</option>
+                              @endif
+                              
+                            @endforeach
+                        @endif
+                      </select>
+                        {{-- <ul>
+                          <li><a><input type="radio" name="size" value="1"  hidden> S</a></li>
+                          <li><a><input type="radio" name="size" value="2" checked hidden> L</a></li>
+                          <li><a><input type="radio" name="size" value="3" hidden> M</a></li>
+                          <li><a><input type="radio" name="size" value="4" hidden> XL</a></li>
+                          <li><a><input type="radio" name="size" value="5" hidden> XXL</a></li> 
+                        </ul> --}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-variation">
+                    <form action="#" method="post">
+                      <div class="cart-plus-minus">
+                        <label for="qty">Quantity:</label>
+                        <div class="numbers-row">
+                          <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="dec qtybutton"><i class="fa fa-minus">&nbsp;</i></div>
+                          <input type="text" class="qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                          <div onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="inc qtybutton"><i class="fa fa-plus">&nbsp;</i></div>
+                        </div>
+                      </div>
+                      <button type="submit" class="button pro-add-to-cart" title="Add to Cart" type="button"><span><i class="pe-7s-cart"></i> Add to Cart</span></button>
+                    </form>
+                  </div>
+                  <div class="product-cart-option">
+                    <ul>
+                      <li><a href="#"><i class="pe-7s-like"></i><span>Add to Wishlist</span></a></li>
+                    </ul>
+                  </div>
+                {{ Form::close() }}
+
+
               </div>
             </div>
           </div>
@@ -107,22 +155,7 @@
                     <div id="productTabContent" class="tab-content">
                       <div class="tab-pane fade in active" id="description">
                         <div class="std">
-                          <p>Proin lectus ipsum, gravida et mattis vulputate, 
-                            tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in 
-                            faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend 
-                            laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla
-                            luctus malesuada tincidunt. Nunc facilisis sagittis ullamcorper. Proin 
-                            lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et 
-                            lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et 
-                            ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus 
-                            adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada 
-                            tincidunt. Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, 
-                            gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. 
-                            Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
-                            cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl 
-                            ut dolor dignissim semper. Nulla luctus malesuada tincidunt.</p>
-                          <p> Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.</p>
-                          <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+                          <p>{{$data['product']->long_description}}</p>
                         </div>
                       </div>
                     </div>
@@ -476,8 +509,20 @@
   <!-- Related Product Slider End -->
 <script>
   $(".desp").click(function scrollWin() {    
-  window.scrollTo(0, 350)
-});
+    window.scrollTo(0, 350)
+  });
+
+  $(document).ready(function () {
+    $("#size_div").change(function(){
+      var product_id = $("#product_id").val();
+      var size_id = $(this).val();
+        
+      var product_route = '{{route('web.product_detail',['product_id' => ':id','size_id' => ':size_id'])}}';
+      product_route = product_route.replace(':id', product_id);
+      product_route = product_route.replace(':size_id', size_id);
+      window.location.href = product_route;
+    })
+  });
 </script>
   <!-- Page Content -->
 @endsection
