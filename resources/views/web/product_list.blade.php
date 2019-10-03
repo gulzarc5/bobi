@@ -65,26 +65,32 @@
                         <div class="item-inner">
                           <div class="product-thumbnail">
                             <div class="pr-img-area"> 
-                              <a  href="{{ route('web.product_detail',['product_id' => encrypt($product['id'])])}}">
-                                <figure><img class="first-img" src="{{asset('images/product/thumb/'.$product['image'].'')}}" alt=""></figure>
+                              <a  href="{{ route('web.product_detail',['product_id' => encrypt($product->id)])}}">
+                                <figure><img class="first-img" src="{{asset('images/product/thumb/'.$product->main_image.'')}}" alt=""></figure>
                               </a> 
                             </div>
                           </div>
                           <div class="item-info">
                             <div class="info-inner">
                               <div class="item-title"> 
-                                <a href="{{ route('web.product_detail',['product_id' => encrypt($product['id'])])}}">
-                                  {{ $product['name'] }}
+                                <a href="{{ route('web.product_detail',['product_id' => encrypt($product->id)])}}">
+                                  {{ $product->name }}
                                  </a> </div>
                               <div class="item-content">
                                 <div class="item-price">
                                   <div class="price-box"> <span class="regular-price"> <span class="price">
-                                      {{ number_format($product['price'],2,".",'') }}
+                                    Rs. {{ number_format($product->min_price,2,".",'') }}
                                     </span> </span> </div>
                                 </div>
                                 <div class="pro-action flex-center">
                                   <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                                  <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
+                                  @if (isset($product->min_price))
+                                  {{ Form::open(['method' => 'post','route'=>'web.add_cart']) }}
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
+                                  {{ Form::close() }}
+                                  @endif
                                 </div>
                               </div>
                             </div>

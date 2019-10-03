@@ -48,13 +48,25 @@ class CartController extends Controller
                         ->whereNull('deleted_at')
                         ->where('status',1)
                         ->first();
-
+                        $size = DB::table('product_sizes')
+                            ->select('product_sizes.*','sizes.name as size_name')
+                            ->join('sizes','sizes.id','=','product_sizes.size_id')
+                            ->where('size_id',$value['size_id'])
+                            ->where('product_id',$product_id)
+                            ->first();
+                        
+                        $color = DB::table('color')
+                            ->where('id',$value['color'])
+                            ->first();
                        $cart_data[] = [
                         'product_id' => $product->id,
                         'title' => $product->name,
                         'image' => $product->main_image,
                         'quantity' => $value['quantity'],
-                        'price' => $product->price,
+                        'color_name' => $color->name,
+                        'color_value' => $color->value,
+                        'size' => $size->size_name,
+                        'price' => $size->price,
                        ];
                     }
                 }else{
@@ -63,8 +75,8 @@ class CartController extends Controller
             }else{
                 $cart_data = false;
             }
-
-            return view('web.shopping_cart',compact('cart_data'));
+            // dd($cart_data);
+            return view('web.cart',compact('cart_data'));
         }
 
          
@@ -76,8 +88,25 @@ class CartController extends Controller
     	$quantity = $request->input('quantity');
         $color = $request->input('color');
         $size_id = $request->input('size');
-        
-
+        if (empty($size_id)) {
+            $size = DB::table('product_sizes')
+            ->where('price','=',DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'))
+            ->where('product_id',$product_id)
+            ->whereNull('deleted_at')
+            ->where('status',1)
+            ->first(); 
+            $size_id = $size->size_id;
+        }
+        if (empty($color)) {
+            $colors = DB::table('product_colors')
+            ->where('product_id',$product_id)
+            ->whereNull('deleted_at')
+            ->where('status',1)
+            ->first(); 
+            $color = $colors->color_id;
+        }
+        // Session::forget('cart');
+        // dd($size_id);
         //*********************if user is logged in*********************
         if( Auth::guard('buyer')->user() && !empty(Auth::guard('buyer')->user()->id)) {
             $user_id = Auth::guard('buyer')->user()->id;
@@ -124,6 +153,7 @@ class CartController extends Controller
             }
             Session::put('cart', $cart);
             Session::save();
+            //  dd(Session::get('cart'));
             return redirect()->route('web.viewCart');
         }
 

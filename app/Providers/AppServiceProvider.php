@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use DB;
+use Auth;
+use Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $category_list_women = null;
             $category_list_menTraditional = null;
             $category_list_womenTraditional = null;
+            $cart_count =0;
             $f_category_men = DB::table('first_category')
                 ->whereNull('deleted_at')
                 ->where('category_id',1)
@@ -126,12 +129,32 @@ class AppServiceProvider extends ServiceProvider
                 ];
             }
 
+            // Shopping Cart Data
+
+              if( Auth::guard('buyer')->user() && !empty(Auth::guard('buyer')->user()->id)) 
+              {
+                  $user_id = Auth::guard('buyer')->user()->id;
+                  $cart_count = DB::table('cart')->where('user_id',$user_id)->count();
+  
+              }else{
+                  if (Session::has('cart') && !empty(Session::get('cart'))) {
+                      $cart_count = count(Session::get('cart'));
+                  }else{
+                      $cart_count = 0;
+                  }
+              }
+
             $category_list = [
                 'category_list_men' => $category_list_men,
                 'category_list_women' => $category_list_women,
                 'category_list_menTraditional' => $category_list_menTraditional,
                 'category_list_womenTraditional' => $category_list_womenTraditional,
+                'cart_count' => $cart_count,
             ];
+
+           
+            //  echo($cart_data);
+            //  die();
             $view->with('category_list', $category_list);
         });
     }

@@ -328,9 +328,16 @@
                 <!-- My Cart -->
                 <div class="top-cart-contain">
                   <div class="mini-cart">
-                    <div class="basket dropdown-toggle"><a href="{{ route('web.cart')}}">
+                    <div class="basket dropdown-toggle"><a href="{{ route('web.viewCart')}}">
                       <div class="cart-icon"><i class="pe-7s-shopbag"></i></div>
-                      <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Basket</span> <span class="cart-total">2 items</span></div>
+                      <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Basket</span> <span class="cart-total">
+                  
+                        @if (isset($category_list['cart_count']) && !empty($category_list['cart_count']))
+                          {{ $category_list['cart_count'] }}
+                        @else
+                          0
+                        @endif
+                         items</span></div>
                       </a>
                     </div>
                   </div>
