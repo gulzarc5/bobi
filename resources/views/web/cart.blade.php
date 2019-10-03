@@ -17,9 +17,9 @@
   <div class="container">
             <div class="row">
                 <div class="col-md-10">
-                    <table class="table table table-shopping-cart">
+                    <table class="table  table-shopping-cart">
                         <thead>
-                            <tr class="tabletr ">
+                            <tr class="tabletr">
                                 <th class="text-center">SI</th>
                                 <th class="text-center">Product</th>
                                 <th class="text-center">Title</th>
@@ -50,13 +50,54 @@
                                 <td class="text-center">$499</td>
                                 <td class="text-center">
                                    <button type="submit" class="fa fa-close table-shopping-remove" ></button>
-                                    <button type="submit" class="fa fa-check table-shopping-check"></>
+                                    <button type="submit" class="fa fa-check table-shopping-check"></button>
                                 </td>
                             </tr>
-                            
+                             <tr class="text-center">
+                              <td class="text-center">1</td>
+                                <td class="table-shopping-cart-img text-center">
+                                    <a href="#">
+                                        <img src="images/category/first_category/11.jpg" alt="Image Alternative text" title="Image Title" />
+                                    </a>
+                                </td>
+                                <td class="table-shopping-cart-title text-center"><a href="#">Gucci </a>
+                                </td>
+                                <td class="text-center">Green</td>
+                                <td class="text-center">L</td>
+                                <td class="text-center">
+                                    <input class="form-control table-shopping-qty" type="number" value="1" />
+                                </td>
+                                <td class="text-center">$499</td>
+                                <td class="text-center">$499</td>
+                                <td class="text-center">
+                                   <button type="submit" class="fa fa-close table-shopping-remove" ></button>
+                                    <button type="submit" class="fa fa-check table-shopping-check"></button>
+                                </td>
+                            </tr>
+                             <tr class="text-center">
+                              <td class="text-center">1</td>
+                                <td class="table-shopping-cart-img text-center">
+                                    <a href="#">
+                                        <img src="images/category/first_category/11.jpg" alt="Image Alternative text" title="Image Title" />
+                                    </a>
+                                </td>
+                                <td class="table-shopping-cart-title text-center"><a href="#">Gucci </a>
+                                </td>
+                                <td class="text-center">Green</td>
+                                <td class="text-center">L</td>
+                                <td class="text-center">
+                                    <input class="form-control table-shopping-qty" type="number" value="1" />
+                                </td>
+                                <td class="text-center">$499</td>
+                                <td class="text-center">$499</td>
+                                <td class="text-center">
+                                   <button type="submit" class="fa fa-close table-shopping-remove" ></button>
+                                    <button type="submit" class="fa fa-check table-shopping-check"></button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
-                    <div class="gap gap-small"></div>
+                    
                 </div>
                 <div class="col-md-2">
                     <ul class="shopping-cart-total-list">
@@ -68,7 +109,7 @@
                         </li>
                         <li><span>Total</span><span>$2199</span>
                         </li>
-                    </ul><a class="btn btn-primary " href="#" >Checkout</a>
+                    </ul><a class="btn btn-primary " href="{{ route('web.shipping')}}" >Checkout</a>
                 </div>
             </div>
             <ul class="list-inline">
@@ -78,5 +119,6 @@
                 </li>
             </ul>
         </div>
+
   <!-- Main Container End --> 
 @endsection

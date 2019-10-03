@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Basic page needs -->
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Bibibobi</title>
-  <!-- Mobile specific metas  -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Favicons Icon -->
   <link rel="shortcut icon" type="image/x-icon" href="{{asset('web/images/fab.png')}}">
   <script src="{{asset('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')}}"></script>
-  <!-- CSS Style -->
   <link rel="stylesheet" href="{{asset('web/css/url.css')}}">
 </head>
 
 <body class="cms-index-index cms-home-page product-page">
   <!-- mobile menu -->
-  <div id="mobile-menu">
+  {{-- <div id="mobile-menu">
     <div class="mobile-menu-top" style="height: 100px;background: #323d61">
         <img src="{{asset('web/images/testimonials-img2.jpg')}}')}}" style="width: 23%;border-radius: 50%;margin: 12px 0 5px 12px;border: 5px solid #c3c30d;">
         <h6 style="color: #fff;margin-left: 10px">Wellcome User</h6>
@@ -258,7 +254,7 @@
         </ul>
       </li>
     </ul>
-  </div>
+  </div> --}}
   <!-- end mobile menu -->
   <div id="page">   
     <!-- Header -->
@@ -280,14 +276,10 @@
                     </div>
                     <!-- Header Logo -->
                     <div class="logo"><a title="e-commerce" href="{{ route('web.index')}}"><img alt="e-commerce" src="{{asset('web/images/logo.png')}}"></a> </div>
-                    <!-- Shop by category -->
                   </div>
                 </div>
               </div>
-              <div class="col-xs-12 col-sm-4 col-md-5 jtv-top-search"> 
-                
-                <!-- Search -->
-                
+              <div class="col-xs-12 col-sm-4 col-md-5 jtv-top-search">
                 <div class="top-search">
                   <div id="search">
                     <form>
@@ -298,11 +290,8 @@
                     </form>
                   </div>
                 </div>
-                
-                <!-- End Search -->                 
               </div>
               <div class="col-sm-5 col-md-5 col-xs-12 header-right">
-                <!-- Seller Login -->
                 <div class="top-cart-contain tab-head">
                   <div style="width: 100%">
                     <div class="basket dropdown-toggle" style="width: 100%">
@@ -317,8 +306,8 @@
                 <div class="jtv-user-info hidden-xs tab-head" id="account-head">
                   <div class="dropdown"><a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i style="font-size: 26px" class="pe-7s-user"></i><span>Account</span> <i class="fa fa-angle-down"></i></a>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="account_page.html">My Account</a></li>
-                      <li><a href="wishlist.html">My Orders</a></li>
+                      <li><a href="{{ route('web.my_account')}}">My Account</a></li>
+                      <li><a href="{{ route('web.order')}}">My Orders</a></li>
                       <li class="divider"></li>
                       <li style="text-align: center;"><a href="{{ route('web.register')}}"> <span>If you are a new user</span><br><strong>Register</strong></a></li>
                       <li class="login"><a href="{{ route('web.login')}}" class="btn outline btn-color" target="_blank">Login</a></li>
@@ -366,9 +355,7 @@
                           <div class="col-1">
                             <ul class="level0">
                               @if (isset($category_list['category_list_men']) && !empty($category_list['category_list_men']))
-                             
-                                
-                                  @foreach ($category_list['category_list_men'] as $f_category)
+                              @foreach ($category_list['category_list_men'] as $f_category)
                                     @if (count($f_category['second_category']) > 0)
                                       <li class="parent item"> <a><span>{{ $f_category['name'] }}</span></a>
                                       <ul class="level1">

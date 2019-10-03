@@ -699,7 +699,7 @@ ul.level1 {
   left: 0;
   height: 25px;
   width: 25px;
-  background-color: #eee;
+  /*background-color: #eee;*/
   border-radius: 50%;
 }
 

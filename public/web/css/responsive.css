@@ -1867,3 +1867,12 @@ footer .footer-links .payment ul li {
     padding: 22px 26px;
 }
 }
+@media only screen and (min-width: 320px) and (max-width: 767px) {
+.account{
+	margin-left: 0px;
+    margin-top: 220px; 
+    margin-bottom: 10px;
+    background-color: #d7d8da8c;
+    border: 1px solid;
+}
+}

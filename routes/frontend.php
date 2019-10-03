@@ -39,7 +39,12 @@ Route::get('/Forgot-Password', function () {
 Route::get('/Cart', function () {
     return view('web.cart');
 })->name('web.cart');
+Route::get('/order', function () {
+    return view('web.your_order');
+})->name('web.order');
 Route::get('/Shipping', function () {
     return view('web.shipping');
 })->name('web.shipping');
-
+Route::get('/my_account', function () {
+    return view('web.my_account');
+})->name('web.my_account');
