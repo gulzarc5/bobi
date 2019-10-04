@@ -318,7 +318,7 @@
                 <!-- Whishlist-->
                 <div class="top-cart-contain">
                   <div class="mini-cart">
-                    <div class="basket dropdown-toggle"><a href="{{ route('web.cart')}}">
+                    <div class="basket dropdown-toggle"><a href="{{ route('web.wishlist')}}">
                       <div class="cart-icon"><i class="pe-7s-like"></i></div>
                       <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Wishlist</span> <span class="cart-total">2 items</span></div>
                       </a>

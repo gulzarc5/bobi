@@ -6350,7 +6350,7 @@ p.note {
 .box-wishlist {
 	margin-top: 20px
 }
-.my-account {
+.my-accountt {
 	padding: 20px;
 	background-color: #fff;
 	border: 1px #e8e6e2 solid;
@@ -7931,4 +7931,42 @@ a.jtv-m-logo-img {
     margin-bottom: 20px;
     background-color: #d7d8da8c;
     border: 1px solid;
+}
+/* 27. Wishlist Table */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 20px;
+  align-items: stretch;
+}
+
+.grid > article {
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+}
+
+.grid > article img {
+  max-width: 100%;
+}
+
+.grid .text {
+  padding: 20px;
+  text-align: center;
+}
+
+.grid .text h3 {
+  font-size: 1.4rem;
+  font-family: 'Fredoka One', cursive;
+}
+
+.grid .text p {
+  font-size: 0.9rem;
+}
+
+.grid .text p a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #555;
+  font-family: 'Courgette', cursive;
 }

@@ -42,9 +42,15 @@ Route::get('/Cart', function () {
 Route::get('/order', function () {
     return view('web.your_order');
 })->name('web.order');
+
 Route::get('/Shipping', function () {
     return view('web.shipping');
 })->name('web.shipping');
+
 Route::get('/my_account', function () {
     return view('web.my_account');
 })->name('web.my_account');
+
+Route::get('/wishlist', function () {
+    return view('web.wishlist');
+})->name('web.wishlist');
