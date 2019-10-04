@@ -21,6 +21,15 @@ Route::group(['namespace'=> 'Web'], function(){
         Route::get('/my_profile', 'UserController@myProfileForm')->name('web.myprofile');
         Route::post('/my_profile/Update', 'UserController@myProfileUpdate')->name('web.myprofile_update');
         Route::post('/Shipping/Address/Add', 'UserController@shippingAdd')->name('web.new_shipping_add');
+        Route::post('/Update/Address/', 'UserController@updateShippingAddress')->name('web.update_shipping_address');
+        Route::get('/Delete/Address/{address_id}', 'UserController@DeleteShippingAddress')->name('web.delete_shipping_address');
+        Route::post('/Change/Password/', 'UserController@changePassword')->name('web.change_password');
+
+        Route::get('/WishList/Add/{product_id}', 'UserController@AddWishList')->name('web.add_wish_list');
+        Route::get('/WishList/View', 'UserController@viewWishList')->name('web.view_wish_list');
+        Route::get('/WishList/Delete/{list_id}', 'UserController@deleteWishList')->name('web.delete_wish_list');
+        Route::get('/WishList/Move/{list_id}', 'UserController@wishListMove')->name('web.move_wish_list');
+
 
 
         Route::post('/Logout', 'LoginController@logout')->name('web.buyerLogout');
@@ -59,9 +68,9 @@ Route::get('/', function () {
 Route::get('/Forgot-Password', function () {
     return view('web.forgot-password');
 })->name('web.forgot-password');
-Route::get('/Cart', function () {
-    return view('web.cart');
-})->name('web.cart');
+// Route::get('/Cart', function () {
+//     return view('web.cart');
+// })->name('web.cart');
 Route::get('/order', function () {
     return view('web.your_order');
 })->name('web.order');
@@ -70,10 +79,10 @@ Route::get('/Shipping', function () {
     return view('web.shipping');
 })->name('web.shipping');
 
-Route::get('/my_account', function () {
-    return view('web.my_account');
-})->name('web.my_account');
+// Route::get('/my_account', function () {
+//     return view('web.my_account');
+// })->name('web.my_account');
 
-Route::get('/wishlist', function () {
-    return view('web.wishlist');
-})->name('web.wishlist');
+// Route::get('/wishlist', function () {
+//     return view('web.wishlist');
+// })->name('web.wishlist');

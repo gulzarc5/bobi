@@ -326,9 +326,15 @@
                 <!-- Whishlist-->
                 <div class="top-cart-contain">
                   <div class="mini-cart">
-                    <div class="basket dropdown-toggle"><a href="{{ route('web.wishlist')}}">
+                    <div class="basket dropdown-toggle"><a href="{{ route('web.view_wish_list')}}">
                       <div class="cart-icon"><i class="pe-7s-like"></i></div>
-                      <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Wishlist</span> <span class="cart-total">2 items</span></div>
+                      <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Wishlist</span> <span class="cart-total">
+                        @if (isset($category_list['wish_list_count']) && !empty($category_list['wish_list_count']))
+                          {{ $category_list['wish_list_count'] }}
+                        @else
+                          0
+                        @endif
+                         items</span></div>
                       </a>
                     </div>
                   </div>

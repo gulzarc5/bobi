@@ -130,11 +130,12 @@ class AppServiceProvider extends ServiceProvider
             }
 
             // Shopping Cart Data
-
+            $wish_list_count = 0;
               if( Auth::guard('buyer')->user() && !empty(Auth::guard('buyer')->user()->id)) 
               {
                   $user_id = Auth::guard('buyer')->user()->id;
                   $cart_count = DB::table('cart')->where('user_id',$user_id)->count();
+                  $wish_list_count = DB::table('wish_list')->where('user_id',$user_id)->count();
   
               }else{
                   if (Session::has('cart') && !empty(Session::get('cart'))) {
@@ -143,13 +144,14 @@ class AppServiceProvider extends ServiceProvider
                       $cart_count = 0;
                   }
               }
-
+            
             $category_list = [
                 'category_list_men' => $category_list_men,
                 'category_list_women' => $category_list_women,
                 'category_list_menTraditional' => $category_list_menTraditional,
                 'category_list_womenTraditional' => $category_list_womenTraditional,
                 'cart_count' => $cart_count,
+                'wish_list_count' => $wish_list_count,
             ];
 
            

@@ -187,86 +187,123 @@
             <div class="mfp-with-anim mfp-dialog clearfix" id="changepass-form" style=" display: none;">
                <div id="err_msg"></div>
                <h3 style="margin-left: 15px; margin-top: -60px;">Change Password</h3>
+               <div id="change_password_msg"></div>
                <div class="form-group" style="margin-top: 20px;">
                   <label>Current Password</label>
-                  <input class="form-control" type="text" name="current_pass" />
+                  <input class="form-control" type="text" name="current_password" id="current_password" />
+                  <span class="invalid-feedback" role="alert" style="color:red" id="current_password_change_pass"></span>
                </div>
                <div class="form-group">
                   <label>New Password</label>
-                  <input class="form-control" type="text" name="new_pass" />
+                  <input class="form-control" type="text" name="new_password" id="new_password" />
+                  <span class="invalid-feedback" role="alert" style="color:red" id="new_password_change_pass"></span>
                </div>
                <div class="form-group">
                   <label>Comfirm Password</label>
-                  <input class="form-control" type="text" name="confirm_pass" />
+                  <input class="form-control" type="text" name="confirm_password" id="confirm_password" />
+                  <span class="invalid-feedback" role="alert" style="color:red" id="confirm_password_change_pass"></span>
                </div>
-               <input class="btn btn-primary" type="button" value="Submit" id="pass_change" />
+               <input class="btn btn-primary" type="button" value="Submit" onclick="changePasses();"/>
                <div class="gap gap-small">
                </div>
             </div>
 
 
             <div class="mfp-with-anim " id="shippingaddress-form" style="margin-top: -20px; display: none;">
-               @if (isset($shipping_address) && !empty($shipping_address) && ($shipping_address->count()) > 0))                
+               @if (isset($shipping_address) && !empty($shipping_address) && ($shipping_address->count()) > 0)               
                {{-- ////////////////Shipping Address View Artea/////////////// --}}
-               <div class="row">
-                     <h3 style="margin-left: 15px; margin-top: 50px;">Shipping Address</h3>
-                    <div class="col-lg-12">
-                       <div style="margin-top: 30px;">
-                          <div class="col-md-4">
-                             <div class="form-group">
-                                <label>State</label>
-                                <select class="form-control" name="state" id="" >
-                                   <option selected disabled>...Select State...</option>
-                                   @if(isset($states) && !empty($states))
-                                       @foreach($states as $state)
+               @php
+                   $count_shipping_addr = 1;
+               @endphp
+                <h3 style="margin-left: 15px; margin-top: 50px;">Shipping Address</h3>
+                <div id="message_shipping_s"></div>
+               @foreach ($shipping_address as $address)
+                  <div class="row">
+                  <input type="hidden" id="address_id_s{{$count_shipping_addr}}" value="{{ $address->id}}">
+                     <div class="col-lg-12">
+                        <div style="margin-top: 30px;">
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>State</label>
+                              <select class="form-control" name="state" id="state_s{{$count_shipping_addr}}" disabled>
+                                    <option selected disabled>...Select State...</option>
+                                    @if(isset($states) && !empty($states))
+                                          @foreach($states as $state)
+                                          @if ($address->state_id == $state->id)
                                              <option value="{{ $state->id }}" selected>{{ $state->name }}</option>
-                                       @endforeach
+                                          @else
+                                             <option value="{{ $state->id }}" >{{ $state->name }}</option>
+                                          @endif
+                                                
+                                          @endforeach
+                                       @endif
+                                 </select>
+                                 <span class="invalid-feedback" id="state_shipping_error{{$count_shipping_addr}}" role="alert" style="color:red"></span>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>City</label>
+                                 <select class="form-control" name="city" id="city_s{{$count_shipping_addr}}" disabled>
+                                    <option selected disabled>...Select City...</option>
+                                    @if(isset($address->cities) && !empty($address->cities))
+                                    @foreach ($address->cities as $city)
+                                       @if ($address->city_id == $city->id )
+                                       <option value="{{ $city->id }}" selected>{{ $city->name }}</option>
+                                       @else
+                                       <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                       @endif                                       
+                                    @endforeach
                                     @endif
-                                </select>
-                             </div>
-                          </div>
-                          <div class="col-md-4">
-                             <div class="form-group">
-                                <label>City</label>
-                                <select class="form-control" name="city" >
-                                   <option selected disabled>...Select City...</option>
-                                   <option >Assam</option>
-                                   <option >Assam</option>
-                                </select>
-                             </div>
-                          </div>
-                          <div class="col-md-4">
-                             <div class="form-group">
-                                <label>Pin Code</label>
-                                <input class="form-control" type="text" name="pin" value="" id="pin" />
-                             </div>
-                          </div>
-                       </div>
-                    </div>
-               </div>
-               <div class="col-md-12">
-                  <div class="form-group">
-                     <textarea rows="5" cols="45" class="form-control" placeholder="address" name="address" id="address" ></textarea>
+                                 </select>
+                                 <span class="invalid-feedback" id="city_shipping_error{{$count_shipping_addr}}" role="alert" style="color:red"></span>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group">
+                                 <label>Pin Code</label>
+                              <input class="form-control" type="text" name="pin" value="{{$address->pin}}" id="pin_s{{$count_shipping_addr}}" disabled/>
+                              <span class="invalid-feedback" id="pin_shipping_error{{$count_shipping_addr}}" role="alert" style="color:red"></span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
                   </div>
-               </div>
-               <center>
-                  <div class="col-md-4"></div>
-                  <div class="col-md-2"  style="margin-bottom: 10px;">
-                     <input class="btn btn-primary" type="button" value="Edit"/>
+                  <div class="col-md-12">
+                     <div class="form-group">
+                     <textarea rows="5" cols="45" class="form-control" placeholder="address" name="address" id="address_s{{$count_shipping_addr}}" disabled>{{$address->address}}</textarea>
+                     <span class="invalid-feedback" id="address_shipping_error{{$count_shipping_addr}}" role="alert" style="color:red"></span>
+                     </div>
+                     <center>
+                           <div class="col-md-4"></div>
+                           <div id="button_s{{$count_shipping_addr}}">
+                                 <div class="col-md-2"  style="margin-bottom: 10px;">
+                                       <input class="btn btn-warning" type="button" id="edit_s{{$count_shipping_addr}}" value="Edit" /onclick="editShippingAddress({{$count_shipping_addr}});">
+                                 </div>
+                           </div>
+                           
+                           <div class="col-md-2" style="margin-bottom: 10px;">
+                           <a href="{{ route('web.delete_shipping_address',['address_id'=> encrypt($address->id)])}}" class="btn btn-danger">Delete</a>
+                           </div>
+                           <div class="col-md-4"></div>
+                        </center>
                   </div>
-                  <div class="col-md-2" style="margin-bottom: 10px;">
-                     <input class="btn btn-primary" type="button" value="Delete"/>
-                  </div>
-                  <div class="col-md-4"></div>
-               </center>
+                  @php
+                   $count_shipping_addr++;
+                  @endphp
+               @endforeach
+             
+               
                  {{--///////////////// End Of Shipping Address View Area ////////////--}}
                <div class="gap gap-small"></div>
-               @else
+               @endif
+              
                  {{-- ////////////////Shipping Address Form/////////////// --}}
-                  <div class="row">
-                     <h3 style="margin-left: 15px; margin-top: 50px;">Shipping Address</h3>
+                  <div class="row">    
+                     <hr>                 
                      <div id="message_shipping"></div>
                     <div class="col-lg-12">
+                        <h3 >Add New Shipping Address</h3>
                        <div style="margin-top: 30px;">
                           <div class="col-md-4">
                              <div class="form-group">
@@ -313,7 +350,6 @@
                     </div>
                  </center>
                  {{--///////////////// End Of Shipping Address Form ////////////--}}
-               @endif
                <div class="gap gap-small">
                </div>
             </div>
@@ -325,6 +361,69 @@
 @section('script')
 <script src="{{ asset('js/web_user_profile.js') }}"></script>
 <script>
+
+function editShippingAddress(id) {
+   $("#state_s"+id).attr('disabled',false);
+   $("#city_s"+id).attr('disabled',false);
+   $("#pin_s"+id).attr('disabled',false);
+   $("#address_s"+id).attr('disabled',false);
+   var btnhtml = '<div class="col-md-2"  style="margin-bottom: 10px;">'+
+                     '<input class="btn btn-info" type="button" id="save_s'+id+'"  /value="Save" onclick="saveShippingAddress('+id+');">'+
+               '</div>';
+   $("#button_s"+id).html(btnhtml);
+}
+
+function saveShippingAddress(id) {
+   var state_s = $("#state_s"+id).val();
+   var city_s = $("#city_s"+id).val();
+   var pin_s = $("#pin_s"+id).val();
+   var address_s = $("#address_s"+id).val();
+   var address_id = $("#address_id_s"+id).val();
+
+   $.ajax({
+      type:"POST",
+      url:"{{ route('web.update_shipping_address') }}",
+      data:{ 
+      "_token": "{{ csrf_token() }}",
+         state:state_s, 
+         city:city_s, 
+         pin:pin_s, 
+         address:address_s,
+         address_id:address_id,
+      },
+      error:function (error) {
+         var err = $.parseJSON(error.responseText)
+         $.each(err.errors, function (key, val) {
+            $("#" + key + "_shipping_error"+id).html("<strong>"+val[0]+"</strong>");
+         });
+      },
+      success:function(data){
+         if (data == 1) {
+            $("#state_shipping_error"+id).html("");
+            $("#city_shipping_error"+id).html("");
+            $("#pin_shipping_error"+id).html("");
+            $("#address_shipping_error"+id).html("");
+            $("#state_s"+id).attr('disabled',true);
+            $("#city_s"+id).attr('disabled',true);
+            $("#pin_s"+id).attr('disabled',true);
+            $("#address_s"+id).attr('disabled',true);
+            $("#message_shipping_s").html("<p class='alert alert-success'>Shipping Address Added Successfully</p>");
+            var btnhtml = '<div class="col-md-2"  style="margin-bottom: 10px;">'+
+                     '<input class="btn btn-warning" type="button" id="save_s'+id+'"  /value="Edit" onclick="editShippingAddress('+id+');">'+
+               '</div>';
+            $("#button_s"+id).html(btnhtml);
+         }else{
+            $("#state_shipping_error"+id).html("");
+            $("#city_shipping_error"+id).html("");
+            $("#pin_shipping_error"+id).html("");
+            $("#address_shipping_error"+id).html("");
+            $("#message_shipping_s").html("<p class='alert alert-success'>Something Went Wrong Please Try Again</p>");
+         }
+         
+         console.log(data);
+      }
+   });
+}
 function shipping_address_add(){
    var state = $("#state_shipping").val();
    var city = $("#city_shipping").val();
@@ -365,6 +464,47 @@ function shipping_address_add(){
             }
          });
    
+}
+
+function changePasses() {
+   var current_password = $("#current_password").val();
+   var new_password = $("#new_password").val();
+   var confirm_password = $("#confirm_password").val();
+   $.ajax({
+      type:"POST",
+      url:"{{ route('web.change_password') }}",
+      data:{ 
+         "_token": "{{ csrf_token() }}",
+         current_password:current_password, 
+         new_password:new_password, 
+         confirm_password:confirm_password, 
+      },
+      error:function (error) {
+         var err = $.parseJSON(error.responseText)
+         console.log(err.errors);
+         $("#current_password_change_pass").html("");
+         $("#new_password_change_pass").html("");
+         $("#confirm_password_change_pass").html("");
+
+         $.each(err.errors, function (key, val) {
+            $("#" + key + "_change_pass").html("<strong>"+val[0]+"</strong>");
+         });
+      },
+      success:function(data){
+         $("#current_password_change_pass").html("");
+         $("#new_password_change_pass").html("");
+         $("#confirm_password_change_pass").html("");
+         if (data == 1) {
+            $("#change_password_msg").html("<p class='alert alert-success'>Password Changed Successfully</p>");
+         }else if(data == 2){
+            $("#change_password_msg").html("<p class='alert alert-danger'>Current Password Does Not Matched</p>");
+         }else{
+            $("#change_password_msg").html("<p class='alert alert-danger'>Something Went Wrong Please Try Again</p>");
+         }
+         
+         console.log(data);
+      }
+   });
 }
 </script>
 <script type="text/javascript">

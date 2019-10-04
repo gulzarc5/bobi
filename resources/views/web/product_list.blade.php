@@ -83,7 +83,7 @@
                                     </span> </span> </div>
                                 </div>
                                 <div class="pro-action flex-center">
-                                  <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
+                                  <div class="mt-button add_to_wishlist" > <a href="{{ route('web.add_wish_list',['product_id'=>encrypt($product->id)]) }}"> <i class="pe-7s-like"></i> </a> </div>
                                   @if (isset($product->min_price))
                                   {{ Form::open(['method' => 'post','route'=>'web.add_cart']) }}
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
