@@ -79,4 +79,31 @@ class UserController extends Controller
 
         return redirect()->back()->with('message','Your Profile Has Been Updated Successfully');
     }
+
+    public function shippingAdd(Request $request)
+    {
+        $user_id = Auth::guard('buyer')->id();
+        $validatedData = $request->validate([
+            'state' => 'required',
+            'city' => 'required',
+            'pin' => 'required',
+            'address' => 'required',
+        ]);
+
+        $shipping_address = DB::table('shipping_address')
+            ->insert([
+                'user_id'=>  $user_id,
+                'address'=> $request->input('address'),
+                'city_id'=> $request->input('city'),
+                'state_id'=> $request->input('state'),
+                'pin'=> $request->input('pin'),
+                'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+            ]);
+        if ($shipping_address) {
+            return 1;
+        }else{
+            return 2;
+        }
+    }
 }

@@ -206,12 +206,7 @@
 
 
             <div class="mfp-with-anim " id="shippingaddress-form" style="margin-top: -20px; display: none;">
-               @if (isset($shipping_address) && !empty($shipping_address) && ($shipping_address->count()) > 0))  
-               {{-- @php
-                  print_r($shipping_address->count());
-                  print_r($shipping_address);
-               @endphp --}}
-               
+               @if (isset($shipping_address) && !empty($shipping_address) && ($shipping_address->count()) > 0))                
                {{-- ////////////////Shipping Address View Artea/////////////// --}}
                <div class="row">
                      <h3 style="margin-left: 15px; margin-top: 50px;">Shipping Address</h3>
@@ -248,29 +243,29 @@
                           </div>
                        </div>
                     </div>
-                 </div>
-                 <div class="col-md-12">
-                    <div class="form-group">
-                       <textarea rows="5" cols="45" class="form-control" placeholder="address" name="address" id="address" ></textarea>
-                    </div>
-                 </div>
-                 <center>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-2"  style="margin-bottom: 10px;">
-                    <input class="btn btn-primary" type="button" value="Edit"/>
-                </div>
-                <div class="col-md-2" style="margin-bottom: 10px;">
-                    <input class="btn btn-primary" type="button" value="Delete"/>
-                </div>
-                   <div class="col-md-4"></div>
-                 </center>
+               </div>
+               <div class="col-md-12">
+                  <div class="form-group">
+                     <textarea rows="5" cols="45" class="form-control" placeholder="address" name="address" id="address" ></textarea>
+                  </div>
+               </div>
+               <center>
+                  <div class="col-md-4"></div>
+                  <div class="col-md-2"  style="margin-bottom: 10px;">
+                     <input class="btn btn-primary" type="button" value="Edit"/>
+                  </div>
+                  <div class="col-md-2" style="margin-bottom: 10px;">
+                     <input class="btn btn-primary" type="button" value="Delete"/>
+                  </div>
+                  <div class="col-md-4"></div>
+               </center>
                  {{--///////////////// End Of Shipping Address View Area ////////////--}}
                <div class="gap gap-small"></div>
                @else
                  {{-- ////////////////Shipping Address Form/////////////// --}}
-                 {{ Form::open(['method' => 'post','route'=>'web.new_shipping_add']) }}
                   <div class="row">
                      <h3 style="margin-left: 15px; margin-top: 50px;">Shipping Address</h3>
+                     <div id="message_shipping"></div>
                     <div class="col-lg-12">
                        <div style="margin-top: 30px;">
                           <div class="col-md-4">
@@ -284,6 +279,7 @@
                                        @endforeach
                                     @endif
                                 </select>
+                                <span class="invalid-feedback" id="state_shipping_error" role="alert" style="color:red"></span>
                              </div>
                           </div>
                           <div class="col-md-4">
@@ -292,12 +288,14 @@
                                 <select class="form-control" name="city" id="city_shipping" >
                                    <option selected disabled>...Select City...</option>
                                 </select>
+                                <span class="invalid-feedback" id="city_shipping_error" role="alert" style="color:red"></span>
                              </div>
                           </div>
                           <div class="col-md-4">
                              <div class="form-group">
                                 <label>Pin Code</label>
-                                <input class="form-control" type="text" name="pin" value="" id="pin" />
+                                <input class="form-control" type="text" name="pin" value="" id="pin_shipping" />
+                                <span class="invalid-feedback" id="pin_shipping_error" role="alert" style="color:red"></span>
                              </div>
                           </div>
                        </div>
@@ -305,15 +303,15 @@
                  </div>
                  <div class="col-md-12">
                     <div class="form-group">
-                       <textarea rows="5" cols="45" class="form-control" placeholder="address" name="address" id="address" ></textarea>
+                       <textarea rows="5" cols="45" class="form-control" placeholder="address" name="address" id="address_shipping" ></textarea>
+                       <span class="invalid-feedback" id="address_shipping_error" role="alert" style="color:red"></span>
                     </div>
                  </div>
                  <center>
                     <div style="margin-bottom: 10px;">
-                       <input class="btn btn-primary" type="submit" value="Submit"  />
+                       <input class="btn btn-primary" type="button" onclick="shipping_address_add()" value="Submit"  />
                     </div>
                  </center>
-                 {{ Form::close() }}
                  {{--///////////////// End Of Shipping Address Form ////////////--}}
                @endif
                <div class="gap gap-small">
@@ -326,6 +324,49 @@
 @endsection
 @section('script')
 <script src="{{ asset('js/web_user_profile.js') }}"></script>
+<script>
+function shipping_address_add(){
+   var state = $("#state_shipping").val();
+   var city = $("#city_shipping").val();
+   var pin = $("#pin_shipping").val();
+   var address = $("#address_shipping").val();
+   $.ajax({
+            type:"POST",
+            url:"{{ route('web.new_shipping_add') }}",
+            data:{ 
+            "_token": "{{ csrf_token() }}",
+              state:state, 
+              city:city, 
+              pin:pin, 
+              address:address,
+            },
+            error:function (error) {
+               var err = $.parseJSON(error.responseText)
+               $.each(err.errors, function (key, val) {
+                  $("#" + key + "_shipping_error").html("<strong>"+val[0]+"</strong>");
+               });
+            },
+            success:function(data){
+               if (data == 1) {
+                  $("#state_shipping_error").html("");
+                  $("#city_shipping_error").html("");
+                  $("#pin_shipping_error").html("");
+                  $("#address_shipping_error").html("");
+                  $("#message_shipping").html("<p class='alert alert-success'>Shipping Address Added Successfully</p>");
+               }else{
+                  $("#state_shipping_error").html("");
+                  $("#city_shipping_error").html("");
+                  $("#pin_shipping_error").html("");
+                  $("#address_shipping_error").html("");
+                  $("#message_shipping").html("<p class='alert alert-success'>Something Went Wrong Please Try Again</p>");
+               }
+               
+               console.log(data);
+            }
+         });
+   
+}
+</script>
 <script type="text/javascript">
    $(function() {
    
