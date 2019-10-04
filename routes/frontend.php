@@ -10,12 +10,22 @@ Route::group(['namespace'=> 'Web'], function(){
 
     Route::get('/user_login', 'UserController@userLoginForm')->name('web.userLoginForm');
     Route::post('/user_login', 'LoginController@buyerLogin')->name('web.buyerLogin');
-    Route::post('/Logout', 'LoginController@logout')->name('web.buyerLogout');
+
 
     Route::get('/shopping_cart', 'CartController@viewCart')->name('web.viewCart');
     Route::post('/Product/Add', 'CartController@AddCart')->name('web.add_cart');
     Route::post('/cartUpdate', 'CartController@updateCart')->name('web.updateCart');
     Route::get('/cart/item/remove/{p_id}','CartController@cartItemRemove')->name('cartItemRemove');
+
+    Route::group(['prefix'=>'User','middleware'=>'auth:buyer'], function(){
+        Route::get('/my_profile', 'UserController@myProfileForm')->name('web.myprofile');
+        Route::post('/my_profile/Update', 'UserController@myProfileUpdate')->name('web.myprofile_update');
+        Route::post('/Shipping/Address/Add', 'UserController@shippingAdd')->name('web.new_shipping_add');
+
+
+        Route::post('/Logout', 'LoginController@logout')->name('web.buyerLogout');
+    });
+    
 
 
     Route::group(['namespace'=> 'Product','prefix'=>'Product'], function(){

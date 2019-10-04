@@ -96,7 +96,7 @@ class RegisterController extends Controller
                 'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
             ]);
 
-        	return redirect()->back()->with('message','Registered Successfully');
+        	return redirect()->route('web.userLoginForm')->with('message','Thank You For Registering With Us Please Login To See The Action');
         }else{
         	return redirect()->back()->with('error','Something Went Wrong Please try Again');
         }

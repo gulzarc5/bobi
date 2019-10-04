@@ -24,23 +24,30 @@ class LoginController extends Controller
                     $cart = Session::get('cart');
                     if (count($cart) > 0) {
                         foreach ($cart as $product_id => $value) {
-                            // $product = DB::table('products')->where('id',$product_id)
-                            // ->whereNull('deleted_at')
-                            // ->where('status',1)
-                            // ->first();
                        
                         $color = null;
+                        $size_id = null;
                         if ( isset($value['color']) && !empty($value['color'])) {
                             $color = $value['color'];
                         }
-                        DB::table('cart')
-                            ->insert([
+                        if ( isset($value['size_id']) && !empty($value['size_id'])) {
+                            $size_id = $value['size_id'];
+                        }
+                        $check_cart_product = DB::table('cart')
+                            ->where('product_id',$product_id)
+                            ->where('user_id',Auth::guard('buyer')->user()->id)
+                            ->count();
+                        if ($check_cart_product < 1 ) {
+                            DB::table('cart')
+                                ->insert([
                                 'product_id' =>  $product_id,
                                 'user_id' => Auth::guard('buyer')->user()->id,
                                 'color_id' => $color,
+                                'size_id' => $size_id,
                                 'quantity' => $value['quantity'],
                                 'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
-                            ]);
+                                ]);
+                        }
                         }
                     }
                     Session::forget('cart');

@@ -24,19 +24,34 @@ class CartController extends Controller
                         ->whereNull('deleted_at')
                         ->where('status',1)
                         ->first();
+                    
+                    $size = DB::table('product_sizes')
+                        ->select('product_sizes.*','sizes.name as size_name')
+                        ->join('sizes','sizes.id','=','product_sizes.size_id')
+                        ->where('size_id',$item->size_id)
+                        ->where('product_id',$item->product_id)
+                        ->first();
+                    
+                    $color = DB::table('color')
+                        ->where('id',$item->color_id)
+                        ->first();
+
                     $cart_data[] = [
                         'product_id' => $product->id,
                         'title' => $product->name,
                         'image' => $product->main_image,
                         'quantity' => $item->quantity,
-                        'price' => $product->price,
+                        'color_name' => $color->name,
+                        'color_value' => $color->value,
+                        'size' => $size->size_name,
+                        'price' => $size->price,
                        ];
                 }
             }else{
                 $cart_data = false;
             }
 
-            return view('web.shopping_cart',compact('cart_data'));
+            return view('web.cart',compact('cart_data'));
         }else{
             if (Session::has('cart') && !empty(Session::get('cart'))) {
                 $cart = Session::get('cart');
@@ -153,13 +168,8 @@ class CartController extends Controller
             }
             Session::put('cart', $cart);
             Session::save();
-            //  dd(Session::get('cart'));
             return redirect()->route('web.viewCart');
         }
-
-        
-
-        
         // dd(session()->all());
        // Session::forget('cart.'.$product_id);
 

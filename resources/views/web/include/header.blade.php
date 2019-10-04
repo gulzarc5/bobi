@@ -306,12 +306,20 @@
                 <div class="jtv-user-info hidden-xs tab-head" id="account-head">
                   <div class="dropdown"><a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i style="font-size: 26px" class="pe-7s-user"></i><span>Account</span> <i class="fa fa-angle-down"></i></a>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="{{ route('web.my_account')}}">My Account</a></li>
+                      <li><a href="{{ route('web.myprofile')}}">My Account</a></li>
                       <li><a href="{{ route('web.order')}}">My Orders</a></li>
                       <li class="divider"></li>
-                      <li style="text-align: center;"><a href="{{ route('web.user_registration_form')}}"> <span>If you are a new user</span><br><strong>Register</strong></a></li>
-                      <li class="login"><a href="{{ route('web.userLoginForm')}}" class="btn outline btn-color" target="_blank">Login</a></li>
-                      <li class="login"><a href="#" class="btn outline btn-color" target="_blank">Logout</a></li>
+                      
+                      @auth('buyer')
+                        <li><a  class="btn outline btn-color" onclick="event.preventDefault();document.getElementById('logout-form').submit();"> Log Out</a></li>
+                        <form id="logout-form" action="{{ route('web.buyerLogout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                      @else
+                        <li style="text-align: center;"><a href="{{ route('web.user_registration_form')}}"> <span>If you are a new user</span><br><strong>Register</strong></a></li>
+                        <li class="login"><a href="{{ route('web.userLoginForm')}}" class="btn outline btn-color" >Login</a></li>
+                      @endauth
+                     
                     </ul>
                   </div>
                 </div>
