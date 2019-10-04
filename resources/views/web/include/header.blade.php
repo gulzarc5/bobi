@@ -306,21 +306,35 @@
                 <div class="jtv-user-info hidden-xs tab-head" id="account-head">
                   <div class="dropdown"><a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i style="font-size: 26px" class="pe-7s-user"></i><span>Account</span> <i class="fa fa-angle-down"></i></a>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="{{ route('web.my_account')}}">My Account</a></li>
+                      <li><a href="{{ route('web.myprofile')}}">My Account</a></li>
                       <li><a href="{{ route('web.order')}}">My Orders</a></li>
                       <li class="divider"></li>
-                      <li style="text-align: center;"><a href="{{ route('web.register')}}"> <span>If you are a new user</span><br><strong>Register</strong></a></li>
-                      <li class="login"><a href="{{ route('web.login')}}" class="btn outline btn-color" target="_blank">Login</a></li>
-                      <li class="login"><a href="#" class="btn outline btn-color" target="_blank">Logout</a></li>
+                      
+                      @auth('buyer')
+                        <li><a  class="btn outline btn-color" onclick="event.preventDefault();document.getElementById('logout-form').submit();"> Log Out</a></li>
+                        <form id="logout-form" action="{{ route('web.buyerLogout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                      @else
+                        <li style="text-align: center;"><a href="{{ route('web.user_registration_form')}}"> <span>If you are a new user</span><br><strong>Register</strong></a></li>
+                        <li class="login"><a href="{{ route('web.userLoginForm')}}" class="btn outline btn-color" >Login</a></li>
+                      @endauth
+                     
                     </ul>
                   </div>
                 </div>
                 <!-- Whishlist-->
                 <div class="top-cart-contain">
                   <div class="mini-cart">
-                    <div class="basket dropdown-toggle"><a href="{{ route('web.wishlist')}}">
+                    <div class="basket dropdown-toggle"><a href="{{ route('web.view_wish_list')}}">
                       <div class="cart-icon"><i class="pe-7s-like"></i></div>
-                      <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Wishlist</span> <span class="cart-total">2 items</span></div>
+                      <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Wishlist</span> <span class="cart-total">
+                        @if (isset($category_list['wish_list_count']) && !empty($category_list['wish_list_count']))
+                          {{ $category_list['wish_list_count'] }}
+                        @else
+                          0
+                        @endif
+                         items</span></div>
                       </a>
                     </div>
                   </div>
@@ -328,9 +342,16 @@
                 <!-- My Cart -->
                 <div class="top-cart-contain">
                   <div class="mini-cart">
-                    <div class="basket dropdown-toggle"><a href="{{ route('web.cart')}}">
+                    <div class="basket dropdown-toggle"><a href="{{ route('web.viewCart')}}">
                       <div class="cart-icon"><i class="pe-7s-shopbag"></i></div>
-                      <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Basket</span> <span class="cart-total">2 items</span></div>
+                      <div class="shoppingcart-inner"><span class="cart-title hidden-xs">My Basket</span> <span class="cart-total">
+                  
+                        @if (isset($category_list['cart_count']) && !empty($category_list['cart_count']))
+                          {{ $category_list['cart_count'] }}
+                        @else
+                          0
+                        @endif
+                         items</span></div>
                       </a>
                     </div>
                   </div>

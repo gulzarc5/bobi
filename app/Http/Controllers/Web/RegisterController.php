@@ -61,4 +61,45 @@ class RegisterController extends Controller
         	return redirect()->back()->with('error','Something Went Wrong Please try Again');
         }
     }
+
+    public function userRegistrationForm()
+    {
+        return view('web.register');
+    }
+
+    public function userRegistration(Request $request)
+    {
+    	$validatedData = $request->validate([
+	        'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:user'],
+            'password' => ['required', 'string', 'min:8', 'same:confirm_password'],
+            'mobile' =>  ['required','digits:10','numeric','unique:user'],
+        ]);
+
+        $seller = Seller::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
+            'mobile' => $request->input('mobile'),
+            'user_role' => 1,
+        ]);
+
+
+        if ($seller) {
+
+            $seller_id = $seller->id;
+
+            $seller_details = DB::table('user_details')
+            ->insert([
+                'seller_id' => $seller_id,
+                'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+            ]);
+
+        	return redirect()->route('web.userLoginForm')->with('message','Thank You For Registering With Us Please Login To See The Action');
+        }else{
+        	return redirect()->back()->with('error','Something Went Wrong Please try Again');
+        }
+    }
+
 }

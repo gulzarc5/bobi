@@ -37,7 +37,8 @@
                 <h4>Login</h4>
                 @if (Session::has('message'))
                   <div class="alert alert-success">{{ Session::get('message') }}</div>
-                @endif @if (Session::has('error'))
+                @endif 
+                @if (Session::has('error'))
                   <div class="alert alert-danger">{{ Session::get('error') }}</div>
                 @endif
                 <p class="before-login-text">Welcome back! Sign in to your account</p>
@@ -62,7 +63,7 @@
                       </span><br>
                   @enderror
 
-                <button class="button"><i class="icon-lock icons"></i>&nbsp; <span>Login</span></button>              
+                <button class="button" type="submit"><i class="icon-lock icons"></i>&nbsp; <span>Login</span></button>              
                 <p class="forgot-pass"><a href="#">Lost your password?</a></p><hr>
                 <p class="forgot-pass"><span class="required">*</span>If you are a new seller <a href="Seller-Register"><span style="text-decoration: underline;">Register</span></a></p>
               </div>
