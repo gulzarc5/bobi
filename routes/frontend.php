@@ -86,3 +86,6 @@ Route::get('/Shipping', function () {
 // Route::get('/wishlist', function () {
 //     return view('web.wishlist');
 // })->name('web.wishlist');
+Route::get('/checkout', function () {
+    return view('web.checkout');
+})->name('web.checkout');

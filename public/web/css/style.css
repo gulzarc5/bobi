@@ -7970,3 +7970,23 @@ a.jtv-m-logo-img {
   color: #555;
   font-family: 'Courgette', cursive;
 }
+.checkout_grid  {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+    display: grid;
+    margin: 8px;
+    height: 221px;
+
+}
+.checkout_grid  p{
+    color: #000!important;
+}
+
+.checkout{
+	margin-bottom: 20px;
+    background-color: #d7d8da8c;
+    border: 2px solid;
+}
+.checkout_checkbox{
+	display: none;
+}
