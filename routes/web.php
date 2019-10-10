@@ -36,10 +36,10 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 	require __DIR__.'/product_routes.php';
 
 	Route::group(['namespace'=> 'Users'], function(){
-		Route::get('/sellers/','UsersController@allSellers')->name('admin.allSellers');
+		Route::get('/sellers/List','UsersController@allSellers')->name('admin.allSellers');
 		Route::get('Ajax/sellers/','UsersController@ajaxAllSellers')->name('admin.ajaxAllSellers');
 
-		Route::get('/Buyers/','UsersController@allBuyers')->name('admin.allBuyers');
+		Route::get('/Buyers/List','UsersController@allBuyers')->name('admin.allBuyers');
 		Route::get('Ajax/Buyers/','UsersController@ajaxAllBuyers')->name('admin.ajaxAllBuyers');
 
 		Route::get('/Seller/Details/{seller_id}','UsersController@sellerView')->name('admin.seller_view');

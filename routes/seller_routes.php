@@ -9,6 +9,9 @@ Route::group(['prefix'=>'Seller','namespace'=>'Seller'],function(){
 	Route::post('/Login', 'SellerLoginController@sellerLogin')->name('seller.login');
 	Route::post('/logout', 'SellerLoginController@logout')->name('seller.logout');
 
+	Route::get('first/Category/{id}', 'SellerController@sellerFirstCategoryWithCategory');
+		Route::get('second/Category/{id}', 'SellerController@sellerSecondCategoryWithFirstCategory');
+
 	Route::group(['middleware'=>'auth:seller'],function(){
 
 		require __DIR__.'/seller_product_routes.php';

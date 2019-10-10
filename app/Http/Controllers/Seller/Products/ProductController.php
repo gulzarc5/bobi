@@ -16,11 +16,27 @@ class ProductController extends Controller
     // Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString();
     public function viewProductAddForm()
     {
-    	$category = DB::table('category')
-    	->where('status','1')
-    	->whereNull('deleted_at')
-    	->get();
-    	return view('seller.products.add_product_form',compact('category'));
+        $seller_id = Auth::guard('seller')->user()->id;
+
+        $seller_category = DB::table('seller_deals')
+            ->where('seller_id',$seller_id)
+            ->whereNull('deleted_at')
+            ->distinct('category_id')
+            ->get();
+        
+        $category_list = [];
+        foreach ($seller_category as $category) {
+            $cat = DB::table('category')
+            ->where('status','1')
+            ->whereNull('deleted_at')
+            ->where('id',$category->category_id)
+            ->first();
+            $category_list[] = [
+                'id' => $cat->id,
+                'name' => $cat->name,
+            ];
+        }
+    	return view('seller.products.add_product_form',compact('category_list'));
     }
 
     public function addNewProduct(Request $request)
@@ -120,6 +136,11 @@ class ProductController extends Controller
                 }                
             }
 
+            $product_price_update = DB::table('products')
+            ->where('id',$product_id)
+            ->update([
+                'min_price' => DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'),
+            ]);
             //*****************insert Product Images******************
             if($request->hasfile('image'))
             {
@@ -536,6 +557,12 @@ class ProductController extends Controller
                 'stock' => $stock,
             ]);
 
+            $product_price_update = DB::table('products')
+                ->where('id',$product_id)
+                ->update([
+                    'min_price' => DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'),
+                ]);
+
             if ($size_update) {
                return 2;
             }else{
@@ -593,6 +620,12 @@ class ProductController extends Controller
                 }
             }                
         }
+
+        $product_price_update = DB::table('products')
+        ->where('id',$product_id)
+        ->update([
+            'min_price' => DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'),
+        ]);
 
         return redirect()->route('seller.product_sizes',['product_id' => encrypt($product_id)]);
     }

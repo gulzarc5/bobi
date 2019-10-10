@@ -61,9 +61,9 @@
                                         <label for="category">Select Category</label>
                                         <select class="form-control" name="category" id="category">
                                             <option value="">Select Category</option>
-                                            @if(isset($category) && !empty($category))
-                                                @foreach($category as $cat)
-                                                    <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                            @if(isset($category_list) && !empty($category_list))
+                                                @foreach($category_list as $cat)
+                                                    <option value="{{ $cat['id'] }}">{{ $cat['name'] }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -230,14 +230,14 @@
                 });
                 $.ajax({
                     type:"GET",
-                    url:"{{ url('/admin/first/Category/')}}"+"/"+category+"",
+                    url:"{{ url('/Seller/first/Category/')}}"+"/"+category+"",
                     success:function(data){
-                        // console.log(data);
+                        console.log(data);
                         var cat = JSON.parse(data);
                         $("#first_category").html("<option value=''>Please Select First Category</option>");
 
                         $.each( cat, function( key, value ) {
-                            $("#first_category").append("<option value='"+key+"'>"+value+"</option>");
+                            $("#first_category").append("<option value='"+value.id+"'>"+value.name+"</option>");
                         });
 
                     }

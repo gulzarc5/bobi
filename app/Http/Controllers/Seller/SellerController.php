@@ -250,4 +250,16 @@ class SellerController extends Controller
             ]);
         return redirect()->back();
     }
+
+    public function sellerFirstCategoryWithCategory($id)
+    {
+        $seller_id = Auth::guard('seller')->user()->id;
+        $category = DB::table('seller_deals')
+            ->select('first_category.*')
+            ->join('first_category','seller_deals.first_category_id','first_category.id')
+            ->where('seller_deals.seller_id',$seller_id)
+            ->where('seller_deals.category_id',$id)
+            ->get();
+        echo $category;
+    }
 }
