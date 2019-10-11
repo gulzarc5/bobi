@@ -113,6 +113,29 @@ class UserController extends Controller
         }
     }
 
+    public function shippingAddCheckout(Request $request)
+    {
+        $user_id = Auth::guard('buyer')->id();
+        $validatedData = $request->validate([
+            'state' => 'required',
+            'city' => 'required',
+            'pin' => 'required',
+            'address' => 'required',
+        ]);
+
+        $shipping_address = DB::table('shipping_address')
+            ->insert([
+                'user_id'=>  $user_id,
+                'address'=> $request->input('address'),
+                'city_id'=> $request->input('city'),
+                'state_id'=> $request->input('state'),
+                'pin'=> $request->input('pin'),
+                'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+            ]);
+        return redirect()->back();
+    }
+    
     public function updateShippingAddress(Request $request)
     {
         $validatedData = $request->validate([

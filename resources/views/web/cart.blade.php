@@ -74,7 +74,7 @@
             --}}
             <li><span>Total</span><span>₹{{ number_format($total,2,".",'')}}</span></li>
          </ul>
-         <a class="btn btn-primary " href="{{ route('web.checkout') }}" >Checkout</a>
+         <a class="btn btn-primary " href="{{ route('web.checkout_ship') }}" >Checkout</a>
       </div>
    </div>
    <ul class="list-inline">

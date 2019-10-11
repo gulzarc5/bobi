@@ -30,8 +30,11 @@ Route::group(['namespace'=> 'Web'], function(){
         Route::get('/WishList/Delete/{list_id}', 'UserController@deleteWishList')->name('web.delete_wish_list');
         Route::get('/WishList/Move/{list_id}', 'UserController@wishListMove')->name('web.move_wish_list');
 
+        Route::get('/checkout','CheckoutController@checkoutShip')->name('web.checkout_ship');
 
+        Route::post('Place/Order','CheckoutController@placeOrder')->name('web.place_order');
 
+        Route::post('New/Shippin/Add/Checkout','UserController@shippingAddCheckout')->name('web.new_ship_add');
         Route::post('/Logout', 'LoginController@logout')->name('web.buyerLogout');
     });
     
@@ -86,6 +89,4 @@ Route::get('/Shipping', function () {
 // Route::get('/wishlist', function () {
 //     return view('web.wishlist');
 // })->name('web.wishlist');
-Route::get('/checkout', function () {
-    return view('web.checkout');
-})->name('web.checkout');
+
