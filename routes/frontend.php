@@ -34,6 +34,7 @@ Route::group(['namespace'=> 'Web'], function(){
 
         Route::post('Place/Order','CheckoutController@placeOrder')->name('web.place_order');
         Route::get('/thankyou/{id}', 'CheckoutController@checkoutSuccess')->name('web.checkout_thankyou');
+        Route::get('/order/history','CheckoutController@orderHistory')->name('web.order_history');
 
         Route::post('New/Shippin/Add/Checkout','UserController@shippingAddCheckout')->name('web.new_ship_add');
         Route::post('/Logout', 'LoginController@logout')->name('web.buyerLogout');
@@ -75,9 +76,7 @@ Route::get('/Forgot-Password', function () {
 // Route::get('/Cart', function () {
 //     return view('web.cart');
 // })->name('web.cart');
-Route::get('/order', function () {
-    return view('web.your_order');
-})->name('web.order');
+
 
 Route::get('/Shipping', function () {
     return view('web.shipping');

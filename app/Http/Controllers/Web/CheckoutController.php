@@ -77,10 +77,11 @@ class CheckoutController extends Controller
                         ->where('product_sizes.size_id',$cart_data->size_id)
                         ->where('product_sizes.product_id',$cart_data->product_id)
                         ->first();
+
                     $size_name = null;
                     $rate = 0;
-                    if (isset($size->name)) {
-                        $size_name = $size->name;
+                    if (isset($size->size_name)) {
+                        $size_name = $size->size_name;
                     }
                     if (isset($size->price)) {
                         $rate = $size->price;
@@ -129,8 +130,8 @@ class CheckoutController extends Controller
                         ->first();
                     $size_name = null;
                     $rate = 0;
-                    if (isset($size->name)) {
-                        $size_name = $size->name;
+                    if (isset($size->size_name)) {
+                        $size_name = $size->size_name;
                     }
                     if (isset($size->price)) {
                         $rate = $size->price;
@@ -173,6 +174,7 @@ class CheckoutController extends Controller
                 'amount' => $total,
             ]);
         if ($update_order) {
+            DB::table('cart')->where('user_id',$user_id)->delete();
             return redirect()->route('web.checkout_thankyou',['id'=>$order]);
         }else{
             return redirect()->back();
@@ -182,6 +184,20 @@ class CheckoutController extends Controller
 
     public function checkoutSuccess($order_id)
     {
+
         return view('web.thankyou',compact('order_id'));
+    }
+
+    public function orderHistory()
+    {
+        $user_id = Auth::guard('buyer')->user()->id;
+        $orders = DB::table('order_details')
+            ->select('order_details.*','products.name as p_name','products.main_image as p_image','color.value as c_value')
+            ->join('products','products.id','=','order_details.product_id')
+            ->join('color','color.id','=','order_details.color')
+            ->where('order_details.user_id',$user_id)
+            ->orderBy('order_details.id','desc')
+            ->get();
+        return view('web.your_order',compact('orders'));
     }
 }

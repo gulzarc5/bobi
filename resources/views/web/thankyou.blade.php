@@ -11,9 +11,9 @@
    </div>
 	<center>
 		<div style="margin-top: 10%; margin-bottom: 4%;">
-			<h3>Order ID : d4569434c676</h3>
+			<h3>Order ID : {{$order_id}}</h3>
 			<h2 >Thank You for Shopping With Us</h2>
-		<p><a href="{{ route('web.index')}}">Continue Shopping</a></p>
+		<p><a href="{{ route('web.order_history')}}">Click Here to Check Order History</a></p>
 		</div>
 	</center>
 @endsection
