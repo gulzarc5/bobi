@@ -96,6 +96,12 @@
                 {{-- <li><a class="btn btn-default" href="#">Update Bag</a>
                 </li> --}}
             </ul>
+<div class="container" style="margin-bottom: 20px;">
+   <div class="text-center"><i class="fa fa-history" style="font-size: 100px;color: gray;"></i>
+       <p class="lead">Order history empty</p><a class="btn btn-primary btn-lg" href="#">Start Shopping <i class="fa fa-long-arrow-right"></i></a>
+   </div>
+   <div class="gap"></div>
+</div>
         </div>
 
   <!-- Main Container End --> 
