@@ -55,7 +55,7 @@
                                         <button type="button" class="btn btn-warning">Return</button>
                                     @endif                                   
                                 </td>
-                            <td>{{ \Carbon\Carbon::parse($item->created_at)->toDateTimeString()}}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -82,6 +82,9 @@ Route::get('/Shipping', function () {
     return view('web.shipping');
 })->name('web.shipping');
 
+Route::get('/return/policy',function(){
+    return view('web.returnpolicy');
+})->name('web.returnpolicy');
 // Route::get('/my_account', function () {
 //     return view('web.my_account');
 // })->name('web.my_account');
