@@ -33,6 +33,7 @@ Route::group(['namespace'=> 'Web'], function(){
         Route::get('/checkout','CheckoutController@checkoutShip')->name('web.checkout_ship');
 
         Route::post('Place/Order','CheckoutController@placeOrder')->name('web.place_order');
+        Route::get('/thankyou/{id}', 'CheckoutController@checkoutSuccess')->name('web.checkout_thankyou');
 
         Route::post('New/Shippin/Add/Checkout','UserController@shippingAddCheckout')->name('web.new_ship_add');
         Route::post('/Logout', 'LoginController@logout')->name('web.buyerLogout');
@@ -90,9 +91,3 @@ Route::get('/Shipping', function () {
 //     return view('web.wishlist');
 // })->name('web.wishlist');
 
- Route::get('/thankyou', function () {
-     return view('web.thankyou');
- })->name('web.thankyou');
- Route::get('/returnpolicy', function () {
-     return view('web.returnpolicy');
- })->name('web.returnpolicy');

@@ -172,6 +172,16 @@ class CheckoutController extends Controller
                 'quantity' => $total_qtty,
                 'amount' => $total,
             ]);
+        if ($update_order) {
+            return redirect()->route('web.checkout_thankyou',['id'=>$order]);
+        }else{
+            return redirect()->back();
+        }
 
+    }
+
+    public function checkoutSuccess($order_id)
+    {
+        return view('web.thankyou',compact('order_id'));
     }
 }
