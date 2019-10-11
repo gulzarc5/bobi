@@ -566,7 +566,7 @@
                       </div>
                     </div>
                   </li>
-                  <li class="drop-menu"><a href="index.html" class="level-top active"><span>Contact Us</span></a></li>
+                  <li class="drop-menu"><a href="{{ route('web.contact')}}" class="level-top active"><span>Contact Us</span></a></li>
                 </ul>
               </div>
             </div>

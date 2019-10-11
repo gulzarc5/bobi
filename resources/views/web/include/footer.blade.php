@@ -39,7 +39,7 @@
                   <li><a href="#">News</a></li>
                   <li><a href="#">Trends</a></li>
                   <li><a href="about_us.html">About Us</a></li>
-                  <li><a href="contact_us.html">Contact Us</a></li>
+                  <li><a href="{{ route('web.contact')}}">Contact Us</a></li>
                   <li><a href="#">My Orders</a></li>
                 </ul>
               </div>
