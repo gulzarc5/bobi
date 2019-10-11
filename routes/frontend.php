@@ -77,9 +77,6 @@ Route::get('contact/',function(){
 Route::get('/Forgot-Password', function () {
     return view('web.forgot-password');
 })->name('web.forgot-password');
-// Route::get('/Cart', function () {
-//     return view('web.cart');
-// })->name('web.cart');
 
 
 Route::get('/Shipping', function () {
@@ -89,11 +86,4 @@ Route::get('/Shipping', function () {
 Route::get('/return/policy',function(){
     return view('web.returnpolicy');
 })->name('web.returnpolicy');
-// Route::get('/my_account', function () {
-//     return view('web.my_account');
-// })->name('web.my_account');
-
-// Route::get('/wishlist', function () {
-//     return view('web.wishlist');
-// })->name('web.wishlist');
 

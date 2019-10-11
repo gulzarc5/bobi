@@ -83,13 +83,14 @@
       <li><a class="btn btn-default" href="#">Update Bag</a></li>
       --}}
    </ul>
-   @endif
+   @else
 
    <div class="container" style="margin-bottom: 20px;">
    <div class="text-center"><i class="fa fa-cart-arrow-down empty-cart-icon" style="    font-size: 100px;color: gray;"></i>
-       <p class="lead">You haven't Fill Your Shopping Cart Yet</p><a class="btn btn-primary btn-lg" href="#">Start Shopping <i class="fa fa-long-arrow-right"></i></a>
+       <p class="lead">You haven't Fill Your Shopping Cart Yet</p><a class="btn btn-primary btn-lg" href="{{route('web.index')}}">Start Shopping <i class="fa fa-long-arrow-right"></i></a>
    </div>
    <div class="gap"></div>
+   @endif
 </div>
 </div>
 <!-- Main Container End --> 
