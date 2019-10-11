@@ -319,6 +319,7 @@
                         <li style="text-align: center;"><a href="{{ route('web.user_registration_form')}}"> <span>If you are a new user</span><br><strong>Register</strong></a></li>
                         <li class="login"><a href="{{ route('web.userLoginForm')}}" class="btn outline btn-color" >Login</a></li>
                       @endauth
+                     
                     </ul>
                   </div>
                 </div>
