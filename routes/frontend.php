@@ -33,6 +33,8 @@ Route::group(['namespace'=> 'Web'], function(){
         Route::get('/checkout','CheckoutController@checkoutShip')->name('web.checkout_ship');
 
         Route::post('Place/Order','CheckoutController@placeOrder')->name('web.place_order');
+        Route::get('/thankyou/{id}', 'CheckoutController@checkoutSuccess')->name('web.checkout_thankyou');
+        Route::get('/order/history','CheckoutController@orderHistory')->name('web.order_history');
 
         Route::post('New/Shippin/Add/Checkout','UserController@shippingAddCheckout')->name('web.new_ship_add');
         Route::post('/Logout', 'LoginController@logout')->name('web.buyerLogout');
@@ -74,14 +76,15 @@ Route::get('/Forgot-Password', function () {
 // Route::get('/Cart', function () {
 //     return view('web.cart');
 // })->name('web.cart');
-Route::get('/order', function () {
-    return view('web.your_order');
-})->name('web.order');
+
 
 Route::get('/Shipping', function () {
     return view('web.shipping');
 })->name('web.shipping');
 
+Route::get('/return/policy',function(){
+    return view('web.returnpolicy');
+})->name('web.returnpolicy');
 // Route::get('/my_account', function () {
 //     return view('web.my_account');
 // })->name('web.my_account');
@@ -90,9 +93,3 @@ Route::get('/Shipping', function () {
 //     return view('web.wishlist');
 // })->name('web.wishlist');
 
- Route::get('/thankyou', function () {
-     return view('web.thankyou');
- })->name('web.thankyou');
- Route::get('/returnpolicy', function () {
-     return view('web.returnpolicy');
- })->name('web.returnpolicy');

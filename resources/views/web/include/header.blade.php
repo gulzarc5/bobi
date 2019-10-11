@@ -307,7 +307,7 @@
                   <div class="dropdown"><a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i style="font-size: 26px" class="pe-7s-user"></i><span>Account</span> <i class="fa fa-angle-down"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="{{ route('web.myprofile')}}">My Account</a></li>
-                      <li><a href="{{ route('web.order')}}">My Orders</a></li>
+                      <li><a href="{{ route('web.order_history')}}">My Orders</a></li>
                       <li class="divider"></li>
                       
                       @auth('buyer')
