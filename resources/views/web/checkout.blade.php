@@ -85,8 +85,8 @@
                <li>
                   <span>Payment Method</span>
                   <span>
-                  Online <input type="radio" name="pay_method" value="1">
-                  COD <input type="radio" name="pay_method" value="2">
+                  Online <input type="radio" name="pay_method" value="2">
+                  COD <input type="radio" name="pay_method" value="1">
                   </span>
                </li>
             </ul>

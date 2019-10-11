@@ -55,22 +55,25 @@ class CheckoutController extends Controller
         $order = DB::table('orders')
             ->insertGetId([
                 'user_id' => $user_id,
+                'payment_method' => $pay_method,
                 'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                 'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
             ]);
+
         $cart = DB::table('cart')->where('user_id',$user_id)->get();
         
         $total = 0;
         $total_qtty = 0;
         if ($pay_method == 1) {
             foreach ($cart as $cart_data) {
-                $product = DB::table('products')->select('seller_id')
+                $product = DB::table('products')->select('seller_id','brand_id')
                     ->where('id',$cart_data->product_id)
                     ->whereNull('deleted_at')
                     ->first();
                 if ($product) {
                     $size = DB::table('product_sizes')
                         ->select('product_sizes.*','sizes.name as size_name')
+                        ->join('sizes','sizes.id','=','product_sizes.size_id')
                         ->where('product_sizes.size_id',$cart_data->size_id)
                         ->where('product_sizes.product_id',$cart_data->product_id)
                         ->first();
@@ -82,7 +85,6 @@ class CheckoutController extends Controller
                     if (isset($size->price)) {
                         $rate = $size->price;
                     }
-
                     $designer = DB::table('brand_name')->where('id',$product->brand_id)->first();
                     $designer_name = null;
                     if (isset($designer->name)) {
@@ -92,6 +94,7 @@ class CheckoutController extends Controller
                     DB::table('order_details')
                     ->insert([
                         'user_id' => $user_id,
+                        'order_id' => $order,
                         'seller_id' => $product->seller_id,
                         'product_id' => $cart_data->product_id,
                         'size' => $size_name,
@@ -100,6 +103,7 @@ class CheckoutController extends Controller
                         'quantity' => $cart_data->quantity,
                         'rate' => $rate,
                         'total' => ($cart_data->quantity * $rate),
+                        'payment_method' => $pay_method,
                         'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                         'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                     ]);
@@ -112,13 +116,14 @@ class CheckoutController extends Controller
 
         }else{
             foreach ($cart as $cart_data) {
-                $product = DB::table('products')->select('seller_id')
-                    ->where('id',$cart_data->product_id)
-                    ->whereNull('deleted_at')
-                    ->first();
+                $product = DB::table('products')->select('seller_id','brand_id')
+                ->where('id',$cart_data->product_id)
+                ->whereNull('deleted_at')
+                ->first();
                 if ($product) {
                     $size = DB::table('product_sizes')
                         ->select('product_sizes.*','sizes.name as size_name')
+                        ->join('sizes','sizes.id','=','product_sizes.size_id')
                         ->where('product_sizes.size_id',$cart_data->size_id)
                         ->where('product_sizes.product_id',$cart_data->product_id)
                         ->first();
@@ -130,7 +135,7 @@ class CheckoutController extends Controller
                     if (isset($size->price)) {
                         $rate = $size->price;
                     }
-
+                   
                     $designer = DB::table('brand_name')->where('id',$product->brand_id)->first();
                     $designer_name = null;
                     if (isset($designer->name)) {
@@ -141,6 +146,7 @@ class CheckoutController extends Controller
                     DB::table('order_details')
                     ->insert([
                         'user_id' => $user_id,
+                        'order_id' => $order,
                         'seller_id' => $product->seller_id,
                         'product_id' => $cart_data->product_id,
                         'size' => $size_name,
@@ -149,21 +155,23 @@ class CheckoutController extends Controller
                         'quantity' => $cart_data->quantity,
                         'rate' => $rate,
                         'total' => ($cart_data->quantity * $rate),
+                        'payment_method' => $pay_method,
                         'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                         'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                     ]);
                     $total += ($cart_data->quantity * $rate);
                     $total_qtty += $cart_data->quantity;
                 }
-               
             }
         }
 
+
         $update_order = DB::table('orders')
-            ->update('id',$order)
+            ->where('id',$order)
             ->update([
                 'quantity' => $total_qtty,
                 'amount' => $total,
             ]);
+
     }
 }
