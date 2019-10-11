@@ -90,3 +90,6 @@ Route::get('/Shipping', function () {
 //     return view('web.wishlist');
 // })->name('web.wishlist');
 
+ Route::get('/thankyou', function () {
+     return view('web.thankyou');
+ })->name('web.thankyou');
