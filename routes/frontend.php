@@ -54,6 +54,10 @@ Route::group(['namespace'=> 'Web'], function(){
 Route::get('/', function () {
     return view('web.index');
 })->name('web.index');
+
+Route::get('contact/',function(){
+    return view('web.contact');
+})->name('web.contact');
 // Route::get('/Seller-Login', function () {
 //     return view('web.seller-login');
 // });
