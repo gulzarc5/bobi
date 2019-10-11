@@ -1,12 +1,7 @@
 
 color_id = 1;
 function addMoreColor(){
-    var html_color = null;
-    if (color_html) {
-        html_color = color_html;
-    }else{
-        html_color = $("#color").html();
-    }
+    var html_color = $("#color_list").html();
     var temp_color = '<div class="form-row mb-3" id="color_remove'+color_id+'">'+
     '<div class="col-md-4 col-sm-12 col-xs-12 mb-3" >'+
                             '<label for="color">Select Color</label>'+
@@ -27,39 +22,45 @@ function removeColorDiv(id) {
 }
 
 
-var inner_size_div_count = 1;
-function add_more_inner_size_div(size_key,size_id){
-   var temp_size_html = '<div id="inner_size_add_div'+inner_size_div_count+'"><div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
-                                '<input type="hidden" name="size_id[]" value="'+size_id+'">'+
-                                '<label for="size">'+size_key+'</label>'+
-                                '<select class="form-control" name="size[]">'+size[size_key]+
-                                '</select>'+
-                                    '</div>'+
-                                    '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
-                                      '<label for="mrp">Enter M.R.P.</label>'+
-                                      '<input type="text" class="form-control" name="mrp[]"  placeholder="Enter MRP" >'+
+var size_div_count = 1;
+function add_more_inner_size_div(){
+    var size_list = $('#size_option').html();
+   var temp_size_html = '<div  id="size_div'+size_div_count+'">'+
+   '<div class="well" style="overflow: auto">'+
+       '<div class="form-row mb-10" >'+
+           '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
+               '<label for="size">Size</label>'+
+                    '<select class="form-control size" name="size[]" id="size_option">'+size_list+
+               '</select>'+
+           '</div>'+
+       '</div>'+
 
-                                    '</div>'+
-                                    '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
-                                      '<label for="price">Enter Price</label>'+
-                                      '<input type="text" class="form-control" name="price[]"  placeholder="Enter Price" >'+
-                                    '</div>'+
+       '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
+           '<label for="mrp">Enter M.R.P.</label>'+
+           '<input type="text" class="form-control" name="mrp[]"  placeholder="Enter MRP">'+
+       '</div>'+
 
-                                    '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
-                                      '<label for="stock">Enter Stock</label>'+
-                                      '<input type="text" class="form-control" name="stock[]"  placeholder="Enter Stock" >'+
-                                    '</div>'+
+       '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
+           '<label for="price">Enter Price</label>'+
+           '<input type="text" class="form-control" name="price[]"  placeholder="Enter Price" >'+
+       '</div>'+
 
-                                    '<div class="col-md-8 col-sm-12 col-xs-12 mb-3">'+
-                                       '<a class="btn btn-sm btn-danger" style="margin-top: 25px;" onclick="removeInnerSizeDiv(\''+inner_size_div_count+'\')">Remove</a>'+
-                                    '</div>'+
-                                '</div></div>';
-    $("#inner_size_add_div"+size_key).append(temp_size_html);
+       '<div class="col-md-4 col-sm-12 col-xs-12 mb-3">'+
+           '<label for="stock">Enter Stock</label>'+
+           '<input type="text" class="form-control" name="stock[]"  placeholder="Enter Stock" >'+
+       '</div>'+
+
+       '<div class="col-md-8 col-sm-12 col-xs-12 mb-3">'+
+           '<a class="btn btn-sm btn-danger" style="margin-top: 25px;" onclick="removeInnerSizeDiv('+size_div_count+')">Remove</a>'+
+       '</div>'+
+   '</div>'+
+'</div>';
+    $("#size_div").append(temp_size_html);
     inner_size_div_count++;
 }
 
 function removeInnerSizeDiv(id) {
-    $("#inner_size_add_div"+id).remove();
+    $("#size_div"+id).remove();
 }
 
 

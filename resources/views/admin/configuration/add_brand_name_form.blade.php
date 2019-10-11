@@ -15,7 +15,7 @@
             <div class="x_panel">
 
                 <div class="x_title">
-                    <h2>Add New Brand Name</h2>
+                    <h2>Add New Brand</h2>
                     <div class="clearfix"></div>
                 </div>
 
@@ -35,7 +35,7 @@
                             {{Form::model($color, ['method' => 'post','route'=>'admin.updateCategory'])}}
                             {{ Form::hidden('id',null,array('class' => 'form-control','placeholder'=>'Enter Category name')) }}
                         @else
-                            {{ Form::open(['method' => 'post','route'=>'admin.add_brand_name']) }}
+                            {{ Form::open(['method' => 'post','route'=>'admin.add_brand']) }}
                         @endif
 
                         <div class="form-group">
@@ -69,17 +69,22 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            {{ Form::label('name', 'Brand Name')}} 
-                            {{ Form::text('name',null,array('class' => 'form-control','placeholder'=>'Enter Brand name')) }}
-                            @if($errors->has('name'))
-                                <span class="invalid-feedback" role="alert" style="color:red">
-			                        <strong>{{ $errors->first('name') }}</strong>
-			                    </span> 
-                            @enderror
+                        <div class="form-group col-md-12" id="brand_add_div" style="padding-left:0;">
+                            <div class="col-md-10" style="padding-left:0;">
+                                {{ Form::label('name', 'Brand Name')}}                             
+                                {{ Form::text('name[]',null,array('class' => 'form-control','placeholder'=>'Enter Brand name')) }}
+                            </div>  
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-sm btn-info" style="margin-top: 24px;" onclick="addbrand()">Add More</button>
+                            </div>                          
                         </div>
+                        @if($errors->has('name'))
+                            <span class="invalid-feedback" role="alert" style="color:red">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span> 
+                        @enderror
 
-                        <div class="form-group">
+                        <div class="form-group col-md-12">
                             @if(isset($color) && !empty($color))
                                 {{ Form::submit('Save', array('class'=>'btn btn-success')) }}
                             @else
@@ -133,6 +138,28 @@
             });
 
         })
+
+
+        var brand_add_count = 1;
+        function addbrand() {
+            var html = '<div id="brand_add_div'+brand_add_count+'" style="padding-left:0;">'+
+                            '<div id="brand_add_div" class="col-md-10" style="padding-left:0;">'+
+                                '<label for="name">Brand Name</label>'+
+                                '<input class="form-control" placeholder="Enter Brand name" name="name[]" type="text" id="name">'+
+                            '</div>'+
+                            '<div class="col-md-2">'+
+                                '<button type="button" onclick="removebrand('+brand_add_count+')" class="btn btn-sm btn-danger" style="margin-top: 24px;">Remove</button>'+
+                            '</div>'+
+                        '</div>';
+            $("#brand_add_div").append(html);
+            brand_add_count++;
+        }
+
+        function removebrand(brand_name_id) {
+            $("#brand_add_div"+brand_name_id).remove();
+        }
     </script>
+
+    
     
  @endsection

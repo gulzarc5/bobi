@@ -119,23 +119,23 @@
                                     </div>                            
                                 </div>
 
-                                <div class="form-row mb-3">
+                                {{-- <div class="form-row mb-3">
                                     <div class="col-md-4 col-sm-12 col-xs-12 mb-3" >
                                         <label for="brand">Select Brand</label>
                                         <select class="form-control" name="brand" id="brand">
                                             <option value="">Select Brand</option>
                                              @if(isset($brands) && !empty($brands))
                                                 @foreach($brands as $brand)
-                                                    @if($product->brand_id  == $brand->brand_id)
-                                                        <option value="{{ $brand->brand_id }}" selected>{{ $brand->brand_name }}</option>
+                                                    @if($product->brand_id  == $brand->id)
+                                                        <option value="{{ $brand->id }}" selected>{{ $brand->name }}</option>
                                                     @else
-                                                        <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
+                                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                                     @endif
                                                 @endforeach
                                             @endif
                                         </select>
                                     </div>                        
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="well" style="overflow: auto">
@@ -213,7 +213,7 @@
                     type:"GET",
                     url:"{{ url('/admin/second/Category/')}}"+"/"+category+"",
                     success:function(data){
-                        // console.log(data);
+                        console.log(data);
                         var cat = JSON.parse(data);
                         $("#second_category").html("<option value=''>Please Select Second Category</option>");
 
@@ -226,31 +226,31 @@
             });
         });
 
-
-         $("#second_category").change(function(){
-                        
-                var category = $('#category').val();
-                var first_category = $('#first_category').val();
-                var second_category = $(this).val();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    type:"GET",
-                    url:"{{ url('/admin/Products/ajax/Get/Brands')}}"+"/"+category+"/"+first_category+"/"+second_category+"",
-                    success:function(data){
-                        if (data.brands.length > 0) {                           
-                            $("#brand").html("<option value=''>Please Select Second Category</option>");
-                            $.each( data.brands, function( key, value ) {
-                                $("#brand").append("<option value='"+value.brand_id+"'>"+value.brand_name+"</option>");
-                            });
-                        }
-
-                    }
-                });
+        $("#first_category").change(function(){                        
+            var category = $(this).val();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
+            $.ajax({
+                type:"GET",
+                url:"{{ url('/Seller/Products/Ajax/brand/')}}"+"/"+category+"",
+                success:function(data){
+                    if (data.length > 0) {                           
+                        $("#brand").html("<option value=''>Please Select Brand</option>");
+                        $.each( data, function( key, value ) {
+                            $("#brand").append("<option value='"+value.id+"'>"+value.name+"</option>");
+                        });
+                    }else{
+                        $("#brand").html("<option value=''>Please Select Brand</option>");
+                    }
+
+                }
+            });
+        });
+
+        
     </script>
  @endsection
 

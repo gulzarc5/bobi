@@ -21,7 +21,6 @@
                               <th>Color</th>
                               <th>Category</th>
                               <th>FirstCategory</th>
-                              <th>SecondCategory</th>
                               <th>Status</th>
                               <th>action</th>
                             </tr>
@@ -50,11 +49,11 @@
                 ajax: "{{ route('admin.ajax_color_list') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'c_name', name: 'c_name',searchable: true},
+                    {data: 'name', name: 'name',searchable: true},
                     {data: 'show_color', name: 'show_color' ,orderable: false, searchable: false},
                     {data: 'category_name', name: 'category_name' ,searchable: true},
                     {data: 'first_category_name', name: 'first_category_name' ,searchable: true},       
-                    {data: 'second_category_name', name: 'second_category_name' ,searchable: true},             
+        
                     {data: 'status_tab', name: 'status_tab',orderable: false, searchable: false},                    
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]

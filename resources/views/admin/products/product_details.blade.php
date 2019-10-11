@@ -110,7 +110,6 @@
                     <thead>
                       <tr>
                         <th>Sl</th>
-                        <th>Name</th>
                         <th>Size</th>
                         <th>MRP</th>
                         <th>Price</th>
@@ -127,7 +126,6 @@
                         <tr>
                           <td>{{ $count++ }}</td>
                           <td> {{ $size->s_name }} </td>
-                          <td> {{ $size->s_value }} </td>
                           <td> {{ $size->mrp }} </td>
                           <td> {{ $size->price }} </td>
                           <td> {{ $size->stock }} </td>

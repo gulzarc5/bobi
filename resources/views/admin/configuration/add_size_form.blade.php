@@ -61,47 +61,21 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            {{ Form::label('second_category', 'Select Second Category')}}
-                            @if(!empty($second_category->first_category_id))
-                            {!! Form::select('second_category',array($second_category->first_category_id => $second_category->firstCategory->name),null, ['class' => 'form-control','id'=>'first_category']) !!}
-                            @else
-                            {!! Form::select('second_category',array('' => 'Please Select Second Category'),null, ['class' => 'form-control','id'=>'second_category']) !!}
-                            @endif
-
-                            @if($errors->has('second_category'))
-                                <span class="invalid-feedback" role="alert" style="color:red">
-                                    <strong>{{ $errors->first('second_category') }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-
-
-                        <div class="form-group">
-                            {{ Form::label('size_id', 'Select Size Name')}}
-                           
-                            {!! Form::select('size_id',array('' => 'Please Select Size Name'),null, ['class' => 'form-control']) !!}
-                        
-
-                            @if($errors->has('size_id'))
-                                <span class="invalid-feedback" role="alert" style="color:red">
-                                    <strong>{{ $errors->first('size_id') }}</strong>
-                                </span>
-                            @enderror
-
-                        </div>
-
-
                         <div class="form-row" id="size_div_append">
                             <div class="col-md-6" style="margin: 0; padding: 0" >
                                 <div class="col-md-8" style="padding: 0" id="size_div">                                    
-                                    {{ Form::label('size_value_id', 'Select Size Value')}}
-                
-                                    {!! Form::select('size_value_id[]',array('' => 'Please Select Size Value'),null, ['class' => 'form-control size_value_id']) !!}
+                                    {{ Form::label('size', 'Size')}}
+                                    {{ Form::text('size[]',null,array('class' => 'form-control','placeholder'=>'Enter Size')) }}
+                                    {{-- {!! Form::select('size[]',array('' => 'Please Select Size Value'),null, ['class' => 'form-control size_value_id']) !!} --}}
                                 </div>
                                 <div class="col-md-3">
                                     <a  class="btn btn-sm btn-primary" style="margin-top: 25px;" id="size_div_button"> More </a>
                                 </div>
+                                @if($errors->has('size[]'))
+                                    <span class="invalid-feedback" role="alert" style="color:red">
+                                        <strong>{{ $errors->first('size[]') }}</strong>
+                                    </span>
+                                @enderror
                             
                             </div>
                         </div>
@@ -171,53 +145,6 @@
 
                         $.each( cat, function( key, value ) {
                             $("#second_category").append("<option value='"+key+"'>"+value+"</option>");
-                        });
-
-                    }
-                });
-            });
-
-            $("#first_category").change(function(){
-                var category = $(this).val();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    type:"GET",
-                    url:"{{ url('admin/ajax/size/')}}"+"/"+category+"",
-                    success:function(data){
-                        console.log(data);
-                        var cat = JSON.parse(data);
-                        $("#size_id").html("<option value=''>Please Select Size</option>");
-
-                        $.each( cat, function( key, value ) {
-                            $("#size_id").append("<option value='"+key+"'>"+value+"</option>");
-                        });
-
-                    }
-                });
-            });
-
-
-             $("#size_id").change(function(){
-                var size_id = $(this).val();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    type:"GET",
-                    url:"{{ url('/admin/size/values/')}}"+"/"+size_id+"",
-                    success:function(data){
-                        console.log(data);
-                        var cat = JSON.parse(data);
-                        $(".size_value_id").html("<option value=''>Please Select Size Value</option>");
-
-                        $.each( cat, function( key, value ) {
-                            $(".size_value_id").append("<option value='"+key+"'>"+value+"</option>");
                         });
 
                     }

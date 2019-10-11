@@ -16,35 +16,33 @@
     	        <div>
     	            <div class="x_content">
 
-                        @if(isset($color_options) && !empty($color_options) && isset($product_colors) && !empty($product_colors))
+                        @if(isset($product_color) && !empty($product_color))
 
                        @php
                         $count_varient = 1;
                        @endphp
-                        @foreach($product_colors as  $value)
+                        @foreach($product_color as  $color)
                            <div class="well" style="overflow: auto">
                                 <div class="form-row mb-10" id="varient_div"> 
 
                                     <div id="error{{$count_varient}}"></div>
-                                    <input type="hidden" name="product_color_id" id="product_color_id{{$count_varient}}" value="{{ $value->id }}">  
+                                    <input type="hidden" id="product_id{{$count_varient}}" value="{{ $product_id_color_add }}">
+                                    <input type="hidden" name="color_id" id="color_id{{$count_varient}}" value="{{ $color->id }}">  
 
 
                                     <div class="col-md-2 col-sm-12 col-xs-12 mb-3">
                                         <label for="color">Select Color </label>
                                     </div>
-
                                     <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                                         <select class="form-control" name="color" id="color{{$count_varient}}" disabled>
-
                                             <option value="">Please Select Color</option>
-
-                                            @foreach($color_options as $value1)
-                                              @if($value->color_id == $value1->color_id)
-                                                    <option value="{{ $value1->color_id }}" style="background-color: {{$value1->color_value}}" selected>{{ $value1->color_name }}</option>
-                                                @else
-                                                    <option value="{{ $value1->color_id }}" style="background-color: {{$value1->color_value}}">{{ $value1->color_name }}</option>
-                                                @endif
-                                            @endforeach
+                                                @foreach($color_options as $value1)
+                                                @if($color->color_id == $value1->id)
+                                                        <option value="{{ $value1->id }}" style="background-color: {{$value1->value}}" selected>{{ $value1->name }}</option>
+                                                    @else
+                                                        <option value="{{ $value1->id }}" style="background-color: {{$value1->value}}">{{ $value1->name }}</option>
+                                                    @endif
+                                                @endforeach
 
                                         </select>
 
@@ -105,13 +103,13 @@
                                         <label for="color">Select Color</label>
                                         <select class="form-control color" name="color[]" id="color">
                                           <option value="">Select Color</option>
-                                          @if(isset($color_options) && !empty($color_options))
-                                             @foreach($color_options as $value1)
-                                                    <option value="{{ $value1->color_id }}" style="background-color: {{$value1->color_value}}">{{ $value1->color_name }}</option>
-                                               
+                                            @foreach($color_options as $value1)
+                                                @if($color->color_id == $value1->id)
+                                                    <option value="{{ $value1->id }}" style="background-color: {{$value1->value}}" selected>{{ $value1->name }}</option>
+                                                @else
+                                                    <option value="{{ $value1->id }}" style="background-color: {{$value1->value}}">{{ $value1->name }}</option>
+                                                @endif
                                             @endforeach
-                                          @endif
-
                                         </select>
                                     </div>    
                                     <div class="col-md-2 col-sm-12 col-xs-12 mb-3">
@@ -146,9 +144,9 @@
         }
 
         function saveVarient(id) {
-            var product_color_id = $("#product_color_id"+id).val();
+            var color_id = $("#color_id"+id).val();
             var color = $("#color"+id).find(":selected").val();
-
+            var product_id = $("#product_id"+id).val();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -158,7 +156,11 @@
             $.ajax({
                 type:"POST",
                 url:"{{ route('seller.product_color_update')}}",
-                data:{ product_color_id:product_color_id, color:color },
+                data:{
+                    color_id:color_id, 
+                    color:color,
+                    product_id:product_id,
+                },
                 success:function(data){
                   if (data == 1) {
                     $("#error"+id).html("<p class='alert alert-danger'>Please Enter Required Field</p>");

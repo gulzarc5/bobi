@@ -11,7 +11,7 @@ class SecondCategory extends Model
    protected $table = 'second_category';
 
     protected $fillable = [
-    	'name','category_id','first_category_id','image','status',
+    	'name','category_id','first_category_id','image','status','tribe_category',
     ];
     protected $primaryKey = 'id';
 

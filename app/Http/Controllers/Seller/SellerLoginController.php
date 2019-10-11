@@ -24,8 +24,7 @@ class SellerLoginController extends Controller
             'password' => 'required|min:8'
         ]);
 
-        if (Auth::guard('seller')->attempt(['email' => $request->email, 'password' => $request->password])) {
-
+        if (Auth::guard('seller')->attempt(['email' => $request->email, 'password' => $request->password,'user_role' => '2','status' => '1'])) {
             return redirect()->intended('/Seller/Deshboard');
         }
         return back()->withInput($request->only('email', 'remember'))->with('login_error','Username or password incorrect');
