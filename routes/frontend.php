@@ -93,3 +93,6 @@ Route::get('/Shipping', function () {
  Route::get('/thankyou', function () {
      return view('web.thankyou');
  })->name('web.thankyou');
+ Route::get('/returnpolicy', function () {
+     return view('web.returnpolicy');
+ })->name('web.returnpolicy');

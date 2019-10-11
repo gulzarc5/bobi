@@ -53,7 +53,7 @@
                   <li><a href="account_page.html">Account</a></li>
                   <li><a href="wishlist.html">Wishlist</a></li>
                   <li><a href="shopping_cart.html">Shopping Cart</a></li>
-                  <li><a href="#">Return Policy</a></li>
+                  <li><a href="{{ route('web.returnpolicy')}}">Return Policy</a></li>
                   <li><a href="#">Special</a></li>
                   <li><a href="#">Lookbook</a></li>
                 </ul>
