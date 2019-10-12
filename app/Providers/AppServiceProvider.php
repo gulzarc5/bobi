@@ -144,7 +144,7 @@ class AppServiceProvider extends ServiceProvider
                       $cart_count = 0;
                   }
               }
-            
+
             $category_list = [
                 'category_list_men' => $category_list_men,
                 'category_list_women' => $category_list_women,
@@ -159,5 +159,33 @@ class AppServiceProvider extends ServiceProvider
             //  die();
             $view->with('category_list', $category_list);
         });
+
+        if (Auth::guard('admin')) {
+            View::composer('admin.include.header', function ($view) {
+                $new_order_count = DB::table('orders')
+                    ->where('admin_view_status',1)
+                    ->count();
+                $seller_view_count = DB::table('user')
+                    ->where('view_status',1)
+                    ->where('user_role',2)
+                    ->count();
+                $buyer_view_count = DB::table('user')
+                    ->where('view_status',1)
+                    ->where('user_role',1)
+                    ->count();
+                $total_count = $new_order_count+$buyer_view_count+$seller_view_count ;
+                $admin_data = [
+                    'new_order_count' => $new_order_count,
+                    'seller_view_count' => $seller_view_count,
+                    'buyer_view_count' => $buyer_view_count,
+                    'total_count' => $total_count,
+                ];
+    
+               
+                //  echo($cart_data);
+                //  die();
+                $view->with('admin_data', $admin_data);
+            });
+        }
     }
 }

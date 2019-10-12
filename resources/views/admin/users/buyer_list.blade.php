@@ -8,7 +8,7 @@
     	    <div class="x_panel">
 
     	        <div class="x_title">
-    	            <h2>All Orders</h2>
+    	            <h2>Buyers List</h2>
     	            <div class="clearfix"></div>
     	        </div>
     	        <div>
@@ -17,15 +17,11 @@
                           <thead>
                             <tr>
                               <th>Sl</th>
-                              <th>Order Id</th>
-                              <th>Order By</th>
-                              <th>Amount</th>
-                              <th>Quantity</th>
-                              <th>Payment Method</th>
-                              <th>Payment Status</th>
-                              <th>Order Status</th>
-                              <th>Date</th>
-                              <th>Action</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Mobile</th>
+                              <th>Status</th>
+                              <th>action</th>
                             </tr>
                           </thead>
                           <tbody>                       
@@ -49,17 +45,13 @@
             var table = $('#size_list').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.ajax_order_all') }}",
+                ajax: "{{ route('admin.ajaxAllBuyers') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'id', name: 'id',searchable: true},
-                    {data: 'u_name', name: 'u_name' ,searchable: true},
-                    {data: 'amount', name: 'amount' ,searchable: true},                 
-                    {data: 'quantity', name: 'quantity',orderable: false, searchable: false},   
-                    { data: 'payment_method', name: 'payment_method',orderable: false, searchable: false},
-                    { data: 'payment_status', name: 'payment_status',orderable: false, searchable: false},  
-                    { data: 'status', name: 'status',orderable: false, searchable: false}, 
-                    { data: 'created_at', name: 'created_at', searchable: true},            
+                    {data: 'name', name: 'name',searchable: true},
+                    {data: 'email', name: 'email' ,searchable: true},
+                    {data: 'mobile', name: 'mobile' ,searchable: true},                 
+                    {data: 'status_tab', name: 'status_tab',orderable: false, searchable: false},          
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]
             });

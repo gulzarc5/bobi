@@ -43,7 +43,9 @@ Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 
 Route::group(['namespace' => 'Order'],function(){
 	Route::get('/All/Orders/', 'OrderController@orderListAll')->name('admin.all_order_list');	
+	Route::get('Order/Details/{order_id}','OrderController@orderDetails')->name('admin.order_details');
 
+	Route::get('Order/Status/Update/{order_id}/{order_details_id}/{status}','OrderController@orderStatusUpdate')->name('admin.order_status_update');
 
 	Route::get('ajax/all/orders','OrderController@ajaxOrderListAll')->name('admin.ajax_order_all');
 });

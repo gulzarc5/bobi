@@ -49,13 +49,14 @@ class CheckoutController extends Controller
         $user_id = Auth::guard('buyer')->user()->id;
         $address_id = $request->input('address');
         $pay_method = $request->input('pay_method');
-
+// dd($address_id);
         /* if Pay method == 1  then send to payment Gateway
             else place order as cash on delivery*/
         $order = DB::table('orders')
             ->insertGetId([
                 'user_id' => $user_id,
                 'payment_method' => $pay_method,
+                'shipping_address_id' => $address_id,
                 'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                 'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
             ]);
@@ -98,6 +99,7 @@ class CheckoutController extends Controller
                         'order_id' => $order,
                         'seller_id' => $product->seller_id,
                         'product_id' => $cart_data->product_id,
+                        'shipping_address_id' => $address_id,
                         'size' => $size_name,
                         'color' => $cart_data->color_id,
                         'designer' => $designer_name,

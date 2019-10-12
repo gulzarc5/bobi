@@ -1269,7 +1269,7 @@
    <div class="container">
       <div class="row">
          <!-- Blog -->
-         <div class="col-sm-7 col-md-6 col-xs-12 news">
+         {{-- <div class="col-sm-7 col-md-6 col-xs-12 news">
             <div id="latest-news">
                <div class="page-header">
                   <h2>From The Blog</h2>
@@ -1331,9 +1331,10 @@
                   </div>
                </div>
             </div>
-         </div>
+         </div> --}}
          <!-- Customers Box -->
-         <div class="col-md-6 col-sm-5 col-xs-12">
+         <div class="col-md-3 col-sm-12 col-xs-12"></div>
+         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="testimonials">
                <div class="page-header">
                   <h2>What Our Customers Say</h2>
@@ -1378,6 +1379,7 @@
                </div>
             </div>
          </div>
+         <div class="col-md-3 col-sm-12 col-xs-12"></div>
       </div>
    </div>
 </div>

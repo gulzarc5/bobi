@@ -10,6 +10,11 @@ class UsersController extends Controller
 {
     public function allSellers()
     {
+        DB::table('user')
+            ->where('user_role',2)
+            ->update([
+                'view_status' => 2,
+            ]);
     	return view('admin.users.seller_list');
     }
 
@@ -17,7 +22,8 @@ class UsersController extends Controller
     {
     	$query = DB::table('user')        
         ->whereNull('deleted_at')
-        ->where('user_role',2);
+        ->where('user_role',2)
+        ->orderBy('id','desc');
        
             return datatables()->of($query->get())
             ->addIndexColumn()
@@ -55,37 +61,46 @@ class UsersController extends Controller
                 return $btn;
             })
             ->rawColumns(['action','status_tab','verification_status'])
-            ->toJson();
+            ->make(true);
     }
 
     public function allBuyers()
     {
+        DB::table('user')
+            ->where('user_role',1)
+            ->update([
+                'view_status' => 2,
+            ]);
     	return view('admin.users.buyer_list');
     }
 
     public function ajaxAllBuyers()
     {
-    	$query = DB::table('seller')        
+    	$query = DB::table('user')        
         ->whereNull('deleted_at')
-        ->where('user_role',1);
+        ->where('user_role',1)
+        ->orderBy('id','desc');
        
             return datatables()->of($query->get())
             ->addIndexColumn()
-            ->addColumn('action', function($row){
-                   $btn = '
-                   <a href="#" class="btn btn-info btn-sm" target="_blank">View</a>
-                   <a href="#" class="btn btn-warning btn-sm">Verify</a>   
-                   <a href="#" class="btn btn-warning btn-sm">Active</a>';
-             
+            ->addColumn('action', function($row){   
+                    if ($row->status == 1) {  
+                        $btn = '<a href="'.route('admin.sellerUpdateStatus',['seller_id'=>encrypt($row->id),'status'=>encrypt(2)]).'" class="btn btn-danger btn-sm">DeActivate</a>';
+                    }else{
+                        $btn = '<a href="'.route('admin.sellerUpdateStatus',['seller_id'=>encrypt($row->id),'status'=>encrypt(1)]).'" class="btn btn-primary btn-sm">Activate</a>';
+                    }
                     return $btn;
             })
             ->addColumn('status_tab', function($row){
-
-                   $btn = '<a href="#" class="btn btn-success btn-sm">Enabled</a>';
-                    return $btn;
+                if ($row->status == 1) {
+                    $btn = '<a href="#" class="btn btn-success btn-sm">Enabled</a>';
+                }else{
+                    $btn = '<a href="#" class="btn btn-danger btn-sm">Disabled</a>';
+                }
+                return $btn;
             })
             ->rawColumns(['action','status_tab'])
-            ->toJson();
+            ->make(true);
     }
 
     public function sellerView($seller_id)
