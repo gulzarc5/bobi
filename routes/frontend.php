@@ -36,6 +36,8 @@ Route::group(['namespace'=> 'Web'], function(){
         Route::get('/thankyou/{id}', 'CheckoutController@checkoutSuccess')->name('web.checkout_thankyou');
         Route::get('/order/history','CheckoutController@orderHistory')->name('web.order_history');
 
+        Route::get('/order/cancel/{order_detail_id}','CheckoutController@orderCancel')->name('web.order_cancel');
+
         Route::post('New/Shippin/Add/Checkout','UserController@shippingAddCheckout')->name('web.new_ship_add');
         Route::post('/Logout', 'LoginController@logout')->name('web.buyerLogout');
     });

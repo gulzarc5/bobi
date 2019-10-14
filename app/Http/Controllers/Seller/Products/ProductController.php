@@ -21,9 +21,9 @@ class ProductController extends Controller
         $seller_category = DB::table('seller_deals')
             ->where('seller_id',$seller_id)
             ->whereNull('deleted_at')
-            ->distinct('category_id')
-            ->get();
-        
+            ->distinct()
+            ->get(['category_id']);
+        // dd($seller_category);
         $category_list = [];
         foreach ($seller_category as $category) {
             $cat = DB::table('category')

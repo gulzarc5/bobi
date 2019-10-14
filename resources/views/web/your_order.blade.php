@@ -22,6 +22,7 @@
                             <th class="text-center">Total</th>
                             <th class="text-center">Order Status</th>
                             <th class="text-center">Date</th>
+                            <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,16 +47,26 @@
                                     @if ($item->order_status == '1')
                                         <button type="button" class="btn btn-warning">pending</button>
                                     @elseif($item->order_status == '2')
-                                        <button type="button" class="btn btn-warning">Dispatched</button>
+                                        <button type="button" class="btn btn-info">Dispatched</button><br>
+                                        Courier Consignment Number : <strong>{{$item->consignment_no}}</strong><br>
+                                        <u><a href="https://www.aftership.com/couriers" style="color:blue" target="_blank">Click Here To Track Your Order</a></u>
                                     @elseif($item->order_status == '3')
-                                        <button type="button" class="btn btn-warning">Delivered</button>
+                                        <button type="button" class="btn btn-success">Delivered</button>
+                                        <br>
+                                        Courier Consignment Number : <strong>{{$item->consignment_no}}</strong><br>
+                                        <u><a href="https://www.aftership.com/couriers" style="color:blue" target="_blank">Click Here To Track Your Order</a></u>
                                     @elseif($item->order_status == '4')
-                                        <button type="button" class="btn btn-warning">Cancelled</button>
+                                        <button type="button" class="btn btn-danger">Cancelled</button>
                                     @elseif($item->order_status == '5')
-                                        <button type="button" class="btn btn-warning">Return</button>
+                                        <button type="button" class="btn btn-default">Return</button>
                                     @endif                                   
+                                </td>                               
+                                <td>{{ \Carbon\Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
+                                <td>
+                                    @if ($item->order_status == '1' || $item->order_status == '2' || $item->order_status == '3')
+                                <a href="{{ route('web.order_cancel',['order_detail_id'=>encrypt($item->id)])}}" class="btn btn-danger">Cancel Order</a>
+                                    @endif
                                 </td>
-                            <td>{{ \Carbon\Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
                             </tr>
                         @endforeach
                     </tbody>

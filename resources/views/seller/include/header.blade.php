@@ -108,9 +108,7 @@
                   </li>
                   <li><a><i class="fa fa-table"></i> Orders <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">New Orders</a></li>
-                      <li><a href="tables_dynamic.html">Pending Orders</a></li>
-                      <li><a href="tables_dynamic.html">Delivered Orders</a></li>
+                      <li><a href="{{ route('seller.all_orders') }}">All Orders</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -155,65 +153,27 @@
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
+                    <span class="badge bg-green">
+                      @if (isset($seller_data['new_order_view_count']))
+                          {{ $seller_data['new_order_view_count'] }}
+                      @else
+                          0
+                      @endif
+                    </span>
                   </a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
+                      @if (isset($seller_data['new_order_view_count']) && $seller_data['new_order_view_count'] > 0 )
+                      <li>
+                      <a href="{{ route('seller.all_orders') }}">
+                          <span>
+                            <span>Order</span>
+                          </span>
+                          <span class="message">
+                            <strong>{{ $seller_data['new_order_view_count']}}</strong> New Order Placed Click Here To Check
+                          </span>
                         </a>
-                      </div>
-                    </li>
+                      </li>
+                    @endif
                   </ul>
                 </li>
               </ul>

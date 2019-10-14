@@ -49,7 +49,6 @@ class CheckoutController extends Controller
         $user_id = Auth::guard('buyer')->user()->id;
         $address_id = $request->input('address');
         $pay_method = $request->input('pay_method');
-// dd($address_id);
         /* if Pay method == 1  then send to payment Gateway
             else place order as cash on delivery*/
         $order = DB::table('orders')
@@ -201,5 +200,49 @@ class CheckoutController extends Controller
             ->orderBy('order_details.id','desc')
             ->get();
         return view('web.your_order',compact('orders'));
+    }
+
+    public function orderCancel($order_details_id)
+    {
+        try {
+            $order_details_id = decrypt($order_details_id);
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+        $user_id = Auth::guard('buyer')->user()->id;
+
+        $update_order_status = DB::table('order_details')
+            ->where('id',$order_details_id)
+            ->update([
+                'order_status' => 4,
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+            ]);
+        if($update_order_status){
+            // $order = DB::table('order_details')->where('id',$order_details_id)->first();
+            $all_orders = DB::table('order_details')
+                ->where('id',$order_details_id)
+                ->get();
+            $status_flag = true;
+            foreach ($all_orders as $key => $value) {
+                $order_id = $value->order_id;
+                if ((int)$value->order_status < (int)4) {
+                    $status_flag = false;                    
+                    break;
+                }
+            }
+
+            if ($status_flag) {
+                DB::table('orders')
+                    ->where('id',$order_id)
+                    ->update([
+                        'status' => 4,
+                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                    ]);
+            }
+            return redirect()->back();
+        }else{
+            return redirect()->back();
+        }
+
     }
 }
