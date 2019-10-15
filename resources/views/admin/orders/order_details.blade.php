@@ -169,7 +169,7 @@
                             </td>
                             <td>
                                 @if ($item->order_status == '1')
-                                  <a href="{{ route('admin.order_status_update',['order_id' => encrypt($item->order_id),'order_details_id' => encrypt($item->id),'status' => encrypt(2)]) }}" class="btn btn-info">Dispatch</a>
+                                  <a href="{{ route('admin.order_dispatch',['order_details_id' => encrypt($item->id)]) }}" class="btn btn-info">Dispatch</a>
                                   <a href="{{ route('admin.order_status_update',['order_id' => encrypt($item->order_id),'order_details_id' => encrypt($item->id),'status' => encrypt(4)]) }}" class="btn btn-danger">Cancel</a>
                                 @elseif ($item->order_status == '2')
                                   <a href="{{ route('admin.order_status_update',['order_id' => encrypt($item->order_id),'order_details_id' => encrypt($item->id),'status' => encrypt(3)]) }}" class="btn btn-success">Delivered</a>

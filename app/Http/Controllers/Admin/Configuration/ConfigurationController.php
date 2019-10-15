@@ -88,12 +88,12 @@ class ConfigurationController extends Controller
             return datatables()->of($query->get())
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                   $btn = '<a href="#" class="btn btn-warning btn-sm">Edit</a>';
+                //    $btn = '<a href="#" class="btn btn-warning btn-sm">Edit</a>';
                    if ($row->status == '1') {
-                       $btn .= '<a href="#" class="btn btn-danger btn-sm">Disable</a>';
+                       $btn = '<a href="'.route('admin.size_status_update',['size_id'=>encrypt($row->id),'status'=>encrypt(2)]).'" class="btn btn-danger btn-sm">Disable</a>';
                         return $btn;
                     }else{
-                       $btn .= '<a href="#" class="btn btn-success btn-sm">Enable</a>';
+                       $btn = '<a href="'.route('admin.size_status_update',['size_id'=>encrypt($row->id),'status'=>encrypt(1)]).'" class="btn btn-success btn-sm">Enable</a>';
                         return $btn;
                     }
                     return $btn;
@@ -112,6 +112,25 @@ class ConfigurationController extends Controller
             ->rawColumns(['action','status_tab'])
             ->toJson();
                     
+    }
+
+    public function sizeStatusUpdate($size_id,$status)
+    {
+        try {
+            $size_id = decrypt($size_id);
+            $status = decrypt($status);
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+
+        DB::table('sizes')
+            ->where('id',$size_id)
+            ->update([
+                'status' => $status,
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+            ]);
+        return redirect()->back();
+
     }
 
 
@@ -150,49 +169,6 @@ class ConfigurationController extends Controller
         return redirect()->back()->with('message','Color Added Successfully');
     }
 
-    // public function viewMapColorForm(){
-    //     $main_category = Category::where('status','1')->get()->pluck('name','id');
-
-    //     $color = DB::table('color')
-    //     ->where('status','=','1')
-    //     ->get();
-    //     return view('admin.configuration.map_color_form',compact('main_category','color'));
-    // }
-
-    // public function addColorMap(Request $request){
-    //     $validatedData = $request->validate([
-    //     'category' => 'required',
-    //     'first_category' => 'required',
-    //     'second_category' => 'required',
-    //     'color_id' => 'required',
-    //     ]);
-
-    //     $check_color = DB::table('color_map')
-    //     ->where('color_id',$request->input('color_id'))
-    //     ->where('first_category',$request->input('first_category'))
-    //     ->where('second_category',$request->input('second_category'))
-    //     ->where('category',$request->input('category'))
-    //     ->count();
-
-    //     if ($check_color > 0) {
-    //         return redirect()->back()->with('error','Color Already Exist Under This Category');
-    //     }
-
-    //     $color = DB::table('color_map')
-    //     ->insert([
-    //         'category' => $request->input('category'),
-    //         'first_category' => $request->input('first_category'),
-    //         'second_category' => $request->input('second_category'),
-    //         'color_id' => $request->input('color_id'),
-    //     ]);
-
-    //     if ($color) {
-    //         return redirect()->back()->with('message','Color Mapped Successfully Under This Category');
-    //     }else{
-    //         return redirect()->back()->with('error','Something Went Wrong Please try Again');
-    //     }
-    // }
-
     public function ajaxGetColor($color_id){
         $color = DB::table('color')
         ->where('id',$color_id)
@@ -213,14 +189,11 @@ class ConfigurationController extends Controller
             return datatables()->of($query->get())
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                   $btn = '<a href="#" class="btn btn-primary btn-sm">View</a>
-                   <a href="#" class="btn btn-warning btn-sm">Edit</a>                   
-                   ';
                    if ($row->status == '1') {
-                       $btn .= '<a href="#" class="btn btn-danger btn-sm">Disable</a>';
+                       $btn = '<a href="'.route('admin.color_status_update',['color_id'=>encrypt($row->id),'status'=> encrypt(2)]).'" class="btn btn-danger btn-sm">Disable</a>';
                         return $btn;
                     }else{
-                       $btn .= '<a href="#" class="btn btn-success btn-sm">Enable</a>';
+                       $btn = '<a href="'.route('admin.color_status_update',['color_id'=>encrypt($row->id),'status'=> encrypt(1)]).'" class="btn btn-success btn-sm">Enable</a>';
                         return $btn;
                     }
                     return $btn;
@@ -243,10 +216,28 @@ class ConfigurationController extends Controller
                 
             })
             ->rawColumns(['action','status_tab','show_color'])
-            ->toJson();
+            ->make(true);
     }
 
-      
+    public function colorStatusUpdate($color_id,$status)
+    {
+        try {
+            $color_id = decrypt($color_id);
+            $status = decrypt($status);
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+
+        DB::table('color')
+            ->where('id',$color_id)
+            ->update([
+                'status' => $status,
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+            ]);
+        return redirect()->back();
+
+    }
+
     //*****************Brand Configuration*************************
 
     public function viewBrandForm(){
@@ -303,14 +294,12 @@ class ConfigurationController extends Controller
             return datatables()->of($query->get())
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                   $btn = '
-                   <a href="#" class="btn btn-warning btn-sm">Edit</a>                   
-                   ';
+                  
                    if ($row->status == '1') {
-                       $btn .= '<a href="#" class="btn btn-danger btn-sm">Disable</a>';
+                       $btn = '<a href="'.route('admin.brand_status_update',['brand_id'=>encrypt($row->id),'status'=> encrypt(2)]).'" class="btn btn-danger btn-sm">Disable</a>';
                         return $btn;
                     }else{
-                       $btn .= '<a href="#" class="btn btn-success btn-sm">Enable</a>';
+                       $btn = '<a href="'.route('admin.brand_status_update',['brand_id'=>encrypt($row->id),'status'=> encrypt(1)]).'" class="btn btn-success btn-sm">Enable</a>';
                         return $btn;
                     }
                     return $btn;
@@ -340,6 +329,25 @@ class ConfigurationController extends Controller
        ->get()
        ->pluck('name','id');
        return $brands;
+    }
+
+    public function brandStatusUpdate($brand_id,$status)
+    {
+        try {
+            $brand_id = decrypt($brand_id);
+            $status = decrypt($status);
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+
+        DB::table('brand_name')
+            ->where('id',$brand_id)
+            ->update([
+                'status' => $status,
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+            ]);
+        return redirect()->back();
+
     }
 
     //******************State Section******************

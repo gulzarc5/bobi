@@ -90,6 +90,7 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 
 		Route::get('/Size/List', 'ConfigurationController@sizeList')->name('admin.size_list');
 		Route::get('/Size/Lists', 'ConfigurationController@sizeLists')->name('admin.size_lists');
+		Route::get('/Size/Status/Update/{size_id}/{status}', 'ConfigurationController@sizeStatusUpdate')->name('admin.size_status_update');
 
 		//********************Color Configuration Route*************************
 		Route::get('/Add/Color/Name', 'ConfigurationController@viewColorNameForm')->name('admin.add_color_name_form');
@@ -98,12 +99,15 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 		Route::get('Ajax/Color/List', 'ConfigurationController@ajaxColorList')->name('admin.ajax_color_list');
 		Route::get('Color/List', 'ConfigurationController@viewColorList')->name('admin.view_color_list');
 
+		Route::get('/Color/Status/Update/{color_id}/{status}', 'ConfigurationController@colorStatusUpdate')->name('admin.color_status_update');
+
 		//********************Brand Configuration Route*************************
 		Route::get('/Add/Brand/', 'ConfigurationController@viewBrandForm')->name('admin.add_brand_form');
 		Route::post('/Add/Brand', 'ConfigurationController@addBrand')->name('admin.add_brand');
 		Route::get('/Brand/Name/list', 'ConfigurationController@brandNameList')->name('admin.brand_name_list');
 		Route::get('Ajax/Brand/Name/List', 'ConfigurationController@ajaxBrandNameList')->name('admin.ajax_brand_name_list');
 		Route::get('/Ajax/brand/{first_category}', 'ConfigurationController@AjaxBrandNames');
+		Route::get('/Brand/Status/Update/{brand_id}/{status}', 'ConfigurationController@brandStatusUpdate')->name('admin.brand_status_update');
 		
 
 		//*******************State Routes*********************

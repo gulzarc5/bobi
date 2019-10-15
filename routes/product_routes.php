@@ -48,4 +48,7 @@ Route::group(['namespace' => 'Order'],function(){
 	Route::get('Order/Status/Update/{order_id}/{order_details_id}/{status}','OrderController@orderStatusUpdate')->name('admin.order_status_update');
 
 	Route::get('ajax/all/orders','OrderController@ajaxOrderListAll')->name('admin.ajax_order_all');
+
+	Route::get('order/dispatch/{order_details_id}','OrderController@dispatchOrder')->name('admin.order_dispatch');
+	Route::post('order/dispatch/Update','OrderController@dispatchOrderUpdate')->name('admin.order_dispatch_update');
 });

@@ -63,7 +63,7 @@
                                 </td>                               
                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->toDayDateTimeString()}}</td>
                                 <td>
-                                    @if ($item->order_status == '1' || $item->order_status == '2' || $item->order_status == '3')
+                                    @if ($item->order_status == '1' || $item->order_status == '2' )
                                 <a href="{{ route('web.order_cancel',['order_detail_id'=>encrypt($item->id)])}}" class="btn btn-danger">Cancel Order</a>
                                     @endif
                                 </td>
