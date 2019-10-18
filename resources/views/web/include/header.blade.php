@@ -12,249 +12,80 @@
 
 <body class="cms-index-index cms-home-page product-page">
   <!-- mobile menu -->
-  {{-- <div id="mobile-menu">
-    <div class="mobile-menu-top" style="height: 100px;background: #323d61">
-        <img src="{{asset('web/images/testimonials-img2.jpg')}}')}}" style="width: 23%;border-radius: 50%;margin: 12px 0 5px 12px;border: 5px solid #c3c30d;">
-        <h6 style="color: #fff;margin-left: 10px">Wellcome User</h6>
+  <div id="mobile-menu">
+    <div class="mobile-menu-top" style="background: #fff">
+        <img src="{{asset('web/images/logo.png')}}" style="width: 100%;padding: 10px 48px;">
     </div>
     <ul>
-      <li><a href="index.html" class="home1">Home</a></li>
-      <li><a href="#">Pages</a>
-        <ul>
-          <li><a href="#">Shop Pages </a>
-            <ul class="sub-menu">
-              <li><a href="Product_List"><span>Grid View Category Page</span></a></li>
-              <li><a href="shop_grid_full_width.html"><span>Grid View Full Width</span></a></li>
-              <li><a href="shop_list.html"><span>List View Category Page</span></a></li>
-              <li><a href="single_product.html"><span>Full Width Product Page</span> </a></li>
-              <li><a href="single_product_sidebar.html"><span>Product Page With Sidebar</span> </a></li>
-              <li><a href="single_product_magnify_zoom.html"><span>Product Page Magnify Zoom</span> </a></li>
-              <li><a href="shopping_cart.html"><span>Shopping Cart</span></a></li>
-              <li><a href="wishlist.html"><span>Wishlist</span></a></li>
-              <li><a href="compare.html"><span>Compare Products</span></a></li>
-              <li><a href="checkout.html"><span>Checkout</span></a></li>
-              <li><a href="sitemap.html"><span>Sitemap</span></a></li>
-            </ul>
-          </li>
-          <li><a href="#">Static Pages </a>
-            <ul class="sub-menu">
-              <li><a href="about_us.html"><span>About Us</span></a></li>
-              <li><a href="contact_us.html"><span>Contact Us</span></a></li>
-              <li><a href="orders_list.html"><span>Orders List</span></a></li>
-              <li><a href="order_details.html"><span>Order Details</span></a></li>
-              <li><a href="404error.html"><span>404 Error</span> </a></li>
-              <li><a href="faq.html"><span>FAQ Page</span></a></li>
-              <li><a href="manufacturers.html"><span>Manufacturers</span></a></li>
-              <li><a href="quick_view.html"><span>Quick View</span></a></li>
-              <li><a href="dashboard.html"><span>Account Dashboard</span></a></li>
-              <li><a href="shortcodes.html"><span>Shortcodes</span> </a></li>
-              <li><a href="typography.html"><span>Typography</span></a></li>
-            </ul>
-          </li>
-          <li><a href="#"> Blog Pages </a>
-            <ul class="sub-menu">
-              <li><a href="blog_right_sidebar.html">Blog – Right sidebar </a></li>
-              <li><a href="blog_left_sidebar.html">Blog – Left sidebar </a></li>
-              <li><a href="blog_full_width.html">Blog - Full width</a></li>
-              <li><a href="blog_single_post.html">Single post </a></li>
-            </ul>
-          </li>
+      <li><a href="{{ route('web.index') }}" class="home1">Home</a></li>
+
+      <li><a>Men</a>
+        <ul class="level0">
+          @if (isset($category_list['category_list_men']) && !empty($category_list['category_list_men']))
+          @foreach ($category_list['category_list_men'] as $f_category)
+                @if (count($f_category['second_category']) > 0)
+                  <li class="parent item"> <a><span>{{ $f_category['name'] }}</span></a>
+                  <ul class="level1">
+                    @foreach ($f_category['second_category'] as $s_category)
+                      <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
+                    @endforeach
+                  </ul>
+                  @endif
+              @endforeach                                  
+          @endif
         </ul>
       </li>
-      <li><a href="blog.html">Blog</a>
-        <ul>
-          <li><a href="blog_right_sidebar.html"> Blog – Right Sidebar </a></li>
-          <li><a href="blog_left_sidebar.html"> Blog – Left Sidebar </a></li>
-          <li><a href="blog_full_width.html"> Blog – Full-Width </a></li>
-          <li><a href="blog_single_post.html"> Single post </a></li>
+      <li><a>Women</a>
+        <ul class="level0">
+            @if (isset($category_list['category_list_women']) && !empty($category_list['category_list_women']))
+              @foreach ($category_list['category_list_women'] as $f_category)
+                @if (count($f_category['second_category']) > 0)
+                  <li> <a><span>{{ $f_category['name'] }}</span></a>
+                  <ul>
+                    @foreach ($f_category['second_category'] as $s_category)
+                      <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
+                    @endforeach
+                  </ul>
+                @endif
+              @endforeach
+            @endif
         </ul>
       </li>
-      <li><a href="Product_List">Fashion</a>
+      <li><a href="Product_List">Women Traditional</a>
         <ul>
-          <li><a href="#" class="">Accessories</a>
-            <ul>
-              <li><a href="Product_List">Cocktail</a></li>
-              <li><a href="Product_List">Day</a></li>
-              <li><a href="Product_List">Evening</a></li>
-              <li><a href="Product_List">Sundresses</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Dresses</a>
-            <ul>
-              <li><a href="Product_List">Accessories</a></li>
-              <li><a href="Product_List">Hats and Gloves</a></li>
-              <li><a href="Product_List">Lifestyle</a></li>
-              <li><a href="Product_List">Bras</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Shoes</a>
-            <ul>
-              <li><a href="Product_List">Flat Shoes</a></li>
-              <li><a href="Product_List">Flat Sandals</a></li>
-              <li><a href="Product_List">Boots</a></li>
-              <li><a href="Product_List">Heels</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Jwellery</a>
-            <ul>
-              <li><a href="Product_List">Bracelets</a></li>
-              <li><a href="Product_List">Necklaces &amp; Pendent</a></li>
-              <li><a href="Product_List">Pendants</a></li>
-              <li><a href="Product_List">Pins &amp; Brooches</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Dresses</a>
-            <ul>
-              <li><a href="Product_List">Casual Dresses</a></li>
-              <li><a href="Product_List">Evening</a></li>
-              <li><a href="Product_List">Designer</a></li>
-              <li><a href="Product_List">Party</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Swimwear</a>
-            <ul>
-              <li><a href="Product_List">Swimsuits</a></li>
-              <li><a href="Product_List">Beach Clothing</a></li>
-              <li><a href="Product_List">Clothing</a></li>
-              <li><a href="Product_List">Bikinis</a></li>
-            </ul>
-          </li>
+          @if (isset($category_list['category_list_womenTraditional']) && !empty($category_list['category_list_womenTraditional']))
+            @foreach ($category_list['category_list_womenTraditional'] as $f_category)
+              @if (count($f_category['second_category']) > 0)
+                <li> <a><span>{{ $f_category['name'] }}</span></a>
+                <ul>
+                  @foreach ($f_category['second_category'] as $s_category)
+                    <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
+                  @endforeach
+                </ul>
+              @endif
+            @endforeach
+          @endif
         </ul>
       </li>
-      <li><a href="Product_List">Women</a>
+      <li><a href="Product_List">Men Traditional</a>
         <ul>
-          <li><a href="#" class="">Clothing</a>
-            <ul class="level1">
-              <li><a href="Product_List">Coats &amp; Jackets</a></li>
-              <li><a href="Product_List">Raincoats</a></li>
-              <li><a href="Product_List">Blazers</a></li>
-              <li><a href="Product_List">Jackets</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Dresses</a>
-            <ul class="level1">
-              <li><a href="Product_List">Casual Dresses</a></li>
-              <li><a href="Product_List">Evening</a></li>
-              <li><a href="Product_List">Designer</a></li>
-              <li><a href="Product_List">Party</a></li>
-            </ul>
-          </li>
-          <li><a href="#" class="">Shoes</a>
-            <ul class="level1">
-              <li><a href="Product_List">Sport Shoes</a></li>
-              <li><a href="Product_List">Casual Shoes</a></li>
-              <li><a href="Product_List">Leather Shoes</a></li>
-              <li><a href="Product_List">canvas shoes</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Jackets</a>
-            <ul class="level1">
-              <li><a href="Product_List">Coats</a></li>
-              <li><a href="Product_List">Formal Jackets</a></li>
-              <li><a href="Product_List">Leather Jackets</a></li>
-              <li><a href="Product_List">Blazers</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Accesories</a>
-            <ul class="level1">
-              <li><a href="Product_List">Backpacks</a></li>
-              <li><a href="Product_List">Wallets</a></li>
-              <li><a href="Product_List">Laptops Bags</a></li>
-              <li><a href="Product_List">Belts</a></li>
-            </ul>
-          </li>
+          @if (isset($category_list['category_list_menTraditional']) && !empty($category_list['category_list_menTraditional']))
+            @foreach ($category_list['category_list_menTraditional'] as $f_category)
+              @if (count($f_category['second_category']) > 0)
+                <li> <a><span>{{ $f_category['name'] }}</span></a>
+                <ul>
+                  @foreach ($f_category['second_category'] as $s_category)
+                    <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
+                  @endforeach
+                </ul>
+              @endif
+            @endforeach
+          @endif
         </ul>
       </li>
-      <li><a href="Product_List">Men</a>
-        <ul>
-          <li><a href="Product_List">Mobiles</a>
-            <ul>
-              <li><a href="Product_List">iPhone</a></li>
-              <li><a href="Product_List">Samsung</a></li>
-              <li><a href="Product_List">Nokia</a></li>
-              <li><a href="Product_List">Sony</a></li>
-            </ul>
-          </li>
-          <li><a href="Product_List" class="">Music &amp; Audio</a>
-            <ul>
-              <li><a href="Product_List">Audio</a></li>
-              <li><a href="Product_List">Cameras</a></li>
-              <li><a href="Product_List">Appling</a></li>
-              <li><a href="Product_List">Car Music</a></li>
-            </ul>
-          </li>
-          <li><a href="Product_List">Accessories</a>
-            <ul>
-              <li><a href="Product_List">Home &amp; Office</a></li>
-              <li><a href="Product_List">TV &amp; Home Theater</a></li>
-              <li><a href="Product_List">Phones &amp; Radio</a></li>
-              <li><a href="Product_List">All Electronics</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li><a href="blog.html">Blog</a>
-        <ul>
-          <li><a href="blog_right_sidebar.html"> Blog – Right Sidebar </a></li>
-          <li><a href="blog_left_sidebar.html"> Blog – Left Sidebar </a></li>
-          <li><a href="blog_full_width.html"> Blog – Full-Width </a></li>
-          <li><a href="blog_single_post.html"> Single post </a></li>
-        </ul>
-      </li>
-      <li><a href="Product_List">Fashion</a>
-        <ul>
-          <li><a href="#" class="">Accessories</a>
-            <ul>
-              <li><a href="Product_List">Cocktail</a></li>
-              <li><a href="Product_List">Day</a></li>
-              <li><a href="Product_List">Evening</a></li>
-              <li><a href="Product_List">Sundresses</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Dresses</a>
-            <ul>
-              <li><a href="Product_List">Accessories</a></li>
-              <li><a href="Product_List">Hats and Gloves</a></li>
-              <li><a href="Product_List">Lifestyle</a></li>
-              <li><a href="Product_List">Bras</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Shoes</a>
-            <ul>
-              <li><a href="Product_List">Flat Shoes</a></li>
-              <li><a href="Product_List">Flat Sandals</a></li>
-              <li><a href="Product_List">Boots</a></li>
-              <li><a href="Product_List">Heels</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Jwellery</a>
-            <ul>
-              <li><a href="Product_List">Bracelets</a></li>
-              <li><a href="Product_List">Necklaces &amp; Pendent</a></li>
-              <li><a href="Product_List">Pendants</a></li>
-              <li><a href="Product_List">Pins &amp; Brooches</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Dresses</a>
-            <ul>
-              <li><a href="Product_List">Casual Dresses</a></li>
-              <li><a href="Product_List">Evening</a></li>
-              <li><a href="Product_List">Designer</a></li>
-              <li><a href="Product_List">Party</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Swimwear</a>
-            <ul>
-              <li><a href="Product_List">Swimsuits</a></li>
-              <li><a href="Product_List">Beach Clothing</a></li>
-              <li><a href="Product_List">Clothing</a></li>
-              <li><a href="Product_List">Bikinis</a></li>
-            </ul>
-          </li>
-        </ul>
-      </li>
+      <li><a href="{{ route('web.contact')}}">Contact Us</a></li>
     </ul>
-  </div> --}}
+  </div>
   <!-- end mobile menu -->
   <div id="page">   
     <!-- Header -->
@@ -387,14 +218,6 @@
                                       @endif
                                   @endforeach                                  
                               @endif
-                              {{-- <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Toaster Crossbody</span></a> </li>
-                                  <li> <a href="Product_List"><span>Piper Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Leather Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Canvas Bag</span></a> </li>
-                                </ul>
-                              </li> --}}
                             </ul>
                           </div>
                           <div class="col-2">
@@ -422,14 +245,6 @@
                                     @endif
                                   @endforeach
                                 @endif
-                              {{-- <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Toaster Crossbody</span></a> </li>
-                                  <li> <a href="Product_List"><span>Piper Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Leather Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Canvas Bag</span></a> </li>
-                                </ul>
-                              </li> --}}
                             </ul>
                           </div>
                           <div class="col-2">
@@ -439,69 +254,7 @@
                       </div>
                     </div>
                   </li>
-                  {{-- <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Kids</span></a>
-                    <div class="jtv-menu-block-wrapper">
-                      <div class="jtv-menu-block-wrapper2">
-                        <div class="nav-block jtv-nav-block-center">
-                          <div class="col-1">
-                            <ul class="level0">
-                              <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Toaster Crossbody</span></a> </li>
-                                  <li> <a href="Product_List"><span>Piper Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Leather Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Canvas Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>bucket bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Accessories</span></a> </li>
-                                  <li> <a href="Product_List"><span>Gym Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Fashion Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Messenger Bags</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Travel Duffels</span></a> </li>
-                                  <li> <a href="Product_List"><span>Umbrellas</span></a> </li>
-                                  <li> <a href="Product_List"><span>Waist Packs</span></a> </li>
-                                  <li> <a href="Product_List"><span>Travel Gear</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>curved boxy sling</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Luggage</span></a> </li>
-                                  <li> <a href="Product_List"><span>Briefcases</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bowling</span></a> </li>
-                                  <li> <a href="Product_List"><span>Bucket Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>floral lattice bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Crossbody Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Clutch Handbag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Hobo Shoulder</span></a> </li>
-                                  <li> <a href="Product_List"><span>Saddle Bag</span></a> </li>
-                                </ul>
-                              </li>
-                              <li class="parent item"> <a href="Product_List"><span>Bag Accessories</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Wallet Wristlet</span></a> </li>
-                                  <li> <a href="Product_List"><span>Solo Premium </span></a> </li>
-                                  <li> <a href="Product_List"><span>Laptop Bags</span></a> </li>
-                                  <li> <a href="Product_List"><span>Belts</span></a> </li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="col-2">
-                            <div class="jtv-nav-image1"> <a title="" href="#"><img alt="menu_image" src="{{asset('web/images/menu-img1.jpg')}}"> </a> </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li> --}}
+                
                   <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Women TRADITIONAL</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">

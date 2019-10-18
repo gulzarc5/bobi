@@ -14,7 +14,7 @@
 <div class="container">
    @if ( isset($cart_data) && !empty($cart_data) && (count($cart_data) > 0))
    <div class="row">
-      <div class="col-md-10">
+      <div class="col-md-10 table-responsive">
          <table class="table  table-shopping-cart">
             <thead>
                <tr class="tabletr">
@@ -77,7 +77,7 @@
          <a class="btn btn-primary " href="{{ route('web.checkout_ship') }}" >Checkout</a>
       </div>
    </div>
-   <ul class="list-inline">
+   <ul class="list-inline mob-check">
       <li><a href="{{ route('web.index') }}" class="btn btn-default" href="#">Continue Shopping</a></li>
       {{-- 
       <li><a class="btn btn-default" href="#">Update Bag</a></li>

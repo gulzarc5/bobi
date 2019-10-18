@@ -7,7 +7,7 @@
   <div class="container" style="margin-top: 20px;">
     @if (isset($orders) && count($orders) > 0)
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 table-responsive">
                 <table class="table  table-shopping-cart">
                     <thead>
                         <tr class="tabletr">
