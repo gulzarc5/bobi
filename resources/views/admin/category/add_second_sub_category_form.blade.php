@@ -133,18 +133,18 @@
                             	@foreach($secondCategoryList as $category)
                                 <tr class="even pointer">
                                     <td class=" ">{{ $count++ }}</td>
-                                    <td class=" ">{{ $category['name'] }}</td>
-                                    <td>{{ $category->firstCategory->name }}</td>
-                                    <td>{{ $category->Category->name }}</td>
-                                    <td><img src="{{ asset('images/category/second_category/thumb/'.$category['image'].'') }}" height="80px"></td>
+                                    <td class=" ">{{ $category->name }}</td>
+                                    <td>{{ $category->f_cat_name }}</td>
+                                    <td>{{ $category->cat_name }}</td>
+                                    <td><img src="{{ asset('images/category/second_category/thumb/'.$category->image.'') }}" height="80px"></td>
                                     <td class=" ">
-                                        @if($category['status'] == '1')
+                                        @if($category->status == '1')
                                             <button class='btn btn-primary'>Enabled</button>
                                         @else
                                              <button class='btn btn-warning'>Disabled</button>
                                         @endif                                    	
                                     <td class=" ">
-                                    	@if($category['status'] == '1')
+                                    	@if($category->status == '1')
                                            <a href="{{route('admin.second_category_status_update',['id' => $category->id,'status' => 2])}}" class="btn btn-danger">Disable</a>
                                         @else
                                             <a href="{{route('admin.second_category_status_update',['id' => $category->id,'status' => 1])}}" class="btn btn-success">Enable</a>
