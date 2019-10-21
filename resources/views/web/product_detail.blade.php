@@ -183,33 +183,45 @@
             <div class="slider-items-products">
               <div id="women-slider" class="product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col4">
-                  <div class="product-item">
-                    <div class="item-inner">
-                      <div class="product-thumbnail">
-                        <div class="icon-new-label new-left">New</div>
-                        <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
-                          <figure> 
-                            <img class="first-img" src="{{asset('web/images/products/img16.jpg')}}" alt=""> 
-                          </figure>
-                          </a> </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">Ipsums Dolors Untra </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$125.00</span> </span> </div>
+
+                  @if (isset($data['related_products']) && count($data['related_products']) > 0)
+                      @foreach ($data['related_products'] as $item)
+                        <div class="product-item">
+                          <div class="item-inner">
+                            <div class="product-thumbnail">
+                              {{-- <div class="icon-new-label new-left">New</div> --}}
+                              <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
+                                <figure> 
+                                  <img class="first-img" src="{{asset('images/product/thumb/'.$item->main_image.'')}}" alt=""> 
+                                </figure>
+                                </a> </div>
                             </div>
-                            <div class="pro-action flex-center">
-                              <div class="mt-button add_to_wishlist" > <a href="wishlist.html"> <i class="pe-7s-like"></i> </a> </div>
-                              <button type="button" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
+                            <div class="item-info">
+                              <div class="info-inner">
+                                <div class="item-title"> <a title="Ipsums Dolors Untra" href="single_product.html">{{$item->name}} </a> </div>
+                                <div class="item-content">
+                                  <div class="item-price">
+                                    <div class="price-box"> <span class="regular-price"> <span class="price">Rs. {{ number_format($item->min_price,2,".",'') }}</span> </span> </div>
+                                  </div>
+                                  <div class="pro-action flex-center">
+                                      <div class="mt-button add_to_wishlist" > <a href="{{ route('web.add_wish_list',['product_id'=>encrypt($item->id)]) }}"> <i class="pe-7s-like"></i> </a> </div>
+                                    @if (isset($item->min_price))
+                                    {{ Form::open(['method' => 'post','route'=>'web.add_cart']) }}
+                                      <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                      <input type="hidden" name="quantity" value="1">
+                                      <button type="submit" class="add-to-cart"> <i class="pe-7s-cart"></i><span> Add to Cart</span> </button>
+                                    {{ Form::close() }}
+                                    @endif
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-item">
+                      @endforeach
+                  @endif
+                  
+                  {{-- <div class="product-item">
                     <div class="item-inner">
                       <div class="product-thumbnail">
                         <div class="pr-img-area"> <a title="Ipsums Dolors Untra" href="single_product.html">
@@ -336,7 +348,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
               </div>
             </div>

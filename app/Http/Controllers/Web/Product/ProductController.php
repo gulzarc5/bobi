@@ -132,12 +132,25 @@ class ProductController extends Controller
             ->whereNull('deleted_at')
             ->where('status',1)
             ->get();
+        
+        $related_products = [];
+        if (isset($product->first_category) && !empty($product->first_category)) {
+            $related_products = DB::table('products')
+            ->where('first_category',$product->first_category)
+            ->whereNull('deleted_at')
+            ->where('status',1)
+            ->inRandomOrder()
+            ->limit(10)
+            ->get();
+        }
+        
         $data = [
             'product' =>$product,
             'colors' => $colors,
             'sizes' => $sizes,
             'images' => $images,
             'min_price' => $min_price,
+            'related_products' => $related_products,
         ];
         return view('web.product_detail',compact('data'));
     }

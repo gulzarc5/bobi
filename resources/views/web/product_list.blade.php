@@ -35,13 +35,15 @@
           </div> --}}
           <div class=" slider-product">
             <div class="page-title" style="padding-top: 13px;">
-              <h2 class="col-md-6">
+              <div class="col-md-6 product-head">
+                <h2>
                 @if (isset($data['category_name'] ) && !empty($data['category_name'] ))
                     {{$data['category_name']->category_name}} > {{ $data['category_name']->second_cat_name }}
                     <input type="hidden" id="category_id_filter" value="{{$data['category_name']->second_cat_id}}">
                 @endif
               </h2>
-              <div class="col-md-6">
+              </div>
+              <div class="col-md-6 product-head">
                   <select style="float:right;width: 200px;" id="product_sort" class="form-control" onchange="filterProduct();">
                       <option value="low">Price Low To High</option>
                       <option value="high">Price High To Low</option>
@@ -50,7 +52,7 @@
                       <option value="title_dsc">Title Z-A</option>
                       
                   </select>
-                  <span style="float:right;float: right;padding-top: 6px;padding-right: 12px;font-variant: small-caps;font-weight: bold;">Sort By</span>
+                  <span class="sort-filter">Sort By</span>
               </div>
               
             </div><hr>

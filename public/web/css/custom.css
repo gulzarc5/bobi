@@ -858,6 +858,14 @@ ul.level1 {
 .done, .act{
 	opacity: .5;
 }
+.sort-filter{
+	float:right;
+	float: right;
+	padding-top: 6px;
+	padding-right: 12px;
+	font-variant: small-caps;
+	font-weight: bold;
+}
 /*========== Responsive ==========*/
 @media (max-width: 425px){
 	.jtv-sticky-menu .logo img{
@@ -880,5 +888,19 @@ ul.level1 {
 	}
 	.slider-content{
 		left: 30px;
+	}
+	.sort-filter{
+		display: none;
+	}
+	.product-head{
+		width: 50%;
+		float: left;
+	}
+	.mob-check{
+		float: right;
+   		margin-top: -42px;
+	}
+	.Login-section .page-content {
+	    width: 100%;
 	}
 }

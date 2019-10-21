@@ -33,7 +33,7 @@
             @foreach ($shipping_address as $addr)
                @if ($ship_flag == false)
                   <div class="col-md-5 checkout_grid shipping" style="border:2px solid #6993f3;">
-                     <input type="radio" name="address"  checked/>
+                     <input type="radio" name="address" value="{{$addr->id}}"  checked/>
                      <p style="margin-top: 10px;">
                      <p><b>State:</b> {{$addr->s_name}}</p>
                      <p><b>City:</b> {{$addr->c_name}}</p>
@@ -46,7 +46,7 @@
                   @endphp
                @else
                   <div class="col-md-5 checkout_grid shipping">
-                     <input type="radio" name="address"  />
+                     <input type="radio" name="address" value="{{$addr->id}}" />
                      <p style="margin-top: 10px;">
                      <p><b>State:</b> {{$addr->s_name}}</p>
                      <p><b>City:</b> {{$addr->c_name}}</p>
@@ -85,8 +85,8 @@
                <li>
                   <span>Payment Method</span>
                   <span>
-                  Online <input type="radio" name="pay_method" value="1">
-                  COD <input type="radio" name="pay_method" value="2">
+                  Online <input type="radio" name="pay_method" value="2">
+                  COD <input type="radio" name="pay_method" value="1">
                   </span>
                </li>
             </ul>

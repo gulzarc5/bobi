@@ -4,8 +4,6 @@ Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 
 	Route::get('/Add/Form', 'ProductController@viewProductAddForm')->name('admin.add_product_form');
 
-	
-
 	Route::post('/Add', 'ProductController@addNewProduct')->name('admin.add_new_product');
 
 	Route::get('/list', 'ProductController@productList')->name('admin.product_list');
@@ -41,4 +39,16 @@ Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 	Route::post('/New/Color/Add/', 'ProductController@productNewColorAdd')->name('admin.product_new_color_add');
 
 	Route::get('/Status/Update/{product_id}/{status}', 'ProductController@productStatusUpdate')->name('admin.product_status_update');
+});
+
+Route::group(['namespace' => 'Order'],function(){
+	Route::get('/All/Orders/', 'OrderController@orderListAll')->name('admin.all_order_list');	
+	Route::get('Order/Details/{order_id}','OrderController@orderDetails')->name('admin.order_details');
+
+	Route::get('Order/Status/Update/{order_id}/{order_details_id}/{status}','OrderController@orderStatusUpdate')->name('admin.order_status_update');
+
+	Route::get('ajax/all/orders','OrderController@ajaxOrderListAll')->name('admin.ajax_order_all');
+
+	Route::get('order/dispatch/{order_details_id}','OrderController@dispatchOrder')->name('admin.order_dispatch');
+	Route::post('order/dispatch/Update','OrderController@dispatchOrderUpdate')->name('admin.order_dispatch_update');
 });

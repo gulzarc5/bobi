@@ -210,7 +210,8 @@ class ProductController extends Controller
         ->join('first_category','products.first_category','=','first_category.id')
         ->join('second_category','products.second_category','=','second_category.id')
         ->join('brand_name','products.brand_id','=','brand_name.id')
-        ->whereNull('products.deleted_at');
+        ->whereNull('products.deleted_at')
+        ->orderBy('products.id','desc');
        
             return datatables()->of($query->get())
             ->addIndexColumn()
@@ -250,21 +251,24 @@ class ProductController extends Controller
         ->join('brand_name','products.brand_id','=','brand_name.id')
         ->where('products.id','=',$product_id)
         ->first();
+        $sizes = [];
+        $colors = [];
+        $related_products = [];
+        if ($product) {
+            $sizes = DB::table('product_sizes')
+                ->select('product_sizes.*','sizes.name as s_name')
+                ->join('sizes','product_sizes.size_id','=','sizes.id')
+                ->where('product_sizes.product_id',$product_id)
+                ->whereNull('product_sizes.deleted_at')
+                ->get();
 
-        $sizes = DB::table('product_sizes')
-        ->select('product_sizes.*','sizes.name as s_name')
-        ->join('sizes','product_sizes.size_id','=','sizes.id')
-        ->where('product_sizes.product_id',$product_id)
-        ->whereNull('product_sizes.deleted_at')
-        ->get();
-
-        $colors = DB::table('product_colors')
-        ->select('product_colors.*','color.name as c_name','color.value as c_value')
-        ->join('color','product_colors.color_id','=','color.id')
-        ->where('product_colors.product_id',$product_id)
-        ->whereNull('product_colors.deleted_at')
-        ->get();
-
+            $colors = DB::table('product_colors')
+                ->select('product_colors.*','color.name as c_name','color.value as c_value')
+                ->join('color','product_colors.color_id','=','color.id')
+                ->where('product_colors.product_id',$product_id)
+                ->whereNull('product_colors.deleted_at')
+                ->get();
+        }
         return view('admin.products.product_details',compact('product','sizes','colors'));
     }
 

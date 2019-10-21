@@ -10,6 +10,7 @@ use App\SecondCategory;
 use Validator;
 use Intervention\Image\Facades\Image;
 use File;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -294,7 +295,16 @@ class CategoryController extends Controller
 
     public function viewSecondCategoryForm(){
     	$main_category = Category::all()->pluck('name','id');
-        $secondCategoryList = SecondCategory::whereNull('deleted_at')->get();
+        // $secondCategoryList = SecondCategory::whereNull('deleted_at')->get();
+        $secondCategoryList = DB::table('second_category')
+                ->select('second_category.*','first_category.name as f_cat_name','category.name as cat_name')
+                ->leftJoin('first_category','first_category.id','=','second_category.first_category_id')
+                ->leftJoin('category','category.id','=','second_category.category_id')
+                ->whereNull('second_category.deleted_at')
+                ->whereNull('first_category.deleted_at')
+                ->whereNull('category.deleted_at')
+                ->get();
+        // dd($secondCategoryList);
     	return view('admin.category.add_second_sub_category_form',compact('main_category','secondCategoryList'));
     }
 

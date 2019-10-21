@@ -8,19 +8,19 @@
         <div class="row tile_count">
         <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Total Products</span>
-            <div class="count green">2500</div>
+            <div class="count green">{{ $dashboard_data['product_count'] }}</div>
         </div>
         <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-clock-o"></i> Total Orders</span>
-            <div class="count green">123.50</div>
+            <div class="count green">{{ $dashboard_data['orders_count'] }}</div>
         </div>
         <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Pending Orders</span>
-            <div class="count green">2,500</div>
+            <div class="count green">{{ $dashboard_data['pending_orders_count'] }}</div>
         </div>
         <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
             <span class="count_top"><i class="fa fa-user"></i> Delivered Orders</span>
-            <div class="count green">4,567</div>
+            <div class="count green">{{ $dashboard_data['delivered_orders_count'] }}</div>
         </div>
     
         
@@ -61,9 +61,58 @@
                     </div>
                 @endif
             </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
-    
-        </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                            <div class="x_content">
+              
+                                {{--//////////// Last Ten Orders //////////////--}}
+                                <div class="table-responsive">
+                                    <h2>Last 10 Orders</h2>
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                            <tr class="headings">                
+                                                <th class="column-title">Sl No. </th>
+                                                <th class="column-title">Order id</th>
+                                                <th class="column-title">Order By</th>
+                                                <th class="column-title">Total Quantity</th>
+                                                <th class="column-title">Total Amount</th>
+                                                <th class="column-title">Payment Method</th>
+                                                <th class="column-title">Date</th>
+                                            </tr>
+                                        </thead>
+              
+                                        <tbody>
+                                          @if (isset($dashboard_data['last_ten_orders']) && count($dashboard_data['last_ten_orders']))
+                                            @php
+                                                $count = 1;
+                                            @endphp
+                                              @foreach ($dashboard_data['last_ten_orders'] as $item)
+                                                  <tr>
+                                                    <td>{{ $count++ }}</td>
+                                                    <td>{{ $item->id }}</td>
+                                                    <td>{{ $item->u_name }}</td>
+                                                    <td>{{ $item->quantity }}</td>
+                                                    <td>{{ number_format($item->total,2,".",'')}}</td>
+                                                    <td>
+                                                      @if ($item->payment_method == '1')
+                                                        <a class="btn btn-info">Cash On Delivery</a>
+                                                      @else
+                                                        <a class="btn btn-success">Online</a>
+                                                      @endif
+                                                    </td>
+                                                    <td>
+                                                        {{ \Carbon\Carbon::parse($item->created_at)->toDayDateTimeString() }}
+                                                      </td>
+                                                  </tr>
+                                              @endforeach
+                                          @endif
+                                        </tbody>
+                                    </table>
+                                </div>
+              
+                            </div>
+                        </div>
+            </div>
         </div>
     </div>
     <!-- /page content -->

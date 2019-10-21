@@ -603,7 +603,7 @@ ul.footer-company-links {
     padding: 12px 12px 5px 15px;
 }
 .form-add-tags input.input-text, select, textarea {
-    margin-bottom: 10px;
+    margin-top: -8px;
     width: 100%;
 }
 }

@@ -16,7 +16,39 @@ class SellerController extends Controller
     // Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString();
     
     public function index(){
-        return view('seller.seller_deshboard');
+        $seller_id = Auth::guard('seller')->user()->id;
+        $product_count = DB::table('products')
+            ->where('seller_id',$seller_id)
+            ->whereNull('deleted_at')
+            ->count();
+        $orders_count = DB::table('order_details')
+            ->where('seller_id',$seller_id)
+            ->count();
+        $pending_orders_count = DB::table('order_details')
+            ->where('seller_id',$seller_id)
+            ->where('order_status',1)
+            ->count();
+        $delivered_orders_count = DB::table('order_details')
+            ->where('seller_id',$seller_id)
+            ->where('order_status',3)
+            ->count();
+        
+        $last_ten_orders = DB::table('order_details')
+            ->select('order_details.*','user.name as u_name')
+            ->leftjoin('user','user.id','=','order_details.user_id')
+            ->where('seller_id',$seller_id)
+            ->orderBy('order_details.id','desc')
+            ->limit(10)
+            ->get(); 
+        // dd($last_ten_orders);    
+        $dashboard_data = [
+            'product_count' => $product_count,
+            'orders_count' => $orders_count,
+            'pending_orders_count' => $pending_orders_count,
+            'delivered_orders_count' => $delivered_orders_count,
+            'last_ten_orders' => $last_ten_orders,
+        ];
+        return view('seller.seller_deshboard',compact('dashboard_data'));
     }
 
     public function myProfileForm()
