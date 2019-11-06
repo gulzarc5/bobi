@@ -187,7 +187,7 @@
                 <!-- /.col -->
               </div>
 
-              <div class="row">
+              {{-- <div class="row">
                 <div class="col-xs-12 table">
                   <h5>Varient Details</h5>
                   <table class="table table-striped jambo_table bulk_action">
@@ -225,7 +225,7 @@
                   </table>
                 </div>
                 <!-- /.col -->
-              </div>
+              </div> --}}
 
               <div class="row">
                 <button class="btn btn-primary" onclick="javascript:window.close()">Window Close</button>
