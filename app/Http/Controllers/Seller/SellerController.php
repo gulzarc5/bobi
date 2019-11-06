@@ -126,6 +126,12 @@ class SellerController extends Controller
             'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
         ]);
 
+        $seller_brand = DB::table('brand_name')
+            ->where('user_id',$seller_id)
+            ->update([
+                'name' => $request->input('name'),
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+            ]);
         return redirect()->back();
 
     }

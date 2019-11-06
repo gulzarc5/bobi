@@ -251,6 +251,17 @@ class ProductController extends Controller
         ->join('brand_name','products.brand_id','=','brand_name.id')
         ->where('products.id','=',$product_id)
         ->first();
+
+        $product_seller = null;
+        if (isset($product->seller_id) && !empty($product->seller_id) && ($product->seller_id != 'A')) {
+            $product_seller = DB::table('user')
+                ->select('user.name as name', 'user.email as email','user.mobile as mobile','user_details.address as address','user_details.pin as pin','state.name as s_name','city.name as c_name')
+                ->leftjoin('user_details','user_details.seller_id','=','user.id')
+                ->leftjoin('state','state.id','=','user_details.state_id')
+                ->leftjoin('city','city.id','=','user_details.city_id')
+                ->where('user.id',$product->seller_id)
+                ->first();
+        }
         $sizes = [];
         $colors = [];
         $related_products = [];
@@ -269,7 +280,7 @@ class ProductController extends Controller
                 ->whereNull('product_colors.deleted_at')
                 ->get();
         }
-        return view('admin.products.product_details',compact('product','sizes','colors'));
+        return view('admin.products.product_details',compact('product','sizes','colors','product_seller'));
     }
 
     public function productEdit($product_id)

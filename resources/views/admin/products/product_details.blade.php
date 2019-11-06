@@ -69,25 +69,28 @@
                   </table>
                 </div>
                 <div class="col-sm-6 invoice-col">
+
+                  @if(isset($product_seller) && !empty($product_seller))
                    <table class="table table-striped">
                     <caption>Seller Deails</caption>
                     <tr>
                       <th>Seller Name : </th>
-                      <td></td>
+                      <td>{{$product_seller->name}}</td>
                     </tr>
                     <tr>
                       <th>Mobile No : </th>
-                      <td></td>
+                      <td>{{$product_seller->mobile}}</td>
                     </tr>
                     <tr>
                       <th>Email : </th>
-                      <td></td>
+                      <td>{{$product_seller->email}}</td>
                     </tr>
                     <tr>
                       <th>Address : </th>
-                      <td></td>
+                      <td>{{$product_seller->address}},{{$product_seller->c_name}},{{$product_seller->s_name}} - {{$product_seller->pin}}</td>
                     </tr>
                   </table>
+                  @endif
 
                   @if(!empty($product->main_image))
                     <table class="table table-striped">

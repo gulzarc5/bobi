@@ -71,10 +71,10 @@ class ProductController extends Controller
         $short_description = $request->input('short_description');
         $long_description = $request->input('long_description');
 
-        $brand_fetch = DB::table('seller_deals')
+        $brand_fetch = DB::table('brand_name')
             ->select('id')
-            ->where('seller_id',$seller_id)
-            ->where('first_category_id',$first_category)
+            ->where('user_id',$seller_id)
+            ->where('first_category',$first_category)
             ->first();
 
         $product_insert = DB::table('products')
@@ -255,6 +255,9 @@ class ProductController extends Controller
         ->whereNull('product_colors.deleted_at')
         ->get();
 
+        
+        
+
         return view('seller.products.product_details',compact('product','sizes','colors'));
     }
 
@@ -320,7 +323,13 @@ class ProductController extends Controller
             return redirect()->back();
         }
 
-        
+         $seller_id = Auth::guard('seller')->id();
+        $brand_fetch = DB::table('brand_name')
+            ->select('id')
+            ->where('user_id',$seller_id)
+            ->where('first_category',$request->input('first_category'))
+            ->first();
+
         $product_update = DB::table('products')
         ->where('id',$product_id)
         ->update([
@@ -331,7 +340,7 @@ class ProductController extends Controller
             'category' => $request->input('category'),
             'first_category' => $request->input('first_category'),
             'second_category' => $request->input('second_category'),
-            // 'brand_id' => $request->input('brand'),
+            'brand_id' => $brand_fetch->id,
             'short_description' => $request->input('short_description'),
             'long_description' => $request->input('long_description'),
         ]);
