@@ -316,7 +316,6 @@ class ProductController extends Controller
         $brands = DB::table('brand_name')
         ->where('brand_name.category',$product->category)
         ->where('brand_name.first_category',$product->first_category)
-        ->where('brand_name.status','1')
         ->whereNull('brand_name.deleted_at')
         ->get();
 
