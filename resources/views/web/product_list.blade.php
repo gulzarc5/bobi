@@ -8,31 +8,7 @@
       
       <div class="row">
         <div class="col-main col-sm-9 col-xs-12 col-sm-push-3 shop-inner">
-          {{-- <div class="category-description std">
-            <div class="slider-items-products">
-              <div id="category-desc-slider" class="product-flexslider hidden-buttons">
-                <div class="slider-items slider-width-col1 owl-carousel owl-theme" style="opacity: 1; display: block;"> 
-                  
-                  <!-- Item -->
-                  <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 2228px; left: 0px; display: block; transition: all 800ms ease 0s; transform: translate3d(-557px, 0px, 0px);"><div class="owl-item" style="width: 557px;"><div class="item"> <a href="#x"><img alt="" src="{{asset('web/images/cat-slider-img1.jpg')}}"></a>
-                    <div class="inner-info">
-                      <div class="cat-img-title"> <span>Best Product 2017</span>
-                        <h2 class="cat-heading">SUMMER COLLECTION</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
-                        <a class="info" href="#">Shop Now</a> </div>
-                    </div>
-                  </div></div><div class="owl-item" style="width: 557px;"><div class="item"> <a href="#x"><img alt="" src="{{asset('web/images/cat-slider-img2.jpg')}}"></a> </div></div></div></div>
-                  <!-- End Item --> 
-                  
-                  <!-- Item -->
-                  
-                  
-                  <!-- End Item --> 
-                  
-                <div class="owl-controls clickable"><div class="owl-buttons"><div class="owl-prev"><a class="flex-prev"></a></div><div class="owl-next"><a class="flex-next"></a></div></div></div></div>
-              </div>
-            </div>
-          </div> --}}
+         
           <div class=" slider-product">
             <div class="page-title" style="padding-top: 13px;">
               <div class="col-md-6 product-head">
@@ -105,37 +81,7 @@
                 
               </ul>
             </div>
-            {{-- <div class="pagination-area">
-              <div class="loader loader--style6" title="Loading">
-                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                   width="24px" height="30px" viewBox="0 0 24 30" xml:space="preserve">
-                  <rect x="0" y="13" width="4" height="8" fill="#555">
-                    <animate attributeName="height" attributeType="XML"
-                      values="5;21;5" 
-                      begin="0s" dur="0.6s" repeatCount="indefinite" />
-                    <animate attributeName="y" attributeType="XML"
-                      values="13; 5; 13"
-                      begin="0s" dur="0.6s" repeatCount="indefinite" />
-                  </rect>
-                  <rect x="10" y="13" width="4" height="8" fill="#00b9f5">
-                    <animate attributeName="height" attributeType="XML"
-                      values="5;21;5" 
-                      begin="0.15s" dur="0.6s" repeatCount="indefinite" />
-                    <animate attributeName="y" attributeType="XML"
-                      values="13; 5; 13"
-                      begin="0.15s" dur="0.6s" repeatCount="indefinite" />
-                  </rect>
-                  <rect x="20" y="13" width="4" height="8" fill="#555">
-                    <animate attributeName="height" attributeType="XML"
-                      values="5;21;5" 
-                      begin="0.3s" dur="0.6s" repeatCount="indefinite" />
-                    <animate attributeName="y" attributeType="XML"
-                      values="13; 5; 13"
-                      begin="0.3s" dur="0.6s" repeatCount="indefinite" />
-                  </rect>
-                </svg>
-              </div>
-            </div> --}}
+            
           </div>
         </div>
         <aside class="sidebar col-sm-3 col-xs-12 col-sm-pull-9">
