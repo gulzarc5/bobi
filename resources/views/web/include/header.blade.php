@@ -293,14 +293,6 @@
                         <div class="nav-block jtv-nav-block-center">
                           <div class="col-12">
                             <ul class="level0">
-                              {{-- <li class="parent item"> <a href="Product_List"><span>tassel saddle bag</span></a>
-                                <ul class="level1">
-                                  <li> <a href="Product_List"><span>Toaster Crossbody</span></a> </li>
-                                  <li> <a href="Product_List"><span>Piper Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Leather Bag</span></a> </li>
-                                  <li> <a href="Product_List"><span>Canvas Bag</span></a> </li>
-                                </ul>
-                              </li> --}}
                               @if (isset($category_list['category_list_menTraditional']) && !empty($category_list['category_list_menTraditional']))
                                 @foreach ($category_list['category_list_menTraditional'] as $f_category)
                                   @if (count($f_category['second_category']) > 0)
@@ -319,6 +311,32 @@
                       </div>
                     </div>
                   </li>
+
+                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>GIFT ITEAM</span></a>
+                    <div class="jtv-menu-block-wrapper">
+                      <div class="jtv-menu-block-wrapper2">
+                        <div class="nav-block jtv-nav-block-center">
+                          <div class="col-12">
+                            <ul class="level0">
+                              @if (isset($category_list['category_list_gift_item']) && !empty($category_list['category_list_gift_item']))
+                                @foreach ($category_list['category_list_gift_item'] as $f_category)
+                                  @if (count($f_category['second_category']) > 0)
+                                    <li class="parent item"> <a><span>{{ $f_category['name'] }}</span></a>
+                                    <ul class="level1">
+                                      @foreach ($f_category['second_category'] as $s_category)
+                                        <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
+                                      @endforeach
+                                    </ul>
+                                  @endif
+                                @endforeach
+                              @endif
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+
                   <li class="drop-menu"><a href="{{ route('web.contact')}}" class="level-top active"><span>Contact Us</span></a></li>
                 </ul>
               </div>

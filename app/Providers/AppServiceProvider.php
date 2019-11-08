@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $category_list_women = null;
             $category_list_menTraditional = null;
             $category_list_womenTraditional = null;
+            $category_list_gift_item = null;
             $cart_count =0;
             $f_category_men = DB::table('first_category')
                 ->whereNull('deleted_at')
@@ -58,6 +59,27 @@ class AppServiceProvider extends ServiceProvider
                 ];
             }
 
+            $f_category_gift_item = DB::table('first_category')
+                ->whereNull('deleted_at')
+                ->where('category_id',6)
+                ->where('status',1)
+                ->orderBy('name','DESC')
+                ->get();
+            
+            foreach ($f_category_gift_item as $key => $f_cat) {
+                $s_category_gift_item = DB::table('second_category')
+                ->where('first_category_id',$f_cat->id)
+                ->whereNull('deleted_at')
+                ->where('status',1)
+                ->get();
+               
+                $category_list_gift_item[] = [
+                    'id' => $f_cat->id,
+                    'name' => $f_cat->name,
+                    'image' => $f_cat->image,
+                    'second_category' => $s_category_gift_item,
+                ];
+            }
             $f_category_women = DB::table('first_category')
                 ->whereNull('deleted_at')
                 ->where('category_id',2)
@@ -79,6 +101,7 @@ class AppServiceProvider extends ServiceProvider
                     'second_category' => $s_category_women,
                 ];
             }
+
 
 
             $f_category_womenTraditional = DB::table('first_category')
@@ -151,12 +174,9 @@ class AppServiceProvider extends ServiceProvider
                 'category_list_menTraditional' => $category_list_menTraditional,
                 'category_list_womenTraditional' => $category_list_womenTraditional,
                 'cart_count' => $cart_count,
+                'category_list_gift_item' => $category_list_gift_item,
                 'wish_list_count' => $wish_list_count,
             ];
-
-           
-            //  echo($cart_data);
-            //  die();
             $view->with('category_list', $category_list);
         });
 
@@ -208,10 +228,6 @@ class AppServiceProvider extends ServiceProvider
                     'buyer_view_count' => $buyer_view_count,
                     'total_count' => $total_count,
                 ];
-    
-               
-                //  echo($cart_data);
-                //  die();
                 $view->with('admin_data', $admin_data);
             });
         }if (Auth::guard('seller')) {

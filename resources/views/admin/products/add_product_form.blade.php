@@ -131,6 +131,12 @@
                                         <select class="form-control size" name="size[]" id="size_option">
                                             <option value="">Please Select Size</option>
                                         </select>
+
+                                        @if($errors->has('size'))
+                                            <span class="invalid-feedback" role="alert" style="color:red">
+                                                <strong>{{ $errors->first('size') }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
 

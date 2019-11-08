@@ -69,6 +69,7 @@ class ProductController extends Controller
             'first_category' => 'required',
             'second_category' => 'required',
             'brand' => 'required',
+            'size.*' => 'required|distinct|array|min:1',
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
