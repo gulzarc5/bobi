@@ -80,6 +80,29 @@ class AppServiceProvider extends ServiceProvider
                     'second_category' => $s_category_gift_item,
                 ];
             }
+
+            $f_category_handicuft_item = DB::table('first_category')
+                ->whereNull('deleted_at')
+                ->where('category_id',7)
+                ->where('status',1)
+                ->orderBy('name','DESC')
+                ->get();
+            
+            foreach ($f_category_handicuft_item as $key => $f_cat) {
+                $s_category_handicuft_item = DB::table('second_category')
+                ->where('first_category_id',$f_cat->id)
+                ->whereNull('deleted_at')
+                ->where('status',1)
+                ->get();
+               
+                $category_list_handicuft_item[] = [
+                    'id' => $f_cat->id,
+                    'name' => $f_cat->name,
+                    'image' => $f_cat->image,
+                    'second_category' => $s_category_handicuft_item,
+                ];
+            }
+
             $f_category_women = DB::table('first_category')
                 ->whereNull('deleted_at')
                 ->where('category_id',2)
@@ -176,6 +199,7 @@ class AppServiceProvider extends ServiceProvider
                 'cart_count' => $cart_count,
                 'category_list_gift_item' => $category_list_gift_item,
                 'wish_list_count' => $wish_list_count,
+                'category_list_handicuft_item' => $category_list_handicuft_item,
             ];
             $view->with('category_list', $category_list);
         });
