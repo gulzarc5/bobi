@@ -51,7 +51,7 @@
             @endif
         </ul>
       </li>
-      <li><a href="Product_List">Women Traditional</a>
+      <li><a href="#">Women Traditional</a>
         <ul>
           @if (isset($category_list['category_list_womenTraditional']) && !empty($category_list['category_list_womenTraditional']))
             @foreach ($category_list['category_list_womenTraditional'] as $f_category)
@@ -67,7 +67,7 @@
           @endif
         </ul>
       </li>
-      <li><a href="Product_List">Men Traditional</a>
+      <li><a href="#">Men Traditional</a>
         <ul>
           @if (isset($category_list['category_list_menTraditional']) && !empty($category_list['category_list_menTraditional']))
             @foreach ($category_list['category_list_menTraditional'] as $f_category)
@@ -227,7 +227,7 @@
                       </div>
                     </div>
                   </li>
-                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Women</span></a>
+                  <li class="mega-menu"> <a class="level-top" href="#"><span>Women</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">
@@ -255,7 +255,7 @@
                     </div>
                   </li>
                 
-                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Women TRADITIONAL</span></a>
+                  <li class="mega-menu"> <a class="level-top" href="#"><span>Women TRADITIONAL</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">
@@ -287,7 +287,7 @@
                       </div>
                     </div>
                   </li>
-                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>Men TRADITIONAL</span></a>
+                  <li class="mega-menu"> <a class="level-top" href="#"><span>Men TRADITIONAL</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">
@@ -312,7 +312,7 @@
                     </div>
                   </li>
 
-                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>GIFT ITEAM</span></a>
+                  <li class="mega-menu"> <a class="level-top" href="#"><span>GIFT ITEAM</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">
@@ -337,7 +337,7 @@
                     </div>
                   </li>
 
-                  <li class="mega-menu"> <a class="level-top" href="Product_List"><span>HANDICUFT</span></a>
+                  <li class="mega-menu"> <a class="level-top" href="#"><span>HANDICUFT</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">
