@@ -312,7 +312,7 @@
                     </div>
                   </li>
 
-                  <li class="mega-menu"> <a class="level-top" href="#"><span>GIFT ITEAM</span></a>
+                  <li class="mega-menu"> <a class="level-top" href="#"><span>GIFT ITEM</span></a>
                     <div class="jtv-menu-block-wrapper">
                       <div class="jtv-menu-block-wrapper2">
                         <div class="nav-block jtv-nav-block-center">
