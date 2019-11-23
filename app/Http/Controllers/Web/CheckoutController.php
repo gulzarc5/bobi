@@ -64,123 +64,159 @@ class CheckoutController extends Controller
         
         $total = 0;
         $total_qtty = 0;
-        if ($pay_method == 1) {
-            foreach ($cart as $cart_data) {
-                $product = DB::table('products')->select('seller_id','brand_id')
-                    ->where('id',$cart_data->product_id)
-                    ->whereNull('deleted_at')
-                    ->first();
-                if ($product) {
-                    $size = DB::table('product_sizes')
-                        ->select('product_sizes.*','sizes.name as size_name')
-                        ->join('sizes','sizes.id','=','product_sizes.size_id')
-                        ->where('product_sizes.size_id',$cart_data->size_id)
-                        ->where('product_sizes.product_id',$cart_data->product_id)
-                        ->first();
-
-                    $size_name = null;
-                    $rate = 0;
-                    if (isset($size->size_name)) {
-                        $size_name = $size->size_name;
-                    }
-                    if (isset($size->price)) {
-                        $rate = $size->price;
-                    }
-                    $designer = DB::table('brand_name')->where('id',$product->brand_id)->first();
-                    $designer_name = null;
-                    if (isset($designer->name)) {
-                        $designer_name = $designer->name;
-                    }
-
-                    DB::table('order_details')
-                    ->insert([
-                        'user_id' => $user_id,
-                        'order_id' => $order,
-                        'seller_id' => $product->seller_id,
-                        'product_id' => $cart_data->product_id,
-                        'shipping_address_id' => $address_id,
-                        'size' => $size_name,
-                        'color' => $cart_data->color_id,
-                        'designer' => $designer_name,
-                        'quantity' => $cart_data->quantity,
-                        'rate' => $rate,
-                        'total' => ($cart_data->quantity * $rate),
-                        'payment_method' => $pay_method,
-                        'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
-                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
-                    ]);
-
-                    $total += ($cart_data->quantity * $rate);
-                    $total_qtty += $cart_data->quantity;
-                }
-               
-            }
-
-        }else{
-            foreach ($cart as $cart_data) {
-                $product = DB::table('products')->select('seller_id','brand_id')
+        foreach ($cart as $cart_data) {
+            $product = DB::table('products')->select('seller_id','brand_id')
                 ->where('id',$cart_data->product_id)
                 ->whereNull('deleted_at')
                 ->first();
-                if ($product) {
-                    $size = DB::table('product_sizes')
-                        ->select('product_sizes.*','sizes.name as size_name')
-                        ->join('sizes','sizes.id','=','product_sizes.size_id')
-                        ->where('product_sizes.size_id',$cart_data->size_id)
-                        ->where('product_sizes.product_id',$cart_data->product_id)
-                        ->first();
-                    $size_name = null;
-                    $rate = 0;
-                    if (isset($size->size_name)) {
-                        $size_name = $size->size_name;
-                    }
-                    if (isset($size->price)) {
-                        $rate = $size->price;
-                    }
-                   
-                    $designer = DB::table('brand_name')->where('id',$product->brand_id)->first();
-                    $designer_name = null;
-                    if (isset($designer->name)) {
-                        $designer_name = $designer->name;
-                    }
+            if ($product) {
+                $size = DB::table('product_sizes')
+                    ->select('product_sizes.*','sizes.name as size_name')
+                    ->join('sizes','sizes.id','=','product_sizes.size_id')
+                    ->where('product_sizes.size_id',$cart_data->size_id)
+                    ->where('product_sizes.product_id',$cart_data->product_id)
+                    ->first();
 
-
-                    DB::table('order_details')
-                    ->insert([
-                        'user_id' => $user_id,
-                        'order_id' => $order,
-                        'seller_id' => $product->seller_id,
-                        'product_id' => $cart_data->product_id,
-                        'size' => $size_name,
-                        'color' => $cart_data->color_id,
-                        'designer' => $designer_name,
-                        'quantity' => $cart_data->quantity,
-                        'rate' => $rate,
-                        'total' => ($cart_data->quantity * $rate),
-                        'payment_method' => $pay_method,
-                        'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
-                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
-                    ]);
-                    $total += ($cart_data->quantity * $rate);
-                    $total_qtty += $cart_data->quantity;
+                $size_name = null;
+                $rate = 0;
+                if (isset($size->size_name)) {
+                    $size_name = $size->size_name;
                 }
+                if (isset($size->price)) {
+                    $rate = $size->price;
+                }
+                $designer = DB::table('brand_name')->where('id',$product->brand_id)->first();
+                $designer_name = null;
+                if (isset($designer->name)) {
+                    $designer_name = $designer->name;
+                }
+
+                DB::table('order_details')
+                ->insert([
+                    'user_id' => $user_id,
+                    'order_id' => $order,
+                    'seller_id' => $product->seller_id,
+                    'product_id' => $cart_data->product_id,
+                    'shipping_address_id' => $address_id,
+                    'size' => $size_name,
+                    'color' => $cart_data->color_id,
+                    'designer' => $designer_name,
+                    'quantity' => $cart_data->quantity,
+                    'rate' => $rate,
+                    'total' => ($cart_data->quantity * $rate),
+                    'payment_method' => $pay_method,
+                    'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                    'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                ]);
+
+                $total += ($cart_data->quantity * $rate);
+                $total_qtty += $cart_data->quantity;
             }
+           
         }
 
-
         $update_order = DB::table('orders')
-            ->where('id',$order)
-            ->update([
-                'quantity' => $total_qtty,
-                'amount' => $total,
-            ]);
+                ->where('id',$order)
+                ->update([
+                    'quantity' => $total_qtty,
+                    'amount' => $total,
+                ]);
         if ($update_order) {
             DB::table('cart')->where('user_id',$user_id)->delete();
-            return redirect()->route('web.checkout_thankyou',['id'=>$order]);
         }else{
             return redirect()->back();
         }
 
+        if ($pay_method == 1) {
+            return redirect()->route('web.checkout_thankyou',['id'=>$order]);            
+        }else{
+            $total_cost =  $total;
+            $user_name = Auth::guard('buyer')->user()->name;
+            $user_email = Auth::guard('buyer')->user()->email;
+            $user_mobile = Auth::guard('buyer')->user()->mobile;
+
+            $api = new \Instamojo\Instamojo(
+                config('services.instamojo.api_key'),
+                config('services.instamojo.auth_token'),
+                config('services.instamojo.url')
+            );
+            try {
+                $response = $api->paymentRequestCreate(array(
+                    "purpose" => "Ecommerce Bplus Payment",
+                    "amount" => $total_cost,
+                    "buyer_name" => $user_name,
+                    "send_email" => true,
+                    "email" => $user_email,
+                    "phone" => $user_mobile,
+                    "redirect_url" => route('web.pay_order_amount',['order_id'=>encrypt($order)]),
+                    ));
+                    DB::table('orders')
+                        ->where('id',$order)
+                        ->update([
+                            'payment_request_id' => $response['id'],
+                            'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                        ]);
+                    
+                    header('Location: ' . $response['longurl']);
+                    exit();
+            }catch (Exception $e) {
+                print('Error: ' . $e->getMessage());
+            }
+        }
+    }
+
+    public function paySuccess(Request $request,$order_id)
+    {
+        try {
+            $order_id = decrypt($order_id);
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+
+        try {
+    
+            $api = new \Instamojo\Instamojo(
+                config('services.instamojo.api_key'),
+                config('services.instamojo.auth_token'),
+                config('services.instamojo.url')
+            );
+     
+            $response = $api->paymentRequestStatus(request('payment_request_id'));
+     
+            if( !isset($response['payments'][0]['status']) ) {
+             return redirect('web.order_history');
+            } else if($response['payments'][0]['status'] != 'Credit') {
+             return redirect('web.order_history');
+            } 
+          }catch (\Exception $e) {
+             return redirect('web.order_history');
+         }
+        
+        if($response['payments'][0]['status'] == 'Credit') {
+ 
+             $user_id = Auth::guard('buyer')->user()->id;
+             DB::table('orders')
+                ->where('id', $order_id)
+                ->where('user_id', $user_id)
+                ->where('payment_request_id', $response['id'])
+                ->update(['payment_id' => $response['payments'][0]['payment_id'], 'payment_status' => '2']);
+            
+            // $request_info = urldecode("Dear ".Auth::guard('buyer')->user()->name.", Your Order Has Been Placed Successfully We Wiill Process it Shortly. Thank You");
+            // SmsHelpers::smsSend(Auth::guard('buyer')->user()->mobile,$request_info);
+
+            //SMS Send To Seller
+            // $products = DB::table('order_details')
+            //     ->select('products.name as p_name','seller.name as seller_name','seller.mobile as mobile')
+            //     ->leftjoin('products','products.id','=','order_details.product_id')
+            //     ->leftjoin('seller','seller.id','=','products.seller_id')
+            //     ->where('order_details.order_id',$order_id)
+            //     ->get();
+            // foreach ($products as $key => $value) {
+            //     $request_info = urldecode("Dear ".$value->seller_name.", Order of ".$value->p_name." Has Been Placed By a Customer From Bplus Keep Your Product Ready and wait for further update . Thank You");
+            //     SmsHelpers::smsSend($value->mobile,$request_info);
+            // }
+            return redirect()->route('web.checkout_thankyou',['id'=>$order_id]);  
+        } 
     }
 
     public function checkoutSuccess($order_id)

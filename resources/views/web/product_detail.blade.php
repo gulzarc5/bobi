@@ -110,13 +110,6 @@
                             @endforeach
                         @endif
                       </select>
-                        {{-- <ul>
-                          <li><a><input type="radio" name="size" value="1"  hidden> S</a></li>
-                          <li><a><input type="radio" name="size" value="2" checked hidden> L</a></li>
-                          <li><a><input type="radio" name="size" value="3" hidden> M</a></li>
-                          <li><a><input type="radio" name="size" value="4" hidden> XL</a></li>
-                          <li><a><input type="radio" name="size" value="5" hidden> XXL</a></li> 
-                        </ul> --}}
                       </div>
                     </div>
                   </div>
@@ -136,6 +129,9 @@
                   <div class="product-cart-option">
                     <ul>
                       <li><a href="#"><i class="pe-7s-like"></i><span>Add to Wishlist</span></a></li>
+                    </ul><br>
+                    <ul id="delivery_data">
+                      <li><span>Enter Pin Code To Check Delivery Status</span></li>
                     </ul>
                   </div>
                 {{ Form::close() }}
@@ -408,4 +404,42 @@
   });
 </script>
   <!-- Page Content -->
+@endsection
+
+@section('script')
+  <script>
+    $( window ).on( "load", getDeliveryStatus());
+    function getDeliveryStatus(pin) {
+      var url;
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      if (pin) {
+        url = "{{ url('pin/availiblity/')}}"+"/"+pin+"/";
+      } else {
+        url = "{{ url('pin/availiblity/')}}";
+      }
+      $.ajax({
+          type:"GET",
+          url:url,
+          success:function(data){
+            if (data == 1) {
+              $("#delivery_data").html('Sorry Delivery Option Is Not Available In This Pin Code')
+            }else if(data == 0){
+
+            }else{
+              var availiblity = data.delivery_codes[0];
+              if (availiblity.postal_code.cod == 'Y') {
+                $("#delivery_data").html('COD available in this pin code');
+              }else{
+                $("#delivery_data").html('Delivery Available in this pin code');
+              }
+            }
+              console.log(data);
+          }
+      });
+    }
+  </script>
 @endsection

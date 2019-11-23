@@ -33,6 +33,7 @@ Route::group(['namespace'=> 'Web'], function(){
         Route::get('/checkout','CheckoutController@checkoutShip')->name('web.checkout_ship');
 
         Route::post('Place/Order','CheckoutController@placeOrder')->name('web.place_order');
+        Route::get('/pay/order/amount/{order_id}','CheckoutController@paySuccess')->name('web.pay_order_amount');
         Route::get('/thankyou/{id}', 'CheckoutController@checkoutSuccess')->name('web.checkout_thankyou');
         Route::get('/order/history','CheckoutController@orderHistory')->name('web.order_history');
 
@@ -49,6 +50,8 @@ Route::group(['namespace'=> 'Web'], function(){
         Route::get('/Detail/{product_id}/{size_id?}','ProductController@productDetail')->name('web.product_detail');
         Route::post('/By/Filter/','ProductController@productFilter')->name('web.product_filter');
     });
+
+    Route::get('pin/availiblity/{pin?}','LogisticController@pinAvailiblity')->name('courier.pin_check');
 
 });
 
