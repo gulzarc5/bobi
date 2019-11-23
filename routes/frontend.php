@@ -56,9 +56,7 @@ Route::group(['namespace'=> 'Web'], function(){
 });
 
 
-Route::get('/', function () {
-    return view('web.index');
-})->name('web.index');
+Route::get('/', 'Web\PagesController@index')->name('web.index');
 
 Route::get('contact/',function(){
     return view('web.contact');

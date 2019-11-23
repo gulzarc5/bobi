@@ -146,6 +146,8 @@ class ConfigurationController extends Controller
         $validatedData = $request->validate([
             'category' => 'required',
             'first_category' => 'required',
+            'color_name' => 'required',
+            'color_value' => 'required',
             ]);
         $category_id = $request->input('category');
         $first_category = $request->input('first_category');
@@ -191,11 +193,10 @@ class ConfigurationController extends Controller
             ->addColumn('action', function($row){
                    if ($row->status == '1') {
                        $btn = '<a href="'.route('admin.color_status_update',['color_id'=>encrypt($row->id),'status'=> encrypt(2)]).'" class="btn btn-danger btn-sm">Disable</a>';
-                        return $btn;
                     }else{
                        $btn = '<a href="'.route('admin.color_status_update',['color_id'=>encrypt($row->id),'status'=> encrypt(1)]).'" class="btn btn-success btn-sm">Enable</a>';
-                        return $btn;
                     }
+                    $btn .= '<a href="'.route('admin.view_color_edit_form',['color_id'=>encrypt($row->id)]).'" class="btn btn-primary btn-sm">Edit</a>';
                     return $btn;
             })
             ->addColumn('status_tab', function($row){
@@ -217,6 +218,70 @@ class ConfigurationController extends Controller
             })
             ->rawColumns(['action','status_tab','show_color'])
             ->make(true);
+    }
+
+    public function viewColorEditForm($color_id)
+    {
+        try {
+            $color_id = decrypt($color_id);
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+
+        $color = DB::table('color')
+        ->where('id',$color_id)
+        ->first();
+        $main_category = Category::where('status','1')->get();
+        $first_category = null;
+        if (isset($color->category_id) && !empty(($color->category_id))) {
+            $first_category = DB::table('first_category')
+                ->where('category_id',$color->category_id)
+                ->whereNull('deleted_at')
+                ->where('status',1)
+                ->get();
+        }
+        // dd($first_category);
+        return view('admin.configuration.colors_edit',compact('main_category','first_category','color'));
+    }
+
+    public function colorUpdate(Request $request)
+    {
+        $validatedData = $request->validate([
+            'color_id' => 'required',
+            'category' => 'required',
+            'first_category' => 'required',
+            'color_name' => 'required',
+            'color_value' => 'required',
+        ]);
+        try {
+            $color_id = decrypt($request->input('color_id'));
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+
+        $category_id = $request->input('category');
+        $first_category = $request->input('first_category');
+        $color_name = $request->input('color_name');
+        $color_value = $request->input('color_value');
+
+        $check_color = DB::table('color')
+            ->where('name',$color_name)
+            ->where('first_category_id',$first_category)
+            ->where('id','!=',$color_id)
+            ->whereNull('deleted_at')
+            ->count();
+        if ( $check_color <= 0 ) {
+            DB::table('color')
+            ->where('id',$color_id)
+            ->update([
+                'name' => $color_name,
+                'value' => $color_value,
+                'category_id' => $category_id,
+                'first_category_id' => $first_category,
+            ]);
+        }
+
+        return redirect()->back()->with('message','Color Updated Successfully');
     }
 
     public function colorStatusUpdate($color_id,$status)

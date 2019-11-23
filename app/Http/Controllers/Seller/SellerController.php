@@ -91,15 +91,27 @@ class SellerController extends Controller
             'account_no' => 'required',
             'ifsc' => 'required',
         ]);
-
+        if (Auth::guard('seller')->user()->mobile != $request->input('mobile')) {
+            $request->validate([
+                'mobile' =>  ['required','digits:10','numeric','unique:user'],
+            ]);
+        }
+//   dd($request->input('mobile'));
+        if (Auth::guard('seller')->user()->verification_status != '3') {
+            $seller = DB::table('user')
+            ->where('id',$seller_id)
+            ->update([
+                'verification_status' => 2,
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+            ]);
+        }
         $seller = DB::table('user')
-        ->where('id',$seller_id)
-        ->update([
-            'name' => $request->input('name'),
-            'mobile' => $request->input('mobile'),
-            'verification_status' => 2,
-            'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
-        ]);
+            ->where('id',$seller_id)
+            ->update([
+                'name' => $request->input('name'),
+                'mobile' => $request->input('mobile'),
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+            ]);
 
         $seller_details = DB::table('user_details')
         ->where('seller_id',$seller_id)

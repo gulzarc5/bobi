@@ -130,9 +130,9 @@
                     <ul>
                       <li><a href="#"><i class="pe-7s-like"></i><span>Add to Wishlist</span></a></li>
                     </ul><br>
-                    <ul id="delivery_data">
+                    {{-- <ul id="delivery_data">
                       <li><span>Enter Pin Code To Check Delivery Status</span></li>
-                    </ul>
+                    </ul> --}}
                   </div>
                 {{ Form::close() }}
 
@@ -406,7 +406,7 @@
   <!-- Page Content -->
 @endsection
 
-@section('script')
+{{-- @section('script')
   <script>
     $( window ).on( "load", getDeliveryStatus());
     function getDeliveryStatus(pin) {
@@ -442,4 +442,4 @@
       });
     }
   </script>
-@endsection
+@endsection --}}

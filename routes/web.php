@@ -98,6 +98,8 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 
 		Route::get('Ajax/Color/List', 'ConfigurationController@ajaxColorList')->name('admin.ajax_color_list');
 		Route::get('Color/List', 'ConfigurationController@viewColorList')->name('admin.view_color_list');
+		Route::get('Color/Edit/{color_id}', 'ConfigurationController@viewColorEditForm')->name('admin.view_color_edit_form');
+		Route::post('Color/Update', 'ConfigurationController@colorUpdate')->name('admin.color_update');
 
 		Route::get('/Color/Status/Update/{color_id}/{status}', 'ConfigurationController@colorStatusUpdate')->name('admin.color_status_update');
 

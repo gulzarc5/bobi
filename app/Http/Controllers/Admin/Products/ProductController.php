@@ -62,17 +62,18 @@ class ProductController extends Controller
 
     public function addNewProduct(Request $request)
     {
-       
+        
         $validatedData = $request->validate([
             'name' => 'required',
             'category' => 'required',
             'first_category' => 'required',
             'second_category' => 'required',
             'brand' => 'required',
-            'size.*' => 'required|distinct|array|min:1',
-            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'size'=>'required',
+            'size.*' => 'distinct',
+            'image' => 'required',
+            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
         $seller_id = "A";
         $name = $request->input('name');
         $tag_name = $request->input('tag_name');
