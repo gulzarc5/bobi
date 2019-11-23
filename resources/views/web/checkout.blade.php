@@ -69,7 +69,7 @@
                         0.00
                      @endif
                   </span></li>
-               <li><span>Shopping</span><span>Free</span> </li>
+               <li><span>Shipping</span><span>Free</span> </li>
                {{-- 
                <li><span>Taxes</span><span>$0</span></li>
                --}}

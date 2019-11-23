@@ -61,11 +61,11 @@
                         </tr>
                         <tr>
                           <th>Mobile No : </th>
-                          <td>{{ $user_details->email }}</td>
+                          <td>{{ $user_details->mobile }}</td>
                         </tr>
                         <tr>
                           <th>Email : </th>
-                          <td>{{ $user_details->mobile }}</td>
+                          <td>{{ $user_details->email }}</td>
                         </tr>
                         <tr>
                           <th>Address : </th>

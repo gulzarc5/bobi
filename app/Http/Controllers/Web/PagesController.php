@@ -66,7 +66,7 @@ class PagesController extends Controller
         $wood_craft_category = DB::table('second_category')
             ->whereNull('deleted_at')
             ->where('status',1)
-            ->where('first_category_id',34)
+            ->where('first_category_id',36)
             ->get();
 
         $special_products = DB::table('products')
