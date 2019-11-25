@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Session;
 use Carbon\Carbon;
 use DB;
+use Validator;
 
 class LoginController extends Controller
 {

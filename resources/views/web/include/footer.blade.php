@@ -65,9 +65,10 @@
               <h3 class="links-title">Contact Us<a class="expander visible-xs" href="#TabBlock-5">+</a></h3>
               <div class="tabBlock" id="TabBlock-5">
                 <div class="footer-description"> 
-                  Address: 8.30 a.m. - 5.30 p.m.<br>
-                  E-mail: Demo@mail.com.<br>
-                  Phone: +91-9451****28 
+                  Address: BIBIBOBI MARKET SERVICES (OPC)<br>PVT LTD.,House No. 453, Halwa Gaon, Dhekial, Golaghat, Golaghat, Assam - 785621<br>
+                  E-mail: support@bibibobi.com.<br>
+                  Phone: +91-6003499455 <BR>
+                  CIN : U52510AS2019OPC019304
                 </div>
                 <div class="footer-description"> 
                   Monday-Friday: 8.30 a.m. - 5.30 p.m.<br>

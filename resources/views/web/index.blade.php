@@ -353,7 +353,7 @@
                                     <div class="product-thumbnail">
                                        {{-- <div class="icon-new-label new-left">New</div> --}}
                                        <div class="pr-img-area">
-                                          <a title="Ipsums Dolors Untra" href="single_product.html">
+                                          <a title="Ipsums Dolors Untra" href="{{ route('web.product_detail',['product_id' => encrypt($item->id)])}}">
                                              <figure> 
                                                 <img class="first-img" src="{{asset('images/product/thumb/'.$item->main_image.'')}}" alt=""> 
                                              </figure>

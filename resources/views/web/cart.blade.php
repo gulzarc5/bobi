@@ -68,7 +68,7 @@
       <div class="col-md-2">
          <ul class="shopping-cart-total-list">
             <li><span>Subtotal</span><span>₹{{ number_format($total,2,".",'')}}</span></li>
-            <li><span>Shopping</span><span>Free</span> </li>
+            <li><span>Shipping</span><span>Free</span> </li>
             {{-- 
             <li><span>Taxes</span><span>$0</span></li>
             --}}

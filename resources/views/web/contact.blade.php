@@ -14,10 +14,12 @@
                 <h3 class="page-subheading">Let's get in touch</h3>
                 <br/>
                 <ul class="store_info">
-                  <li><i class="icon-home icons"></i>7064 Golaghat , Assam</li>
-                  <li><i class="icon-phone icons"></i><span>+ 012 315 678 1234</span></li>
-                  <li><i class="icon-printer icons"></i><span>+39 0035 356 765</span></li>
-                  <li><i class="icon-envelope-open icons"></i>Email: <span><a href="mailto:support@bibibobi.com">support@bibibobi.com</a></span></li>
+                  <li><i class="icon-home icons"></i>BIBIBOBI MARKET SERVICES (OPC) PVT LTD.,House No. 453, Halwa Gaon, Dhekial, Golaghat, Golaghat, Assam - 785621</li>
+                  <li><i class="icon-phone icons"></i><span>+91-6003499455 </li>
+                  <li><i style="width: 47px;"> CIN :  </i><span>U52510AS2019OPC019304</li>
+                  {{-- <li><i class="icon-printer icons"></i><span>+39 0035 356 765</span></li> --}}
+                  <li><i class="icon-envelope-open icons"></i>Email:<span><a href="mailto:support@bibibobi.com">support@bibibobi.com</a></span></li>
+
                 </ul>
               </div>
               <div class="col-sm-6">
