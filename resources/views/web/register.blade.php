@@ -26,7 +26,7 @@
               </span> <br>
             @enderror
 
-            <label for="emmail_register">Email<span class="required">*</span></label>
+            <label for="emmail_register">Email<span class="required"></span></label>
             <input id="emmail_register" type="email" value="{{ old('email') }}" name="email" type="text" class="form-control">
             @if($errors->has('email'))
               <span class="invalid-feedback" role="alert" style="color:red">

@@ -71,10 +71,15 @@ class RegisterController extends Controller
     {
     	$validatedData = $request->validate([
 	        'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:user'],
             'password' => ['required', 'string', 'min:8', 'same:confirm_password'],
             'mobile' =>  ['required','digits:10','numeric','unique:user'],
         ]);
+        
+        if (!empty($request->input('email'))) {
+            $validatedData = $request->validate([
+            'email' => ['string', 'email', 'max:255', 'unique:user'],
+            ]);
+        }
 
         $seller = Seller::create([
             'name' => $request->input('name'),

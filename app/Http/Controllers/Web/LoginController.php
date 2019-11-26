@@ -15,11 +15,11 @@ class LoginController extends Controller
 {
     public function buyerLogin(Request $request){
         $this->validate($request, [
-            'email'   => 'required|email',
+            'mobile' =>  ['required','digits:10','numeric'],
             'password' => 'required|min:8',
         ]);
 
-        if (Auth::guard('buyer')->attempt(['email' => $request->email, 'password' => $request->password,'status' => '1' ])) {
+        if (Auth::guard('buyer')->attempt(['mobile' => $request->mobile, 'password' => $request->password,'status' => '1' ])) {
         	//************Check Session Shopping Cart**********************
                  if (Session::has('cart') && !empty(Session::get('cart'))) {
                     $cart = Session::get('cart');
@@ -58,7 +58,7 @@ class LoginController extends Controller
             //
             return redirect()->intended('User/my_profile');
         }
-        return back()->withInput($request->only('email', 'remember'))->with('login_error','Username or password incorrect');
+        return back()->withInput($request->only('mobile', 'remember'))->with('login_error','Username or password incorrect');
     }
 
     public function logout()

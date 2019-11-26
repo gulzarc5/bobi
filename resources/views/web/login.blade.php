@@ -17,21 +17,21 @@
               <div class="alert alert-danger">{{ Session::get('error') }}</div>
             @endif
             {{ Form::open(array('route' => 'web.buyerLogin', 'method' => 'post')) }}
-              <label for="emmail_login">Email address<span class="required">*</span></label>
-              <input id="emmail_login" value="{{ old('email') }}" name="email" type="text" class="form-control @error('email') is-invalid @enderror">
+              <label for="emmail_login">Mobile Number<span class="required">*</span></label>
+              <input id="emmail_login" value="{{ old('mobile') }}" name="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" placeholder="Enter Mobile Number" >
               @if ($message = Session::get('login_error'))
                 <span class="invalid-feedback" role="alert" style="color:red">
                     <strong>{{ $message }}</strong>
                 </span><br>
               @endif
-              @if($errors->has('email'))
+              @if($errors->has('mobile'))
                 <span class="invalid-feedback" role="alert" style="color:red">
-                    <strong>{{ $errors->first('email') }}</strong>
+                    <strong>{{ $errors->first('mobile') }}</strong>
                 </span><br>
               @enderror
 
               <label for="password_login">Password<span class="required">*</span></label>
-              <input id="password_login" type="password" name="password" class="form-control @error('password') is-invalid @enderror">
+              <input id="password_login" type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter Password" >
               @if($errors->has('password'))
                   <span class="invalid-feedback" role="alert" style="color:red">
                       <strong>{{ $errors->first('password') }}</strong>
