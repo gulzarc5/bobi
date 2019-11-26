@@ -20,7 +20,7 @@
    @endif
    </div>
 </section>
-<div class="container">
+<div class="container" style="padding: 30px 0 50px;">
 
    @if (isset($shipping_address) && count($shipping_address) > 0 )
 
@@ -31,14 +31,15 @@
                 $ship_flag = false;
             @endphp
             @foreach ($shipping_address as $addr)
-               @if ($ship_flag == false)
-                  <div class="col-md-5 checkout_grid shipping" style="border:2px solid #6993f3;">
-                     <input type="radio" name="address" value="{{$addr->id}}"  checked/>
-                     <p style="margin-top: 10px;">
-                     <p><b>State:</b> {{$addr->s_name}}</p>
-                     <p><b>City:</b> {{$addr->c_name}}</p>
-                     <p><b>pin:</b> {{$addr->pin}}</p>
-                     <p>{{$addr->address}}</p>
+               @if ($ship_flag == false)               
+                  <div class="col-md-5 checkout_grid shipping">
+                     <div class="col-md-1"><input type="radio" name="address" value="{{$addr->id}}"  checked/></div>
+                     <div class="col-md-11">
+                        <p>{{$addr->address}}</p>
+                        <p><b>City:</b> {{$addr->c_name}}&nbsp;&nbsp;<b>State:</b> {{$addr->s_name}}</p>
+                        <p></p>
+                        <p><b>Pin:</b> {{$addr->pin}}</p>
+                     </div>
                   </div>
                   <div class="col-md-1 "></div>
                   @php
@@ -57,8 +58,14 @@
                @endif
                
             @endforeach
-           
+
+            <div class="col-md-12">
+               <ul class="list-inline">
+                     <li><a class="btn btn-success" id="add_new_ship_btn" >Add New</a></li>
+               </ul>
+            </div>           
          </div>
+
          <div class="col-md-3" style="margin-top: 20px;">
             <ul class="shopping-cart-total-list">
                <li>
@@ -82,23 +89,11 @@
                         @endif
                   </span>
                </li>
-               <li>
-                  <span>Payment Method</span>
-                  <span>
-                  Online <input type="radio" name="pay_method" value="2">
-                  COD <input type="radio" name="pay_method" value="1">
-                  </span>
-               </li>
             </ul>
-            <button type="submit" class="btn btn-primary " href="#" >Proceed to Checkout</button>
+            <button type="submit" class="btn btn-primary " href="#" >Proceed To Pay</button>
          </div>
       </div>
    {{ Form::close() }}
-      <div class="col-md-12">
-      <ul class="list-inline">
-            <li><a class="btn btn-success" id="add_new_ship_btn" >Add New</a></li>
-      </ul>
-      </div>
 
    @else
       {{-- ///////////////////Add New Shipping Area //////////////////--}}
@@ -281,7 +276,7 @@ $('.shipping').click(function (e){
    // checkbox.prop("checked", !checkbox.prop("checked"));
    $('.shipping').css("border", "1px solid #ccc");
    if(checkbox.prop("checked") == true) {
-     $(this).css("border", "2px solid #6993f3");
+     $(this).css("border", "1px solid #6993f3");
    }else{
       $(this).css("border", "2px solid #ccc");
    }
