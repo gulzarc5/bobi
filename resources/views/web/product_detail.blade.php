@@ -147,15 +147,9 @@
                     <ul>
                       <li><a href="#"><i class="pe-7s-like"></i><span>Add to Wishlist</span></a></li>
                     </ul><br>
-<<<<<<< HEAD
-                    {{-- <ul id="delivery_data">
-                      <li><span>Enter Pin Code To Check Delivery Status</span></li>
-                    </ul> --}}
-=======
                     <ul id="delivery_data">
                       {{-- <li><span>Enter Pin Code To Check Delivery Status</span></li> --}}
                     </ul>
->>>>>>> update
                   </div>
                 {{ Form::close() }}
               </div>
