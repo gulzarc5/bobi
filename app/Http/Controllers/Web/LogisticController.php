@@ -23,8 +23,44 @@ class LogisticController extends Controller
         $this->baseUrl = 'https://staging-express.delhivery.com/';
     }
 
-
     public function pinAvailiblity($pin = null)
+    {
+        if (empty($pin)) {
+            if (Session::has('pin') && !empty(Session::get('pin'))) {
+                $pin = Session::get('pin');
+                
+            }elseif ( Auth::guard('buyer')->user() && !empty(Auth::guard('buyer')->user()->id)) {
+                $shipping_address = DB::table('shipping_address')
+                    ->where('user_id',Auth::guard('buyer')->user()->id)
+                    ->whereNull('deleted_at')
+                    ->orderBy('id','desc')
+                    ->limit(1)
+                    ->first();
+                $pin = $shipping_address->pin;
+                if (empty($pin)) {
+                    return 0 ;
+                }
+            }else{
+                return 0;
+            }
+           
+        }
+        if(!empty($pin)){
+            $check = DB::table('delhivery_pin_code')->where('pin_code',$pin)->count();
+            if ($check > 0) {
+                $pin_chk = DB::table('delhivery_pin_code')->where('pin_code',$pin)->first();
+                Session::put('pin', $pin);
+                return response()->json($pin_chk, 200);
+            }else{
+                return 1;
+            }
+
+        }else{
+            return 0 ;
+        }
+    }
+
+    public function pinAvailiblityApi($pin = null)
     {
         
         if (empty($pin)) {
@@ -87,4 +123,5 @@ class LogisticController extends Controller
        
     }
     
+
 }

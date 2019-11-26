@@ -39,15 +39,63 @@ class CheckoutController extends Controller
         return view('web.checkout',compact('cart_total','shipping_address','states'));
     }
 
+    public function paymentPage($address,$pin)
+    {
+        try {
+            $address = decrypt($address);
+            $pin = decrypt($pin);
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+        $user_pin_details =  DB::table('delhivery_pin_code')->where('pin_code',$pin)->first();
+        $user_id = Auth::guard('buyer')->user()->id;
+
+        $cart = DB::table('cart')->where('user_id',$user_id)->get();
+        $cart_total = 0;
+        foreach ($cart as $key => $item) {
+            $size = DB::table('product_sizes')
+                ->where('size_id',$item->size_id)
+                ->where('product_id',$item->product_id)
+                ->first();
+            $cart_total += $item->quantity * $size->price;
+        }
+        return view('web.payment',compact('user_pin_details','cart_total','address'));
+    }
+
+    public function proceedToPay(Request $request)
+    {
+        $validatedData = $request->validate([
+            'address' => 'required',
+        ]);
+        $user_shi_addr = DB::table('shipping_address')->select('pin')->where('id',$request->input('address'))->first();
+        $user_pin_details = null;
+        if ($user_shi_addr) {
+            $user_pin = DB::table('delhivery_pin_code')->where('pin_code',$user_shi_addr->pin)->count();
+            if ($user_pin > 0) {
+                return redirect()->route('web.payment_page',['address'=>encrypt($request->input('address')),'pin'=>encrypt($user_shi_addr->pin)]);
+            } else {
+                return redirect()->back()->with('error','Sorry Delivery Not Available At this Address Please Choose Another Address');
+            }
+            
+        } else {
+            return redirect()->back()->with('error','Sorry Delivery Not Available At this Address Please Choose Another Address');
+        }
+    }
+
     public function placeOrder(Request $request)
     {
         $validatedData = $request->validate([
             'address' => 'required',
             'pay_method' => 'required',
         ]);
-        
+        try {
+            $address = decrypt($request->input('address'));
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+
         $user_id = Auth::guard('buyer')->user()->id;
-        $address_id = $request->input('address');
+        $address_id = $address;
         $pay_method = $request->input('pay_method');
         /* if Pay method == 1  then send to payment Gateway
             else place order as cash on delivery*/

@@ -22,45 +22,62 @@
    </section>
    <section>
       <div class="container" style="padding-bottom: 50px;">
-          <form method="POST" action="http://localhost/bobi/public/User/Place/Order" accept-charset="UTF-8">
-              <input name="_token" type="hidden" value="Xw0zXN2qjAawISV2yaXTYoYzomgb4HXEPkkQ4mdv">
-              <div class="row">
-                  <div class="col-md-9">
-                     <h3 style="color: #333;text-transform: uppercase;margin-bottom: 20px">Select Payment</h3>
-                     {{-- ///////////////// Item 1 ///////////////// --}}
-                      <div class="col-md-5 checkout_grid shipping" style="padding: 22px;">
-                          <div class="col-md-1">
-                              <input type="radio" name="address" value="10" checked="">
-                          </div>
-                          <div class="col-md-11">
+         @if (isset($user_pin_details) && !empty($user_pin_details) && !empty($address))
+         {{ Form::open(array('route' => 'web.place_order', 'method' => 'post')) }}
+            <input type="hidden" name="address" value="{{encrypt($address)}}">
+            <div class="row">
+               <div class="col-md-9">
+                  <h3 style="color: #333;text-transform: uppercase;margin-bottom: 20px">Select Payment</h3>
+                  {{-- ///////////////// Item 1 ///////////////// --}}
+                  @if (isset($user_pin_details->cod) && !empty($user_pin_details->cod) && $user_pin_details->cod == 'Y')
+                     <div class="col-md-5 checkout_grid shipping" style="padding: 22px;">
+                        <div class="col-md-1">
+                              <input type="radio" name="pay_method" value="1" checked>
+                        </div>
+                        <div class="col-md-11">
                               <h5>Cash On Delivery</h5>
-                          </div>
-                      </div>
-                      <div class="col-md-1 "></div>
-                     {{-- ///////////////// Item 2 ///////////////// --}}
-                      <div class="col-md-5 checkout_grid shipping" style="padding: 22px;">
-                          <div class="col-md-1">
-                              <input type="radio" name="address" value="10" checked="">
-                          </div>
-                          <div class="col-md-11">
-                              <h5>Online Payment</h5>
-                          </div>
-                      </div>
-                      {{-- /////////////////// Button /////////////////// --}}   
-                       <div class="col-md-12 flex-center">                   
-                         <button type="submit" class="btn btn-primary " href="#">Proceed </button>
-                      </div>
+                        </div>
+                     </div>
+                  @else
+                     <div class="col-md-5 checkout_grid shipping" style="padding: 22px;">
+                        <div class="col-md-1">
+                           <input type="radio" name="pay_method" value="1" disabled>
+                        </div>
+                        <div class="col-md-11">
+                           <h5>Cash On Delivery</h5>
+                        </div>
+                     </div>
+                  @endif
+                  
+                  <div class="col-md-1 "></div>
+                  {{-- ///////////////// Item 2 ///////////////// --}}
+                  <div class="col-md-5 checkout_grid shipping" style="padding: 22px;">
+                     <div class="col-md-1">
+                           <input type="radio" name="pay_method" value="2">
+                     </div>
+                     <div class="col-md-11">
+                           <h5>Online Payment</h5>
+                     </div>
                   </div>
-
+                  {{-- /////////////////// Button /////////////////// --}}   
+                  <div class="col-md-12 flex-center">                   
+                     <button type="submit" class="btn btn-primary " href="#">Proceed </button>
+                  </div>
+               </div>
+               @if (isset($cart_total) && !empty($cart_total))
                   <div class="col-md-3" style="margin-top: 20px;">
-                      <ul class="shopping-cart-total-list">
-                          <li><span>Subtotal</span><span>₹ 599.00</span></li>
-                          <li><span>Shipping</span><span>Free</span> </li>
-                          <li><span>Total</span><span>₹ 599.00</span></li>
-                      </ul>
-                  </div>
-              </div>
-          </form>
+                     <ul class="shopping-cart-total-list">
+                        <li><span>Subtotal</span><span>₹ {{ number_format($cart_total,2,".",'') }}</span></li>
+                        <li><span>Shipping</span><span>Free</span> </li>
+                        <li><span>Total</span><span>₹ {{ number_format($cart_total,2,".",'') }}</span></li>
+                     </ul>
+               </div>
+               @endif
+               
+            </div>
+         {{ Form::close() }}
+         @endif
+          
       </div>      
    </section>
 @endsection

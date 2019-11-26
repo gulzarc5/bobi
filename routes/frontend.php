@@ -31,6 +31,8 @@ Route::group(['namespace'=> 'Web'], function(){
         Route::get('/WishList/Move/{list_id}', 'UserController@wishListMove')->name('web.move_wish_list');
 
         Route::get('/checkout','CheckoutController@checkoutShip')->name('web.checkout_ship');
+        Route::post('Proceed/Pay', 'CheckoutController@proceedToPay')->name('web.payment');
+        Route::get('Payment/Method/{address}/{pin}','CheckoutController@paymentPage')->name('web.payment_page');
 
         Route::post('Place/Order','CheckoutController@placeOrder')->name('web.place_order');
         Route::get('/pay/order/amount/{order_id}','CheckoutController@paySuccess')->name('web.pay_order_amount');
@@ -90,9 +92,7 @@ Route::get('/Return/Policy',function(){
     return view('web.returnpolicy');
 })->name('web.returnpolicy');
 
-Route::get('/Payment', function () {
-    return view('web.payment');
-})->name('web.payment');
+
 
 Route::get('/Privacy', function () {
     return view('web.privacy');

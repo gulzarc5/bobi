@@ -67,21 +67,23 @@
                   <div id="pincode">
                     <form>
                       <div class="input-group flex">
-                        <input type="text" class="form-control" placeholder="Enter Pincode" name="pincode">
-                        <button class="btn-search" type="button">Check</button>
+                          @if(Session::has('pin'))
+                      <input type="text" class="form-control" placeholder="Enter Pincode" id="pincode_data" value="{{Session::get('pin')}}"> 
+                          @else
+                            <input type="text" class="form-control" placeholder="Enter Pincode" id="pincode_data">
+                          @endif
+                        <button class="btn-search" type="button" onclick="checkDelivery()">Check</button>
                       </div>
                     </form>
 
                     {{-- Print --}}
-                    <div class="delivery-info"><!-- Condition 1 -->
+                    <div class="delivery-info" id="delivery_info">
                       <p style="margin-top: 7px;"><span style="color: red">*</span>Please check the availablity of product on your pincode </p>
                     </div> 
 
-                    <div class="delivery-info"><!-- Condition 2 -->
-                      <h6>Delivery Available</h6>
-                      <h5><i class="fa fa-check"></i>COD</h5>
-                      <h5><i class="fa fa-times"></i>ONLINE</h5>
-                    </div>
+                    {{-- <div class="delivery-info">
+                      
+                    </div> --}}
                     {{-- Print --}}
 
                   </div>
@@ -421,7 +423,7 @@
   <!-- Page Content -->
 @endsection
 
-{{-- @section('script')
+@section('script')
   <script>
     $( window ).on( "load", getDeliveryStatus());
     function getDeliveryStatus(pin) {
@@ -439,22 +441,35 @@
       $.ajax({
           type:"GET",
           url:url,
+          beforeSend: function() {
+            $('#delivery_info').html('<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>');    
+          },
           success:function(data){
+            
+            console.log(data);
+            
             if (data == 1) {
-              $("#delivery_data").html('Sorry Delivery Option Is Not Available In This Pin Code')
+              $("#delivery_info").html('<p style="margin-top: 7px;color:red;font-weight:bold">Sorry Delivery Option Is Not Available In This Pin Code</p>')
             }else if(data == 0){
-
+              $('#delivery_info').html('<p style="margin-top: 7px;"><span style="color: red">*</span>Please check the availablity of product on your pincode </p>'); 
             }else{
-              var availiblity = data.delivery_codes[0];
-              if (availiblity.postal_code.cod == 'Y') {
-                $("#delivery_data").html('COD available in this pin code');
+              var html_delivery = '<h6>Delivery Available</h6><h5><i class="fa fa-check"></i>ONLINE</h5>';
+              if (data.cod == 'Y') {
+                html_delivery+='<h5><i class="fa fa-check"></i>COD</h5>';
               }else{
-                $("#delivery_data").html('Delivery Available in this pin code');
+                html_delivery+='<h5><i class="fa fa-times"></i>COD</h5>';
               }
+              $("#delivery_info").html(html_delivery);
             }
-              console.log(data);
           }
-      });
+      })
+    }
+
+    function checkDelivery() {
+      var pin = $('#pincode_data').val();
+      if (pin) {
+        getDeliveryStatus(pin);
+      }
     }
   </script>
-@endsection --}}
+@endsection

@@ -18,13 +18,16 @@
       @endforeach
    </ul>
    @endif
+      @if (Session::has('error'))
+         <div class="alert alert-danger">{{ Session::get('error') }}</div>
+      @endif
    </div>
 </section>
 <div class="container" style="padding: 30px 0 50px;">
 
    @if (isset($shipping_address) && count($shipping_address) > 0 )
 
-   {{ Form::open(array('route' => 'web.place_order', 'method' => 'post')) }}
+   {{ Form::open(array('route' => 'web.payment', 'method' => 'post')) }}
       <div class="row">
          <div class="col-md-9">
             @php
