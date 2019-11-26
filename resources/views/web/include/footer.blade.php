@@ -95,7 +95,7 @@
             <div class="col-sm-6 col-xs-12 coppyright"> Copyright © 2019 <a href="#"> Bibibobi </a>. All Rights Reserved. || Developed By <a href="https://www.webinfotech.net.in/">Webinfotech</a></div>
             <div class="col-sm-6 col-xs-12">
               <ul class="footer-company-links">
-                <li> <a href="#">Privacy Policy</a> </li>
+                <li> <a href="{{route('web.privacy')}}">Privacy Policy</a> </li>
                 <li>|</li>
                 <li> <a href="#">Terms &amp; Condition</a> </li>
               </ul>

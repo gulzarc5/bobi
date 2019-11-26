@@ -83,7 +83,7 @@ jQuery(document).ready(function() {
             itemsDesktop: [1024, 4],
             itemsDesktopSmall: [900, 3],
             itemsTablet: [640, 2],
-            itemsMobile: [390, 1],
+            itemsMobile: [390, 2],
             navigation: !0,
             navigationText: ['<a class="flex-prev"></a>', '<a class="flex-next"></a>'],
             slideSpeed: 500,

@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-main">
             <div class="product-view-area">
-              <div class="product-big-image col-xs-12 col-sm-5 col-lg-5 col-md-5">
+              <div class="product-big-image col-xs-12 col-sm-4 col-lg-4 col-md-4">
                 <div class="icon-sale-label sale-left">Sale</div>
                 <div class="large-image"> <a href="{{asset('images/product/'.$data['product']->main_image.'')}}" class="cloud-zoom" id="magni_img" data-big="{{asset('images/product/'.$data['product']->main_image.'')}}" data-overlay="{{asset('web/images/magnifying_glass.png')}}" rel="useWrapper: false, adjustY:0, adjustX:20"> <img  src="{{asset('images/product/'.$data['product']->main_image.'')}}" alt="pr img"/></a> </div>
                 <div class="flexslider flexslider-thumb">
@@ -30,18 +30,12 @@
                       @endforeach
                         
                     @endif
-                    {{-- <li><a href='{{asset('web/images/products/img01.jpg')}}' class='cloud-zoom-gallery' rel="useZoom: 'magni_img', smallImage: '{{asset('web/images/products/img01.jpg')}}' "><img src="{{asset('web/images/products/img01.jpg')}}" alt = "Thumbnail 2"/></a></li>
-                    <li><a href='{{asset('web/images/products/img07.jpg')}}' class='cloud-zoom-gallery' rel="useZoom: 'magni_img', smallImage: '{{asset('web/images/products/img07.jpg')}}' "><img src="{{asset('web/images/products/img07.jpg')}}" alt = "Thumbnail 1"/></a></li>
-                    <li><a href='{{asset('web/images/products/img02.jpg')}}' class='cloud-zoom-gallery' rel="useZoom: 'magni_img', smallImage: '{{asset('web/images/products/img02.jpg')}}' "><img src="{{asset('web/images/products/img02.jpg')}}" alt = "Thumbnail 1"/></a></li>
-                    <li><a href='{{asset('web/images/products/img03.jpg')}}' class='cloud-zoom-gallery' rel="useZoom: 'magni_img', smallImage: '{{asset('web/images/products/img03.jpg')}}' "><img src="{{asset('web/images/products/img03.jpg')}}" alt = "Thumbnail 2"/></a></li>
-                    <li><a href='{{asset('web/images/products/img04.jpg')}}' class='cloud-zoom-gallery' rel="useZoom: 'magni_img', smallImage: '{{asset('web/images/products/img04.jpg')}}' "><img src="{{asset('web/images/products/img04.jpg')}}" alt = "Thumbnail 2"/></a></li> --}}
                   </ul>
                 </div>
                 
-                <!-- end: more-images --> 
-                
+                <!-- end: more-images -->                 
               </div>
-              <div class="col-xs-12 col-sm-7 col-lg-7 col-md-7 product-details-area">
+              <div class="col-xs-12 col-sm-8 col-lg-8 col-md-8 product-details-area">
                 <div class="product-name">
                   <h1>{{$data['product']->name}}</h1>
                 </div>
@@ -53,8 +47,6 @@
                   
                 </div>
                 <div class="ratings">
-                  {{-- <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> </div> --}}
-                  {{-- <p class="rating-links"> <a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Your Review</a> </p> --}}
                   @if (isset($data['min_price']) && !empty($data['min_price']))
                     @if ($data['min_price']->stock > 0)
                       <p class="availability in-stock ">Availability: <span>In Stock</span></p>
@@ -69,8 +61,33 @@
                   <p>{{$data['product']->short_description}}</a></p>
                 </div>
 
+                {{--  --}}
+                <div class="product-color-size-area">
+                  <h2 class="saider-bar-title">Delivery Availability</h2>
+                  <div id="pincode">
+                    <form>
+                      <div class="input-group flex">
+                        <input type="text" class="form-control" placeholder="Enter Pincode" name="pincode">
+                        <button class="btn-search" type="button">Check</button>
+                      </div>
+                    </form>
+
+                    {{-- Print --}}
+                    <div class="delivery-info"><!-- Condition 1 -->
+                      <p style="margin-top: 7px;"><span style="color: red">*</span>Please check the availablity of product on your pincode </p>
+                    </div> 
+
+                    <div class="delivery-info"><!-- Condition 2 -->
+                      <h6>Delivery Available</h6>
+                      <h5><i class="fa fa-check"></i>COD</h5>
+                      <h5><i class="fa fa-times"></i>ONLINE</h5>
+                    </div>
+                    {{-- Print --}}
+
+                  </div>
+                </div>
                 {{ Form::open(['method' => 'post','route'=>'web.add_cart']) }}
-              <input type="hidden" name="product_id" value="{{ $data['product']->id }}">
+                <input type="hidden" name="product_id" value="{{ $data['product']->id }}">
                   <div class="product-color-size-area">
                     <div class="color-area">
                       <h2 class="saider-bar-title">Color</h2>
@@ -130,13 +147,11 @@
                     <ul>
                       <li><a href="#"><i class="pe-7s-like"></i><span>Add to Wishlist</span></a></li>
                     </ul><br>
-                    {{-- <ul id="delivery_data">
-                      <li><span>Enter Pin Code To Check Delivery Status</span></li>
-                    </ul> --}}
+                    <ul id="delivery_data">
+                      {{-- <li><span>Enter Pin Code To Check Delivery Status</span></li> --}}
+                    </ul>
                   </div>
                 {{ Form::close() }}
-
-
               </div>
             </div>
           </div>

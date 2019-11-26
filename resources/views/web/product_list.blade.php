@@ -196,8 +196,8 @@
 @endsection
 @section('script')
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+<link rel="stylesheet" href="{{asset('web/css/ion.rangeSlider.min.css')}}"/>
+<script src="{{asset('web/js/ion.rangeSlider.min.js')}}"></script>
 
 @if(isset($data['price_range']) && !empty($data['price_range']) && !empty($data['price_range']->min_price) && !empty($data['price_range']->max_price))
   <script>
