@@ -3,18 +3,18 @@
 @section('content')
 
 <div class="right_col" role="main">
-  @if (isset($orders) && !empty($orders))
+  @if (isset($order_details) && !empty($order_details))
     <div class="row">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Order Details of Order - {{$orders->id}}
-              @if ($orders->status == '1')
+            <h2>Order Details of Order - {{$order_details->id}}
+              @if ($order_details->order_status == '1')
                 <a class="btn btn-warning">Pending</a>
-              @elseif ($orders->status == '2')
+              @elseif ($order_details->order_status == '2')
                 <a class="btn btn-info">Dispatched</a>
-              @elseif ($orders->status == '3')
+              @elseif ($order_details->order_status == '3')
                 <a class="btn btn-success">Delivered</a>
-              @elseif ($orders->status == '4')
+              @elseif ($order_details->order_status == '4')
                 <a class="btn btn-danger">Cancelled</a>
               @else
               <a class="btn btn-default">Return</a>
@@ -81,7 +81,7 @@
                      <tr>
                        <th>Payment Method : </th>
                        <td>
-                         @if ($orders->payment_method == '1')
+                         @if ($order_details->payment_method == '1')
                              Cash On Delivery
                          @else
                              Online
@@ -91,7 +91,7 @@
                      <tr>
                        <th>Payment Status : </th>
                        <td>
-                          @if ($orders->payment_status == '1')
+                          @if ($order_details->payment_status == '1')
                              Pending
                           @else
                              Paid
@@ -100,11 +100,11 @@
                      </tr>
                      <tr>
                        <th>Total Quantity : </th>
-                     <td>{{ $orders->quantity }}</td>
+                     <td>{{ $order_details->quantity }}</td>
                      </tr>
                      <tr>
                        <th>Total Amount : </th>
-                       <td> ₹{{ number_format($orders->amount,2,".",'')}} </td>
+                       <td> ₹{{ number_format($order_details->total,2,".",'')}} </td>
                      </tr>
                    </table>
                  </div>
@@ -135,53 +135,44 @@
                       </tr>
                     </thead>
                     <tbody>
-
-                      @if (isset($order_details) && count($order_details) > 0 )
-                        @php
-                            $count = 1;
-                        @endphp
-                        @foreach ($order_details as $item)
                           <tr>
-                            <td>{{$count++}}</td>
-                            <td><img src="{{asset('images/product/thumb/'.$item->image.'')  }}" height="150px" width="120px"></td>
-                            <td>{{$item->product_id}}</td>
-                            <td>{{$item->title}}</td>
-                            <td>{{$item->seller_name}}</td>
-                            <td>{{$item->size}}</td>
-                            <td><span style=" height: 25px;width: 25px;background-color: {{$item->color_value}};border-radius: 50%;display: inline-block;"></span></td>
-                            <td>{{$item->designer}}</td>
-                            <td>₹{{ number_format($item->rate,2,".",'')}}</td>
-                            <td>{{$item->quantity}}</td>
-                            <td>₹{{ number_format($item->total,2,".",'')}}</td>
-                            <td>{{$item->order_date}}</td>
+                            <td>1</td>
+                            <td><img src="{{asset('images/product/thumb/'.$order_details->image.'')  }}" height="150px" width="120px"></td>
+                            <td>{{$order_details->product_id}}</td>
+                            <td>{{$order_details->title}}</td>
+                            <td>{{$order_details->seller_name}}</td>
+                            <td>{{$order_details->size}}</td>
+                            <td><span style=" height: 25px;width: 25px;background-color: {{$order_details->color_value}};border-radius: 50%;display: inline-block;"></span></td>
+                            <td>{{$order_details->designer}}</td>
+                            <td>₹{{ number_format($order_details->rate,2,".",'')}}</td>
+                            <td>{{$order_details->quantity}}</td>
+                            <td>₹{{ number_format($order_details->total,2,".",'')}}</td>
+                            <td>{{$order_details->order_date}}</td>
                             <td>
-                              @if ($item->order_status == '1')
+                              @if ($order_details->order_status == '1')
                                 <a class="btn btn-warning">Pending</a>
-                              @elseif ($item->order_status == '2')
+                              @elseif ($order_details->order_status == '2')
                                 <a class="btn btn-info">Dispatched</a>
-                              @elseif ($item->order_status == '3')
+                              @elseif ($order_details->order_status == '3')
                                 <a class="btn btn-success">Delivered</a>
-                              @elseif ($item->order_status == '4')
+                              @elseif ($order_details->order_status == '4')
                                 <a class="btn btn-danger">Cancelled</a>
                               @else
                                 <a class="btn btn-default">Return</a>
                               @endif
                             </td>
                             <td>
-                                @if ($item->order_status == '1')
+                                @if ($order_details->order_status == '1')
                                   {{-- <a href="{{ route('admin.order_dispatch',['order_details_id' => encrypt($item->id)]) }}" class="btn btn-info">Dispatch</a> --}}
-                                  <a href="{{ route('admin.order_status_update',['order_id' => encrypt($item->order_id),'order_details_id' => encrypt($item->id),'status' => encrypt(4)]) }}" class="btn btn-danger">Cancel</a>
-                                @elseif ($item->order_status == '2')
-                                  <a href="{{ route('admin.order_status_update',['order_id' => encrypt($item->order_id),'order_details_id' => encrypt($item->id),'status' => encrypt(3)]) }}" class="btn btn-success">Delivered</a>
-                                  <a href="{{ route('admin.order_status_update',['order_id' => encrypt($item->order_id),'order_details_id' => encrypt($item->id),'status' => encrypt(4)]) }}" class="btn btn-danger">Cancel</a>
+                                  <a href="{{ route('admin.order_status_update',['order_id' => encrypt($order_details->order_id),'order_details_id' => encrypt($order_details->id),'status' => encrypt(4)]) }}" class="btn btn-danger">Cancel</a>
+                                @elseif ($order_details->order_status == '2')
+                                  <a href="{{ route('admin.order_status_update',['order_id' => encrypt($order_details->order_id),'order_details_id' => encrypt($order_details->id),'status' => encrypt(3)]) }}" class="btn btn-success">Delivered</a>
+                                  <a href="{{ route('admin.order_status_update',['order_id' => encrypt($order_details->order_id),'order_details_id' => encrypt($order_details->id),'status' => encrypt(4)]) }}" class="btn btn-danger">Cancel</a>
                                 @else
                                   <a class btn btn-primary>Order Processed</a>
                               @endif
                             </td>
                           </tr>
-                        @endforeach
-                          
-                      @endif
                     </tbody>
                   </table>
                 </div>

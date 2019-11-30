@@ -31,6 +31,9 @@ Route::group(['prefix'=>'Seller','namespace'=>'Seller'],function(){
 		Route::get('order/dispatch/{order_details_id}','OrderController@dispatchOrder')->name('seller.order_dispatch');
 		Route::post('order/dispatch/Update','OrderController@dispatchOrderUpdate')->name('seller.order_dispatch_update');
 		Route::get('Order/Status/Update/{order_id}/{order_details_id}/{status}','OrderController@orderStatusUpdate')->name('seller.order_status_update');
+
+		Route::get('/processing/Orders','OrderController@processingOrders')->name('seller.processing_orders');
+		Route::get('ajax/processing/Orders','OrderController@processingOrdersAjax')->name('seller.ajax_processing_orders');
 	});
 });
 

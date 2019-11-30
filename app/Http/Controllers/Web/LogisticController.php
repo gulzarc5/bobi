@@ -36,8 +36,12 @@ class LogisticController extends Controller
                     ->orderBy('id','desc')
                     ->limit(1)
                     ->first();
-                $pin = $shipping_address->pin;
-                if (empty($pin)) {
+                if ($shipping_address) {
+                    $pin = $shipping_address->pin;
+                    if (empty($pin)) {
+                        return 0 ;
+                    }
+                } else {
                     return 0 ;
                 }
             }else{

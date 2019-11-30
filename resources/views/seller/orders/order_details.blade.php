@@ -16,6 +16,10 @@
                 <a class="btn btn-success">Delivered</a>
               @elseif ($order_details->order_status == '4')
                 <a class="btn btn-danger">Cancelled</a>
+              @elseif ($order_details->order_status == '6')
+                <a class="btn btn-success">Ready To Dispatched</a>
+              @elseif ($order_details->order_status == '7')
+                <a>Keep Your Product Ready Courier will Pick your Product Soon</a>
               @else
               <a class="btn btn-default">Return</a>
               @endif
@@ -122,6 +126,8 @@
                             <a class="btn btn-success">Delivered</a>
                           @elseif ($order_details->order_status == '4')
                             <a class="btn btn-danger">Cancelled</a>
+                          @elseif ($order_details->order_status == '6')
+                          <a>Keep Your Product Ready Courier will Pick your Product Soon</a>
                           @else
                             <a class="btn btn-default">Return</a>
                           @endif
@@ -129,11 +135,11 @@
                         <td>
                             @if ($order_details->order_status == '1')
                             
-                              <a href="{{ route('seller.order_dispatch',['order_details_id' => encrypt($order_details->id)]) }}" class="btn btn-info">Dispatch</a>
+                              <a href="{{ route('seller.order_dispatch',['order_details_id' => encrypt($order_details->id)]) }}" class="btn btn-info">Ready To Dispatch</a>
                               <a href="{{ route('seller.order_status_update',['order_id' => encrypt($order_details->order_id),'order_details_id' => encrypt($order_details->id),'status' => encrypt(4)]) }}" class="btn btn-danger">Cancel</a>
-                            @elseif ($order_details->order_status == '2')
+                            {{-- @elseif ($order_details->order_status == '2')
                               <a href="{{ route('seller.order_status_update',['order_id' => encrypt($order_details->order_id),'order_details_id' => encrypt($order_details->id),'status' => encrypt(3)]) }}" class="btn btn-success">Delivered</a>
-                              <a href="{{ route('seller.order_status_update',['order_id' => encrypt($order_details->order_id),'order_details_id' => encrypt($order_details->id),'status' => encrypt(4)]) }}" class="btn btn-danger">Cancel</a>
+                              <a href="{{ route('seller.order_status_update',['order_id' => encrypt($order_details->order_id),'order_details_id' => encrypt($order_details->id),'status' => encrypt(4)]) }}" class="btn btn-danger">Cancel</a> --}}
                             @else
                               <a class btn btn-primary>Order Processed</a>
                           @endif

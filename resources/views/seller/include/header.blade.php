@@ -109,6 +109,7 @@
                   <li><a><i class="fa fa-table"></i> Orders <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('seller.all_orders') }}">All Orders</a></li>
+                      <li><a href="{{ route('seller.processing_orders') }}">Processing Orders</a></li>
                     </ul>
                   </li>
                 </ul>

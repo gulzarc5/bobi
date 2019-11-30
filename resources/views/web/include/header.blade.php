@@ -83,6 +83,40 @@
           @endif
         </ul>
       </li>
+
+      <li><a href="#">GIFT ITEM</a>
+        <ul>
+          @if (isset($category_list['category_list_gift_item']) && !empty($category_list['category_list_gift_item']))
+            @foreach ($category_list['category_list_gift_item'] as $f_category)
+              @if (count($f_category['second_category']) > 0)
+                <li> <a><span>{{ $f_category['name'] }}</span></a>
+                <ul>
+                  @foreach ($f_category['second_category'] as $s_category)
+                    <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
+                  @endforeach
+                </ul>
+              @endif
+            @endforeach
+          @endif
+        </ul>
+      </li>
+
+      <li><a href="#">HANDICRAFT</a>
+        <ul>
+          @if (isset($category_list['category_list_handicuft_item']) && !empty($category_list['category_list_handicuft_item']))
+            @foreach ($category_list['category_list_handicuft_item'] as $f_category)
+              @if (count($f_category['second_category']) > 0)
+                <li> <a><span>{{ $f_category['name'] }}</span></a>
+                <ul>
+                  @foreach ($f_category['second_category'] as $s_category)
+                    <li> <a href="{{ route('web.product_list',['second_category_id'=>encrypt($s_category->id)]) }}"><span>{{ $s_category->name }}</span></a> </li>
+                  @endforeach
+                </ul>
+              @endif
+            @endforeach
+          @endif
+        </ul>
+      </li>
       <li><a href="{{ route('web.contact')}}">Contact Us</a></li>
     </ul>
   </div>

@@ -11,7 +11,7 @@ Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 
  	Route::get('/view/{product_id}', 'ProductController@productView')->name('seller.product_view');
  	Route::get('/Edit/{product_id}', 'ProductController@productEdit')->name('seller.product_edit');
- 	Route::post('/Update/', 'ProductController@productUpdate')->name('seller.update_product');
+ 	Route::post('/Update', 'ProductController@productUpdate')->name('seller.update_product');
  	Route::get('/Images/{product_id}', 'ProductController@productImages')->name('seller.product_images');
  	Route::get('/Thumb/Set/{product_id}/{image_id}', 'ProductController@productSetThumb')->name('seller.product_set_thumb');
  	Route::get('/Images/Status/Update/{product_id}/{image_id}/{status}', 'ProductController@productUpdateImageStatus')->name('seller.product_images_status_update');

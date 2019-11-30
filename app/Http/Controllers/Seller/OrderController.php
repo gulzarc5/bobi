@@ -43,6 +43,8 @@ class OrderController extends Controller
                     $btn =  '<a class="btn btn-success">Delivered</a>';
                 }elseif ($row->status == '4') {
                     $btn =  '<a class="btn btn-danger">Cancelled</a>';
+                }elseif ($row->status == '6') {
+                    $btn =  '<a>Keep Your Product Ready Courier will Pick your Product Soon</a>';
                 }else{
                     $btn = '<a class="btn btn-default">Return</a>';
                 }
@@ -61,6 +63,11 @@ class OrderController extends Controller
             ->make(true);
     }
 
+    public function processingOrders()
+    {
+        return view('seller.orders.processing_orders');
+    }
+    
     public function OrdersView($order_details_id)
     {
         try {
@@ -106,32 +113,20 @@ class OrderController extends Controller
         }catch(DecryptException $e) {
             return redirect()->back();
         }
-
-        return view('seller.orders.dispatch_orders',compact('order_details_id'));
-    }
-
-    public function dispatchOrderUpdate(Request $request)
-    {
-        $validatedData = $request->validate([
-            'order_details_id' => 'required',
-            'transaction_no' => 'required',
-        ]);
-        $order_details_id = $request->input('order_details_id');
-        $consign_no = $request->input('transaction_no');
-
         $update_order_status = DB::table('order_details')
         ->where('id',$order_details_id)
         ->update([
-            'order_status' => 2,
-            'consignment_no' => $consign_no,
+            'order_status' => 6,
             'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
         ]);
 
         if($update_order_status){
             $order = DB::table('order_details')->where('id',$order_details_id)->first();
+          
             $all_orders = DB::table('order_details')
                 ->where('id',$order->order_id)
                 ->get();
+               
             $status_flag = true;
             foreach ($all_orders as $key => $value) {
                 $order_id = $value->order_id;
@@ -140,20 +135,57 @@ class OrderController extends Controller
                     break;
                 }
             }
-
-            if ($status_flag) {
-                DB::table('orders')
-                    ->where('id',$all_orders->order_id)
-                    ->update([
-                        'status' => 2,
-                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
-                    ]);
-            }
             return redirect()->route('seller.order_view',['order_details_id'=>encrypt($order_details_id)]);
         }else{
             return redirect()->back();
         }
+
     }
+
+    // public function dispatchOrderUpdate(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         'order_details_id' => 'required',
+    //         'transaction_no' => 'required',
+    //     ]);
+    //     $order_details_id = $request->input('order_details_id');
+    //     $consign_no = $request->input('transaction_no');
+
+    //     $update_order_status = DB::table('order_details')
+    //     ->where('id',$order_details_id)
+    //     ->update([
+    //         'order_status' => 2,
+    //         'consignment_no' => $consign_no,
+    //         'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+    //     ]);
+
+    //     if($update_order_status){
+    //         $order = DB::table('order_details')->where('id',$order_details_id)->first();
+    //         $all_orders = DB::table('order_details')
+    //             ->where('id',$order->order_id)
+    //             ->get();
+    //         $status_flag = true;
+    //         foreach ($all_orders as $key => $value) {
+    //             $order_id = $value->order_id;
+    //             if ((int)$value->order_status < (int)2) {
+    //                 $status_flag = false;                    
+    //                 break;
+    //             }
+    //         }
+
+    //         if ($status_flag) {
+    //             DB::table('orders')
+    //                 ->where('id',$all_orders->order_id)
+    //                 ->update([
+    //                     'status' => 2,
+    //                     'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+    //                 ]);
+    //         }
+    //         return redirect()->route('seller.order_view',['order_details_id'=>encrypt($order_details_id)]);
+    //     }else{
+    //         return redirect()->back();
+    //     }
+    // }
 
     public function orderStatusUpdate($order_id,$order_details_id,$status)
     {

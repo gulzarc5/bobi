@@ -147,7 +147,7 @@
                   </div>
                   <div class="product-cart-option">
                     <ul>
-                      <li><a href="#"><i class="pe-7s-like"></i><span>Add to Wishlist</span></a></li>
+                      <li><a href="{{ route('web.add_wish_list',['product_id'=>encrypt($data['product']->id)]) }}"><i class="pe-7s-like"></i><span>Add to Wishlist</span></a></li>
                     </ul><br>
                     <ul id="delivery_data">
                       {{-- <li><span>Enter Pin Code To Check Delivery Status</span></li> --}}

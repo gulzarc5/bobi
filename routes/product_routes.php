@@ -44,11 +44,16 @@ Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 Route::group(['namespace' => 'Order'],function(){
 	Route::get('/All/Orders/', 'OrderController@orderListAll')->name('admin.all_order_list');	
 	Route::get('Order/Details/{order_id}','OrderController@orderDetails')->name('admin.order_details');
-
 	Route::get('Order/Status/Update/{order_id}/{order_details_id}/{status}','OrderController@orderStatusUpdate')->name('admin.order_status_update');
-
 	Route::get('ajax/all/orders','OrderController@ajaxOrderListAll')->name('admin.ajax_order_all');
+	Route::get('/Processing/Orders/', 'OrderController@processingOrders')->name('admin.processing_orders');	
+	Route::get('/Processing/Orders/Excel', 'OrderController@processingOrdersExcel')->name('admin.processing_orders_excel');	
+	Route::get('ajax/processing/orders','OrderController@ajaxProcessingOrders')->name('admin.ajax_processing_orders');
+	Route::get('/Dispatched/Orders/', 'OrderController@dispatchedOrders')->name('admin.dispatched_orders');		
+	Route::get('ajax/dispatched/orders','OrderController@ajaxdispatchedOrders')->name('admin.ajax_dispatched_orders');
+
+	Route::get('Order/Details/OrderDetail/{order_id}','OrderController@orderDetailsFromOrderDetail')->name('admin.order_details_of_order_detail');
 
 	Route::get('order/dispatch/{order_details_id}','OrderController@dispatchOrder')->name('admin.order_dispatch');
-	Route::post('order/dispatch/Update','OrderController@dispatchOrderUpdate')->name('admin.order_dispatch_update');
+	Route::get('order/dispatch/Update/{order_details_id}/{awb_no}','OrderController@dispatchOrderUpdate')->name('admin.order_dispatch_update');
 });

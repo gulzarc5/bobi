@@ -1192,13 +1192,13 @@
    </div>
 </div>
 <!-- Bottom section -->
-<div class="bottom-section">
+{{-- <div class="bottom-section">
    <div class="container">
       <div class="row">
          <!-- Blog -->
          <!-- Customers Box -->
          <div class="col-md-3 col-sm-12 col-xs-12"></div>
-         {{-- <div class="col-md-6 col-sm-12 col-xs-12">
+         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="testimonials">
                <div class="page-header">
                   <h2>What Our Customers Say</h2>
@@ -1242,13 +1242,13 @@
                   </div>
                </div>
             </div>
-         </div> --}}
+         </div>
          <div class="col-md-3 col-sm-12 col-xs-12"></div>
       </div>
    </div>
-</div>
+</div> --}}
 <!-- service section -->
-<div class="jtv-service-area">
+<div class="jtv-service-area bottom-section">
    <div class="container">
       <div class="row">
          <div class="col col-md-3 col-sm-6 col-xs-12">
@@ -1257,7 +1257,7 @@
                   <div class="icon-wrapper"><i class="pe-7s-plane"></i></div>
                   <div class="service-wrapper">
                      <h3>Shipping Anywhere</h3>
-                     <p>On order over $99</p>
+                     <p>On order</p>
                   </div>
                </div>
             </div>
@@ -1279,7 +1279,7 @@
                   <div class="icon-wrapper"><i class="pe-7s-umbrella"></i></div>
                   <div class="service-wrapper">
                      <h3>Support 24/7</h3>
-                     <p>Call us: ( +123 ) 456 789</p>
+                     <p>Call us:  +91-6003499455</p>
                   </div>
                </div>
             </div>
@@ -1290,7 +1290,7 @@
                   <div class="icon-wrapper"><i class="pe-7s-ticket"></i></div>
                   <div class="service-wrapper">
                      <h3>Member Discount</h3>
-                     <p>25% on order over $199</p>
+                     <p>coming soon</p>
                   </div>
                </div>
             </div>
