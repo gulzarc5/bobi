@@ -168,7 +168,7 @@
                   </div>
                 </div>
                 <!-- My Account --> 
-                <dFiv class="jtv-user-info hidden-xs tab-head" id="account-head">
+                <div class="jtv-user-info hidden-xs tab-head" id="account-head">
                   <div class="dropdown"><a class="current-open" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i style="font-size: 26px" class="pe-7s-user"></i><span>Account</span> <i class="fa fa-angle-down"></i></a>
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="{{ route('web.myprofile')}}">My Account</a></li>

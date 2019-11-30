@@ -5,6 +5,7 @@ Route::get('seller_login', function () {
 })->name('seller_login');
 
 Route::group(['prefix'=>'Seller','namespace'=>'Seller'],function(){
+	Route::get('print/courier/label/{awb_no}','ReceiptController@ReceiptPrint')->name('seller.print_courier_label');
 
 	Route::post('/Login', 'SellerLoginController@sellerLogin')->name('seller.login');
 	Route::post('/logout', 'SellerLoginController@logout')->name('seller.logout');

@@ -23,6 +23,7 @@
                               <th>Quantity</th>
                               <th>Total</th>
                               <th>Order Status</th>
+                              <th>AWB No</th>
                               <th>Date</th>
                               <th>Action</th>
                             </tr>
@@ -48,7 +49,7 @@
             var table = $('#size_list').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('seller.ajax_all_orders') }}",
+                ajax: "{{ route('seller.ajax_processing_orders') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'id', name: 'id',searchable: true},
@@ -57,6 +58,7 @@
                     {data: 'quantity', name: 'quantity',orderable: false, searchable: false},  
                     {data: 'total', name: 'total' ,searchable: true},  
                     { data: 'status', name: 'status',orderable: false, searchable: false}, 
+                    { data: 'consignment_no', name: 'consignment_no', searchable: true},
                     { data: 'created_at', name: 'created_at', searchable: true},            
                     {data: 'action', name: 'action', orderable: false, searchable: false},
                 ]

@@ -227,7 +227,8 @@ class OrderController extends Controller
             })
             ->addColumn('action', function($row){
                    $btn = '
-                   <a href="'.route('admin.order_details_of_order_detail',['order_id'=>encrypt($row->id)]).'" class="btn btn-info btn-sm" target="_blank">View</a>';
+                   <a href="'.route('admin.order_details_of_order_detail',['order_id'=>encrypt($row->id)]).'" class="btn btn-info btn-sm" target="_blank">View</a>
+                   <a href="'.route('seller.print_courier_label',['consignment_no'=>encrypt($row->consignment_no)]).'" class="btn btn-success btn-sm" target="_blank">Print Label</a>';
                     return $btn;
             })
             ->rawColumns(['action', 'payment_method','payment_status','status','created_at'])
