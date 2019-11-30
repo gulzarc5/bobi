@@ -147,14 +147,6 @@ class OrderController extends Controller
             ->make(true);
     }
 
-    public function printCourierLabel($awb_no)
-    {
-        try {
-            $order_details_id = decrypt($order_details_id);
-        }catch(DecryptException $e) {
-            return redirect()->back();
-        }
-    }
     public function dispatchOrder($order_details_id)
     {
         try {
