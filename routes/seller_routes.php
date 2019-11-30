@@ -34,6 +34,8 @@ Route::group(['prefix'=>'Seller','namespace'=>'Seller'],function(){
 
 		Route::get('/processing/Orders','OrderController@processingOrders')->name('seller.processing_orders');
 		Route::get('ajax/processing/Orders','OrderController@processingOrdersAjax')->name('seller.ajax_processing_orders');
+
+		Route::get('print/courier/label/{awb_no}','OrderController@printCourierLabel')->name('seller.print_courier_label');
 	});
 });
 

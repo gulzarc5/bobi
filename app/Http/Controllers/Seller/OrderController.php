@@ -106,6 +106,55 @@ class OrderController extends Controller
         
     }
 
+    public function processingOrdersAjax()
+    {
+        $seller_id = Auth::guard('seller')->id();
+        $query =  $order_details = DB::table('order_details')
+                ->select('order_details.id as id','order_details.consignment_no as consignment_no','order_details.order_id as admin_order_id','order_details.rate as rate','order_details.total as total','order_details.quantity as quantity','order_details.order_status as status','order_details.created_at as created_at','user.name as u_name')
+                ->join('user','user.id','=','order_details.user_id')
+                ->where('order_details.seller_id', $seller_id)
+                ->where('order_details.order_status', 2)
+                ->orderBy('order_details.id','desc');
+
+            return datatables()->of($query->get())
+            ->addIndexColumn()
+            ->editColumn('status', function($row){
+                if ($row->status == '1') {
+                   $btn =  '<a class="btn btn-warning">Pending</a>';
+                }elseif ($row->status == '2') {
+                    $btn =  '<a class="btn btn-info">Dispatched</a>';
+                }elseif ($row->status == '3') {
+                    $btn =  '<a class="btn btn-success">Delivered</a>';
+                }elseif ($row->status == '4') {
+                    $btn =  '<a class="btn btn-danger">Cancelled</a>';
+                }elseif ($row->status == '6') {
+                    $btn =  '<a>Keep Your Product Ready Courier will Pick your Product Soon</a>';
+                }else{
+                    $btn = '<a class="btn btn-default">Return</a>';
+                }
+                return $btn;
+            })
+            ->editColumn('created_at', function($row){
+               
+                return Carbon::parse($row->created_at)->toDayDateTimeString();
+            })
+            ->addColumn('action', function($row){
+                   $btn = '<a href="'.route('seller.order_view',['order_details_id'=>encrypt($row->id)]).'" class="btn btn-info btn-sm" target="_blank">View</a>
+                   <a href="'.route('seller.print_courier_label',['consignment_no'=>encrypt($row->consignment_no)]).'" class="btn btn-success btn-sm" target="_blank">Print Label</a>';
+                    return $btn;
+            })
+            ->rawColumns(['action','status','created_at'])
+            ->make(true);
+    }
+
+    public function printCourierLabel($awb_no)
+    {
+        try {
+            $order_details_id = decrypt($order_details_id);
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+    }
     public function dispatchOrder($order_details_id)
     {
         try {
