@@ -65,7 +65,7 @@
 
                 <button class="button" type="submit"><i class="icon-lock icons"></i>&nbsp; <span>Login</span></button>              
                 <p class="forgot-pass"><a href="#">Lost your password?</a></p><hr>
-                <p class="forgot-pass"><span class="required">*</span>If you are a new seller <a href="Seller-Register"><span style="text-decoration: underline;">Register</span></a></p>
+                <p class="forgot-pass"><span class="required">*</span>If you are a new seller <a href="{{route('web.seller_registration_form')}}"><span style="text-decoration: underline;">Register</span></a></p>
               </div>
             </div>
             {{ Form::close() }}

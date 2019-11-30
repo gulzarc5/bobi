@@ -98,3 +98,14 @@ Route::get('/Privacy', function () {
     return view('web.privacy');
 })->name('web.privacy');
 
+// ///////////////////// Receipt //////////////////////////////////
+
+Route::get('/Seller/Receipt', function () {
+    return view('admin.reciet');
+})->name('admin.reciet');
+
+Route::get('/Admin/Receipt', function () {
+    return view('admin.reciet');
+})->name('admin.reciet');
+
+// ///////////////////////////////////////////////////////

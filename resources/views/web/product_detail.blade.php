@@ -25,8 +25,16 @@
                 <div class="flexslider flexslider-thumb">
                   <ul class="previews-list slides">
                     @if (isset($data['images']))
+                    @php
+                    $count = 1;
+                    @endphp
                       @foreach ($data['images'] as $image)
+                      @if($count == 1)
                         <li><a href='{{asset('images/product/'.$image->image.'')}}' class='cloud-zoom-gallery' rel="useZoom: 'magni_img', smallImage: '{{asset('images/product/'.$image->image.'')}}' "><img src="{{asset('images/product/'.$image->image.'')}}" alt = "Thumbnail 2"/></a></li>
+                        @endif
+                        @php
+                    $count++;
+                    @endphp
                       @endforeach
                         
                     @endif

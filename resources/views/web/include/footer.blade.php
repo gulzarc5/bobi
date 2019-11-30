@@ -20,42 +20,35 @@
               <h3 class="links-title">Information<a class="expander visible-xs" href="#TabBlock-1">+</a></h3>
               <div class="tabBlock" id="TabBlock-1">
                 <ul class="list-links list-unstyled">
-                  <li><a href="#s">Delivery Information</a></li>
-                  <li><a href="#">Discount</a></li>
-                  <li><a href="sitemap.html">Sitemap</a></li>
-                  <li><a href="#">Privacy Policy</a></li>
-                  <li><a href="faq.html">FAQs</a></li>
+                <li> <a href="{{route('web.privacy')}}">Privacy Policy</a> </li>
+                  <li><a href="{{ route('web.returnpolicy')}}">Return Policy</a></li>
                   <li><a href="#">Terms &amp; Condition</a></li>
+                  <li><a href="#">About Us</a></li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-sm-3 col-md-2 col-xs-12 collapsed-block">
             <div class="footer-links">
-              <h3 class="links-title">Insider<a class="expander visible-xs" href="#TabBlock-3">+</a></h3>
+              <h3 class="links-title">Important Links<a class="expander visible-xs" href="#TabBlock-3">+</a></h3>
               <div class="tabBlock" id="TabBlock-3">
                 <ul class="list-links list-unstyled">
-                  <li><a href="sitemap.html"> Sites Map </a></li>
-                  <li><a href="#">News</a></li>
-                  <li><a href="#">Trends</a></li>
-                  <li><a href="about_us.html">About Us</a></li>
+                  <li><a target="_blank" href="{{ route('web.seller_registration_form') }}">Seller Signup</a></li>
+                  <li><a target="_blank" href="{{ route('seller_login') }}">Seller Signin</a></li>
                   <li><a href="{{ route('web.contact')}}">Contact Us</a></li>
-                  <li><a href="#">My Orders</a></li>
                 </ul>
               </div>
             </div>
           </div>
           <div class="col-sm-3 col-md-2 col-xs-12 collapsed-block">
             <div class="footer-links">
-              <h3 class="links-title">Service<a class="expander visible-xs" href="#TabBlock-4">+</a></h3>
+              <h3 class="links-title">My Account<a class="expander visible-xs" href="#TabBlock-4">+</a></h3>
               <div class="tabBlock" id="TabBlock-4">
                 <ul class="list-links list-unstyled">
-                  <li><a href="account_page.html">Account</a></li>
-                  <li><a href="wishlist.html">Wishlist</a></li>
-                  <li><a href="shopping_cart.html">Shopping Cart</a></li>
-                  <li><a href="{{ route('web.returnpolicy')}}">Return Policy</a></li>
-                  <li><a href="#">Special</a></li>
-                  <li><a href="#">Lookbook</a></li>
+                  <li><a href="{{ route('web.myprofile')}}">My Account</a></li>
+                  <li><a href="{{ route('web.viewCart')}}">My Basket</a></li>
+                  <li><a href="{{ route('web.view_wish_list')}}">My Wishlist</a></li>
+                  <li><a href="{{ route('web.order_history')}}">My Orders</a></li>
                 </ul>
               </div>
             </div>
