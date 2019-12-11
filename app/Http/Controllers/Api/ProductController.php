@@ -12,20 +12,20 @@ class ProductController extends Controller
     {
         $limit = ($page*10)-10;
         $message = null;
+        
         $products = DB::table('products')
             ->where('second_category',$second_category)
             ->whereNull('deleted_at')
-            ->where('status',1)
-            ->skip($limit)
-            ->take(10)
-            ->get();
+            ->where('status',1);
 
-        $total_rows = clone $products;
-        $total_rows = $total_rows->count();
+        $total_rows = $products->count();
         $total_page = ceil($total_rows/10);
+
         if ($total_rows > 0) {
             
-            
+            $products = $products->skip($limit)
+            ->take(10)
+            ->get();
             $first_cat = DB::table('second_category')->where('id',$second_category)->first();
             if ($first_cat) {
                 $second_category = DB::table('second_category')
@@ -48,6 +48,7 @@ class ProductController extends Controller
                     ->whereNull('deleted_at')
                     ->where('status',1)
                     ->get();
+
 
                 $message = "Product List";
                 $data = [

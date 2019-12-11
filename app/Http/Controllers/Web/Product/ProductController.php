@@ -38,20 +38,6 @@ class ProductController extends Controller
             ->whereNull('deleted_at')
             ->where('status',1)
             ->get();
-        // $product_list = [];
-        // foreach ($products as $key => $value) {
-        //    $sizes = DB::table('product_sizes')
-        //         ->where('product_id',$value->id)
-        //         ->whereNull('deleted_at')
-        //         ->get()           
-        //         ->min('price');
-        //     $product_list[] =[
-        //         'id' => $value->id,
-        //         'name' => $value->name,
-        //         'price' => $sizes,
-        //         'image' => $value->main_image,
-        //     ];
-        // }
 
         $colors = DB::table('color')
             ->where('first_category_id',$category_name->first_category_id)
