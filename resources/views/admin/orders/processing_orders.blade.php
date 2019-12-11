@@ -92,9 +92,7 @@
                 $('.mod'+id).modal('hide');
                 $("#btn"+id).html('Order Processed');
             }
-        });
-
-        
+        });       
 
         console.log('#mod'+id);
     }

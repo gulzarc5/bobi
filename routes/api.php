@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 Route::group(['namespace'=>'Api'], function(){
-    Route::get('category/list','CategoryController@mainCategory');
+    Route::get('category/list/{main_cat_id}/{traditional_type?}','CategoryController@CategoryList');
     Route::get('first/category/{main_category}','CategoryController@firstCategory');
     Route::get('second/category/{first_category}','CategoryController@secondCategory');
     
