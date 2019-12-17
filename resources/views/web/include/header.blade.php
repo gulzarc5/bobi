@@ -152,6 +152,19 @@
                         <input type="text" class="form-control" placeholder="Search for product..." name="search">
                         <button class="btn-search" type="button"><i class="fa fa-search"></i></button>
                       </div>
+                      <div class="dialog-box" style="display: ;">
+                        <ul>
+                          <li><a href="#">T-Shirt</a></li>
+                          <li><a href="#">Jeans</a></li>
+                          <li><a href="#">Jackets</a></li>
+                          <li><a href="#">Shoes</a></li>
+                          <li><a href="#">Sunglasses</a></li>
+                          <li><a href="#">Sweater</a></li>
+                          {{-- /////////////////////////////////// --}}
+                          <li class="flex-center"><i class="fa fa-spinner fa-spin"></i></li>
+                          {{-- /////////////////////////////////// --}}
+                        </ul>
+                      </div>
                     </form>
                   </div>
                 </div>

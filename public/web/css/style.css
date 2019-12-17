@@ -641,13 +641,12 @@ label {
 	margin-bottom: 15px;
 }
 .top-search a {
-	color: #fff;
+	background: #fff;
 	cursor: pointer;
-	padding: 8px 12px 9px
 }
 .top-search a:hover {
-	background: #006393;
-	color: #fff
+	background: #fff;
+	padding-left: 10px;
 }
 .icon-search:before {
 	font-size: 16px
