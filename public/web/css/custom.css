@@ -930,6 +930,42 @@ ul.level1 {
 #pincode .delivery-info h5 .fa-times{
 	color: #ff0000db;
 }
+.dialog-box{
+	position: absolute;
+    z-index: 999;
+    width: 98.5%;
+    background: #fff;
+    top: 52px;
+    left: 30px;
+    border: 1px solid #eeeeee;
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+}
+.dialog-box ul {
+	margin-left: 10px;
+}
+.dialog-box ul li{
+	list-style: none;
+	padding: 3px 0;
+}
+.dialog-box ul li:before{
+	font-family: 'FontAwesome';
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    content: "\f105";
+    text-transform: none;
+    font-size: 15px;
+    line-height: 26px;
+    margin-right: 5px;
+}
+.dialog-box li:last-child i {
+	font-size: 30px;
+	opacity: .8;
+	margin: 10px 0;
+}
+.dialog-box ul li:last-child:before{content: none;}
 /*========== Responsive ==========*/
 @media (max-width: 425px){
 	.jtv-sticky-menu .logo img{
