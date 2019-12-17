@@ -152,7 +152,7 @@
                         <input type="text" class="form-control" placeholder="Search for product..." name="search">
                         <button class="btn-search" type="button"><i class="fa fa-search"></i></button>
                       </div>
-                      <div class="dialog-box" style="display: ;">
+                      <div class="dialog-box" style="display: none;">
                         <ul>
                           <li><a href="#">T-Shirt</a></li>
                           <li><a href="#">Jeans</a></li>
