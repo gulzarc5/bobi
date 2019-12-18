@@ -153,6 +153,12 @@
                         </ul>
                       </li>
 
+                      <li><a><i class="fa fa-bar-chart-o"></i>App Slider <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{{route('admin.app_slider_form')}}">Add New Slider</a></li>
+                        </ul>
+                      </li>
+
                     </ul>
                   </li>
 

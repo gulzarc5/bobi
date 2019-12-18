@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 */
 Route::group(['namespace'=>'Api'], function(){
     Route::get('category/list/{main_cat_id}/{traditional_type?}','CategoryController@CategoryList');
+
+    Route::get('app/load/','CategoryController@appLoadApi');
     
     Route::get('product/list/second/category/{second_category}/{page}','ProductController@productList');
     Route::post('product/filter','ProductController@productListWithFilter');

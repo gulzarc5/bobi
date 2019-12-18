@@ -129,6 +129,13 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 		Route::get('City/Edit/{id}', 'ConfigurationController@EditCity')->name('admin.edit_city');
 		Route::post('City/Update', 'ConfigurationController@updateCity')->name('admin.update_city');
 		Route::get('City/Delete/{id}', 'ConfigurationController@deleteCity')->name('admin.delete_city');
+
+
+		Route::get('App/Slider/Form', 'ConfigurationController@ViewAppSliderForm')->name('admin.app_slider_form');
+		Route::post('App/Slider/Insert', 'ConfigurationController@appSliderInsert')->name('admin.app_slider_insert');
+		Route::get('App/Slider/Edit/{id}', 'ConfigurationController@AppSliderEdit')->name('admin.sliderEdit');
+		Route::get('App/Slider/Delete/{id}', 'ConfigurationController@appSliderDelete')->name('admin.sliderDelete');
+		Route::post('App/Slider/Update', 'ConfigurationController@appSliderUpdate')->name('admin.app_slider_update');
 	});
 
 });
@@ -145,7 +152,6 @@ Route::group(['middleware'=>'auth:admin,seller','prefix'=>'admin','namespace'=>'
 
 	Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 		Route::get('ajax/form/load/data/{category}/{first_category}','ProductController@ajaxGetLoadFormData');
-		
 	});
 
 });
