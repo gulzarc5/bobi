@@ -61,7 +61,7 @@ class ProcessingOrders implements FromArray
             }
 
             $return_address = $shipping_address->address.",".$shipping_address->c_name.",".$shipping_address->s_name;
-            $data[] = [ null,$value->id, $value->u_name,$shipping_address->c_name,$shipping_address->s_name,'India',$shipping_address->address,$user_details->pin,null,$value->u_mobile,null,$payment_method,$package_amount,$cod_amount,'Clothing',$return_address,$shipping_address->pin,$seller_name,$seller_address,null,null,null,null,$value->quantity,];
+            $data[] = [ null,$value->id, $value->u_name,$shipping_address->c_name,$shipping_address->s_name,'India',$shipping_address->address,$user_details->pin,$value->u_mobile,$value->u_mobile,null,$payment_method,$package_amount,$cod_amount,'Clothing',$seller_address,$shipping_address->pin,$seller_name,$seller_address,null,null,null,null,$value->quantity,];
         }
         return $data;
     }
