@@ -357,6 +357,93 @@ class UsersController extends Controller
         }
     }
 
-    
+    public function userChangePassword(Request $request)
+    {
+        $validator =  Validator::make($request->all(),[
+            'user_id' => 'required',
+            'current_pass' => ['required', 'string', 'min:8'],
+            'new_password' => ['required', 'string', 'min:8', 'same:confirm_password'],
+        ]);
+
+        if ($validator->fails()) {
+            $response = [
+                'status' => false,
+                'message' => 'Required Field Can not be Empty',
+                'error_code' => true,
+                'error_message' => $validator->errors(),    
+            ];    	
+            return response()->json($response, 200);
+        }
+
+        $user = DB::table('user')->where('id',$request->input('user_id'))->first();
+        if ($user) {
+            if(Hash::check($request->input('current_pass'), $user->password)){           
+                $password_change = DB::table('user')
+                ->where('id',$request->input('user_id'))
+                ->update([
+                    'password' => Hash::make($request->input('confirm_password')),
+                    'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                ]);
+
+                if ($password_change) {
+                    $response = [
+                        'status' => true,
+                        'message' => 'Password Changed Successfully',
+                        'error_code' => false,
+                        'error_message' => null,    
+                    ];    	
+                    return response()->json($response, 200);
+                }else{
+                    $response = [
+                        'status' => false,
+                        'message' => 'Something Went Wrong Please Try Again',
+                        'error_code' => false,
+                        'error_message' => null,    
+                    ];    	
+                    return response()->json($response, 200);
+                }
+            }else{           
+                $response = [
+                    'status' => false,
+                    'message' => 'Current Password Does Not Matched',
+                    'error_code' => false,
+                    'error_message' => null,    
+                ];    	
+                return response()->json($response, 200);
+           }
+        } else {
+            $response = [
+                'status' => false,
+                'message' => 'User Not Found Please Try Again',
+                'error_code' => false,
+                'error_message' => null,    
+            ];    	
+            return response()->json($response, 200);
+        }
+    }
+
+    public function userLogout($user_id)
+    {
+        $password_change = DB::table('user')
+                ->where('id',$user_id)
+                ->update([
+                    'api_token' => null,
+                    'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                ]);
+
+        if ($password_change) {
+            $response = [
+                'status' => true,
+                'message' => 'User Logout Successfully',  
+            ];    	
+            return response()->json($response, 200);
+        }else{
+            $response = [
+                'status' => false,
+                'message' => 'Something Went Wrong Please Try Again',
+            ];    	
+            return response()->json($response, 200);
+        }
+    }
 
 }

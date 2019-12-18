@@ -20,7 +20,8 @@ Route::group(['namespace'=>'Api'], function(){
     Route::get('product/list/second/category/{second_category}/{page}','ProductController@productList');
     Route::post('product/filter','ProductController@productListWithFilter');
     Route::get('product/single/view/{product_id}','ProductController@singleProductView');
-    Route::get('releted/product/{second_category}','ProductController@reletedProducts');
+
+    Route::get('product/search/{search_key}','ProductController@productSearch');
 
     Route::post('user/registration','UsersController@userRegistration');
     Route::post('user/login','UsersController@userLogin');
@@ -28,6 +29,8 @@ Route::group(['namespace'=>'Api'], function(){
     Route::group(['middleware'=>'auth:api'],function(){
         Route::get('user/profile/{user_id}','UsersController@userProfile');
         Route::post('user/profile/update','UsersController@userProfileUpdate');
+        Route::post('user/change/password','UsersController@userChangePassword');
+        Route::get('user/logout/{user_id}','UsersController@userLogout');
 
         Route::post('user/shipping/add','UsersController@userShippingAdd');
         Route::get('user/shipping/list/{user_id}','UsersController@userShippingList');

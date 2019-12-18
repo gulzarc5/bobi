@@ -22,7 +22,6 @@ class ProductController extends Controller
         $total_page = ceil($total_rows/10);
 
         if ($total_rows > 0) {
-            
             $products = $products->skip($limit)
             ->take(10)
             ->get();
@@ -48,8 +47,6 @@ class ProductController extends Controller
                     ->whereNull('deleted_at')
                     ->where('status',1)
                     ->get();
-
-
                 $message = "Product List";
                 $data = [
                     'products' => $products,
@@ -209,8 +206,6 @@ class ProductController extends Controller
                 $message = "No Product Found After Filter";
                 $product_after_filter = [];
             }
-           
-
             $response = [
                 'status' => true,
                 'pagination' =>$pagination,
@@ -218,7 +213,6 @@ class ProductController extends Controller
                 'data' => $product_after_filter,    
             ];    	
             return response()->json($response, 200);
-            
         }else{
             $data = [];
             $pagination = [
@@ -235,8 +229,32 @@ class ProductController extends Controller
             ];    	
             return response()->json($response, 200);
         }
+    }
 
-
+    public function productSearch($search_key)
+    {
+        $products_count = DB::table('products')
+            ->where('name','like','%'.$search_key.'%')
+            ->count();
+        if ($products_count > 0) {
+            $products = DB::table('products')
+                ->where('name','like','%'.$search_key.'%')
+                ->limit(5)
+                ->get();
+            $response = [
+                'status' => false,
+                'message' => 'Required Field Can Not Be Empty',
+                'data' => $products,
+            ];    	
+            return response()->json($response, 200);
+        } else {
+            $response = [
+                'status' => false,
+                'message' => 'No products Found',
+                'data' => [],
+            ];    	
+            return response()->json($response, 200);
+        }
     }
 
     public function singleProductView($product_id)
@@ -269,11 +287,24 @@ class ProductController extends Controller
             
             $status = true;
             $message = "Product Details";
+
+            $related_products = [];
+            if (isset($product->second_category) && !empty($product->second_category)) {
+                $related_products = DB::table('products')
+                ->where('second_category',$product->second_category)
+                ->whereNull('deleted_at')
+                ->where('status',1)
+                ->inRandomOrder()
+                ->limit(10)
+                ->get();
+            }
+
             $data = [
                 'product' =>$product,
                 'colors' => $colors,
                 'sizes' => $sizes,
                 'images' => $images,
+                'related_products' => $related_products,
             ];
         }else{
             $status = false;
@@ -286,33 +317,6 @@ class ProductController extends Controller
             ];
         }
 
-        $response = [
-            'status' => $status,
-            'message' => $message,
-            'data' => $data,    
-        ];    	
-        return response()->json($response, 200);
-    }
-
-    public function reletedProducts($second_category)
-    {
-        $products = DB::table('products')
-            ->where('second_category',$second_category)
-            ->whereNull('deleted_at')
-            ->where('status',1)
-            ->inRandomOrder()
-            ->take(10)
-            ->get();
-        
-        if (count($products) > 0 ) {
-            $status = true;
-            $message = "Related Product List";
-            $data = $products;
-        }else{
-            $status = false;
-            $message = "No Products Found";
-            $data = [];
-        }
         $response = [
             'status' => $status,
             'message' => $message,

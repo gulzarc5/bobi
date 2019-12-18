@@ -120,9 +120,9 @@ class ProductController extends Controller
             ->get();
         
         $related_products = [];
-        if (isset($product->first_category) && !empty($product->first_category)) {
+        if (isset($product->second_category) && !empty($product->second_category)) {
             $related_products = DB::table('products')
-            ->where('first_category',$product->first_category)
+            ->where('second_category',$product->second_category)
             ->whereNull('deleted_at')
             ->where('status',1)
             ->inRandomOrder()
