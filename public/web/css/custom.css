@@ -1115,4 +1115,12 @@ ul.level1 {
 		background-color: #52d3fa;
 		border-color: #52d3fa;
 	}
+	.dialog-box {
+		left:0;
+		width: 99.9%;
+		top: 31px;
+	}
+	.dialog-box li .btn-view {
+		padding-right: 20px;
+	}
 }
