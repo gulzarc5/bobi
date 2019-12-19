@@ -235,10 +235,14 @@ class ProductController extends Controller
     {
         $products_count = DB::table('products')
             ->where('name','like','%'.$search_key.'%')
+            ->whereNull('deleted_at')
+            ->where('status',1)
             ->count();
         if ($products_count > 0) {
             $products = DB::table('products')
                 ->where('name','like','%'.$search_key.'%')
+                ->whereNull('deleted_at')
+                ->where('status',1)
                 ->limit(5)
                 ->get();
             $response = [
