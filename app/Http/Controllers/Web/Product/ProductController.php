@@ -272,6 +272,52 @@ class ProductController extends Controller
         return response()->json($response, 200);
 
     }
+
+    public function productSearch($search_key)
+    {
+        $products_count = DB::table('products')
+            ->where('name','like','%'.$search_key.'%')
+            ->count();
+        if ($products_count > 0) {
+            $products = DB::table('products')
+                ->where('name','like','%'.$search_key.'%')
+                ->limit(5)
+                ->get();
+            $html = "<ul>";
+            foreach ($products as $key => $item) {
+                $html.='<li>
+                <a href="'.route('web.product_detail',['product_id' => encrypt($item->id)]).'">
+                  <div class="row">
+                    <div class="col-md-1 col-sm-1 col-xs-1">
+                      <img src="'.asset('images/product/thumb')."/".$item->main_image.'">
+                    </div>
+                    <div class="col-md-11 col-sm-11 col-xs-11">
+                        <div class="row">
+                            <div class="pro-nane-src col-md-10 col-sm-10 col-xs-10">
+                              <h5>'.$item->name.'</h5>
+                              <div class="price-box"> 
+                                <span class="regular-price">
+                                Rs. '.number_format($item->min_price,2,".",'').'
+                                </span> 
+                              </div>
+                            </div>
+                            <div class="col-md-2 col-sm-2 col-xs-2">
+                                <div class="btn-view flex-center">
+                                  <b class="btn btn-info">View</b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </a>
+              </li>';
+            }
+            $html .= "</ul>";
+            return $html;
+        }else{
+            return 1;
+        }
+    }
 }
 
 

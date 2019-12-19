@@ -79,14 +79,14 @@
                         0.00
                      @endif
                   </span></li>
-               <li><span>Shipping</span><span>Free</span> </li>
+               <li><span>Shipping</span><span>₹{{ number_format($shipping_charge,2,".",'') }}</span> </li>
                {{-- 
                <li><span>Taxes</span><span>$0</span></li>
                --}}
                <li>
                   <span>Total</span><span>₹
                         @if (isset($cart_total))
-                        {{ number_format($cart_total,2,".",'') }}
+                        {{ number_format(($cart_total+$shipping_charge),2,".",'') }}
                         @else
                            0.00
                         @endif
@@ -180,11 +180,11 @@
                         0.00
                      @endif
                   </span></li>
-               <li><span>Shopping</span><span>Free</span> </li>
+               <li><span>Shopping</span><span>₹{{ number_format($shipping_charge,2,".",'') }}</span> </li>
                <li>
                   <span>Total</span><span>₹
                         @if (isset($cart_total))
-                        {{ number_format($cart_total,2,".",'') }}
+                        {{ number_format(($cart_total+$shipping_charge),2,".",'') }}
                         @else
                            0.00
                         @endif

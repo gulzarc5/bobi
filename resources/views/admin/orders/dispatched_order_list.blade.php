@@ -19,8 +19,10 @@
                               <th>Sl</th>
                               <th>Order Id</th>
                               <th>Order By</th>
-                              <th>Amount</th>
                               <th>Quantity</th>
+                              <th>Amount</th>
+                              <th>Shipping Charge</th>
+                              <th>Total Amount</th>
                               <th>Payment Method</th>
                               <th>Payment Status</th>
                               <th>AWB No.</th>
@@ -53,9 +55,11 @@
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'id', name: 'id',searchable: true},
-                    {data: 'u_name', name: 'u_name' ,searchable: true},
-                    {data: 'total', name: 'total' ,searchable: true},                 
-                    {data: 'quantity', name: 'quantity',orderable: false, searchable: false},   
+                    {data: 'u_name', name: 'u_name' ,searchable: true},               
+                    {data: 'quantity', name: 'quantity',orderable: false, searchable: false}, 
+                    {data: 'total', name: 'total' ,searchable: true},  
+                    {data: 'shipping_charge', name: 'shipping_charge' ,searchable: true},  
+                    {data: 'grand_total', name: 'grand_total' ,searchable: true},    
                     { data: 'payment_method', name: 'payment_method',orderable: false, searchable: false},
                     { data: 'payment_status', name: 'payment_status',orderable: false, searchable: false},  
                     { data: 'consignment_no', name: 'consignment_no',orderable: false, searchable: false}, 

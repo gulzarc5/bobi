@@ -65,7 +65,7 @@
                                       <td>{{ $item->id }}</td>
                                       <td>{{ $item->u_name }}</td>
                                       <td>{{ $item->quantity }}</td>
-                                      <td>{{ number_format($item->amount,2,".",'')}}</td>
+                                      <td>{{ number_format(($item->amount+$item->shipping_charge),2,".",'')}}</td>
                                       <td>
                                         @if ($item->payment_method == '1')
                                           <a class="btn btn-info">Cash On Delivery</a>

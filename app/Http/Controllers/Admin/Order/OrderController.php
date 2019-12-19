@@ -25,7 +25,7 @@ class OrderController extends Controller
     public function ajaxOrderListAll()
     {
         $query = DB::table('orders')
-            ->select('orders.id as id','orders.amount as amount','orders.quantity as quantity','orders.payment_method as payment_method','orders.payment_status as payment_status','orders.status as status','orders.created_at as created_at','user.name as u_name')
+            ->select('orders.id as id','orders.shipping_charge as shipping_charge','orders.amount as amount','orders.quantity as quantity','orders.payment_method as payment_method','orders.payment_status as payment_status','orders.status as status','orders.created_at as created_at','user.name as u_name')
             ->join('user','user.id','=','orders.user_id')
             ->orderBy('orders.id','desc');
 
@@ -117,6 +117,10 @@ class OrderController extends Controller
                 }
                 return $btn;
             })
+            ->addColumn('grand_total', function($row){
+                $btn =  $row->total+$row->shipping_charge;
+                return $btn;
+            })
             ->editColumn('created_at', function($row){
             
                 return Carbon::parse($row->created_at)->toDayDateTimeString();
@@ -162,7 +166,7 @@ class OrderController extends Controller
                 
                     return $btn;
             })
-            ->rawColumns(['action', 'payment_method','payment_status','created_at'])
+            ->rawColumns(['action', 'grand_total', 'payment_method','payment_status','created_at'])
             ->make(true);
     }
 
@@ -221,6 +225,10 @@ class OrderController extends Controller
                 }
                 return $btn;
             })
+            ->addColumn('grand_total', function($row){
+                $btn =  $row->total+$row->shipping_charge;
+                return $btn;
+            })
             ->editColumn('created_at', function($row){
                
                 return Carbon::parse($row->created_at)->toDayDateTimeString();
@@ -231,7 +239,7 @@ class OrderController extends Controller
                    <a href="'.route('seller.print_courier_label',['consignment_no'=>encrypt($row->consignment_no)]).'" class="btn btn-success btn-sm" target="_blank">Print Label</a>';
                     return $btn;
             })
-            ->rawColumns(['action', 'payment_method','payment_status','status','created_at'])
+            ->rawColumns(['action', 'grand_total','payment_method','payment_status','status','created_at'])
             ->make(true);
     }
 

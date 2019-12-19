@@ -16,13 +16,16 @@ class CheckoutController extends Controller
 
         $cart = DB::table('cart')->where('user_id',$user_id)->get();
         $cart_total = 0;
+        $cart_count = 0;
         foreach ($cart as $key => $item) {
+            $cart_count = $cart_count+1;
             $size = DB::table('product_sizes')
                 ->where('size_id',$item->size_id)
                 ->where('product_id',$item->product_id)
                 ->first();
             $cart_total += $item->quantity * $size->price;
         }
+        $shipping_charge = $cart_count*50;
         
         $shipping_address = DB::table('shipping_address')
             ->select('shipping_address.*','state.name as s_name','city.name as c_name')
@@ -35,8 +38,7 @@ class CheckoutController extends Controller
         $states = DB::table('state')
             ->whereNull('deleted_at')
             ->get();
-        // dd($shipping_address);
-        return view('web.checkout',compact('cart_total','shipping_address','states'));
+        return view('web.checkout',compact('cart_total','shipping_address','states','shipping_charge'));
     }
 
     public function paymentPage($address,$pin)
@@ -52,14 +54,17 @@ class CheckoutController extends Controller
 
         $cart = DB::table('cart')->where('user_id',$user_id)->get();
         $cart_total = 0;
+        $cart_count = 0;
         foreach ($cart as $key => $item) {
+            $cart_count = $cart_count+1;
             $size = DB::table('product_sizes')
                 ->where('size_id',$item->size_id)
                 ->where('product_id',$item->product_id)
                 ->first();
             $cart_total += $item->quantity * $size->price;
         }
-        return view('web.payment',compact('user_pin_details','cart_total','address'));
+        $shipping_charge = $cart_count*50;
+        return view('web.payment',compact('user_pin_details','cart_total','address','shipping_charge'));
     }
 
     public function proceedToPay(Request $request)
@@ -112,7 +117,9 @@ class CheckoutController extends Controller
         
         $total = 0;
         $total_qtty = 0;
+        $total_item = 0;
         foreach ($cart as $cart_data) {
+            $total_item = $total_item + 1;
             $product = DB::table('products')->select('seller_id','brand_id')
                 ->where('id',$cart_data->product_id)
                 ->whereNull('deleted_at')
@@ -152,6 +159,7 @@ class CheckoutController extends Controller
                     'quantity' => $cart_data->quantity,
                     'rate' => $rate,
                     'total' => ($cart_data->quantity * $rate),
+                    'shipping_charge' => 50,
                     'payment_method' => $pay_method,
                     'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                     'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
@@ -167,6 +175,7 @@ class CheckoutController extends Controller
                 ->where('id',$order)
                 ->update([
                     'quantity' => $total_qtty,
+                    'shipping_charge' => ($total_item*50),
                     'amount' => $total,
                 ]);
         if ($update_order) {
@@ -178,7 +187,7 @@ class CheckoutController extends Controller
         if ($pay_method == 1) {
             return redirect()->route('web.checkout_thankyou',['id'=>$order]);            
         }else{
-            $total_cost =  $total;
+            $total_cost =  $total+($total_item*50);
             $user_name = Auth::guard('buyer')->user()->name;
             $user_email = Auth::guard('buyer')->user()->email;
             $user_mobile = Auth::guard('buyer')->user()->mobile;

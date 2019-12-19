@@ -64,8 +64,8 @@
                   <div class="col-md-3" style="margin-top: 20px;">
                      <ul class="shopping-cart-total-list">
                         <li><span>Subtotal</span><span>₹ {{ number_format($cart_total,2,".",'') }}</span></li>
-                        <li><span>Shipping</span><span>Free</span> </li>
-                        <li><span>Total</span><span>₹ {{ number_format($cart_total,2,".",'') }}</span></li>
+                        <li><span>Shipping</span><span>₹ {{ number_format($shipping_charge,2,".",'') }}</span> </li>
+                        <li><span>Total</span><span>₹ {{ number_format(($cart_total+$shipping_charge),2,".",'') }}</span></li>
                      </ul>
                </div>
                @endif

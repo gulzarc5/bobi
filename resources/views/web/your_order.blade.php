@@ -19,6 +19,7 @@
                             <th class="text-center">Size</th>
                             <th class="text-center">Quatity</th>
                             <th class="text-center">Price</th>
+                            <th class="text-center">Shipping Charge</th>
                             <th class="text-center">Total</th>
                             <th class="text-center">Order Status</th>
                             <th class="text-center">Date</th>
@@ -41,7 +42,8 @@
                                 <td class="table-shopping-cart-title text-center">{{ $item->size }}</td>
                                 <td class="text-center">{{ $item->quantity }}</td>
                                 <td class="text-center">₹{{ number_format($item->rate,2,".",'')}}</td>
-                                <td class="text-center">₹{{ number_format($item->total,2,".",'')}}</td>
+                                <td class="text-center">₹{{ number_format($item->shipping_charge,2,".",'')}}</td>
+                                <td class="text-center">₹{{ number_format(($item->total+$item->shipping_charge),2,".",'')}}</td>
                                 <td class="text-center">
                                     {{-- <button type="submit" class="btn btn-primary">Return</button> --}}
                                     @if ($item->order_status == '1')

@@ -32,14 +32,16 @@
             <tbody>
                @php
                $total = 0; 
+               $cart_count = 0;
                @endphp
                @foreach($cart_data as $cart)
                @php
                $total = $total+ ($cart['price']*$cart['quantity']);
+               $cart_count = $cart_count+1;
                @endphp
                {{ Form::open(['method' => 'post','route'=>'web.updateCart']) }}
                <tr class="text-center">
-                  <td class="text-center">1</td>
+                  <td class="text-center">{{$cart_count}}</td>
                   <td class="table-shopping-cart-img text-center">
                      <a href="#">
                      <img src="{{ asset('images/product/thumb/'.$cart['image'].'')}}" alt="Image Alternative text" title="Image Title" />
@@ -67,21 +69,22 @@
       </div>
       <div class="col-md-2">
          <ul class="shopping-cart-total-list">
+            @php
+                $shipping = $cart_count *50;
+                $grand_total = $total + $shipping
+            @endphp
             <li><span>Subtotal</span><span>₹{{ number_format($total,2,".",'')}}</span></li>
-            <li><span>Shipping</span><span>Free</span> </li>
+            <li><span>Shipping</span><span>₹{{ number_format($shipping,2,".",'')}}</span> </li>
             {{-- 
             <li><span>Taxes</span><span>$0</span></li>
             --}}
-            <li><span>Total</span><span>₹{{ number_format($total,2,".",'')}}</span></li>
+            <li><span>Total</span><span>₹{{ number_format($grand_total,2,".",'')}}</span></li>
          </ul>
          <a class="btn btn-primary " href="{{ route('web.checkout_ship') }}" >Checkout</a>
       </div>
    </div>
    <ul class="list-inline mob-check">
       <li><a href="{{ route('web.index') }}" class="btn btn-default" href="#">Continue Shopping</a></li>
-      {{-- 
-      <li><a class="btn btn-default" href="#">Update Bag</a></li>
-      --}}
    </ul>
    @else
 

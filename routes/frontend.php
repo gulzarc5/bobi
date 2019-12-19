@@ -51,6 +51,7 @@ Route::group(['namespace'=> 'Web'], function(){
         Route::get('/List/{second_category_id}','ProductController@productList')->name('web.product_list');
         Route::get('/Detail/{product_id}/{size_id?}','ProductController@productDetail')->name('web.product_detail');
         Route::post('/By/Filter/','ProductController@productFilter')->name('web.product_filter');
+        Route::get('/Search/{search_key}','ProductController@productSearch')->name('web.product_search');
     });
 
     Route::get('pin/availiblity/{pin?}','LogisticController@pinAvailiblity')->name('courier.pin_check');

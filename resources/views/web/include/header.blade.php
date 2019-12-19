@@ -129,7 +129,7 @@
         <div class="header-inner">
           <div class="container">
             <div class="row">
-              <div class="col-sm-3 col-md-2 col-xs-12 jtv-logo-block">
+              <div class="col-sm-2 col-md-2 col-xs-12 jtv-logo-block">
                 <div class="mega-container">
                   <div class="navleft-container">
                     <div class="mega-menu-title hidden-xs hidden-lg"> <i class="pe-7s-menu icons"></i>
@@ -149,21 +149,11 @@
                   <div id="search">
                     <form>
                       <div class="input-group flex">
-                        <input type="text" class="form-control" placeholder="Search for product..." name="search">
-                        <button class="btn-search" type="button"><i class="fa fa-search"></i></button>
+                        <input type="text" class="form-control" placeholder="Search for product..." id="search_product_input">
+                        {{-- <button class="btn-search" type="button"><i class="fa fa-search"></i></button> --}}
                       </div>
-                      <div class="dialog-box" style="display: none;">
-                        <ul>
-                          <li><a href="#">T-Shirt</a></li>
-                          <li><a href="#">Jeans</a></li>
-                          <li><a href="#">Jackets</a></li>
-                          <li><a href="#">Shoes</a></li>
-                          <li><a href="#">Sunglasses</a></li>
-                          <li><a href="#">Sweater</a></li>
-                          {{-- /////////////////////////////////// --}}
-                          <li class="flex-center"><i class="fa fa-spinner fa-spin"></i></li>
-                          {{-- /////////////////////////////////// --}}
-                        </ul>
+                      <div class="dialog-box" id="srch_rslt_div" style="display: none;">
+                        
                       </div>
                     </form>
                   </div>

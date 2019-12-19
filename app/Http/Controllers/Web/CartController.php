@@ -103,6 +103,9 @@ class CartController extends Controller
     	$quantity = $request->input('quantity');
         $color = $request->input('color');
         $size_id = $request->input('size');
+        if (empty($quantity)) {
+            $quantity = 1;
+        }
         if (empty($size_id)) {
             $size = DB::table('product_sizes')
             ->where('price','=',DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'))

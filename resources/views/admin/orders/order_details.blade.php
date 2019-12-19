@@ -103,9 +103,17 @@
                      <td>{{ $orders->quantity }}</td>
                      </tr>
                      <tr>
-                       <th>Total Amount : </th>
+                       <th>Amount : </th>
                        <td> ₹{{ number_format($orders->amount,2,".",'')}} </td>
                      </tr>
+                     <tr>
+                        <th>Shipping Charge : </th>
+                        <td> ₹{{ number_format($orders->shipping_charge,2,".",'')}} </td>
+                      </tr>
+                      <tr>
+                        <th>Total Amount : </th>
+                        <td> ₹{{ number_format(($orders->amount+$orders->shipping_charge),2,".",'')}} </td>
+                      </tr>
                    </table>
                  </div>
 
@@ -128,7 +136,8 @@
                         <th>Designer</th>
                         <th>Rate</th>
                         <th>Quantity</th>
-                        <th>Total</th>
+                        <th>Amount</th>
+                        <th>Shipping Charge</th>
                         <th>Date</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -153,6 +162,7 @@
                             <td>₹{{ number_format($item->rate,2,".",'')}}</td>
                             <td>{{$item->quantity}}</td>
                             <td>₹{{ number_format($item->total,2,".",'')}}</td>
+                            <td>₹{{ number_format($item->shipping_charge,2,".",'')}}</td>
                             <td>{{$item->order_date}}</td>
                             <td>
                               @if ($item->order_status == '1')

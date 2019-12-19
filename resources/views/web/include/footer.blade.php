@@ -302,6 +302,43 @@
     });
     });
   </script> 
+
+  <script>
+    $("#search_product_input").keyup(function(){
+      var search_key = $(this).val();
+      $("#srch_rslt_div").css('display','block');
+      if (search_key) {
+        $("#srch_rslt_div").css('display','block');
+        fetchSerchIndxProduct(search_key);
+      } else {
+        $("#srch_rslt_div").css('display','none');
+      }
+    });
+
+    function fetchSerchIndxProduct(search_key){
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+
+      $.ajax({
+        type:"GET",
+        url:"{{ url('Product/Search/')}}"+"/"+search_key+"/",
+        beforeSend: function(xhr) {
+          $("#srch_rslt_div").html('<li class="flex-center" id="srch_rslt_div_loader"><i class="fa fa-spinner fa-spin"></i></li>');
+        },
+        success:function(data){
+          console.log(data);
+          if (data != 1 ) {  
+            $("#srch_rslt_div").html(data);
+          }else{
+            $("#srch_rslt_div").html('<li class="flex-center" style="padding:80px" id="srch_rslt_div_loader">No Products Found</li>');
+          }
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>

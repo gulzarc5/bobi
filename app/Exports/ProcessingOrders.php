@@ -37,11 +37,11 @@ class ProcessingOrders implements FromArray
                 ->first();
             $user_details =  DB::table('user_details')->where('seller_id',$value->user_id)->first();
             $payment_method = null;
-            $package_amount = $value->total;
+            $package_amount = $value->total+$value->shipping_charge;
             $cod_amount = 0;
             if ($value->payment_method == '1') {
                 $payment_method = 'COD';
-                $cod_amount = $value->total;
+                $cod_amount = $value->total+$value->shipping_charge;
             } else {
                 $payment_method = 'prepaid';
                 
