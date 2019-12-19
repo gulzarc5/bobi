@@ -2,10 +2,10 @@
 @section('content')
 <div class="container">
    <div class="row">
-         <div class="col-md-4">
+         <div class="col-md-4 col-xs-12 m-p-0">
             <div class="atom-panel atom-panel--left left" style="margin-top: 20px;
                margin-bottom: 20px;">
-               <nav class="atom-toolbar atom-toolbar-vertical expanded">
+               <div class="atom-toolbar atom-toolbar-vertical expanded">
                   <a href="#" class="btn btn-default active" id="myprofile-form-link">
                   <span class="octicon octicon-beaker"></span>
                   <span class="title">My Profile</span>
@@ -20,7 +20,7 @@
                   <span class="octicon octicon-telescope"></span>
                   <span class="title">Change Password</span>
                   </a>
-               </nav>
+               </div>
             </div>
          </div>
          <div class="col-md-8 account" >

@@ -410,9 +410,9 @@ footer h3 {
 	text-align: left;
 }
 .product-grid-area .products-grid .item {
-	float: none;
-	margin: 15px auto;
-	width: 90%;
+	float: left;
+    margin: 15px auto;
+    width: 50%;
 }
 .hot-deal {
 	margin-bottom: 15px;
@@ -1865,14 +1865,5 @@ footer .footer-links .payment ul li {
 }
 .col2-left-layout .product-view-area .flexslider-thumb {
     padding: 22px 26px;
-}
-}
-@media only screen and (min-width: 320px) and (max-width: 767px) {
-.account{
-	margin-left: 0px;
-    margin-top: 220px; 
-    margin-bottom: 10px;
-    background-color: #d7d8da8c;
-    border: 1px solid;
 }
 }

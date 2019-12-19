@@ -581,6 +581,9 @@ ul.level1 {
 .mt-20{
 	margin-top: 20px;
 }
+.ptb-30{
+	padding: 30px 0;
+}
 /*========== logo ==========*/
 .logo img{
 	width: 94%;
@@ -965,7 +968,24 @@ ul.level1 {
 	opacity: .8;
 	margin: 10px 0;
 }
-.dialog-box ul li:last-child:before{content: none;}
+.dialog-box ul li:last-child:before{
+	content: none;
+}
+.flexslider-thumb ul li{
+	width: 100px;
+}
+.pr-img-area img {
+    padding: 15px;
+}  
+.thanks-img{
+	width: 15%;
+	padding: 10px 48px;
+}
+.atom-panel .atom-toolbar .active{
+	background-color: #52d3fa;
+	border-color: #52d3fa;
+}
+
 /*========== Responsive ==========*/
 @media (max-width: 425px){
 	.jtv-sticky-menu .logo img{
@@ -1002,5 +1022,90 @@ ul.level1 {
 	}
 	.Login-section .page-content {
 	    width: 100%;
+	}
+	.item-inner .item-info .add-to-cart span {
+	    display: none;
+	}
+	.inner-box .container{
+		padding: 0
+	}
+	.inner-box .container .jtv-best-sale-list .owl-item:nth-child(odd){
+		margin-left: 8px;
+	}
+	#pincode {
+	    display: block;
+	}
+	.delivery-info{
+		display: flex;
+		justify-content: center;
+	}
+	.delivery-info i{
+		margin-top: 10px;
+	}
+	.product-view-area .short-description {
+	    display: none;
+	}
+	#pincode .delivery-info h6 {
+	    margin-top: 13px;
+	}
+	.on-sale-product .owl-item .item {
+	    width: 50%;
+	    float: left;
+	    padding: 0 8px;
+	}
+	.on-sale-product .owl-item .jtv-item-child:nth-child(2) {
+		display: none;
+	}
+	.pr-img-area img {
+	     padding: 0; 
+	}
+	.checkout_grid {
+	    margin: 0 30px 5px;
+	} 
+	.m-pt-0 {
+		padding-top: 0!important;
+	}
+	.m-p-0{
+		padding: 0
+	}  
+	.thanks-img{
+		width: 50%;
+	} 
+	.atom-toolbar.expanded .btn .title {
+	    font-size: 12px;
+	}
+	.atom-toolbar.atom-toolbar-vertical .atom-toolbar-spacer {
+		display: none;
+	}
+	.atom-toolbar.expanded .btn .octicon {
+	    display: none;
+	}
+	.atom-toolbar.expanded .btn {
+		padding: 0 6px;
+		height: auto;
+	}
+	.atom-toolbar {
+		flex-direction: inherit;
+	}
+	.atom-toolbar.expanded {
+	    width: 100%;
+	}
+	.atom-panel, .atom-toolbar {
+	    background-color: #fff;
+	}
+	.atom-panel--left {
+	    border-right: none;
+	    border-bottom: none;
+    }
+    .account{
+		margin-left: 0px;
+	    margin-top: 70px; 
+	    margin-bottom: 10px;
+	    background-color: #d7d8da8c;
+	    border: 1px solid;
+	}	
+	.atom-toolbar .btn:hover {
+		background-color: #52d3fa;
+		border-color: #52d3fa;
 	}
 }

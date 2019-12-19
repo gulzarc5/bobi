@@ -59,10 +59,6 @@
                            <h5>Online Payment</h5>
                      </div>
                   </div>
-                  {{-- /////////////////// Button /////////////////// --}}   
-                  <div class="col-md-12 flex-center">                   
-                     <button type="submit" class="btn btn-primary " href="#">Proceed </button>
-                  </div>
                </div>
                @if (isset($cart_total) && !empty($cart_total))
                   <div class="col-md-3" style="margin-top: 20px;">
@@ -73,6 +69,11 @@
                      </ul>
                </div>
                @endif
+               {{-- /////////////////// Button /////////////////// --}}   
+               <div class="col-md-9 flex-center"> 
+                  <hr>                  
+                  <button type="submit" class="btn btn-primary " href="#">Proceed </button>
+               </div>
                
             </div>
          {{ Form::close() }}

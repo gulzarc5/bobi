@@ -10,9 +10,10 @@
        </ul>
    </div>
 	<center>
-		<div style="margin-top: 10%; margin-bottom: 4%;">
+		<div style="margin-top: 0%; margin-bottom: 4%;">
+      <img src="{{asset('web/images/check.png')}}" class="thanks-img">
 			<h2 >Thank You for Shopping With Us</h2>
-		<p><a href="{{ route('web.order_history')}}">Click Here to Check Order History</a></p>
+		<p><a class="btn outline btn-color" style="font-size: 12px" href="{{ route('web.order_history')}}">Click Here to Check Order History</a></p>
 		</div>
 	</center>
 @endsection

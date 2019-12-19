@@ -10,25 +10,28 @@
            <li><h6>Payment</h6></li>
        </ul>
    </div>
-   <div class="nav-drict">
+   
    @if ($errors->any())
-   <ul>
-      @foreach ($errors->all() as $error)
-            <li class="invalid-feedback" role="alert" style="color:red">{{$error}}</li>
-      @endforeach
-   </ul>
-   @endif
-      @if (Session::has('error'))
-         <div class="alert alert-danger">{{ Session::get('error') }}</div>
-      @endif
+   <div class="nav-drict">
+      <ul>
+         @foreach ($errors->all() as $error)
+               <li class="invalid-feedback" role="alert" style="color:red">{{$error}}</li>
+         @endforeach
+      </ul>
    </div>
+   @endif
+   @if (Session::has('error'))
+      <div class="nav-drict">
+         <div class="alert alert-danger">{{ Session::get('error') }}</div>
+      </div>
+   @endif
 </section>
-<div class="container" style="padding: 30px 0 50px;">
+<div class="container m-pt-0" style="padding: 30px 0 50px;">
 
    @if (isset($shipping_address) && count($shipping_address) > 0 )
 
    {{ Form::open(array('route' => 'web.payment', 'method' => 'post')) }}
-      <div class="row">
+      <div class="row" id="checkout-div">
          <div class="col-md-9">
             @php
                 $ship_flag = false;
@@ -39,9 +42,8 @@
                      <div class="col-md-1"><input type="radio" name="address" value="{{$addr->id}}"  checked/></div>
                      <div class="col-md-11">
                         <p>{{$addr->address}}</p>
-                        <p><b>City:</b> {{$addr->c_name}}&nbsp;&nbsp;<b>State:</b> {{$addr->s_name}}</p>
-                        <p></p>
-                        <p><b>Pin:</b> {{$addr->pin}}</p>
+                        <p><b>CITY:</b> {{$addr->c_name}}&nbsp;&nbsp;<b>STATE:</b> {{$addr->s_name}}</p>
+                        <p><b>PIN:</b> {{$addr->pin}}</p>
                      </div>
                   </div>
                   <div class="col-md-1 "></div>
@@ -50,22 +52,20 @@
                   @endphp
                @else
                   <div class="col-md-5 checkout_grid shipping">
-                     <input type="radio" name="address" value="{{$addr->id}}" />
-                     <p style="margin-top: 10px;">
-                     <p><b>State:</b> {{$addr->s_name}}</p>
-                     <p><b>City:</b> {{$addr->c_name}}</p>
-                     <p><b>pin:</b> {{$addr->pin}}</p>
-                     <p>{{$addr->address}}</p>
+                     <div class="col-md-1"><input type="radio" name="address" value="{{$addr->id}}" /></div>
+                     <div class="col-md-11">
+                        <p>{{$addr->address}}</p>
+                        <p><b>CITY:</b> {{$addr->c_name}}&nbsp;&nbsp;<b>STATE:</b> {{$addr->s_name}}</p>
+                        <p><b>PIN:</b> {{$addr->pin}}</p>
+                     </div>
                   </div>
                   <div class="col-md-1 "></div>
                @endif
                
             @endforeach
 
-            <div class="col-md-12">
-               <ul class="list-inline">
-                     <li><a class="btn btn-success" id="add_new_ship_btn" >Add New</a></li>
-               </ul>
+            <div class="col-md-5 checkout_grid shipping flex-center ptb-30">
+               <a class="btn btn-success" id="add_new_ship_btn" >Add New</a>
             </div>           
          </div>
 
@@ -181,9 +181,6 @@
                      @endif
                   </span></li>
                <li><span>Shopping</span><span>Free</span> </li>
-               {{-- 
-               <li><span>Taxes</span><span>$0</span></li>
-               --}}
                <li>
                   <span>Total</span><span>₹
                         @if (isset($cart_total))
@@ -195,10 +192,10 @@
                </li>
             </ul>
             <a class="btn btn-primary " href="#" >Proceed to Checkout</a>
-         </div>
+      </div>
    @endif
-
-   <div class="col-md-9 checkout"  id="add_new_ship" style="display:none">
+   <div class="col-md-2"></div>
+   <div class="col-md-8 checkout"  id="add_new_ship" style="display:none">
       <div class="mfp-with-anim">
          {{ Form::open(array('route' => 'web.new_ship_add', 'method' => 'post')) }}
             <div class="row">
@@ -263,6 +260,7 @@
             </div>
             <div class="col-md-12"  style="margin-bottom: 10px;" id="profile_btn">
                <button type="submit" class="btn btn-success"> Submit </button>
+               <button type="button" class="btn btn-danger" id="add_new_ship_close_btn"> Close </button>
             </div>
          {{ Form::close() }}
          <div class="gap gap-small">
@@ -287,6 +285,12 @@ $('.shipping').click(function (e){
 
 $("#add_new_ship_btn").click(function(){
    $("#add_new_ship").css('display','block');
+   $("#checkout-div").css('display','none');   
+})
+
+$("#add_new_ship_close_btn").click(function(){
+   $("#add_new_ship").css('display','none');
+   $("#checkout-div").css('display','block');   
 })
 
 $("#state").change(function(){

@@ -29,9 +29,7 @@
                     $count = 1;
                     @endphp
                       @foreach ($data['images'] as $image)
-                      @if($count == 1)
                         <li><a href='{{asset('images/product/'.$image->image.'')}}' class='cloud-zoom-gallery' rel="useZoom: 'magni_img', smallImage: '{{asset('images/product/'.$image->image.'')}}' "><img src="{{asset('images/product/'.$image->image.'')}}" alt = "Thumbnail 2"/></a></li>
-                        @endif
                         @php
                     $count++;
                     @endphp
@@ -196,7 +194,6 @@
     <div class="home-tab box-shadow ">
       <div class="page-header" style=" display: flex;justify-content: space-between;margin-top: 0">
         <h2>Related Products</h2>
-        <a href="#" class="btn outline btn-color" style="font-size: 13px; letter-spacing: 0px; font-weight: 500; margin: 0px 0px 0px 15px; transition: none 0s ease 0s; line-height: 18px; border-width: 1px; padding: 8px 15px;" target="_blank">View more</a>
       </div><hr>
       <div id="productTabContent" class="tab-content">
         <div class="tab-pane active in" id="women">
@@ -457,9 +454,9 @@
             console.log(data);
             
             if (data == 1) {
-              $("#delivery_info").html('<p style="margin-top: 7px;color:red;font-weight:bold">Sorry Delivery Option Is Not Available In This Pin Code</p>')
+              $("#delivery_info").html('<p style="margin-top: 7px;color:#ff0000c7;font-weight:bold">Sorry Delivery Option Is Not Available In This Pin Code</p>')
             }else if(data == 0){
-              $('#delivery_info').html('<p style="margin-top: 7px;"><span style="color: red">*</span>Please check the availablity of product on your pincode </p>'); 
+              $('#delivery_info').html('<p style="margin-top: 7px;"><span style="color: #ff0000c7">*</span>Please check the availablity of product on your pincode </p>'); 
             }else{
               var html_delivery = '<h6>Delivery Available</h6><h5><i class="fa fa-check"></i>ONLINE</h5>';
               if (data.cod == 'Y') {
