@@ -237,7 +237,7 @@ class ProductController extends Controller
                 ->where('name','like','%'.$search_key.'%')
                 ->whereNull('deleted_at')
                 ->where('status',1)
-                ->limit(5)
+                ->limit(20)
                 ->get();
             $response = [
                 'status' => true,
