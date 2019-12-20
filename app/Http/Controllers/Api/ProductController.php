@@ -165,11 +165,6 @@ class ProductController extends Controller
             $total_product = $product_count->distinct('products.id')->count('products.id');
             $total_page = intval(ceil($total_product / 10 ));
             $limit = ($page*10)-10;
-            $pagination = [
-                'current_page' => $page,
-                'total_page' => $total_page,
-                'total_product' => $total_product,
-            ];
 
             if ($total_product > 0) {
                 $product_after_filter =$product_Query
@@ -208,21 +203,20 @@ class ProductController extends Controller
             }
             $response = [
                 'status' => true,
-                'pagination' =>$pagination,
+                'current_page' =>$page,
+                'total_page' =>$total_page,
+                'total_product' =>$total_product,
                 'message' => $message,
                 'data' => $product_after_filter,    
             ];    	
             return response()->json($response, 200);
         }else{
             $data = [];
-            $pagination = [
-                'current_page' => $page,
-                'total_page' => $total_page,
-                'total_product' => $total_product,
-            ];
             $response = [
                 'status' => false,
-                'pagination' =>$pagination,
+                'current_page' =>1,
+                'total_page' =>0,
+                'total_product' =>0,
                 'message' => 'Required Field Can Not Be Empty',
                 'data' => $data,
     
