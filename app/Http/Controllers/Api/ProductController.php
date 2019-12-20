@@ -240,9 +240,10 @@ class ProductController extends Controller
                 ->limit(5)
                 ->get();
             $response = [
-                'status' => false,
-                'message' => 'Required Field Can Not Be Empty',
+                'status' => true,
+                'message' => 'Product List After Search',
                 'data' => $products,
+                'search_key' => $search_key,
             ];    	
             return response()->json($response, 200);
         } else {
@@ -250,6 +251,7 @@ class ProductController extends Controller
                 'status' => false,
                 'message' => 'No products Found',
                 'data' => [],
+                'search_key' => $search_key,
             ];    	
             return response()->json($response, 200);
         }
