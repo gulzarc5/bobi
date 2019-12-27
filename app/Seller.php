@@ -13,10 +13,10 @@ class Seller extends Authenticatable
         protected $table = 'user';
 
         protected $fillable = [
-            'name', 'email', 'mobile', 'password','user_role',
+            'name', 'email', 'mobile', 'password','user_role','api_token',
         ];
 
         protected $hidden = [
-            'password', 'remember_token','api_token',
+            'password', 'remember_token',
         ];
 }
