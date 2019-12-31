@@ -254,6 +254,26 @@ class UsersController extends Controller
         
     }
 
+    public function userShippingDelete($address_id)
+    {
+        $shipping_address = DB::table('shipping_address')
+            ->where('id',$address_id)
+            ->delete();
+        if ($shipping_address) {
+            $response = [
+                'status' => true,
+                'message' => 'Shipping Address Deleted SucccessFullt',
+            ];
+            return response()->json($response, 200);
+        }else{
+            $response = [
+                'status' => false,
+                'message' => 'Something Went Wrong',
+            ];
+            return response()->json($response, 200);
+        }
+    }
+
     public function userShippingList($user_id)
     {
         $shipping_address = DB::table('shipping_address')
@@ -444,6 +464,37 @@ class UsersController extends Controller
             ];    	
             return response()->json($response, 200);
         }
+    }
+
+    public function states()
+    {
+        $states = DB::table('state')
+        ->whereNull('deleted_at')
+        ->orderBy('name','desc')
+        ->get();
+
+        $response = [
+                'status' => true,
+                'message' => 'State List',
+                'data' => $states,
+            ];      
+        return response()->json($response, 200);
+    }
+
+    public function city($state_id)
+    {
+        $city = DB::table('city')
+            ->where('state_id',$state_id)
+            ->whereNull('deleted_at')
+            ->orderBy('name','desc')
+            ->get();
+        
+        $response = [
+                'status' => true,
+                'message' => 'City List',
+                'data' => $city,
+            ];      
+        return response()->json($response, 200);
     }
 
 }

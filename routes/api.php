@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 
 Route::group(['namespace'=>'Api'], function(){
+    Route::get('state_list/','UserController@states');
+    Route::get('city/list/{state_id}','UserController@city');
+    
     Route::get('category/list/{main_cat_id}/{traditional_type?}','CategoryController@CategoryList');
 
     Route::get('app/load/','CategoryController@appLoadApi');
@@ -26,6 +29,7 @@ Route::group(['namespace'=>'Api'], function(){
         Route::get('user/shipping/list/{user_id}','UsersController@userShippingList');
         Route::get('user/shipping/single/{user_id}/{address_id}','UsersController@userShippingSingleView');
         Route::post('user/shipping/update','UsersController@userShippingUpdate');
+        Route::post('user/shipping/delete/{address_id}','UsersController@userShippingDelete');
 
         Route::post('user/add/to/cart','CartController@addToCart');
         Route::get('user/cart/all/product/{user_id}','CartController@cartProduct');

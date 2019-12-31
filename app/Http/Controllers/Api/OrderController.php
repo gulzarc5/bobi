@@ -168,7 +168,7 @@ class OrderController extends Controller
                 'status' => true,
                 'message' => 'Order Placed Successfully',
                 'payment_status' => false,
-                'data' => [],
+                'data' => null,
                 'error_code' => false,
                 'error_message' => null,
             ];

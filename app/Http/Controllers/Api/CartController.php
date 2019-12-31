@@ -35,6 +35,24 @@ class CartController extends Controller
         $size_id = $request->input('size');
         $user_id = $request->input('user_id');
 
+        if (empty($size_id)) {
+            $size = DB::table('product_sizes')
+            ->where('price','=',DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'))
+            ->where('product_id',$product_id)
+            ->whereNull('deleted_at')
+            ->where('status',1)
+            ->first(); 
+            $size_id = $size->size_id;
+        }
+        if (empty($color)) {
+            $colors = DB::table('product_colors')
+            ->where('product_id',$product_id)
+            ->whereNull('deleted_at')
+            ->where('status',1)
+            ->first(); 
+            $color = $colors->color_id;
+        }
+
         if (empty($quantity)) {
             $quantity = 1;
         }
