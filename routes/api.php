@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 
 Route::group(['namespace'=>'Api'], function(){
-    Route::get('state_list/','UserController@states');
-    Route::get('city/list/{state_id}','UserController@city');
+    Route::get('state_list/','UsersController@states');
+    Route::get('city/list/{state_id}','UsersController@city');
     
     Route::get('category/list/{main_cat_id}/{traditional_type?}','CategoryController@CategoryList');
 
