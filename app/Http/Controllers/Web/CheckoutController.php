@@ -200,7 +200,7 @@ class CheckoutController extends Controller
         }
 
         if ($pay_method == 1) {
-            productStockUpdate($order_id);
+            $this->productStockUpdate($order);
             return redirect()->route('web.checkout_thankyou',['id'=>$order]);            
         }else{
             $total_cost =  $total+($total_item*50);
@@ -253,7 +253,7 @@ class CheckoutController extends Controller
         
     }
 
-    public function productStockUpdate($order_id,$product_id,$size_id,$quantity)
+    public function productStockUpdate($order_id)
     {
         $order = DB::table('order_details')->where('order_id',$order_id)->get();
         if ($order) {
@@ -262,7 +262,7 @@ class CheckoutController extends Controller
                     ->where('product_id',$value->product_id)
                     ->where('size_id',$value->size_id)
                     ->update([
-                        'stock' => DB::raw("`stock`-".($quantity)),
+                        'stock' => DB::raw("`stock`-".($value->quantity)),
                         'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                     ]);
             }
@@ -292,14 +292,15 @@ class CheckoutController extends Controller
             if( !isset($response['payments'][0]['status']) ) {
              return redirect('web.order_history');
             } else if($response['payments'][0]['status'] != 'Credit') {
-             return redirect('web.order_history');
+                
+                return redirect('web.order_history');
             } 
           }catch (\Exception $e) {
              return redirect('web.order_history');
          }
         
         if($response['payments'][0]['status'] == 'Credit') {
- 
+            $this->productStockUpdate($order_id);
              $user_id = Auth::guard('buyer')->user()->id;
              DB::table('orders')
                 ->where('id', $order_id)
