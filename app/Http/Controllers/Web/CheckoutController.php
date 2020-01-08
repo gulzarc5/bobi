@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use DB;
 use Carbon\Carbon;
+use Session;
 
 class CheckoutController extends Controller
 {
@@ -102,6 +103,21 @@ class CheckoutController extends Controller
         $user_id = Auth::guard('buyer')->user()->id;
         $address_id = $address;
         $pay_method = $request->input('pay_method');
+
+        //Before Order Check Order Stock
+        $cart = DB::table('cart')->where('user_id',$user_id)->get();
+        foreach ($cart as $cart_data) {
+            $p_stock = $this->checkProductStock($cart_data->product_id,$cart_data->size_id);
+            if (isset($p_stock->stock)) {
+                if ($p_stock->stock < $cart_data->quantity) {
+                    return redirect()->route('web.viewCart')->with('error','Product '.$p_stock->p_name.' Is Out Of Stock');
+                }
+            }else{
+                return redirect()->route('web.viewCart')->with('error','Something Went Wrong Please Try Again');
+            }
+
+        }
+
         /* if Pay method == 1  then send to payment Gateway
             else place order as cash on delivery*/
         $order = DB::table('orders')
@@ -113,8 +129,6 @@ class CheckoutController extends Controller
                 'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
             ]);
 
-        $cart = DB::table('cart')->where('user_id',$user_id)->get();
-        
         $total = 0;
         $total_qtty = 0;
         $total_item = 0;
@@ -153,6 +167,7 @@ class CheckoutController extends Controller
                     'seller_id' => $product->seller_id,
                     'product_id' => $cart_data->product_id,
                     'shipping_address_id' => $address_id,
+                    'size_id' => $cart_data->size_id,
                     'size' => $size_name,
                     'color' => $cart_data->color_id,
                     'designer' => $designer_name,
@@ -185,6 +200,7 @@ class CheckoutController extends Controller
         }
 
         if ($pay_method == 1) {
+            productStockUpdate($order_id);
             return redirect()->route('web.checkout_thankyou',['id'=>$order]);            
         }else{
             $total_cost =  $total+($total_item*50);
@@ -220,6 +236,39 @@ class CheckoutController extends Controller
                 print('Error: ' . $e->getMessage());
             }
         }
+    }
+
+    public function checkProductStock($product_id,$size_id)
+    {
+        if (empty($quantity)) {
+            $quantity = 1 ;
+        }
+        $product_stock = DB::table('products')
+                ->select('product_sizes.stock as stock','products.id as p_id','products.name as p_name')
+                ->join('product_sizes','product_sizes.product_id','=','products.id')
+                ->where('products.id',$product_id)
+                ->where('product_sizes.size_id',$size_id)
+                ->first();
+        return $product_stock;
+        
+    }
+
+    public function productStockUpdate($order_id,$product_id,$size_id,$quantity)
+    {
+        $order = DB::table('order_details')->where('order_id',$order_id)->get();
+        if ($order) {
+            foreach ($order as $key => $value) {
+                $update = DB::table('product_sizes')
+                    ->where('product_id',$value->product_id)
+                    ->where('size_id',$value->size_id)
+                    ->update([
+                        'stock' => DB::raw("`stock`-".($quantity)),
+                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                    ]);
+            }
+        }
+        
+        return true;
     }
 
     public function paySuccess(Request $request,$order_id)

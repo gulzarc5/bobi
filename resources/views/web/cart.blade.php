@@ -9,6 +9,9 @@
             <li class="divider"></li>
             <li><h6>Payment</h6></li>
         </ul>
+        @if (Session::has('error'))
+            <div class="alert alert-danger" style="text-align:center">{{ Session::get('error') }}</div>
+         @endif
     </div>
 </section>
 <div class="container">
