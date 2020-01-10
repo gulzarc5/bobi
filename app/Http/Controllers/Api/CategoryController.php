@@ -142,13 +142,18 @@ class CategoryController extends Controller
             ->inRandomOrder()
             ->limit(10)
             ->get(); 
-        
+        $promotion1_image = null;
+        $promotion2_image = null;
+        $promotion1_image = DB::table('app_promotional')->where('id',1)->first();
+        $promotion2_image = DB::table('app_promotional')->where('id',2)->first();
         $data = [
             'sliders' => $sliders,
             'women_traditional_products' => $women_traditional_products,
             'men_traditional_products' => $men_traditional_products,
             'special_products' => $special_products,
             'random' => $random,
+            'promotion1_image' => $promotion1_image,
+            'promotion2_image' => $promotion2_image,
         ];
         $response = [
             'status' => true,

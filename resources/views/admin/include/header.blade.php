@@ -159,6 +159,12 @@
                         </ul>
                       </li>
 
+                      <li><a><i class="fa fa-bar-chart-o"></i>App Promotional <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><a href="{{route('admin.app_promotional')}}">Add Promotional</a></li>
+                        </ul>
+                      </li>
+
                     </ul>
                   </li>
 

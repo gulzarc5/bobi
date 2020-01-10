@@ -136,6 +136,10 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 		Route::get('App/Slider/Edit/{id}', 'ConfigurationController@AppSliderEdit')->name('admin.sliderEdit');
 		Route::get('App/Slider/Delete/{id}', 'ConfigurationController@appSliderDelete')->name('admin.sliderDelete');
 		Route::post('App/Slider/Update', 'ConfigurationController@appSliderUpdate')->name('admin.app_slider_update');
+
+		Route::get('App/Promotional/View', 'ConfigurationController@ViewAppPromotional')->name('admin.app_promotional');
+		Route::get('App/Promotional/Edit/{id}', 'ConfigurationController@AppPromotionalEdit')->name('admin.promotional_edit');
+		Route::post('App/Promotiona/Update', 'ConfigurationController@appPromotionaUpdate')->name('admin.app_Promotiona_update');
 	});
 
 });
