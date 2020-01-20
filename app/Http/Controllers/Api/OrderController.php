@@ -80,7 +80,36 @@ class OrderController extends Controller
                 'error_message' => null,
             ];
             return response()->json($response, 200);
-        }        
+        }
+        
+        $cart = DB::table('cart')->where('user_id',$user_id)->get();
+        foreach ($cart as $cart_data) {
+            $p_stock = $this->checkProductStock($cart_data->product_id,$cart_data->size_id);
+            if (isset($p_stock->stock)) {
+                if ($p_stock->stock < $cart_data->quantity) {
+                    $response = [
+                        'status' => false,
+                        'message' => 'Product '.$p_stock->p_name.' Is Out Of Stock',
+                        'payment_status' => false,
+                        'data' => [],
+                        'error_code' => false,
+                        'error_message' => null,
+                    ];
+                    return response()->json($response, 200);
+                }
+            }else{
+                $response = [
+                    'status' => false,
+                    'message' => 'Something Went Wrong Please try Again',
+                    'payment_status' => false,
+                    'data' => [],
+                    'error_code' => false,
+                    'error_message' => null,
+                ];
+                return response()->json($response, 200);
+            }
+
+        }
 
         $order = DB::table('orders')
             ->insertGetId([
@@ -162,8 +191,8 @@ class OrderController extends Controller
             ];
             return response()->json($response, 200);
         }
-
         if ($pay_method == 1) {
+            $this->productStockUpdate($order);
             $response = [
                 'status' => true,
                 'message' => 'Order Placed Successfully',
@@ -197,6 +226,38 @@ class OrderController extends Controller
             ];
             return response()->json($response, 200); 
         }
+    }
+
+    public function checkProductStock($product_id,$size_id)
+    {
+        if (empty($quantity)) {
+            $quantity = 1 ;
+        }
+        $product_stock = DB::table('products')
+                ->select('product_sizes.stock as stock','products.id as p_id','products.name as p_name')
+                ->join('product_sizes','product_sizes.product_id','=','products.id')
+                ->where('products.id',$product_id)
+                ->where('product_sizes.size_id',$size_id)
+                ->first();
+        return $product_stock;
+        
+    }
+
+    public function productStockUpdate($order_id)
+    {
+        $order = DB::table('order_details')->where('order_id',$order_id)->get();
+        if ($order) {
+            foreach ($order as $key => $value) {
+                $update = DB::table('product_sizes')
+                    ->where('product_id',$value->product_id)
+                    ->where('size_id',$value->size_id)
+                    ->update([
+                        'stock' => DB::raw("`stock`-".($value->quantity)),
+                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                    ]);
+            }
+        }        
+        return true;
     }
 
     public function updatePaymentRequestId($order_id,$payment_rqst_id)
@@ -233,7 +294,7 @@ class OrderController extends Controller
             'payment_status' => '2',
             'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
         ]);
-
+        $this->productStockUpdate($order);
         if ($update) {
             $response = [
                 'status' => true,
