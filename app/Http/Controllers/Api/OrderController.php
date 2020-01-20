@@ -81,7 +81,18 @@ class OrderController extends Controller
             ];
             return response()->json($response, 200);
         }
-        
+        $cart_cnt = DB::table('cart')->where('user_id',$user_id)->count();
+        if ($cart_cnt<1) {
+            $response = [
+                'status' => false,
+                'message' => 'Your Cart Is Empty',
+                'payment_status' => false,
+                'data' => [],
+                'error_code' => false,
+                'error_message' => null,
+            ];
+            return response()->json($response, 200);
+        }
         $cart = DB::table('cart')->where('user_id',$user_id)->get();
         foreach ($cart as $cart_data) {
             $p_stock = $this->checkProductStock($cart_data->product_id,$cart_data->size_id);
@@ -156,6 +167,7 @@ class OrderController extends Controller
                     'seller_id' => $product->seller_id,
                     'product_id' => $cart_data->product_id,
                     'shipping_address_id' => $address_id,
+                    'size_id' => $cart_data->size_id,
                     'size' => $size_name,
                     'color' => $cart_data->color_id,
                     'designer' => $designer_name,
