@@ -134,7 +134,9 @@ class OrderController extends Controller
         
         $total = 0;
         $total_qtty = 0;
+        $total_item = 0;
         foreach ($cart as $cart_data) {
+            $total_item = $total_item + 1;
             $product = DB::table('products')->select('seller_id','brand_id')
                 ->where('id',$cart_data->product_id)
                 ->whereNull('deleted_at')
@@ -174,6 +176,7 @@ class OrderController extends Controller
                     'quantity' => $cart_data->quantity,
                     'rate' => $rate,
                     'total' => ($cart_data->quantity * $rate),
+                    'shipping_charge' => 50,
                     'payment_method' => $pay_method,
                     'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                     'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
@@ -187,6 +190,7 @@ class OrderController extends Controller
                 ->where('id',$order)
                 ->update([
                     'quantity' => $total_qtty,
+                    'shipping_charge' => ($total_item*50),
                     'amount' => $total,
                 ]);
         if ($update_order) {
