@@ -21,9 +21,9 @@ class ProductList implements FromArray
 
         $data[] = ['Sl No','Product Id','Product Name','Seller Name','Main Category','First Category','Second Category']; 
         $count = 1;
-        foreach ($query as $key => $value) {
-            $count++;
+        foreach ($query as $key => $value) {            
             $data[] = [ $count, $value->id,  $value->name,  $value->u_name,  $value->main_category_name,$value->first_category_name,$value->second_category_name,];
+            $count++;
         }
         return $data;
     }
