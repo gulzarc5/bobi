@@ -108,7 +108,6 @@ class OrderController extends Controller
                 ];
                 return response()->json($response, 200);
             }
-
         }
 
         $order = DB::table('orders')
