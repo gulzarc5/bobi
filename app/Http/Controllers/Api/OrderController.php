@@ -44,7 +44,7 @@ class OrderController extends Controller
                 'status' => false,
                 'message' => 'Required Field Can not be Empty',
                 'payment_status' => false,
-                'data' => [],
+                'data' => null,
                 'error_code' => true,
                 'error_message' => $validator->errors(),
             ];
@@ -64,7 +64,7 @@ class OrderController extends Controller
                     'status' => false,
                     'message' => 'Service Not Available At this pin code',
                     'payment_status' => false,
-                    'data' => [],
+                    'data' => null,
                     'error_code' => false,
                     'error_message' => null,
                     ];
@@ -75,7 +75,7 @@ class OrderController extends Controller
                 'status' => false,
                 'message' => 'Shipping Address Not Found',
                 'payment_status' => false,
-                'data' => [],
+                'data' => null,
                 'error_code' => false,
                 'error_message' => null,
             ];
@@ -87,7 +87,7 @@ class OrderController extends Controller
                 'status' => false,
                 'message' => 'Your Cart Is Empty',
                 'payment_status' => false,
-                'data' => [],
+                'data' => null,
                 'error_code' => false,
                 'error_message' => null,
             ];
@@ -102,7 +102,7 @@ class OrderController extends Controller
                         'status' => false,
                         'message' => 'Product '.$p_stock->p_name.' Is Out Of Stock',
                         'payment_status' => false,
-                        'data' => [],
+                        'data' => null,
                         'error_code' => false,
                         'error_message' => null,
                     ];
@@ -113,7 +113,7 @@ class OrderController extends Controller
                     'status' => false,
                     'message' => 'Something Went Wrong Please try Again',
                     'payment_status' => false,
-                    'data' => [],
+                    'data' => null,
                     'error_code' => false,
                     'error_message' => null,
                 ];
@@ -196,7 +196,7 @@ class OrderController extends Controller
                 'status' => false,
                 'message' => 'Something Went Wrong',
                 'payment_status' => false,
-                'data' => [],
+                'data' => null,
                 'error_code' => false,
                 'error_message' => null,
             ];
