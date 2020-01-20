@@ -16,7 +16,6 @@ class ProductList implements FromArray
             ->leftjoin('first_category','first_category.id','=','products.first_category')
             ->leftjoin('second_category','second_category.id','=','products.second_category')
             ->whereNull('products.deleted_at')
-            ->where('products.status',1)
             ->orderBy('products.id','desc')
             ->get();
 
