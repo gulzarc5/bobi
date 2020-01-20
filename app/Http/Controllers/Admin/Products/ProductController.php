@@ -11,6 +11,8 @@ use Intervention\Image\Facades\Image;
 use File;
 use App\SecondCategory;
 use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductList;
 
 class ProductController extends Controller
 {
@@ -202,6 +204,11 @@ class ProductController extends Controller
     public function productList()
     {
        return view('admin.products.product_list');
+    }
+
+    public function productListExcelExport()
+    {
+        return Excel::download(new ProductList, 'product_list.xlsx');
     }
 
     public function ajaxGetProductList()

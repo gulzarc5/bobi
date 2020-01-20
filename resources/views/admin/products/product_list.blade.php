@@ -8,9 +8,9 @@
     	    <div class="x_panel">
 
     	        <div class="x_title">
-    	            <h2>Product List</h2>
+    	            <h2>Product List <b><button onclick="export_excel()"><i class="fa fa-file-excel-o" aria-hidden="true" style="font-size: 20px; color:#FF9800"></i></button></b></h2>
     	            <div class="clearfix"></div>
-    	        </div>
+              </div>
     	        <div>
     	            <div class="x_content">
                         <table id="size_list" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -42,33 +42,39 @@
 
 @section('script')
      
-     <script type="text/javascript">
-         $(function () {
-    
-            var table = $('#size_list').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('admin.ajax.get_product_list') }}",
-                columns: [
-                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'id', name: 'id',searchable: true},
-                    {data: 'name', name: 'name',searchable: true},
-                    {data: 'c_name', name: 'c_name' ,searchable: true},
-                    {data: 'first_c_name', name: 'first_c_name' ,searchable: true},       
-                    {data: 'second_c_name', name: 'second_c_name' ,searchable: true},
-                    {data: 'brand_name', name: 'brand_name' ,searchable: true}, 
-                    {data: 'status', name: 'status', render:function(data, type, row){
-                      if (row.status == '1') {
-                        return "<button class='btn btn-info'>Enable</a>"
-                      }else{
-                        return "<button class='btn btn-danger'>Disabled</a>"
-                      }                        
-                    }},                  
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                ]
-            });
-            
+  <script type="text/javascript">
+      $(function () {
+
+        var table = $('#size_list').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('admin.ajax.get_product_list') }}",
+            columns: [
+                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                {data: 'id', name: 'id',searchable: true},
+                {data: 'name', name: 'name',searchable: true},
+                {data: 'c_name', name: 'c_name' ,searchable: true},
+                {data: 'first_c_name', name: 'first_c_name' ,searchable: true},       
+                {data: 'second_c_name', name: 'second_c_name' ,searchable: true},
+                {data: 'brand_name', name: 'brand_name' ,searchable: true}, 
+                {data: 'status', name: 'status', render:function(data, type, row){
+                  if (row.status == '1') {
+                    return "<button class='btn btn-info'>Enable</a>"
+                  }else{
+                    return "<button class='btn btn-danger'>Disabled</a>"
+                  }                        
+                }},                  
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
         });
-     </script>
+        
+    });
+  </script>
+
+<script>
+  function export_excel(){
+  window.location.href = "{{route('admin.product_list_excel')}}";
+}
+</script>
     
  @endsection

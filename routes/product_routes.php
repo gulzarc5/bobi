@@ -8,6 +8,8 @@ Route::group(['namespace'=> 'Products','prefix'=>'Products'], function(){
 
 	Route::get('/list', 'ProductController@productList')->name('admin.product_list');
 
+	Route::get('/list/export', 'ProductController@productListExcelExport')->name('admin.product_list_excel');
+
 	Route::get('ajax/Get/List/','ProductController@ajaxGetProductList')->name('admin.ajax.get_product_list');
 
 	Route::get('/view/{product_id}', 'ProductController@productView')->name('admin.product_view');

@@ -19,7 +19,6 @@ class UsersController extends Controller
 	        'name' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'same:confirm_password'],
             'mobile' =>  ['required','digits:10','numeric','unique:user'],
-            'email' => ['string', 'email', 'max:255', 'unique:user'],
         ]);
 
         if ($validator->fails()) {

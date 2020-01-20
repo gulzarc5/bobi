@@ -218,7 +218,7 @@ class CheckoutController extends Controller
                     "purpose" => "Ecommerce Bplus Payment",
                     "amount" => $total_cost,
                     "buyer_name" => $user_name,
-                    "send_email" => true,
+                    "send_email" => false,
                     "email" => $user_email,
                     "phone" => $user_mobile,
                     "redirect_url" => route('web.pay_order_amount',['order_id'=>encrypt($order)]),
@@ -258,13 +258,15 @@ class CheckoutController extends Controller
         $order = DB::table('order_details')->where('order_id',$order_id)->get();
         if ($order) {
             foreach ($order as $key => $value) {
-                $update = DB::table('product_sizes')
-                    ->where('product_id',$value->product_id)
-                    ->where('size_id',$value->size_id)
-                    ->update([
-                        'stock' => DB::raw("`stock`-".($value->quantity)),
-                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
-                    ]);
+                if (!empty($value->product_id) && !empty($value->size_id)) {
+                    $update = DB::table('product_sizes')
+                        ->where('product_id',$value->product_id)
+                        ->where('size_id',$value->size_id)
+                        ->update([
+                            'stock' => DB::raw("`stock`-".($value->quantity)),
+                            'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                        ]);
+                }
             }
         }
         
@@ -361,6 +363,7 @@ class CheckoutController extends Controller
                 'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
             ]);
         if($update_order_status){
+            $this->stockUpdateCancel($order_details_id);
             // $order = DB::table('order_details')->where('id',$order_details_id)->first();
             $all_orders = DB::table('order_details')
                 ->where('id',$order_details_id)
@@ -387,5 +390,22 @@ class CheckoutController extends Controller
             return redirect()->back();
         }
 
+    }
+
+    public function stockUpdateCancel($order_id)
+    {
+        $order = DB::table('order_details')->where('id',$order_id)->first();
+        if ($order) {
+            if (!empty($order->product_id) && !empty($order->size_id)) {
+                $update = DB::table('product_sizes')
+                ->where('product_id',$order->product_id)
+                ->where('size_id',$order->size_id)
+                ->update([
+                    'stock' => DB::raw("`stock`+".($order->quantity)),
+                    'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                ]);
+            }
+        }
+        return true;
     }
 }

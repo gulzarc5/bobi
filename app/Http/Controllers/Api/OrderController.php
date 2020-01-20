@@ -220,7 +220,7 @@ class OrderController extends Controller
             $user_email =   $user_details ->email;
             $user_mobile =  $user_details ->mobile;
             $data = [
-                'purpose' => "Ecommerce Bplus Payment",
+                'purpose' => "Ecommerce Bibi Bobi Payment",
                 'amount' => $total_cost,
                 'buyer_name' => $user_name,
                 'email' => $user_email,
@@ -259,13 +259,15 @@ class OrderController extends Controller
         $order = DB::table('order_details')->where('order_id',$order_id)->get();
         if ($order) {
             foreach ($order as $key => $value) {
-                $update = DB::table('product_sizes')
-                    ->where('product_id',$value->product_id)
-                    ->where('size_id',$value->size_id)
-                    ->update([
-                        'stock' => DB::raw("`stock`-".($value->quantity)),
-                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
-                    ]);
+                if (!empty($value->product_id) && !empty($value->size_id)) {
+                    $update = DB::table('product_sizes')
+                        ->where('product_id',$value->product_id)
+                        ->where('size_id',$value->size_id)
+                        ->update([
+                            'stock' => DB::raw("`stock`-".($value->quantity)),
+                            'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                        ]);
+                }
             }
         }        
         return true;
@@ -358,6 +360,27 @@ class OrderController extends Controller
         ]);
 
         if ($update) {
+            $this->stockUpdateCancel($order_id);
+            $all_orders = DB::table('order_details')
+                ->where('id',$order_id)
+                ->get();
+            $status_flag = true;
+            foreach ($all_orders as $key => $value) {
+                $order_id = $value->order_id;
+                if ((int)$value->order_status < (int)4) {
+                    $status_flag = false;                    
+                    break;
+                }
+            }
+
+            if ($status_flag) {
+                DB::table('orders')
+                    ->where('id',$order_id)
+                    ->update([
+                        'status' => 4,
+                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                    ]);
+            }
             $response = [
                 'status' => true,
                 'message' => 'Order Cancelled Successfully',
@@ -370,5 +393,22 @@ class OrderController extends Controller
             ];
             return response()->json($response, 200);
         }
+    }
+
+    public function stockUpdateCancel($order_id)
+    {
+        $order = DB::table('order_details')->where('id',$order_id)->first();
+        if ($order) {
+            if (!empty($order->product_id) && !empty($order->size_id)) {
+                $update = DB::table('product_sizes')
+                ->where('product_id',$order->product_id)
+                ->where('size_id',$order->size_id)
+                ->update([
+                    'stock' => DB::raw("`stock`+".($order->quantity)),
+                    'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                ]);
+            }
+        }
+        return true;
     }
 }
