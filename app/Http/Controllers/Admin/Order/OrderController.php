@@ -128,6 +128,12 @@ class OrderController extends Controller
             ->addColumn('action', function($row){
                 $btn = '
                 <a href="'.route('admin.order_details_of_order_detail',['order_id'=>encrypt($row->id)]).'" class="btn btn-info btn-sm" target="_blank">View</a>
+                ';
+                
+                return $btn;
+            })
+            ->addColumn('dispatch', function($row){
+                $btn = '
                 <a id="btn'.$row->id.'">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".mod'.$row->id.'">Dispatch</button>
                 </a>
@@ -163,10 +169,9 @@ class OrderController extends Controller
                     </div>
                 </div>
                 <!-- /modals -->';
-                
-                    return $btn;
+                return $btn;
             })
-            ->rawColumns(['action', 'grand_total', 'payment_method','payment_status','created_at'])
+            ->rawColumns(['action', 'dispatch','grand_total', 'payment_method','payment_status','created_at'])
             ->make(true);
     }
 

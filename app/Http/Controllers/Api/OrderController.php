@@ -183,7 +183,7 @@ class OrderController extends Controller
                 ]);
                 $total += ($cart_data->quantity * $rate);
                 $total_qtty += $cart_data->quantity;
-            }           
+            }
         }
 
         $update_order = DB::table('orders')

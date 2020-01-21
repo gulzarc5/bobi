@@ -18,6 +18,7 @@
                             <tr>
                               <th>Sl</th>
                               <th>Order Id</th>
+                              <th>Dispatch</th>
                               <th>Order By</th>
                               <th>Quantity</th>
                               <th>Amount</th>
@@ -56,6 +57,7 @@
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'id', name: 'id',searchable: true},
+                    {data: 'dispatch', name: 'dispatch',searchable: true},
                     {data: 'u_name', name: 'u_name' ,searchable: true},         
                     {data: 'quantity', name: 'quantity',orderable: false, searchable: false},  
                     {data: 'total', name: 'total' ,searchable: true},        
