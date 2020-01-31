@@ -55,7 +55,6 @@ class RegisterController extends Controller
                 'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
             ]);
 
-
         	return redirect()->route('seller_login')->with('message','Registered Successfully');
         }else{
         	return redirect()->back()->with('error','Something Went Wrong Please try Again');

@@ -50,11 +50,20 @@ Route::group(['namespace'=> 'Web'], function(){
     Route::group(['namespace'=> 'Product','prefix'=>'Product'], function(){
         Route::get('/List/{second_category_id}','ProductController@productList')->name('web.product_list');
         Route::get('/Detail/{product_id}/{size_id?}','ProductController@productDetail')->name('web.product_detail');
+        Route::get('/Detail/app/{slug?}/{product_id}/{size_id?}','ProductController@productDetailSlug')->name('web.product_detail_slug');
         Route::post('/By/Filter/','ProductController@productFilter')->name('web.product_filter');
         Route::get('/Search/{search_key}','ProductController@productSearch')->name('web.product_search');
     });
 
     Route::get('pin/availiblity/{pin?}','LogisticController@pinAvailiblity')->name('courier.pin_check');
+
+    Route::group(['prefix'=>'forgot'],function(){
+        Route::post('send/otp/','UserController@sendOtp')->name('web.sendOtp');
+        Route::get('change/password/{mobile}','UserController@verifyOtp')->name('web.verifyOtp');
+        Route::get('resend/otp/{mobile}','UserController@resendOtp')->name('web.resend_otp');
+        Route::post('pass/change/','UserController@passChangeForgot')->name('web.pass_change_forgot');
+    });
+    
 
 });
 
@@ -64,22 +73,7 @@ Route::get('/', 'Web\PagesController@index')->name('web.index');
 Route::get('contact/',function(){
     return view('web.contact');
 })->name('web.contact');
-// Route::get('/Seller-Login', function () {
-//     return view('web.seller-login');
-// });
 
-// Route::get('/Product_Detail', function () {
-//     return view('web.product_detail');
-// });
-// Route::get('/Product_List', function () {
-//     return view('web.product_list');
-// });
-// Route::get('/Login', function () {
-//     return view('web.login');
-// })->name('web.login');
-// Route::get('/Register', function () {
-//     return view('web.register');
-// })->name('web.register');
 Route::get('/Forgot-Password', function () {
     return view('web.forgot-password');
 })->name('web.forgot-password');

@@ -141,6 +141,77 @@ class ProductController extends Controller
         return view('web.product_detail',compact('data'));
     }
 
+    public function productDetailSlug($slug=null,$product_id,$size_id=null)
+    {
+        // try {
+        //     $product_id = decrypt($product_id);
+        // }catch(DecryptException $e) {
+        //     return redirect()->back();
+        // }
+
+        $product = DB::table('products')
+            ->where('id',$product_id)
+            ->whereNull('deleted_at')
+            ->where('status',1)
+            ->first();
+        $sizes = DB::table('product_sizes')
+            ->select('product_sizes.*','sizes.name as size_name')
+            ->join('sizes','sizes.id','=','product_sizes.size_id')
+            ->where('product_sizes.product_id',$product_id)
+            ->whereNull('product_sizes.deleted_at')
+            ->where('product_sizes.status',1)
+            ->get();
+        if (isset($size_id) && !empty($size_id)) {
+            $min_price = DB::table('product_sizes')
+            ->where('size_id',$size_id)
+            ->where('product_id',$product_id)
+            ->whereNull('deleted_at')
+            ->where('status',1)
+            ->first(); 
+        }else{
+            $min_price = DB::table('product_sizes')
+            ->where('price','=',DB::raw('(SELECT min(price) FROM product_sizes WHERE product_id ='.$product_id.')'))
+            ->where('product_id',$product_id)
+            ->whereNull('deleted_at')
+            ->where('status',1)
+            ->first(); 
+        }
+        
+        $colors = DB::table('product_colors')
+            ->select('product_colors.color_id as color_id','color.name as color_name','color.value as color_value')
+            ->join('color','product_colors.color_id','=','color.id')
+            ->where('product_colors.product_id',$product_id)
+            ->whereNull('product_colors.deleted_at')
+            ->where('product_colors.status',1)
+            ->get();
+        $images = DB::table('product_image')
+            ->where('product_id',$product_id)
+            ->whereNull('deleted_at')
+            ->where('status',1)
+            ->get();
+        
+        $related_products = [];
+        if (isset($product->second_category) && !empty($product->second_category)) {
+            $related_products = DB::table('products')
+            ->where('second_category',$product->second_category)
+            ->whereNull('deleted_at')
+            ->where('status',1)
+            ->inRandomOrder()
+            ->limit(10)
+            ->get();
+        }
+        
+        $data = [
+            'product' =>$product,
+            'colors' => $colors,
+            'sizes' => $sizes,
+            'images' => $images,
+            'min_price' => $min_price,
+            'related_products' => $related_products,
+        ];
+        return view('web.product_detail',compact('data'));
+    }
+
 
     public function productFilter(Request $request)
     {

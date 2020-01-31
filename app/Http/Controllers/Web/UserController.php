@@ -10,6 +10,7 @@ use Auth;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use Illuminate\Contracts\Encryption\DecryptException;
+use SmsHelpers;
 
 class UserController extends Controller
 {
@@ -342,5 +343,96 @@ class UserController extends Controller
 
         $wish_list = DB::table('wish_list')->where('id',$wish_list_id)->delete();
         return redirect()->route('web.viewCart');
+    }
+
+    public function sendOtp(Request $request)
+    {
+        $validatedData = $request->validate([
+            'mobile' => ['required','min:10'],
+        ]);
+
+        $user = DB::table('user')->where('mobile',$request->input('mobile'))->count();
+        if ($user) {
+            if ($user > 0) {
+                $otp = rand(111111,999999);
+                DB::table('user')
+                ->where('mobile',$request->input('mobile'))
+                ->update([
+                    'otp' => $otp,
+                ]);                
+                $request_info = urldecode("Your OTP is $otp . Please Do Not Share This Otp To Any One. Thank you");
+                SmsHelpers::smsSend($request->input('mobile'),$request_info);
+                return redirect()->route('web.verifyOtp',['mobile'=>encrypt($request->input('mobile'))])->with('message','Your One Time Password Has Been Sent To Your Mobile Number Please Enter OTP To Verify');
+            }else {
+                return redirect()->back()->with('error','Mobile Number Not Found');
+            }
+        }else {
+            return redirect()->back()->with('error','Mobile Number Not Found');
+        }
+    }
+
+    public function resendOtp($mobile)
+    {
+        try{
+            $mobile = decrypt($mobile);
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+        $user = DB::table('user')->where('mobile',$mobile)->count();
+        
+        if ($user) {
+            if ($user > 0) {
+                $otp = rand(111111,999999);
+                DB::table('user')
+                ->where('mobile',$mobile)
+                ->update([
+                    'otp' => $otp,
+                ]);                
+                $request_info = urldecode("Your OTP is $otp . Please Do Not Share This Otp To Any One. Thank you");
+                SmsHelpers::smsSend($mobile,$request_info);
+                return redirect()->route('web.verifyOtp',['mobile'=>encrypt($mobile)])->with('message','Your One Time Password Has Been Sent To Your Mobile Number Please Enter OTP To Verify');
+            }else {
+                return redirect()->back()->with('error','Mobile Number Not Found');
+            }
+        }else {
+            return redirect()->back()->with('error','Mobile Number Not Found');
+        }
+    }
+
+    public function verifyOtp($mobile)
+    {
+        try{
+            $mobile = decrypt($mobile);
+        }catch(DecryptException $e) {
+            return redirect()->back();
+        }
+        return view('web.verify_otp',compact('mobile'));
+    }
+
+    public function passChangeForgot(Request $request)
+    {
+        $validatedData = $request->validate([
+            'mobile' => ['required','min:10','numeric'],
+            'otp' => ['required','numeric','digits:6'],
+            'new_pass' => ['required', 'string', 'min:8', 'same:confirm_pass'],
+        ]);
+        $user = DB::table('user')->where('mobile',$request->input('mobile'))->where('otp',$request->input('otp'))->count();  
+ 
+        if ($user > 0) {
+            $password_change = DB::table('user')
+                ->where('mobile',$request->input('mobile'))
+                ->update([
+                    'password' => Hash::make($request->input('confirm_pass')),
+                    'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                ]);
+            if ($password_change) {
+                return redirect()->route('web.userLoginForm')->with('message','Password Changed Successfully Please Login With Your New Password');
+            } else {
+                return redirect()->back()->with('error','Please Enter Correct OTP');
+            }    
+
+        }else {
+            return redirect()->back()->with('error','Please Enter Correct OTP');
+        }
     }
 }

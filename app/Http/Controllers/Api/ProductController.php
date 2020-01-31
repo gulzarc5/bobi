@@ -305,6 +305,7 @@ class ProductController extends Controller
                 'sizes' => $sizes,
                 'images' => $images,
                 'related_products' => $related_products,
+                'share_link'=>url('Product/Detail/app/'.str_slug($product->name, '-').'/'.$product->id),
             ];
         }else{
             $status = false;

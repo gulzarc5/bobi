@@ -8,6 +8,7 @@ use Auth;
 use DB;
 use Carbon\Carbon;
 use Session;
+use SmsHelpers;
 
 class CheckoutController extends Controller
 {
@@ -200,7 +201,10 @@ class CheckoutController extends Controller
         }
 
         if ($pay_method == 1) {
+            $sms_amt = $total + ($total_item*50);
             $this->productStockUpdate($order);
+            $request_info = urldecode("Dear ".Auth::guard('buyer')->user()->name.", Your Order of Rs. ". $sms_amt ." Has Been Placed Successfully We Wiill Process it Shortly. Thank You");
+            SmsHelpers::smsSend(Auth::guard('buyer')->user()->mobile,$request_info);
             return redirect()->route('web.checkout_thankyou',['id'=>$order]);            
         }else{
             $total_cost =  $total+($total_item*50);
@@ -294,7 +298,6 @@ class CheckoutController extends Controller
             if( !isset($response['payments'][0]['status']) ) {
              return redirect('web.order_history');
             } else if($response['payments'][0]['status'] != 'Credit') {
-                
                 return redirect('web.order_history');
             } 
           }catch (\Exception $e) {
@@ -302,6 +305,7 @@ class CheckoutController extends Controller
          }
         
         if($response['payments'][0]['status'] == 'Credit') {
+           
             $this->productStockUpdate($order_id);
              $user_id = Auth::guard('buyer')->user()->id;
              DB::table('orders')
@@ -309,21 +313,15 @@ class CheckoutController extends Controller
                 ->where('user_id', $user_id)
                 ->where('payment_request_id', $response['id'])
                 ->update(['payment_id' => $response['payments'][0]['payment_id'], 'payment_status' => '2']);
-            
-            // $request_info = urldecode("Dear ".Auth::guard('buyer')->user()->name.", Your Order Has Been Placed Successfully We Wiill Process it Shortly. Thank You");
-            // SmsHelpers::smsSend(Auth::guard('buyer')->user()->mobile,$request_info);
 
-            //SMS Send To Seller
-            // $products = DB::table('order_details')
-            //     ->select('products.name as p_name','seller.name as seller_name','seller.mobile as mobile')
-            //     ->leftjoin('products','products.id','=','order_details.product_id')
-            //     ->leftjoin('seller','seller.id','=','products.seller_id')
-            //     ->where('order_details.order_id',$order_id)
-            //     ->get();
-            // foreach ($products as $key => $value) {
-            //     $request_info = urldecode("Dear ".$value->seller_name.", Order of ".$value->p_name." Has Been Placed By a Customer From Bplus Keep Your Product Ready and wait for further update . Thank You");
-            //     SmsHelpers::smsSend($value->mobile,$request_info);
-            // }
+            $order = DB::table('orders')->where('id',$order_id)->first();
+            if ($order) {
+                $sms_amt = $order->amount + $order->shipping_charge;
+                $request_info = urldecode("Dear ".Auth::guard('buyer')->user()->name.", Your Order of Rs. ". $sms_amt ." Has Been Placed Successfully We Wiill Process it Shortly. Thank You");
+                SmsHelpers::smsSend(Auth::guard('buyer')->user()->mobile,$request_info);
+            }
+            
+
             return redirect()->route('web.checkout_thankyou',['id'=>$order_id]);  
         } 
     }
