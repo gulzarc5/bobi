@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Validator;
 use App\Seller;
 use Illuminate\Support\Str;
+use SmsHelpers;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class UsersController extends Controller
 {
@@ -495,6 +497,127 @@ class UsersController extends Controller
                 'data' => $city,
             ];      
         return response()->json($response, 200);
+    }
+
+    public function sendOtp($mobile)
+    {
+        $user = DB::table('user')->where('mobile',$mobile)->count();
+        if ($user > 0) {
+            $otp = rand(111111,999999);
+            DB::table('user')
+                ->where('mobile',$mobile)
+                ->update([
+                    'otp' => $otp,
+                ]);                
+            $request_info = urldecode("Your OTP is $otp . Please Do Not Share This Otp To Any One. Thank you");
+            SmsHelpers::smsSend($mobile,$request_info);
+            $data = [
+                'mobile' => $mobile,
+            ];
+            $response = [
+                'status' => true,
+                'message' => 'OTP Send Successfully Please Verify',
+                'data' => $data,
+            ];
+            return response()->json($response, 200);
+        } else {
+            $data = [
+                'mobile' => $mobile,
+            ];
+            $response = [
+                'status' => false,
+                'message' => 'Please Enter Registered Mobile Number',
+                'data' => $data,
+            ];
+            return response()->json($response, 200);
+        }
+        
+    }
+
+    public function varifyOtp($mobile,$otp)
+    {
+        $user = DB::table('user')->where('mobile',$mobile)->where('otp',$otp)->count();
+        if ($user > 0) {
+            $data = [
+                'mobile' => $mobile,
+                'otp' => $otp,
+            ];
+            $response = [
+                'status' => true,
+                'message' => 'OTP Send Successfully Please Verify',
+                'data' => $data,
+            ];
+            return response()->json($response, 200);
+        } else {
+            $data = [
+                'mobile' => $mobile,
+            ];
+            $response = [
+                'status' => false,
+                'message' => 'Please Enter Correct OTP',
+                'data' => $data,
+            ];
+            return response()->json($response, 200);
+        }
+        
+    }
+
+    public function forgotChangePass(Request $request)
+    {
+        $validator =  Validator::make($request->all(),[
+            'otp' => 'required',
+            'mobile' => ['required', 'numeric', 'digits:6'],
+            'current_pass' => ['required', 'string', 'min:8'],
+            'new_password' => ['required', 'string', 'min:8', 'same:confirm_password'],
+        ]);
+
+        if ($validator->fails()) {
+            $response = [
+                'status' => false,
+                'message' => 'Input Error',
+                'error_code' => true,
+                'error_message' => $validator->errors(),    
+            ];    	
+            return response()->json($response, 200);
+        }
+
+        $user = DB::table('user')->where('mobile',$request->input('mobile'))->where('otp',$request->input('otp'))->count();  
+
+            if ($user > 0) {
+                $password_change = DB::table('user')
+                    ->where('mobile',$request->input('mobile'))
+                    ->update([
+                        'password' => Hash::make($request->input('confirm_pass')),
+                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                    ]);
+                if ($password_change) {
+                    $response = [
+                        'status' => true,
+                        'message' => 'Password Changed Successfully',
+                        'error_code' => false,
+                        'error_message' => null,    
+                    ];    	
+                    return response()->json($response, 200);
+                } else {
+                    $response = [
+                        'status' => false,
+                        'message' => 'Something Went Wrong',
+                        'error_code' => false,
+                        'error_message' => null,    
+                    ];    	
+                    return response()->json($response, 200);
+                }    
+
+            }else {
+                $response = [
+                    'status' => false,
+                    'message' => 'Something Went Wrong',
+                    'error_code' => false,
+                    'error_message' => null,    
+                ];    	
+                return response()->json($response, 200);
+            }
+        }
     }
 
 }

@@ -19,6 +19,11 @@ Route::group(['namespace'=>'Api'], function(){
     Route::post('user/registration','UsersController@userRegistration');
     Route::post('user/login','UsersController@userLogin');
     Route::get('user/Shipping/pin/check/{pin}','OrderController@pinAvailability');
+
+    Route::get('send/otp/{mobile}','UsersController@sendOtp');
+    Route::get('verify/otp/{mobile}/{otp}','UsersController@varifyOtp');
+    Route::post('forgot/change/password/','UsersController@forgotChangePass');
+
     Route::group(['middleware'=>'auth:api'],function(){
         Route::get('user/profile/{user_id}','UsersController@userProfile');
         Route::post('user/profile/update','UsersController@userProfileUpdate');
