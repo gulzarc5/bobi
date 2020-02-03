@@ -583,32 +583,22 @@ class UsersController extends Controller
 
         $user = DB::table('user')->where('mobile',$request->input('mobile'))->where('otp',$request->input('otp'))->count();  
 
-            if ($user > 0) {
-                $password_change = DB::table('user')
-                    ->where('mobile',$request->input('mobile'))
-                    ->update([
-                        'password' => Hash::make($request->input('confirm_pass')),
-                        'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
-                    ]);
-                if ($password_change) {
-                    $response = [
-                        'status' => true,
-                        'message' => 'Password Changed Successfully',
-                        'error_code' => false,
-                        'error_message' => null,    
-                    ];    	
-                    return response()->json($response, 200);
-                } else {
-                    $response = [
-                        'status' => false,
-                        'message' => 'Something Went Wrong',
-                        'error_code' => false,
-                        'error_message' => null,    
-                    ];    	
-                    return response()->json($response, 200);
-                }    
-
-            }else {
+        if ($user > 0) {
+            $password_change = DB::table('user')
+                ->where('mobile',$request->input('mobile'))
+                ->update([
+                    'password' => Hash::make($request->input('confirm_pass')),
+                    'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+                ]);
+            if ($password_change) {
+                $response = [
+                    'status' => true,
+                    'message' => 'Password Changed Successfully',
+                    'error_code' => false,
+                    'error_message' => null,    
+                ];    	
+                return response()->json($response, 200);
+            } else {
                 $response = [
                     'status' => false,
                     'message' => 'Something Went Wrong',
@@ -616,7 +606,16 @@ class UsersController extends Controller
                     'error_message' => null,    
                 ];    	
                 return response()->json($response, 200);
-            }
+            }    
+
+        }else {
+            $response = [
+                'status' => false,
+                'message' => 'Something Went Wrong',
+                'error_code' => false,
+                'error_message' => null,    
+            ];    	
+            return response()->json($response, 200);
         }
     }
 
