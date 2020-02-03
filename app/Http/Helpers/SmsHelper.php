@@ -5,7 +5,7 @@ class SmsHelpers{
     {
         $username="bibibobi";
         $api_password="9aea6n725bb8uegi3";
-        $sender="DEMOSM";
+        $sender="BBBIBI";
         $domain="http://sms.webinfotech.co";
         $priority="11";// 11-Enterprise, 12- Scrub
         $method="GET";

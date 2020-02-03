@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use DB;
 use Carbon\Carbon;
 use Validator;
+use SmsHelpers;
 
 class OrderController extends Controller
 {
@@ -208,6 +209,12 @@ class OrderController extends Controller
         }
         if ($pay_method == 1) {
             $this->productStockUpdate($order);
+            $sms_amt = $total + ($total_item*50);
+            $user_details = DB::table('user')->where('id',$user_id)->first();
+            $user_name =   $user_details->name;
+            $user_mobile =  $user_details ->mobile;
+            $request_info = urldecode("Dear ".$user_name.", Your Order of Rs. ". $sms_amt ." Has Been Placed Successfully We Wiill Process it Shortly. Thank You");
+            SmsHelpers::smsSend($user_mobile,$request_info);
             $response = [
                 'status' => true,
                 'message' => 'Order Placed Successfully',
@@ -311,6 +318,16 @@ class OrderController extends Controller
             'payment_status' => '2',
             'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
         ]);
+        $order = DB::table('orders')->where('id',$order_id)->first();
+        if ($order) {
+            $user_details = DB::table('user')->where('id',$user_id)->first();
+            $user_name =   $user_details->name;
+            $user_mobile =  $user_details ->mobile;
+            $sms_amt = $order->amount + $order->shipping_charge;
+            $request_info = urldecode("Dear ".$user_name.", Your Order of Rs. ". $sms_amt ." Has Been Placed Successfully We Wiill Process it Shortly. Thank You");
+            SmsHelpers::smsSend($user_mobile,$request_info);
+        }
+        
         $this->productStockUpdate($order);
         if ($update) {
             $response = [
