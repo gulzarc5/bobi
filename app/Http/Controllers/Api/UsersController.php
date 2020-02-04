@@ -566,7 +566,7 @@ class UsersController extends Controller
     {
         $validator =  Validator::make($request->all(),[
             'otp' => 'required',
-            'mobile' => ['required', 'numeric', 'digits:6'],
+            'mobile' => ['required', 'numeric', 'digits:10'],
             'current_pass' => ['required', 'string', 'min:8'],
             'new_password' => ['required', 'string', 'min:8', 'same:confirm_password'],
         ]);
